@@ -1,0 +1,3538 @@
+{
+  "schemaVersion": 1,
+  "version": "catalog-v1-a44f7b90ba11484c",
+  "importedAt": "2026-11-04T15:10:44.138Z",
+  "source": {
+    "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+    "section": "ARŞİV BÖLÜMÜ 5 / Oyuncu Veritabanı; bölüm 4 / rol tercihleri"
+  },
+  "players": [
+    {
+      "id": "taha",
+      "name": "Taha",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 935; Stage 2: MD 989; Stage 1: MD 1043; Excel ana puan: =H3"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 6,
+        "CM": 8,
+        "CAM": 8,
+        "W": 9,
+        "ST": 9
+      },
+      "preferredPositions": [
+        "W",
+        "ST",
+        "CAM"
+      ],
+      "notes": [
+        {
+          "text": "Alper + Taha — Aynı takım — İkisine de PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 675"
+          }
+        },
+        {
+          "text": "Taha — Alper ile aynı takım — PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 766"
+          }
+        },
+        {
+          "text": "Pozitif hücum ikilisi — Alper + Taha — İkisine PAS +0.5 ve GÖR +0.5; ayrıca iki oyuncu da takım atmosferini aşağı çekmez.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 798"
+          }
+        },
+        {
+          "text": "iyi niyetli, takım odaklı ve güvenilir; +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 608"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 9,
+        "stamina": 9,
+        "strength": 8,
+        "passing": 8,
+        "vision": 8,
+        "control": 8.5,
+        "dribbling": 9,
+        "shooting": 8.5,
+        "finishing": 9,
+        "defending": 7,
+        "pressing": 9,
+        "positioning": 8
+      },
+      "mainPosition": "W",
+      "positionRatings": {
+        "CB": 76.95,
+        "FB": 83.59,
+        "CM": 84.03,
+        "CAM": 85.18,
+        "W": 87.47,
+        "ST": 87.24
+      }
+    },
+    {
+      "id": "servan",
+      "name": "Servan",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 936; Stage 2: MD 990; Stage 1: MD 1044; Excel ana puan: =D4"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 10,
+        "FB": 4,
+        "CM": 7,
+        "CAM": 7,
+        "W": 1,
+        "ST": 9
+      },
+      "preferredPositions": [
+        "CB",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Servan — Zayıf oyuncuları aşağılama / pozisyon terk etme — Servan POZ -0.5, PAS -0.5; takım kimyası -1; aktif güçlü negatif kaynak.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 761"
+          }
+        },
+        {
+          "text": "Servan — Rol net ve yapı sağlıklı — Ceza yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 762"
+          }
+        },
+        {
+          "text": "Negatif güçlü çift — Göktuğ + Servan — İkisinden biri tetiklenirse kötü kimya eşiğine çok hızlı ulaşılır. İsmail gibi hassas oyuncular negatif atmosfer cezasına girebilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 795"
+          }
+        },
+        {
+          "text": "güçlü kavgacı/negatif risk; küçümseme ve yapı bozma davranışı tetikleyicidir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 651"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 8.5,
+        "stamina": 8.5,
+        "strength": 9,
+        "passing": 8.5,
+        "vision": 8.5,
+        "control": 8,
+        "dribbling": 8,
+        "shooting": 8.5,
+        "finishing": 6,
+        "defending": 9.5,
+        "pressing": 8,
+        "positioning": 7
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 86.29,
+        "FB": 82.3,
+        "CM": 83.31,
+        "CAM": 81.7,
+        "W": 77.5,
+        "ST": 79.6
+      }
+    },
+    {
+      "id": "alper",
+      "name": "Alper",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 937; Stage 2: MD 991; Stage 1: MD 1045; Excel ana puan: =H5"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 1,
+        "CM": 6,
+        "CAM": 7,
+        "W": 10,
+        "ST": 10
+      },
+      "preferredPositions": [
+        "W",
+        "ST",
+        "CAM"
+      ],
+      "notes": [
+        {
+          "text": "Alper + Taha — Aynı takım — İkisine de PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 675"
+          }
+        },
+        {
+          "text": "Alper — Taha ile aynı takım — PAS +0.5, GÖR +0.5. Genel pozitif kişiliği ayrıca direkt stat bonusu üretmez.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 690"
+          }
+        },
+        {
+          "text": "Pozitif hücum ikilisi — Alper + Taha — İkisine PAS +0.5 ve GÖR +0.5; ayrıca iki oyuncu da takım atmosferini aşağı çekmez.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 798"
+          }
+        },
+        {
+          "text": "moral yükselten, hata sonrası destekleyen ve takım odaklı; gergin ortamda +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 594"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 9,
+        "stamina": 9,
+        "strength": 8,
+        "passing": 8,
+        "vision": 8,
+        "control": 8.5,
+        "dribbling": 9,
+        "shooting": 9,
+        "finishing": 9,
+        "defending": 2,
+        "pressing": 5,
+        "positioning": 6
+      },
+      "mainPosition": "W",
+      "positionRatings": {
+        "CB": 59.06,
+        "FB": 70.65,
+        "CM": 76.18,
+        "CAM": 82.16,
+        "W": 85.46,
+        "ST": 84.54
+      }
+    },
+    {
+      "id": "mahmut",
+      "name": "Mahmut",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 938; Stage 2: MD 992; Stage 1: MD 1046; Excel ana puan: =G6"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 1,
+        "CM": 10,
+        "CAM": 9,
+        "W": 4,
+        "ST": 5
+      },
+      "preferredPositions": [
+        "CAM",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Mahmut — Çok kavgacı ortam — Takım kimyasında -0.5 risk.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 738"
+          }
+        },
+        {
+          "text": "hafif kavgacı.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 640"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 8,
+        "stamina": 8,
+        "strength": 8,
+        "passing": 8.5,
+        "vision": 9,
+        "control": 9,
+        "dribbling": 10,
+        "shooting": 6.5,
+        "finishing": 6,
+        "defending": 6,
+        "pressing": 7.5,
+        "positioning": 8
+      },
+      "mainPosition": "CAM",
+      "positionRatings": {
+        "CB": 72.77,
+        "FB": 76.31,
+        "CM": 83.49,
+        "CAM": 84.61,
+        "W": 81.56,
+        "ST": 76.96
+      }
+    },
+    {
+      "id": "goktug",
+      "name": "Göktuğ",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 939; Stage 2: MD 993; Stage 1: MD 1047; Excel ana puan: =H7"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 1,
+        "CM": 5,
+        "CAM": 9,
+        "W": 9,
+        "ST": 9
+      },
+      "preferredPositions": [
+        "W",
+        "ST",
+        "CAM"
+      ],
+      "notes": [
+        {
+          "text": "Göktuğ — Çok iyi gün — ŞUT +0.5, BİT +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 728"
+          }
+        },
+        {
+          "text": "Göktuğ — Pas gelmemesi, tartışma, küsme — PRES -0.5, POZ -0.5, BİT -0.5; aktif güçlü negatif kaynağa dönüşebilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 729"
+          }
+        },
+        {
+          "text": "Negatif güçlü çift — Göktuğ + Servan — İkisinden biri tetiklenirse kötü kimya eşiğine çok hızlı ulaşılır. İsmail gibi hassas oyuncular negatif atmosfer cezasına girebilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 795"
+          }
+        },
+        {
+          "text": "Negatif zincir — Göktuğ + Uğur + Utku — Göktuğ/Uğur aktif negatifleşirse Utku’nun koşullu kavgacı trait’i açılabilir ve atmosfer daha da bozulabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 796"
+          }
+        },
+        {
+          "text": "servis alamadığında küsme/tartışma riski vardır; aynı zamanda kavgacı profildir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 634"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 9,
+        "stamina": 8,
+        "strength": 7,
+        "passing": 8,
+        "vision": 8,
+        "control": 8,
+        "dribbling": 9,
+        "shooting": 9,
+        "finishing": 9,
+        "defending": 1,
+        "pressing": 6,
+        "positioning": 7.5
+      },
+      "mainPosition": "W",
+      "positionRatings": {
+        "CB": 57.68,
+        "FB": 69.09,
+        "CM": 74.79,
+        "CAM": 82.82,
+        "W": 84.52,
+        "ST": 84.2
+      }
+    },
+    {
+      "id": "barkuz",
+      "name": "Barkuz",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 940; Stage 2: MD 994; Stage 1: MD 1048; Excel ana puan: =I8"
+        }
+      },
+      "suitability": {
+        "GK": 9,
+        "CB": 1,
+        "FB": 1,
+        "CM": 1,
+        "CAM": 1,
+        "W": 9,
+        "ST": 10
+      },
+      "preferredPositions": [
+        "ST",
+        "W"
+      ],
+      "notes": [
+        {
+          "text": "Arif + Barkuz — Aynı takım — İkisinin de PAS -0.5, GÖR -0.5; takım kimyası -1.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 676"
+          }
+        },
+        {
+          "text": "Barkuz — Çok iyi form günü — ŞUT +0.5, BİT +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 707"
+          }
+        },
+        {
+          "text": "Barkuz — Çok kötü form günü — KNTRL -0.5, ŞUT -0.5, BİT -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 708"
+          }
+        },
+        {
+          "text": "Kilitli negatif çift — Arif + Barkuz — Genel takım çok pozitif olsa bile çiftin PAS/GÖR -0.5 ve takım kimyası -1 cezası ayrıca uygulanır.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 797"
+          }
+        },
+        {
+          "text": "form ve mental olarak dalgalı; Arif ile aynı takım özel negatif eşleşmedir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 626"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 9,
+        "stamina": 8,
+        "strength": 8.5,
+        "passing": 5,
+        "vision": 5,
+        "control": 8,
+        "dribbling": 8,
+        "shooting": 9,
+        "finishing": 9.5,
+        "defending": 2,
+        "pressing": 3.5,
+        "positioning": 7.5
+      },
+      "mainPosition": "ST",
+      "positionRatings": {
+        "CB": 56.11,
+        "FB": 64.12,
+        "CM": 61.77,
+        "CAM": 67.38,
+        "W": 78.59,
+        "ST": 82.8
+      }
+    },
+    {
+      "id": "kiyan",
+      "name": "Kiyan",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 941; Stage 2: MD 995; Stage 1: MD 1049; Excel ana puan: =C9"
+        }
+      },
+      "suitability": {
+        "GK": 10,
+        "CB": 1,
+        "FB": 1,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "GK"
+      ],
+      "notes": [
+        {
+          "text": "Kiyan / Şahin / Talha / Yusuf / Sarp — Kaleci kimyası — Şimdilik özel modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 775"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "goalkeeper",
+      "mainPosition": "GK",
+      "goalkeeperRating": 82.5
+    },
+    {
+      "id": "m-emre",
+      "name": "M.Emre",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 942; Stage 2: MD 996; Stage 1: MD 1050; Excel ana puan: =D10"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 10,
+        "FB": 9,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "M.Emre + Tevfik — Aynı takım — Tevfik’in M.Emre yokluğuna bağlı negatif kimya cezası tamamen kalkar.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 682"
+          }
+        },
+        {
+          "text": "M.Emre — Berkin/Direnç/Şeker/Halit/Metehan gibi daha zayıf-ortalama stoperle — Partnerine DEF +0.5, POZ +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 737"
+          }
+        },
+        {
+          "text": "Savunma güven ağı — M.Emre + Berkin — Berkin DEF +0.5 ve POZ +0.5 alır; M.Emre savunma kimyasını stabilize eder.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 783"
+          }
+        },
+        {
+          "text": "deneyimli savunma lideri ve dengeleyici; özellikle savunma ünitesinde +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 610"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7.5,
+        "stamina": 7.5,
+        "strength": 8.5,
+        "passing": 8,
+        "vision": 8,
+        "control": 7.5,
+        "dribbling": 6.5,
+        "shooting": 7,
+        "finishing": 4,
+        "defending": 9,
+        "pressing": 7,
+        "positioning": 8
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 82.29,
+        "FB": 78.27,
+        "CM": 73.32,
+        "CAM": 70.51,
+        "W": 68.81,
+        "ST": 65.73
+      }
+    },
+    {
+      "id": "erhan",
+      "name": "Erhan",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 943; Stage 2: MD 997; Stage 1: MD 1051; Excel ana puan: =G11"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 1,
+        "CM": 8,
+        "CAM": 8,
+        "W": 9,
+        "ST": 4
+      },
+      "preferredPositions": [
+        "CAM",
+        "W",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Erhan — Hızlı ve kooperatif koşucularla — PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 720"
+          }
+        },
+        {
+          "text": "Erhan — Bencil/top ezen veya çatışmalı hücum grubu — PAS -0.5, GÖR -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 721"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 8.5,
+        "stamina": 8.5,
+        "strength": 7,
+        "passing": 8.5,
+        "vision": 8.5,
+        "control": 8,
+        "dribbling": 8,
+        "shooting": 8,
+        "finishing": 6,
+        "defending": 3,
+        "pressing": 7,
+        "positioning": 9
+      },
+      "mainPosition": "CAM",
+      "positionRatings": {
+        "CB": 65.36,
+        "FB": 72.08,
+        "CM": 79.43,
+        "CAM": 81.73,
+        "W": 81.72,
+        "ST": 76.13
+      }
+    },
+    {
+      "id": "ismail",
+      "name": "İsmail",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 944; Stage 2: MD 998; Stage 1: MD 1052; Excel ana puan: =I12"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 1,
+        "CM": 5,
+        "CAM": 9,
+        "W": 8,
+        "ST": 9
+      },
+      "preferredPositions": [
+        "ST",
+        "W",
+        "CAM"
+      ],
+      "notes": [
+        {
+          "text": "İsmail — Baran-Arif-Eren üçlüsünden en az 2 kişi aynı takımda — PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 733"
+          }
+        },
+        {
+          "text": "İsmail — Göktuğ+Barkuz gibi iki dominant hücumcu ile — PAS -0.5, GÖR -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 734"
+          }
+        },
+        {
+          "text": "İsmail — Negatif takım atmosferi — KNTRL -0.5, GÖR -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 735"
+          }
+        },
+        {
+          "text": "negatif atmosferden ve yıldız rolü çatışmasından etkilenir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 628"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 8,
+        "stamina": 7.5,
+        "strength": 8,
+        "passing": 8,
+        "vision": 7,
+        "control": 8.5,
+        "dribbling": 9,
+        "shooting": 9,
+        "finishing": 9,
+        "defending": 1,
+        "pressing": 5,
+        "positioning": 6
+      },
+      "mainPosition": "ST",
+      "positionRatings": {
+        "CB": 54.64,
+        "FB": 65.41,
+        "CM": 71.71,
+        "CAM": 79.83,
+        "W": 80.86,
+        "ST": 81.67
+      }
+    },
+    {
+      "id": "baran",
+      "name": "Baran",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 945; Stage 2: MD 999; Stage 1: MD 1053; Excel ana puan: =F13"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 4,
+        "FB": 10,
+        "CM": 8.5,
+        "CAM": 8,
+        "W": 7,
+        "ST": 2
+      },
+      "preferredPositions": [
+        "CM",
+        "FB",
+        "CAM"
+      ],
+      "notes": [
+        {
+          "text": "Baran + Eren — Aynı takım — İkisine de PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 677"
+          }
+        },
+        {
+          "text": "Baran + Eren + Arif — Aynı takım ve bağlantılı orta saha/build-up rolleri — Üçüne de PAS +0.5, GÖR +0.5. Baran-Eren bonusuyla stack olmaz.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 678"
+          }
+        },
+        {
+          "text": "Baran — Güçlü PAS/GÖR oyuncularıyla çevrili — GÖR +0.5, POZ +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 695"
+          }
+        },
+        {
+          "text": "Baran — Çok düşük PAS/GÖR çevresi — GÖR -0.5, POZ -0.5. Bu kavgacılık değil teknik bağlantı/frustrasyon etkisidir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 706"
+          }
+        },
+        {
+          "text": "Pozitif teknik çekirdek — Baran + Eren + Arif — Üçlü PAS/GÖR bonusu aktif olur. İsmail de aynı takımda ise kendi PAS/GÖR bonusunu tetikleyebilir. Bu takım yapısı kombinasyon oyununu destekler.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 781"
+          }
+        },
+        {
+          "text": "Pozitif liderlik çekirdeği — Baran + Süleyman + Kamil Reis — Üç güçlü stabilizatör. Tek bir hafif negatif kaynak atmosferi otomatik kötüye çeviremez.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 782"
+          }
+        },
+        {
+          "text": "Pas ortamı — Baran + Süleyman + Melih — Melih’in pozitif kombinasyon ortamı bonusu PAS +0.5 / GÖR +0.5 aktive olabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 801"
+          }
+        },
+        {
+          "text": "Teknik uyumsuzluk — Baran + çok düşük PAS/GÖR profilleri — Baran’ın GÖR -0.5 / POZ -0.5 bağlantı cezası tetiklenebilir; bu durum Baran’ın kavgacı olduğu anlamına gelmez.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 802"
+          }
+        },
+        {
+          "text": "saha içi yönlendirme, iletişim ve oyun organizasyonu. Kavgacı değildir; düşük PAS/GÖR çevresinde yaşadığı frustrasyon teknik bağlantı problemidir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 588"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7.5,
+        "stamina": 8.5,
+        "strength": 7,
+        "passing": 8.5,
+        "vision": 8,
+        "control": 8,
+        "dribbling": 7,
+        "shooting": 6.5,
+        "finishing": 4,
+        "defending": 8.5,
+        "pressing": 7.5,
+        "positioning": 8.5
+      },
+      "mainPosition": "CM",
+      "positionRatings": {
+        "CB": 78.75,
+        "FB": 80.08,
+        "CM": 80.23,
+        "CAM": 77.22,
+        "W": 74.89,
+        "ST": 66.98
+      }
+    },
+    {
+      "id": "eren",
+      "name": "Eren",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 946; Stage 2: MD 1000; Stage 1: MD 1054; Excel ana puan: =G14"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 2,
+        "CM": 9,
+        "CAM": 9,
+        "W": 9,
+        "ST": 5
+      },
+      "preferredPositions": [
+        "CAM",
+        "W",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Baran + Eren — Aynı takım — İkisine de PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 677"
+          }
+        },
+        {
+          "text": "Baran + Eren + Arif — Aynı takım ve bağlantılı orta saha/build-up rolleri — Üçüne de PAS +0.5, GÖR +0.5. Baran-Eren bonusuyla stack olmaz.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 678"
+          }
+        },
+        {
+          "text": "Eren — Bağlantılı hattında PAS>=8 ve GÖR>=8 oyuncular — PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 716"
+          }
+        },
+        {
+          "text": "Eren — Düşük PAS/GÖR desteği — PAS -0.5, GÖR -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 717"
+          }
+        },
+        {
+          "text": "Eren — Çok iyi / kötü form — Uygun teknik özelliklerde +0.5 / -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 718"
+          }
+        },
+        {
+          "text": "Pozitif teknik çekirdek — Baran + Eren + Arif — Üçlü PAS/GÖR bonusu aktif olur. İsmail de aynı takımda ise kendi PAS/GÖR bonusunu tetikleyebilir. Bu takım yapısı kombinasyon oyununu destekler.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 781"
+          }
+        },
+        {
+          "text": "teknik/pas kalitesi yüksek gruplarda pozitif etkileşim verir; tek başına genel kimya kaynağı sayılmaz.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 614"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7.5,
+        "stamina": 8,
+        "strength": 7.5,
+        "passing": 8,
+        "vision": 8,
+        "control": 8,
+        "dribbling": 8,
+        "shooting": 8.5,
+        "finishing": 6,
+        "defending": 3,
+        "pressing": 7,
+        "positioning": 8
+      },
+      "mainPosition": "CAM",
+      "positionRatings": {
+        "CB": 62.92,
+        "FB": 69.64,
+        "CM": 77.07,
+        "CAM": 79.46,
+        "W": 78.68,
+        "ST": 74.7
+      }
+    },
+    {
+      "id": "arif",
+      "name": "Arif",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 947; Stage 2: MD 1001; Stage 1: MD 1055; Excel ana puan: =F15"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 6,
+        "FB": 6,
+        "CM": 9,
+        "CAM": 9,
+        "W": 5,
+        "ST": 5
+      },
+      "preferredPositions": [
+        "CM",
+        "CAM"
+      ],
+      "notes": [
+        {
+          "text": "Arif + Barkuz — Aynı takım — İkisinin de PAS -0.5, GÖR -0.5; takım kimyası -1.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 676"
+          }
+        },
+        {
+          "text": "Baran + Eren + Arif — Aynı takım ve bağlantılı orta saha/build-up rolleri — Üçüne de PAS +0.5, GÖR +0.5. Baran-Eren bonusuyla stack olmaz.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 678"
+          }
+        },
+        {
+          "text": "Arif — Barkuz ile aynı takım — PAS -0.5, GÖR -0.5; Barkuz da aynı cezayı alır; takım kimyası -1.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 694"
+          }
+        },
+        {
+          "text": "Pozitif teknik çekirdek — Baran + Eren + Arif — Üçlü PAS/GÖR bonusu aktif olur. İsmail de aynı takımda ise kendi PAS/GÖR bonusunu tetikleyebilir. Bu takım yapısı kombinasyon oyununu destekler.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 781"
+          }
+        },
+        {
+          "text": "Kilitli negatif çift — Arif + Barkuz — Genel takım çok pozitif olsa bile çiftin PAS/GÖR -0.5 ve takım kimyası -1 cezası ayrıca uygulanır.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 797"
+          }
+        },
+        {
+          "text": "genel olarak uyumlu ve dengeli; Barkuz eşleşmesi dışında nötr-pozitif.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 612"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 9.5,
+        "stamina": 9,
+        "strength": 8.5,
+        "passing": 7.5,
+        "vision": 7.5,
+        "control": 7,
+        "dribbling": 7,
+        "shooting": 7,
+        "finishing": 6,
+        "defending": 7.5,
+        "pressing": 8,
+        "positioning": 8
+      },
+      "mainPosition": "CM",
+      "positionRatings": {
+        "CB": 79.82,
+        "FB": 80.51,
+        "CM": 79.19,
+        "CAM": 77.67,
+        "W": 77.97,
+        "ST": 76.17
+      }
+    },
+    {
+      "id": "emir",
+      "name": "Emir",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 948; Stage 2: MD 1002; Stage 1: MD 1056; Excel ana puan: =H16"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 1,
+        "CM": 6,
+        "CAM": 9,
+        "W": 10,
+        "ST": 8
+      },
+      "preferredPositions": [
+        "W",
+        "CAM",
+        "ST"
+      ],
+      "notes": [
+        {
+          "text": "Emir — Normal kullanım — Özel modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 715"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 8,
+        "stamina": 7,
+        "strength": 7.5,
+        "passing": 7.5,
+        "vision": 7.5,
+        "control": 8,
+        "dribbling": 8,
+        "shooting": 9,
+        "finishing": 7.5,
+        "defending": 2.5,
+        "pressing": 5,
+        "positioning": 7
+      },
+      "mainPosition": "W",
+      "positionRatings": {
+        "CB": 57.95,
+        "FB": 65.27,
+        "CM": 71.31,
+        "CAM": 77.67,
+        "W": 78.33,
+        "ST": 77.54
+      }
+    },
+    {
+      "id": "hakan-goktug",
+      "name": "Hakan Göktuğ",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 949; Stage 2: MD 1003; Stage 1: MD 1057; Excel ana puan: =D17"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 10,
+        "FB": 9,
+        "CM": 3,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Hakan Göktuğ — Fiziksel / yüksek GÜÇ stoper partneri — DEF +0.5, POZ +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 730"
+          }
+        },
+        {
+          "text": "Hakan Göktuğ — Rakibin yüksek PAS ile uzun/hava topu tehdidi — İlgili durumda DEF -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 731"
+          }
+        },
+        {
+          "text": "Savunma tamamlayıcılığı — Hakan Göktuğ + yüksek GÜÇ stoper — Hakan DEF +0.5 ve POZ +0.5 alır; fiziksel eksikliği partner tarafından kapatılır.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 784"
+          }
+        },
+        {
+          "text": "özellikle savunma hattında yapıcı iletişim; +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 596"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 8,
+        "stamina": 7,
+        "strength": 7.5,
+        "passing": 7,
+        "vision": 7,
+        "control": 6.5,
+        "dribbling": 7,
+        "shooting": 4,
+        "finishing": 2,
+        "defending": 8.5,
+        "pressing": 7,
+        "positioning": 8
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 78.29,
+        "FB": 74.68,
+        "CM": 68.42,
+        "CAM": 63.24,
+        "W": 64.16,
+        "ST": 57.63
+      }
+    },
+    {
+      "id": "melih",
+      "name": "Melih",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 950; Stage 2: MD 1004; Stage 1: MD 1058; Excel ana puan: =G18"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 1,
+        "CM": 9,
+        "CAM": 9,
+        "W": 6,
+        "ST": 6
+      },
+      "preferredPositions": [
+        "CAM",
+        "CM",
+        "ST"
+      ],
+      "notes": [
+        {
+          "text": "Melih — Güçlü pozitif pas/kombinasyon ortamı — PAS +0.5, GÖR +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 751"
+          }
+        },
+        {
+          "text": "Pas ortamı — Baran + Süleyman + Melih — Melih’in pozitif kombinasyon ortamı bonusu PAS +0.5 / GÖR +0.5 aktive olabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 801"
+          }
+        },
+        {
+          "text": "uyumlu, pozitif iletişimli ve kombinasyon oyununa açık; +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 606"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7,
+        "stamina": 7.5,
+        "strength": 7,
+        "passing": 8,
+        "vision": 8,
+        "control": 7.5,
+        "dribbling": 8,
+        "shooting": 8,
+        "finishing": 8,
+        "defending": 1,
+        "pressing": 5.5,
+        "positioning": 8
+      },
+      "mainPosition": "CAM",
+      "positionRatings": {
+        "CB": 55.29,
+        "FB": 63.66,
+        "CM": 73.62,
+        "CAM": 78.22,
+        "W": 75.31,
+        "ST": 75.77
+      }
+    },
+    {
+      "id": "sahin",
+      "name": "Şahin",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 951; Stage 2: MD 1005; Stage 1: MD 1059; Excel ana puan: =C19"
+        }
+      },
+      "suitability": {
+        "GK": 10,
+        "CB": 1,
+        "FB": 1,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "GK"
+      ],
+      "notes": [
+        {
+          "text": "Kiyan / Şahin / Talha / Yusuf / Sarp — Kaleci kimyası — Şimdilik özel modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 775"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "goalkeeper",
+      "mainPosition": "GK",
+      "goalkeeperRating": 78
+    },
+    {
+      "id": "mustafa",
+      "name": "Mustafa",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 952; Stage 2: MD 1006; Stage 1: MD 1060; Excel ana puan: =G20"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 1,
+        "CM": 9,
+        "CAM": 8,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CAM",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Mustafa — Sorumluluk aldığı iyi gün — POZ +0.5, ŞUT +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 756"
+          }
+        },
+        {
+          "text": "Mustafa — Bencil/kötü karar günü — PAS -0.5, GÖR -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 757"
+          }
+        },
+        {
+          "text": "kötü karar/bencillik günlerinde takım arkadaşlarını frustrasyona sokabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 632"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7.5,
+        "stamina": 7,
+        "strength": 8,
+        "passing": 7.5,
+        "vision": 7,
+        "control": 8,
+        "dribbling": 8,
+        "shooting": 9,
+        "finishing": 7,
+        "defending": 6.5,
+        "pressing": 6.5,
+        "positioning": 8.5
+      },
+      "mainPosition": "CAM",
+      "positionRatings": {
+        "CB": 70.6,
+        "FB": 70.83,
+        "CM": 76.61,
+        "CAM": 77.54,
+        "W": 73.13,
+        "ST": 73.5
+      }
+    },
+    {
+      "id": "mali",
+      "name": "Mali",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 953; Stage 2: MD 1007; Stage 1: MD 1061; Excel ana puan: =D21"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 7,
+        "CM": 7,
+        "CAM": 5,
+        "W": 3,
+        "ST": 4
+      },
+      "preferredPositions": [
+        "CB",
+        "FB",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Mali — Normal kullanım — Sabit kişisel modifier yok; pozitif/proaktif kimya kaynağı.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 739"
+          }
+        },
+        {
+          "text": "pozitif ve proaktif takım etkisi; +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 598"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 8,
+        "stamina": 8,
+        "strength": 8,
+        "passing": 7,
+        "vision": 7,
+        "control": 6.5,
+        "dribbling": 7,
+        "shooting": 6.5,
+        "finishing": 4,
+        "defending": 8,
+        "pressing": 8,
+        "positioning": 6.5
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 77.25,
+        "FB": 75.17,
+        "CM": 72.78,
+        "CAM": 69.41,
+        "W": 69.34,
+        "ST": 66.1
+      }
+    },
+    {
+      "id": "mensur",
+      "name": "Mensur",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 954; Stage 2: MD 1008; Stage 1: MD 1062; Excel ana puan: =G22"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 7,
+        "FB": 1,
+        "CM": 9,
+        "CAM": 9,
+        "W": 9,
+        "ST": 9
+      },
+      "preferredPositions": [
+        "CAM",
+        "W"
+      ],
+      "notes": [
+        {
+          "text": "Mensur — İyi gün — PAS +0.5, GÖR +0.5, KNTRL +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 752"
+          }
+        },
+        {
+          "text": "Mensur — Kötü gün — PAS -0.5, GÖR -0.5, KNTRL -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 753"
+          }
+        },
+        {
+          "text": "Mensur — Rakibi mental olarak bozması — Küçük mental/matchup etkisi; kalıcı stat değişmez.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 754"
+          }
+        },
+        {
+          "text": "hafif kavgacı; rakibi ve bazen ortamı mental olarak zorlayabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 638"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7,
+        "stamina": 6,
+        "strength": 7.5,
+        "passing": 8,
+        "vision": 8,
+        "control": 8,
+        "dribbling": 8,
+        "shooting": 8,
+        "finishing": 6,
+        "defending": 5,
+        "pressing": 5,
+        "positioning": 7
+      },
+      "mainPosition": "CAM",
+      "positionRatings": {
+        "CB": 66.61,
+        "FB": 65.36,
+        "CM": 73.94,
+        "CAM": 76.52,
+        "W": 74.77,
+        "ST": 72.61
+      }
+    },
+    {
+      "id": "suleyman",
+      "name": "Süleyman",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 955; Stage 2: MD 1009; Stage 1: MD 1063; Excel ana puan: =H23"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 9,
+        "CM": 9,
+        "CAM": 5,
+        "W": 9,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "W",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Süleyman — Takımda normal rolünde — Takım kimyası +0.5; sakinleştirici liderlik.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 763"
+          }
+        },
+        {
+          "text": "Pozitif liderlik çekirdeği — Baran + Süleyman + Kamil Reis — Üç güçlü stabilizatör. Tek bir hafif negatif kaynak atmosferi otomatik kötüye çeviremez.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 782"
+          }
+        },
+        {
+          "text": "Pas ortamı — Baran + Süleyman + Melih — Melih’in pozitif kombinasyon ortamı bonusu PAS +0.5 / GÖR +0.5 aktive olabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 801"
+          }
+        },
+        {
+          "text": "sakin, olgun, pas odaklı ve kapsayıcı; takım kimyası +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 592"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7,
+        "stamina": 7,
+        "strength": 7.5,
+        "passing": 8,
+        "vision": 7.5,
+        "control": 7.5,
+        "dribbling": 8,
+        "shooting": 8,
+        "finishing": 6,
+        "defending": 5.5,
+        "pressing": 7,
+        "positioning": 7
+      },
+      "mainPosition": "W",
+      "positionRatings": {
+        "CB": 65.82,
+        "FB": 73.11,
+        "CM": 75.28,
+        "CAM": 74.38,
+        "W": 75.46,
+        "ST": 68.4
+      }
+    },
+    {
+      "id": "onur",
+      "name": "Onur",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 956; Stage 2: MD 1010; Stage 1: MD 1064; Excel ana puan: =E24"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 7,
+        "CM": 4,
+        "CAM": 5,
+        "W": 1,
+        "ST": 8
+      },
+      "preferredPositions": [
+        "FB",
+        "ST"
+      ],
+      "notes": [
+        {
+          "text": "Onur + Ömer — Aynı takım — İkisinin de tüm 12 Stage 2 özelliği +1.0.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 679"
+          }
+        },
+        {
+          "text": "Onur vs Ömer — Rakip takımlar — İkisinin de tüm 12 Stage 2 özelliği -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 680"
+          }
+        },
+        {
+          "text": "Onur + Ömer — Aynı takım — Her iki oyuncunun tüm 12 özelliği +1.0.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 759"
+          }
+        },
+        {
+          "text": "Onur vs Ömer — Rakip takımlar — Her iki oyuncunun tüm 12 özelliği -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 760"
+          }
+        },
+        {
+          "text": "Aşırı özel pozitif çift — Onur + Ömer — Aynı takımda ikisinin tüm 12 özelliği +1.0. Bu kural normal +1 cap mantığının kilitli özel örneğidir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 799"
+          }
+        },
+        {
+          "text": "Aşırı özel negatif çift — Onur vs Ömer — Rakip takımlardaysa ikisinin tüm 12 özelliği -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 800"
+          }
+        },
+        {
+          "text": "saygılı, görev disiplinli ve iyi niyetli; +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 600"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7,
+        "stamina": 8.5,
+        "strength": 8.5,
+        "passing": 7,
+        "vision": 6.5,
+        "control": 6,
+        "dribbling": 6.5,
+        "shooting": 6,
+        "finishing": 7,
+        "defending": 7.5,
+        "pressing": 9,
+        "positioning": 8
+      },
+      "mainPosition": "FB",
+      "positionRatings": {
+        "CB": 73.5,
+        "FB": 75.08,
+        "CM": 71.58,
+        "CAM": 69.55,
+        "W": 67.29,
+        "ST": 73.63
+      }
+    },
+    {
+      "id": "omer",
+      "name": "Ömer",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 957; Stage 2: MD 1011; Stage 1: MD 1065; Excel ana puan: =D25"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 9,
+        "CM": 7,
+        "CAM": 2,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Onur + Ömer — Aynı takım — İkisinin de tüm 12 Stage 2 özelliği +1.0.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 679"
+          }
+        },
+        {
+          "text": "Onur vs Ömer — Rakip takımlar — İkisinin de tüm 12 Stage 2 özelliği -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 680"
+          }
+        },
+        {
+          "text": "Onur + Ömer — Aynı takım — Her iki oyuncunun tüm 12 özelliği +1.0.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 759"
+          }
+        },
+        {
+          "text": "Onur vs Ömer — Rakip takımlar — Her iki oyuncunun tüm 12 özelliği -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 760"
+          }
+        },
+        {
+          "text": "Aşırı özel pozitif çift — Onur + Ömer — Aynı takımda ikisinin tüm 12 özelliği +1.0. Bu kural normal +1 cap mantığının kilitli özel örneğidir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 799"
+          }
+        },
+        {
+          "text": "Aşırı özel negatif çift — Onur vs Ömer — Rakip takımlardaysa ikisinin tüm 12 özelliği -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 800"
+          }
+        },
+        {
+          "text": "sürekli pozitif ve mücadeleci; +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 602"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7,
+        "stamina": 9,
+        "strength": 7.5,
+        "passing": 4,
+        "vision": 4,
+        "control": 4,
+        "dribbling": 3,
+        "shooting": 5,
+        "finishing": 4,
+        "defending": 7.5,
+        "pressing": 10,
+        "positioning": 9
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 75.05,
+        "FB": 68.93,
+        "CM": 60.63,
+        "CAM": 51.24,
+        "W": 53.95,
+        "ST": 57.17
+      }
+    },
+    {
+      "id": "mamadou",
+      "name": "Mamadou",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 958; Stage 2: MD 1012; Stage 1: MD 1066; Excel ana puan: =F26"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 6,
+        "FB": 2,
+        "CM": 9,
+        "CAM": 5,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CM",
+        "CB"
+      ],
+      "notes": [
+        {
+          "text": "Mamadou — Normal kullanım — Özel modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 740"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6.5,
+        "stamina": 8,
+        "strength": 8,
+        "passing": 7.5,
+        "vision": 7.5,
+        "control": 7.5,
+        "dribbling": 7,
+        "shooting": 5,
+        "finishing": 2,
+        "defending": 7.5,
+        "pressing": 7.5,
+        "positioning": 7.5
+      },
+      "mainPosition": "CM",
+      "positionRatings": {
+        "CB": 74.76,
+        "FB": 70.1,
+        "CM": 74.68,
+        "CAM": 69.14,
+        "W": 64.58,
+        "ST": 58.41
+      }
+    },
+    {
+      "id": "caca",
+      "name": "Çaça",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 959; Stage 2: MD 1013; Stage 1: MD 1067; Excel ana puan: =F27"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 5,
+        "FB": 3,
+        "CM": 10,
+        "CAM": 9,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CM",
+        "CAM"
+      ],
+      "notes": [
+        {
+          "text": "Çaça — Normal kullanım — Özel modifier yok; stabil/nötr.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 712"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7,
+        "stamina": 7,
+        "strength": 6,
+        "passing": 8,
+        "vision": 8,
+        "control": 7,
+        "dribbling": 6.5,
+        "shooting": 5,
+        "finishing": 3,
+        "defending": 6,
+        "pressing": 7.5,
+        "positioning": 7.5
+      },
+      "mainPosition": "CM",
+      "positionRatings": {
+        "CB": 68.63,
+        "FB": 67.91,
+        "CM": 73.04,
+        "CAM": 71.18,
+        "W": 63.98,
+        "ST": 58.09
+      }
+    },
+    {
+      "id": "utku",
+      "name": "Utku",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 960; Stage 2: MD 1014; Stage 1: MD 1068; Excel ana puan: =D28"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 8,
+        "FB": 7,
+        "CM": 6,
+        "CAM": 4,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Utku — Takımında en az 2 başka kavgacı — Kavgacı trait aktif; atmosfer riskini artırır.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 770"
+          }
+        },
+        {
+          "text": "Utku — Takımı önde — DEF +0.5, PRES +0.5, POZ +0.5, DAY +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 771"
+          }
+        },
+        {
+          "text": "Utku — Takımı geride — DEF -0.5, PRES -0.5, POZ -0.5, DAY -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 772"
+          }
+        },
+        {
+          "text": "Negatif zincir — Göktuğ + Uğur + Utku — Göktuğ/Uğur aktif negatifleşirse Utku’nun koşullu kavgacı trait’i açılabilir ve atmosfer daha da bozulabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 796"
+          }
+        },
+        {
+          "text": "yalnız takımında en az iki başka kavgacı varsa kavgacı trait aktif olur.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 642"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6.5,
+        "stamina": 7.5,
+        "strength": 8,
+        "passing": 6,
+        "vision": 6.5,
+        "control": 6,
+        "dribbling": 6.5,
+        "shooting": 6,
+        "finishing": 4,
+        "defending": 7,
+        "pressing": 8,
+        "positioning": 7
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 72.3,
+        "FB": 69.28,
+        "CM": 67.17,
+        "CAM": 63.76,
+        "W": 61.86,
+        "ST": 60.02
+      }
+    },
+    {
+      "id": "kamil-reis",
+      "name": "Kamil Reis",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 961; Stage 2: MD 1015; Stage 1: MD 1069; Excel ana puan: =H29"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 5,
+        "CM": 3,
+        "CAM": 6,
+        "W": 9,
+        "ST": 5
+      },
+      "preferredPositions": [
+        "W",
+        "CAM",
+        "ST"
+      ],
+      "notes": [
+        {
+          "text": "Kamil Reis — Takımda normal rolünde — Takım kimyası +0.5; kişisel stat bonusu yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 736"
+          }
+        },
+        {
+          "text": "Pozitif liderlik çekirdeği — Baran + Süleyman + Kamil Reis — Üç güçlü stabilizatör. Tek bir hafif negatif kaynak atmosferi otomatik kötüye çeviremez.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 782"
+          }
+        },
+        {
+          "text": "liderlik ve abi/reis etkisi; takım kimyası +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 590"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6,
+        "stamina": 6,
+        "strength": 6.5,
+        "passing": 7.5,
+        "vision": 7.5,
+        "control": 7.5,
+        "dribbling": 8,
+        "shooting": 7,
+        "finishing": 7,
+        "defending": 4,
+        "pressing": 5,
+        "positioning": 7
+      },
+      "mainPosition": "W",
+      "positionRatings": {
+        "CB": 57.31,
+        "FB": 64.03,
+        "CM": 66.72,
+        "CAM": 71.35,
+        "W": 71.37,
+        "ST": 68.49
+      }
+    },
+    {
+      "id": "ali-efe",
+      "name": "Ali Efe",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 962; Stage 2: MD 1016; Stage 1: MD 1070; Excel ana puan: =G30"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 3,
+        "CM": 9,
+        "CAM": 9,
+        "W": 5,
+        "ST": 3
+      },
+      "preferredPositions": [
+        "CAM",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Ali Efe — Belirgin kötü form günü — DAY -0.5, PRES -0.5, POZ -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 689"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7,
+        "stamina": 6,
+        "strength": 7,
+        "passing": 7,
+        "vision": 7,
+        "control": 7.5,
+        "dribbling": 7,
+        "shooting": 7,
+        "finishing": 5,
+        "defending": 2,
+        "pressing": 6,
+        "positioning": 7
+      },
+      "mainPosition": "CAM",
+      "positionRatings": {
+        "CB": 54.46,
+        "FB": 61.29,
+        "CM": 67.46,
+        "CAM": 70.31,
+        "W": 67.76,
+        "ST": 64.56
+      }
+    },
+    {
+      "id": "talha",
+      "name": "Talha",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 963; Stage 2: MD 1017; Stage 1: MD 1071; Excel ana puan: =C31"
+        }
+      },
+      "suitability": {
+        "GK": 10,
+        "CB": 1,
+        "FB": 1,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "GK"
+      ],
+      "notes": [
+        {
+          "text": "Kiyan / Şahin / Talha / Yusuf / Sarp — Kaleci kimyası — Şimdilik özel modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 775"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "goalkeeper",
+      "mainPosition": "GK",
+      "goalkeeperRating": 70
+    },
+    {
+      "id": "yusuf",
+      "name": "Yusuf",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 964; Stage 2: MD 1018; Stage 1: MD 1072; Excel ana puan: =C32"
+        }
+      },
+      "suitability": {
+        "GK": 10,
+        "CB": 1,
+        "FB": 1,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "GK"
+      ],
+      "notes": [
+        {
+          "text": "Kiyan / Şahin / Talha / Yusuf / Sarp — Kaleci kimyası — Şimdilik özel modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 775"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "goalkeeper",
+      "mainPosition": "GK",
+      "goalkeeperRating": 70
+    },
+    {
+      "id": "yanki",
+      "name": "Yankı",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 965; Stage 2: MD 1019; Stage 1: MD 1073; Excel ana puan: =E33"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 7,
+        "FB": 9,
+        "CM": 4,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "FB",
+        "CB"
+      ],
+      "notes": [
+        {
+          "text": "Yankı — Takımı aktif hücum fazında — Efektif HIZ = 10, PAS = 1. Oyun fazı bitince base değerlere döner.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 681"
+          }
+        },
+        {
+          "text": "Yankı — Takım aktif hücum fazında — HIZ=10, PAS=1; faz bitince base değerlere döner.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 773"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 8.5,
+        "stamina": 9,
+        "strength": 8,
+        "passing": 4,
+        "vision": 4,
+        "control": 6,
+        "dribbling": 7,
+        "shooting": 5,
+        "finishing": 3,
+        "defending": 7,
+        "pressing": 8,
+        "positioning": 3
+      },
+      "mainPosition": "FB",
+      "positionRatings": {
+        "CB": 66.34,
+        "FB": 69.85,
+        "CM": 58.97,
+        "CAM": 53.77,
+        "W": 61.31,
+        "ST": 56.02
+      }
+    },
+    {
+      "id": "tevfik",
+      "name": "Tevfik",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 966; Stage 2: MD 1020; Stage 1: MD 1074; Excel ana puan: =D34"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 7,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "M.Emre + Tevfik — Aynı takım — Tevfik’in M.Emre yokluğuna bağlı negatif kimya cezası tamamen kalkar.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
+            "detail": "Markdown satırı 682"
+          }
+        },
+        {
+          "text": "Tevfik — M.Emre aynı takımda — Negatif kimya cezası yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 767"
+          }
+        },
+        {
+          "text": "Tevfik — M.Emre yok veya rakipte — Takım kimyası -0.5; irritasyon görünürse PAS -0.5, GÖR -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 768"
+          }
+        },
+        {
+          "text": "M.Emre kendi takımında değilse daha kolay irrite olabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 630"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 4,
+        "stamina": 6.5,
+        "strength": 7.5,
+        "passing": 7,
+        "vision": 7,
+        "control": 7,
+        "dribbling": 4,
+        "shooting": 3,
+        "finishing": 3,
+        "defending": 7.5,
+        "pressing": 6,
+        "positioning": 7
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 69.16,
+        "FB": 61.92,
+        "CM": 60.76,
+        "CAM": 56.11,
+        "W": 51.01,
+        "ST": 49.58
+      }
+    },
+    {
+      "id": "berkin",
+      "name": "Berkin",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 967; Stage 2: MD 1021; Stage 1: MD 1075; Excel ana puan: =D35"
+        }
+      },
+      "suitability": {
+        "GK": 3,
+        "CB": 9,
+        "FB": 9,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Berkin — Güçlü savunmacı yanında — DEF +0.5, POZ +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 710"
+          }
+        },
+        {
+          "text": "Berkin — Savunmayı tek başına taşıma — DEF -0.5, POZ -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 711"
+          }
+        },
+        {
+          "text": "Savunma güven ağı — M.Emre + Berkin — Berkin DEF +0.5 ve POZ +0.5 alır; M.Emre savunma kimyasını stabilize eder.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 783"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 7,
+        "stamina": 6,
+        "strength": 8,
+        "passing": 5.5,
+        "vision": 6,
+        "control": 5,
+        "dribbling": 5,
+        "shooting": 6,
+        "finishing": 3,
+        "defending": 7,
+        "pressing": 4,
+        "positioning": 7.5
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 68.05,
+        "FB": 64.01,
+        "CM": 56.94,
+        "CAM": 55.06,
+        "W": 55.75,
+        "ST": 54.69
+      }
+    },
+    {
+      "id": "direnc",
+      "name": "Direnç",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 968; Stage 2: MD 1022; Stage 1: MD 1076; Excel ana puan: =D36"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 8,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Direnç — Güçlü savunmacı yanında — DEF +0.5, POZ +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 713"
+          }
+        },
+        {
+          "text": "Direnç — Kötü gün — PAS -0.5, DEF -0.5, POZ -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 714"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6,
+        "stamina": 6,
+        "strength": 6,
+        "passing": 6.5,
+        "vision": 6.5,
+        "control": 5,
+        "dribbling": 4,
+        "shooting": 2,
+        "finishing": 2,
+        "defending": 7,
+        "pressing": 7,
+        "positioning": 7.5
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 67.69,
+        "FB": 62.59,
+        "CM": 56.94,
+        "CAM": 52.3,
+        "W": 50.41,
+        "ST": 46.87
+      }
+    },
+    {
+      "id": "eto",
+      "name": "Eto",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 969; Stage 2: MD 1023; Stage 1: MD 1077; Excel ana puan: =D37"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 9,
+        "CM": 2,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Eto — Rakip hücumcu HIZ/GÜÇ yaklaşık 7 — DEF -0.5, POZ -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 722"
+          }
+        },
+        {
+          "text": "Eto — Rakip hem HIZ hem GÜÇ 8+ — DEF -1.0, POZ -1.0; kritik mismatch.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 723"
+          }
+        },
+        {
+          "text": "Eto — Güçlü savunmacı yanında — Yukarıdaki matchup cezası uygun durumda 0.5 azaltılır.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 724"
+          }
+        },
+        {
+          "text": "hatalara yargısız yaklaşan, dirençli ve pozitif; +0.5 kimya eğilimi.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 604"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6,
+        "stamina": 6,
+        "strength": 6,
+        "passing": 5,
+        "vision": 5,
+        "control": 5,
+        "dribbling": 6,
+        "shooting": 3,
+        "finishing": 2,
+        "defending": 7,
+        "pressing": 9,
+        "positioning": 6
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 66.26,
+        "FB": 62.95,
+        "CM": 55.02,
+        "CAM": 50.27,
+        "W": 52.02,
+        "ST": 47.51
+      }
+    },
+    {
+      "id": "ugur",
+      "name": "Uğur",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 970; Stage 2: MD 1024; Stage 1: MD 1078; Excel ana puan: =D38"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 7,
+        "CM": 3,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Uğur — Negatif/tartışmalı ortam — Kendi performansı büyük ölçüde sabit; takım kimyası -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 769"
+          }
+        },
+        {
+          "text": "Negatif zincir — Göktuğ + Uğur + Utku — Göktuğ/Uğur aktif negatifleşirse Utku’nun koşullu kavgacı trait’i açılabilir ve atmosfer daha da bozulabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
+            "detail": "Markdown satırı 796"
+          }
+        },
+        {
+          "text": "negatif atmosferde tartışmayı büyütebilir; kendi performansı nispeten stabildir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 636"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 5.5,
+        "stamina": 6.5,
+        "strength": 7,
+        "passing": 6.5,
+        "vision": 6.5,
+        "control": 6.5,
+        "dribbling": 4,
+        "shooting": 3,
+        "finishing": 2,
+        "defending": 7,
+        "pressing": 4,
+        "positioning": 7
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 66.12,
+        "FB": 60.86,
+        "CM": 59.27,
+        "CAM": 53.81,
+        "W": 51.19,
+        "ST": 47.88
+      }
+    },
+    {
+      "id": "arda-barin",
+      "name": "Arda Barin",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 971; Stage 2: MD 1025; Stage 1: MD 1079; Excel ana puan: =F39"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 7,
+        "CM": 9,
+        "CAM": 8,
+        "W": 3,
+        "ST": 3
+      },
+      "preferredPositions": [
+        "CM",
+        "CAM",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Arda Barin — Pozitif clutch modu — ŞUT +0.5, BİT +0.5, POZ +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 692"
+          }
+        },
+        {
+          "text": "Arda Barin — Kötü varyans günü — PAS -0.5, KNTRL -0.5, POZ -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 693"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 5.5,
+        "stamina": 6.5,
+        "strength": 5,
+        "passing": 6.5,
+        "vision": 6.5,
+        "control": 6,
+        "dribbling": 7,
+        "shooting": 7.5,
+        "finishing": 3,
+        "defending": 6,
+        "pressing": 5,
+        "positioning": 6
+      },
+      "mainPosition": "CM",
+      "positionRatings": {
+        "CB": 56.48,
+        "FB": 61.64,
+        "CM": 64.7,
+        "CAM": 64.16,
+        "W": 60.09,
+        "ST": 54.99
+      }
+    },
+    {
+      "id": "yigit-cetinkaya",
+      "name": "Yiğit Çetinkaya",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 972; Stage 2: MD 1026; Stage 1: MD 1080; Excel ana puan: =E40"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 5,
+        "FB": 9,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "FB",
+        "CB"
+      ],
+      "notes": [
+        {
+          "text": "Yiğit Çetinkaya — Normal kullanım — Özel modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 774"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6,
+        "stamina": 5,
+        "strength": 5,
+        "passing": 7.5,
+        "vision": 7.5,
+        "control": 7,
+        "dribbling": 6.5,
+        "shooting": 7.5,
+        "finishing": 3,
+        "defending": 6,
+        "pressing": 5,
+        "positioning": 7.5
+      },
+      "mainPosition": "FB",
+      "positionRatings": {
+        "CB": 62.7,
+        "FB": 64.37,
+        "CM": 62.92,
+        "CAM": 63.43,
+        "W": 60.21,
+        "ST": 55.52
+      }
+    },
+    {
+      "id": "batu",
+      "name": "Batu",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 973; Stage 2: MD 1027; Stage 1: MD 1081; Excel ana puan: =E41"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 1,
+        "FB": 8,
+        "CM": 5,
+        "CAM": 1,
+        "W": 7,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "FB",
+        "W"
+      ],
+      "notes": [
+        {
+          "text": "Batu — Nefes/fizik problemi — İlgili fazda HIZ -0.5, DAY -1.0.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 709"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6,
+        "stamina": 5,
+        "strength": 5,
+        "passing": 7.5,
+        "vision": 7.5,
+        "control": 7,
+        "dribbling": 6.5,
+        "shooting": 7.5,
+        "finishing": 3,
+        "defending": 6,
+        "pressing": 5,
+        "positioning": 7.5
+      },
+      "mainPosition": "FB",
+      "positionRatings": {
+        "CB": 59.66,
+        "FB": 63.97,
+        "CM": 65.96,
+        "CAM": 63.43,
+        "W": 64.13,
+        "ST": 55.52
+      }
+    },
+    {
+      "id": "seker",
+      "name": "Şeker",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 974; Stage 2: MD 1028; Stage 1: MD 1082; Excel ana puan: =D42"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 9,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Şeker — Güçlü stoper yanında — DEF +0.5, POZ +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 764"
+          }
+        },
+        {
+          "text": "Şeker — Rakibin onu hedeflemesi — DEF -0.5, POZ -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 765"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6,
+        "stamina": 6,
+        "strength": 6,
+        "passing": 5,
+        "vision": 5,
+        "control": 5,
+        "dribbling": 6,
+        "shooting": 3,
+        "finishing": 2,
+        "defending": 7,
+        "pressing": 5,
+        "positioning": 6
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 62.58,
+        "FB": 60,
+        "CM": 51.93,
+        "CAM": 49.17,
+        "W": 50.92,
+        "ST": 46.04
+      }
+    },
+    {
+      "id": "halit",
+      "name": "Halit",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 975; Stage 2: MD 1029; Stage 1: MD 1083; Excel ana puan: =D43"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 9,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Halit — Fazla build-up sorumluluğu — PAS -0.5, KNTRL -0.5, GÖR -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 732"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 5,
+        "stamina": 7,
+        "strength": 7.5,
+        "passing": 6,
+        "vision": 5,
+        "control": 5,
+        "dribbling": 4,
+        "shooting": 2,
+        "finishing": 2,
+        "defending": 6,
+        "pressing": 5,
+        "positioning": 6
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 62.12,
+        "FB": 58.62,
+        "CM": 52.53,
+        "CAM": 47.93,
+        "W": 47.1,
+        "ST": 44.66
+      }
+    },
+    {
+      "id": "metehan",
+      "name": "Metehan",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 976; Stage 2: MD 1030; Stage 1: MD 1084; Excel ana puan: =D44"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 9,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Metehan — Fazla build-up sorumluluğu — PAS -0.5, KNTRL -0.5, GÖR -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 755"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 5,
+        "stamina": 7,
+        "strength": 7.5,
+        "passing": 6,
+        "vision": 5,
+        "control": 5,
+        "dribbling": 4,
+        "shooting": 2,
+        "finishing": 2,
+        "defending": 6,
+        "pressing": 5,
+        "positioning": 6
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 62.12,
+        "FB": 58.62,
+        "CM": 52.53,
+        "CAM": 47.93,
+        "W": 47.1,
+        "ST": 44.66
+      }
+    },
+    {
+      "id": "sarp",
+      "name": "Sarp",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 977; Stage 2: MD 1031; Stage 1: MD 1085; Excel ana puan: =C45"
+        }
+      },
+      "suitability": {
+        "GK": 10,
+        "CB": 1,
+        "FB": 1,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "GK"
+      ],
+      "notes": [
+        {
+          "text": "Kiyan / Şahin / Talha / Yusuf / Sarp — Kaleci kimyası — Şimdilik özel modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 775"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "goalkeeper",
+      "mainPosition": "GK",
+      "goalkeeperRating": 62
+    },
+    {
+      "id": "altug",
+      "name": "Altuğ",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 978; Stage 2: MD 1032; Stage 1: MD 1086; Excel ana puan: =F46"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 9,
+        "CM": 9,
+        "CAM": 2,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CM",
+        "CB"
+      ],
+      "notes": [
+        {
+          "text": "Altuğ — Pas alamama, mental kopma veya sevmediği oyuncuyla oynama — DAY -0.5, PRES -0.5, PAS -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 691"
+          }
+        },
+        {
+          "text": "pas alamazsa veya sevmediği oyuncuyla oynarsa oyundan kopabilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / oyuncu profili",
+            "detail": "Markdown satırı 624"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 5,
+        "stamina": 4,
+        "strength": 8,
+        "passing": 6,
+        "vision": 8,
+        "control": 7,
+        "dribbling": 5,
+        "shooting": 6.5,
+        "finishing": 5,
+        "defending": 7,
+        "pressing": 3,
+        "positioning": 3
+      },
+      "mainPosition": "CM",
+      "positionRatings": {
+        "CB": 60.05,
+        "FB": 57.8,
+        "CM": 61.61,
+        "CAM": 58.14,
+        "W": 53.17,
+        "ST": 52.66
+      }
+    },
+    {
+      "id": "oguz",
+      "name": "Oğuz",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 979; Stage 2: MD 1033; Stage 1: MD 1087; Excel ana puan: =D47"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 5,
+        "FB": 5,
+        "CM": 5,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Oğuz — Şimdilik — Veri yetersiz; modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 758"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6,
+        "stamina": 6,
+        "strength": 6,
+        "passing": 6,
+        "vision": 6,
+        "control": 6,
+        "dribbling": 6,
+        "shooting": 6,
+        "finishing": 6,
+        "defending": 6,
+        "pressing": 6,
+        "positioning": 6
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 61.04,
+        "FB": 61.04,
+        "CM": 61.04,
+        "CAM": 58,
+        "W": 58,
+        "ST": 58
+      }
+    },
+    {
+      "id": "eren-emeksiz",
+      "name": "Eren Emeksiz",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 980; Stage 2: MD 1034; Stage 1: MD 1088; Excel ana puan: =E48"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 6,
+        "FB": 9,
+        "CM": 7,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "FB",
+        "CM"
+      ],
+      "notes": [
+        {
+          "text": "Eren Emeksiz — Şimdilik — Veri az; modifier yok.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 719"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 6,
+        "stamina": 6,
+        "strength": 6,
+        "passing": 6,
+        "vision": 6,
+        "control": 6,
+        "dribbling": 4,
+        "shooting": 4,
+        "finishing": 3,
+        "defending": 6,
+        "pressing": 5,
+        "positioning": 6
+      },
+      "mainPosition": "FB",
+      "positionRatings": {
+        "CB": 59.81,
+        "FB": 59.91,
+        "CM": 58.61,
+        "CAM": 52.39,
+        "W": 51.19,
+        "ST": 48.8
+      }
+    },
+    {
+      "id": "fuat",
+      "name": "Fuat",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 981; Stage 2: MD 1035; Stage 1: MD 1089; Excel ana puan: =D49"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 9,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Fuat — Kontrolsüz ileri koşular — POZ -1.0, DEF -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 725"
+          }
+        },
+        {
+          "text": "Fuat — Aşırı özgüvenli top kullanımı — KNTRL -0.5, PAS -0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 726"
+          }
+        },
+        {
+          "text": "Fuat — Güçlü stoper yanında — Negatif etkinin bir kısmı absorbe edilir.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 727"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 4,
+        "stamina": 5,
+        "strength": 6,
+        "passing": 5,
+        "vision": 5,
+        "control": 5,
+        "dribbling": 4,
+        "shooting": 4,
+        "finishing": 2,
+        "defending": 6.5,
+        "pressing": 6,
+        "positioning": 6
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 59.68,
+        "FB": 54.3,
+        "CM": 49.31,
+        "CAM": 45.81,
+        "W": 43.88,
+        "ST": 42.45
+      }
+    },
+    {
+      "id": "akin",
+      "name": "Akın",
+      "origin": {
+        "kind": "catalog",
+        "source": {
+          "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+          "section": "Oyuncu Veritabanı",
+          "detail": "Mevki/rol: MD 982; Stage 2: MD 1036; Stage 1: MD 1090; Excel ana puan: =D50"
+        }
+      },
+      "suitability": {
+        "GK": 1,
+        "CB": 9,
+        "FB": 9,
+        "CM": 1,
+        "CAM": 1,
+        "W": 1,
+        "ST": 1
+      },
+      "preferredPositions": [
+        "CB",
+        "FB"
+      ],
+      "notes": [
+        {
+          "text": "Akın — Yakın maçın son bölümü / clutch anı — ŞUT +0.5, BİT +0.5, POZ +0.5.",
+          "source": {
+            "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+            "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
+            "detail": "Markdown satırı 688"
+          }
+        }
+      ],
+      "archived": false,
+      "kind": "outfield",
+      "attributes": {
+        "speed": 1,
+        "stamina": 1,
+        "strength": 3,
+        "passing": 3,
+        "vision": 2,
+        "control": 2,
+        "dribbling": 1,
+        "shooting": 2,
+        "finishing": 2,
+        "defending": 4,
+        "pressing": 1,
+        "positioning": 4
+      },
+      "mainPosition": "CB",
+      "positionRatings": {
+        "CB": 33.05,
+        "FB": 26.79,
+        "CM": 23.13,
+        "CAM": 21.48,
+        "W": 18.62,
+        "ST": 21.2
+      }
+    }
+  ]
+}

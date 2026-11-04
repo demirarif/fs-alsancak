@@ -1,0 +1,6 @@
+.kit.home{background:#458cff}.kit.away{background:#ef4c5d}
+.player-label,.player-label.is-owner{gap:3px;padding:0;background:transparent;border:0;border-radius:0;box-shadow:none;backdrop-filter:none;font-family:"Segoe UI",Arial,sans-serif;font-size:9px;letter-spacing:0;font-weight:600;line-height:12px;color:#f1f4f6;text-shadow:0 1px 2px #09130e,1px 0 2px #09130ed9,-1px 0 2px #09130ed9}
+.player-label::after{display:none}.player-label.is-owner{color:#5bff9a}
+.player-label .label-dot,.player-label.is-owner .label-dot{width:4px;height:4px;background:var(--kit);border-radius:50%;box-shadow:0 0 1px 1px #101c199c}
+.player-label.team-1 .label-dot{border-radius:0}
+@media(max-width:700px){.player-label,.player-label.is-owner{font-size:8px;line-height:11px;gap:3px;padding:0}.player-label .label-dot,.player-label.is-owner .label-dot{width:3px;height:3px}}

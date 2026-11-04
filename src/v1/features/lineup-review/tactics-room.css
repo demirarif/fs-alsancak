@@ -1,0 +1,130 @@
+/* Two fields, one viewport. Shared shirts, typography and controls from the player cards. The top bar is shared (ui/design-system.css). */
+#app #lineup-screen:not([hidden]){display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:14px 18px 0;background:#171f2b;font-family:var(--als-font);color:var(--als-text)}
+#app #lineup-screen .tactics-layout{display:block;width:100%;max-width:1600px;min-height:0;flex:1;margin:0 auto}
+#app #lineup-screen .tactics-pitches{display:grid;grid-template-columns:minmax(0,1fr) 128px minmax(0,1fr);height:100%;min-height:0;gap:12px;align-items:stretch}
+#app #lineup-screen .tactic-team{display:flex;flex-direction:column;min-height:0;overflow:hidden;background:linear-gradient(145deg,#252f3f,#202a39 75%);border:1px solid #3f4b5e;border-radius:8px;box-shadow:var(--als-shadow)}
+#app #lineup-screen .tactic-team>header{display:grid;grid-template-columns:auto minmax(0,1fr) 26px;align-items:center;flex:none;min-height:52px;height:52px;padding:5px 10px;gap:8px;border-bottom:1px solid #ffffff12;background:linear-gradient(120deg,color-mix(in srgb,var(--team-color) 13%,#273345),#242f40 75%)}
+#app #lineup-screen .tactic-team>header>div{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;min-width:0}
+#app #lineup-screen .tactic-team>header .tactic-team-kit{display:grid;place-items:center;width:35px;height:42px;flex:none;padding:0;margin:0}
+#app #lineup-screen .tactic-team-kit>.bp-shirt{width:45px;height:45px;fill:none;stroke:none;filter:drop-shadow(0 3px 3px #07101b55)}
+#app #lineup-screen .tactic-team h2{font-size:16px;font-weight:800;line-height:1.4;letter-spacing:-.4px;margin:0;color:#edf1f7;white-space:nowrap}
+#app #lineup-screen .tactic-recommend{display:grid;place-items:center;width:26px;height:30px;flex:none;padding:0;border:1px solid #ffffff12;border-radius:5px;background:#ffffff03;color:#9caec6;cursor:pointer}
+#app #lineup-screen .tactic-recommend:hover{background:#ffffff08;border-color:#c1a67b55;color:#e7c181}
+#app #lineup-screen .tactic-recommend>.ui-icon{width:15px;height:15px}
+#app #lineup-screen .tactic-team>header .tactic-formations{display:flex;align-items:center;justify-content:flex-end;gap:4px;min-width:0;padding:0;margin:0;border:0;background:none}
+#app #lineup-screen .tactic-formations button{display:inline-flex;align-items:center;justify-content:center;flex:0 1 auto;min-width:0;height:28px;padding:5px 6px;border:1px solid #ffffff13;border-radius:4px;background:#1e2a3b;color:#9fb0c7;font-family:var(--als-font);font-size:10px;font-weight:700;line-height:1.4;font-variant-numeric:tabular-nums;white-space:nowrap;cursor:pointer}
+#app #lineup-screen .tactic-formations button:hover{background:#2c3a4f;color:#dce5f2;border-color:#b9c5d133}
+#app #lineup-screen .tactic-formations button.is-active{background:#d5b27812;border-color:#c5a87380;color:#edcf99;box-shadow:0 1px 0 #ffffff06 inset}
+#app #lineup-screen .tactic-team .tactic-pitch{flex:1;min-height:0;height:auto;margin:8px 9px 10px;border:1px solid #8cae9e3d;border-radius:5px;background:radial-gradient(ellipse at 50% 40%,#49726920,transparent 75%),repeating-linear-gradient(0deg,#233f3b 0,#233f3b 10%,#203b37 10%,#203b37 20%);box-shadow:0 3px 15px #080f1726 inset}
+#app #lineup-screen .tactic-pitch-lines{stroke:#b0c8bc42;stroke-width:1.7;fill:none}
+#app #lineup-screen .tactic-player{position:absolute;display:flex;flex-direction:column;align-items:center;width:100px;gap:1px;transform:translate(-50%,-85%);pointer-events:none;will-change:translate}
+#app #lineup-screen .tactic-token{position:relative;display:block;width:42px;height:34px;margin:0;padding:0;flex:none;background:none;border:0;border-radius:6px;filter:none;box-shadow:none;cursor:grab;pointer-events:auto;touch-action:manipulation}
+#app #lineup-screen .tactic-token:active{cursor:grabbing}
+#app #lineup-screen .tactic-token>.bp-shirt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;max-width:none;display:block;fill:none;stroke:none;pointer-events:none;filter:drop-shadow(0 3px 3px #07141160)}
+#app #lineup-screen .tactic-player.is-selected{z-index:5}
+#app #lineup-screen .tactic-player.is-selected .tactic-token{outline:1px solid #e7c181;outline-offset:3px;background:#e7c18112;filter:none}
+#app #lineup-screen .tactic-player.is-drop-target{z-index:6}
+#app #lineup-screen .tactic-player.is-drop-target .tactic-token{outline:2px solid #edcf96;outline-offset:3px;background:#e7c18120;filter:none}
+#app #lineup-screen .tactic-player-label{display:flex;align-items:center;gap:2px;max-width:104px;padding:2px 4px 2px 6px;border:1px solid #aec8bd1a;border-radius:4px;background:#152c29f0;box-shadow:0 2px 4px #07141138;pointer-events:auto}
+#app #lineup-screen .tactic-player-label strong{font-family:var(--als-font);font-size:10px;line-height:1.3;font-weight:700;color:#e8eeef;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#app #lineup-screen .tactic-player-label button{display:grid;place-items:center;flex:none;width:13px;height:14px;padding:0;border:0;border-radius:2px;background:none;color:#96b4a7;cursor:pointer}
+#app #lineup-screen .tactic-player-label button:hover{color:#e7c181}
+#app #lineup-screen .tactic-player-label button .ui-icon{width:11px;height:11px;stroke-width:1.5}
+#app #lineup-screen .tactics-balance{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:repeat(5,72px) 36px;align-self:center;gap:9px;min-width:0;width:100%;height:auto;min-height:0;margin:0}
+#app #lineup-screen .tactics-balance .tactic-metric{display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:9px;min-width:0;min-height:0;margin:0;padding:10px 12px;border:1px solid #ffffff10;border-radius:6px;background:linear-gradient(140deg,#253141,#202b3b);text-align:center;box-shadow:0 3px 10px #090f1820}
+#app #lineup-screen .tactics-balance .tactic-metric>span{font-size:10px;line-height:1.3;font-weight:650;text-align:center;color:#9eafc6;white-space:nowrap}
+#app #lineup-screen .tactics-balance .tactic-metric>div{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}
+#app #lineup-screen .tactics-balance .tactic-metric b{font-family:var(--als-font);font-size:18px;font-weight:750;line-height:1.15;letter-spacing:-.4px;font-variant-numeric:tabular-nums}
+#app #lineup-screen .tactics-balance .tactic-metric i{width:1px;height:12px;background:#ffffff14}
+#app #lineup-screen .tactics-balance .blue-value{color:#8cb4ed}
+#app #lineup-screen .tactics-balance .red-value{color:#e598a8}
+#app #lineup-screen .tactics-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;position:static;width:100%;max-width:1600px;min-height:59px;flex:none;margin:9px auto 0;padding:9px 0 12px;border-top:1px solid #ffffff12;background:#171f2b;box-shadow:none;backdrop-filter:none}
+#app #lineup-screen .tactics-footer>.tactics-footer-left{display:flex;flex-direction:row;align-items:center;gap:9px;min-width:0}
+#app #lineup-screen :is(.tactics-back,.tactics-detail-button,#tactics-retry){display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:35px;padding:8px 11px;border:1px solid #ffffff14;border-radius:5px;background:#222e3e;color:#b6c4d8;font-family:var(--als-font);font-size:11px;font-weight:650;line-height:1.4;white-space:nowrap}
+#app #lineup-screen :is(.tactics-back,.tactics-detail-button,#tactics-retry):hover{border-color:#c1a67b55;background:#2a384b;color:#e0c393}
+#app #lineup-screen .tactics-balance .tactics-detail-button{min-width:0;min-height:36px;padding:7px 6px;gap:5px;font-size:10px}
+#app #lineup-screen .tactics-balance .tactics-detail-button .ui-icon{width:13px;height:13px;flex:none}
+#app #lineup-screen .tactics-footer #tactics-confirm{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:38px;padding:9px 14px;border:1px solid #ecd09c;border-radius:6px;background:linear-gradient(#e7c994,#d8b778);font-family:var(--als-font);font-size:11px;font-weight:800;line-height:1.4;color:#262a30;white-space:nowrap;box-shadow:0 1px 0 #fff3 inset,0 4px 12px #080e1733}
+#app #lineup-screen .tactics-footer #tactics-confirm:disabled{background:#253245;border-color:#43516a;color:#7c92b0;box-shadow:none;cursor:default}
+#app #lineup-screen .tactics-footer .ui-icon{width:15px;height:15px}
+#app #lineup-screen .tactics-halftime{display:inline-flex;align-items:center;gap:9px;margin-right:8px;font-size:10px;color:#98abc3;white-space:nowrap}
+#app #lineup-screen .tactics-halftime strong{font-size:17px;font-weight:750;font-variant-numeric:tabular-nums;color:#e9d2ab}
+#app #lineup-screen #tactics-status{font-size:10px;color:#ed9ca8;max-width:260px;line-height:1.5}
+#app #lineup-screen .tactics-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#app #lineup-screen .tactics-notice{position:fixed;bottom:72px;left:50%;z-index:12;transform:translateX(-50%);margin:0;padding:11px 18px;font-size:11px;border:1px solid #617969;border-radius:6px;background:#24372e;color:#d6e6d9;box-shadow:0 8px 24px #0004}
+#app #lineup-screen .tactics-loading{margin:auto;padding:30px;border:1px solid #3f4b5e;background:#222d3d;max-width:650px}
+#app #lineup-screen .tactics-loading h1{font-family:var(--als-font);font-size:23px;line-height:1.4;font-weight:750;margin:0}
+#app #lineup-screen .tactics-loading a{font-size:11px;color:#d9bf93;margin:14px 0 0}
+#app #lineup-screen .tactics-detail-dialog{width:810px;max-width:calc(100vw - 40px);max-height:calc(100dvh - 50px);padding:0;color:#edf1f7;font-family:var(--als-font);border:1px solid #46546b;border-radius:10px;background:#171f2b;box-shadow:0 32px 100px #0009;scrollbar-width:thin;scrollbar-color:#536079 #171f2b}
+#app #lineup-screen .tactics-detail-dialog::backdrop{background:#090e17dc;backdrop-filter:blur(12px)}
+#app #lineup-screen .tactics-detail-dialog>header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:19px 22px;background:#1e2938;border-bottom:1px solid #ffffff12}
+#app #lineup-screen .tactics-detail-dialog h2{font-size:22px;font-weight:750;letter-spacing:-.6px;margin:0}
+#app #lineup-screen .tactics-detail-dialog>header button{display:grid;place-items:center;flex:none;width:32px;height:32px;padding:0;border:1px solid #ffffff12;border-radius:6px;background:#ffffff03;color:#a9b7cb}
+#app #lineup-screen .tactics-detail-dialog .tactic-reports{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding:8px 22px 22px}
+#app #lineup-screen .tactics-detail-dialog .tactic-report h3{font-size:13px;font-weight:750;margin:17px 0 12px}
+#app #lineup-screen .tactics-detail-dialog .tactic-report p{font-size:11px;line-height:1.8;padding:10px 12px;background:#ffffff03;border-radius:0 4px 4px 0;color:#afbed1}
+#app #lineup-screen :is(button,a,select):focus-visible{outline:2px solid #e7c181;outline-offset:3px}
+@media(max-width:1050px){
+  #app #lineup-screen .tactics-pitches{grid-template-columns:minmax(0,1fr) 112px minmax(0,1fr);gap:10px}
+  #app #lineup-screen .tactic-team>header{padding:5px 7px;gap:5px;grid-template-columns:auto minmax(0,1fr) 23px}
+  #app #lineup-screen .tactic-team>header .tactic-team-identity{gap:3px}
+  #app #lineup-screen .tactic-team h2{font-size:12px;letter-spacing:-.35px}
+  #app #lineup-screen .tactic-team>header .tactic-team-kit{width:25px;height:35px}
+  #app #lineup-screen .tactic-team-kit>.bp-shirt{width:34px;height:34px}
+  #app #lineup-screen .tactic-team>header .tactic-formations{gap:3px}
+  #app #lineup-screen .tactic-formations button{font-size:9px;padding:5px 3px;letter-spacing:-.3px}
+  #app #lineup-screen .tactic-recommend{width:23px;height:28px}
+  #app #lineup-screen .tactic-recommend>.ui-icon{width:13px;height:13px}
+  #app #lineup-screen .tactic-player-label{max-width:89px;padding:2px 3px 2px 5px}
+  #app #lineup-screen .tactic-player-label strong{font-size:9px}
+  #app #lineup-screen .tactics-balance .tactic-metric{padding:9px 8px}
+  #app #lineup-screen .tactics-balance .tactic-metric>span{font-size:9px}
+  #app #lineup-screen .tactics-balance .tactic-metric>div{gap:6px}
+  #app #lineup-screen .tactics-balance .tactic-metric b{font-size:17px}
+}
+@media(max-height:730px){
+  #app #lineup-screen:not([hidden]){padding-top:11px}
+  #app #lineup-screen .tactics-balance{grid-template-rows:repeat(5,66px) 36px;gap:8px}
+  #app #lineup-screen .tactics-footer{min-height:55px;margin-top:8px;padding-top:8px;padding-bottom:9px}
+}
+@media(max-height:650px){
+  #app #lineup-screen .tactic-token{height:30px}
+  #app #lineup-screen .tactic-token>.bp-shirt{width:40px;height:40px}
+  #app #lineup-screen .tactic-player-label{padding-block:1px}
+}
+/* Phones and narrow tablets up to 800 px (2026-11-04): the room scrolls. The balance metrics come first (both teams side by side), then each team's pitch full width
+ * with its formations on their own row; tap a shirt, then another of the same team, to swap them. The footer stays at the bottom. */
+@media(max-width:800px),(max-height:500px){
+  #app #lineup-screen:not([hidden]){overflow-x:hidden;overflow-y:auto;padding:10px 12px 0;overscroll-behavior:contain}
+  #app #lineup-screen .tactics-layout{flex:none}
+  #app #lineup-screen .tactics-pitches{grid-template-columns:minmax(0,1fr);height:auto;gap:12px}
+  #app #lineup-screen .tactics-balance{order:-1;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:auto;gap:8px;align-self:stretch}
+  #app #lineup-screen .tactics-balance .tactic-metric{padding:8px 10px;gap:5px}
+  #app #lineup-screen .tactics-balance .tactic-metric>span{font-size:11px}
+  #app #lineup-screen .tactics-balance .tactic-metric b{font-size:17px}
+  #app #lineup-screen .tactics-balance .tactics-detail-button{min-height:100%;font-size:12px;gap:7px}
+  #app #lineup-screen .tactic-team{overflow:visible}
+  #app #lineup-screen .tactic-team>header{grid-template-columns:minmax(0,1fr) 34px;grid-template-rows:auto auto;height:auto;min-height:0;padding:8px 10px;gap:8px}
+  #app #lineup-screen .tactic-team>header .tactic-team-identity{grid-column:1;grid-row:1}
+  #app #lineup-screen .tactic-team h2{font-size:15px}
+  #app #lineup-screen .tactic-recommend{grid-column:2;grid-row:1;width:34px;height:34px}
+  #app #lineup-screen .tactic-team>header .tactic-formations{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+  #app #lineup-screen .tactic-formations button{height:36px;padding:5px 2px;font-size:11px;letter-spacing:0}
+  #app #lineup-screen .tactic-team .tactic-pitch{flex:none;height:auto;aspect-ratio:68/105;margin:8px}
+  #app #lineup-screen .tactic-player{width:76px}
+  #app #lineup-screen .tactic-token{width:40px;height:34px}
+  #app #lineup-screen .tactic-player-label{max-width:74px;padding:2px 3px 2px 5px}
+  #app #lineup-screen .tactic-player-label strong{font-size:9px}
+  #app #lineup-screen .tactic-player-label button{width:16px;height:18px}
+  #app #lineup-screen .tactics-footer{position:sticky;bottom:0;z-index:6;flex-wrap:wrap;gap:8px;margin:12px -12px 0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#171f2bf5;backdrop-filter:blur(10px)}
+  #app #lineup-screen .tactics-footer>.tactics-footer-left{flex-wrap:wrap;gap:8px}
+  #app #lineup-screen .tactics-footer>div:last-child{margin-left:auto}
+  #app #lineup-screen :is(.tactics-back,#tactics-retry),#app #lineup-screen .tactics-footer .squad-export{min-height:42px}
+  #app #lineup-screen .tactics-footer #tactics-confirm{min-height:44px;font-size:13px}
+  #app #lineup-screen .tactics-notice{bottom:110px;width:max-content;max-width:calc(100vw - 24px)}
+  #app #lineup-screen .tactics-detail-dialog{max-width:calc(100vw - 16px);max-height:calc(100dvh - 24px)}
+  #app #lineup-screen .tactics-detail-dialog>header{padding:14px 16px}
+  #app #lineup-screen .tactics-detail-dialog h2{font-size:18px}
+  #app #lineup-screen .tactics-detail-dialog .tactic-reports{grid-template-columns:minmax(0,1fr);gap:0;padding:2px 14px 16px}
+  #app #lineup-screen .tactics-detail-dialog .tactic-report p{font-size:12px;line-height:1.7}
+}

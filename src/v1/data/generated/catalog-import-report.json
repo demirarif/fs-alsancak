@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "importerVersion": "1.0.0",
+  "ratingModelVersion": "source-92-8-two-decimals-v1",
+  "catalogVersion": "catalog-v1-a44f7b90ba11484c",
+  "importedAt": "2026-11-04T15:10:44.138Z",
+  "sourceFile": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+  "sourceSha256": "3fe014d6e832ca10f19be9a32b8627a67eaa664ae34ca31eb5d133295be78b4f",
+  "definitionSha256": "35a2dd3f942b1d185307353f03acfb723ede88bcba7c4f03ec0a4482c0c8ab8b",
+  "discrepancies": [
+    {
+      "playerName": "Ömer",
+      "field": "CB ana puan",
+      "reportedValue": 75.1,
+      "canonicalValue": 75.05,
+      "source": {
+        "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
+        "section": "Güncel Mevki Listesi / PDF aktarımı",
+        "detail": "Markdown satırı 889"
+      },
+      "resolution": "Tek ondalıklı Excel/PDF gösterimleri arşivde korundu; uygulama puanı kaynak formülünden iki ondalıkla hesaplandı."
+    }
+  ],
+  "precision": {
+    "storedRatingDecimals": 2,
+    "sourceRatingDecimals": 1
+  },
+  "checks": {
+    "players": 48,
+    "outfield": 43,
+    "goalkeepers": 5,
+    "verifiedPositionRatings": 258,
+    "verifiedMainRatings": 48,
+    "verifiedPublishedMainRatings": 48,
+    "verifiedSecondaryRatings": 43,
+    "lockedChemistryRows": 8,
+    "modifierRows": 68,
+    "atmosphereExamples": 12
+  },
+  "chemistryStatus": "source-only"
+}

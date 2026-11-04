@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#121a19" />
+    <meta name="description" content="Alsancak maç simülatörü — 3D saha ve oyuncu görünümü önizlemesi." />
+    <title>Alsancak · Maç sahası</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23121a19'/%3E%3Cpath d='M9 30 18 10h5l8 20h-6l-2-5h-8l-2 5zm8-10h4l-2-6z' fill='%23d5ee90'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Alsancak ana ekran">
+          <span class="brand-mark">A<span></span></span>
+          <span>ALSANCAK<small>MATCH ENGINE</small></span>
+        </a>
+        <div class="header-center"><span class="header-divider"></span><span id="header-page-name">Kadro seçimi</span><span class="version" id="header-version">03</span></div>
+        <div class="header-actions"><a id="selection-nav" href="#kadrolar" class="text-button" hidden><span>← Kadro<span class="nav-long"> seçimi</span></span></a><a id="tactics-nav" href="#dizilis" class="text-button" hidden><span>← Taktik<span class="nav-long"> odası</span></span></a><button id="inventory-toggle" class="text-button">Oyuncular <svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 14 14 6M6 6h8v8"/></svg></button></div>
+      </header>
+
+      <main id="selection-screen" aria-label="Maç için takım seçimi"></main>
+      <main id="lineup-screen" aria-label="Diziliş ve canlı takım değerlendirmesi" hidden></main>
+      <main id="match-screen" aria-label="Maç: 3D izleme, devre arası ve özet" hidden></main>
+      <!-- 3D demo and sample-player study archived 2026-11-03 (archive/2026-11-03-demo); the match screen replaces them. -->
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

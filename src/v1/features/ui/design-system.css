@@ -1,0 +1,86 @@
+/* The approved profile is the visual reference for each screen as it is revised. */
+:root{--als-font:'Manrope','Segoe UI',sans-serif;--als-bg:#171f2b;--als-panel:#222d3d;--als-raised:#293546;--als-text:#edf1f7;--als-muted:#9caec4;--als-line:#ffffff12;--als-gold:#e7c181;--als-radius:6px;--als-shadow:0 7px 18px #070d182b}
+.ui-icon{display:block;width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.prep-stage-nav{position:fixed;top:0;right:24px;height:55px;display:flex;align-items:center;z-index:11;font-family:var(--als-font)}
+.prep-stage-nav ol{display:flex;align-items:center;gap:18px;list-style:none;margin:0;padding:0}
+.prep-stage-nav li{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:#798ba6;white-space:nowrap}
+.prep-stage-nav li+li::before{content:'';width:20px;height:1px;margin-right:4px;background:#ffffff17}
+.prep-stage-nav b{display:grid;place-items:center;width:24px;height:24px;border:1px solid #ffffff15;border-radius:5px;font-size:9px;font-weight:650;color:#8293ad;background:#ffffff02}
+.prep-stage-nav [aria-current=step]{color:#e7c181}
+.prep-stage-nav [aria-current=step] b{border-color:#d4b57866;background:#d4b5780a;color:#e7c181}
+/* One top bar for squads, tactics and the match (it used to be restyled per screen in seven files). Squads and tactics show the stage
+ * steps on the right; the match shows its way back and the player inventory. */
+#app .topbar.topbar{height:55px;min-height:55px;padding:0 24px;background:#151d28;border-bottom:1px solid #ffffff12;box-shadow:none;font-family:var(--als-font)}
+#app .topbar .brand{font-size:13px;letter-spacing:2.6px;gap:10px}
+#app .topbar .brand small,#app .topbar .header-center,#app.selection-mode .topbar .header-actions{display:none}
+#app .topbar .brand-mark{font-size:29px;line-height:29px;width:27px;height:29px;color:var(--als-gold)}
+#app .topbar .brand-mark span{width:6px;height:6px;right:-1px;bottom:1px;background:var(--als-gold);border-color:#151d28}
+#app .topbar .header-actions{gap:8px}
+#app .topbar .header-actions :is(.text-button,#inventory-toggle){display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:32px;padding:7px 10px;border:1px solid #ffffff10;border-radius:5px;background:#ffffff02;color:#aab9cd;font-family:var(--als-font);font-size:10px;line-height:1.4;font-weight:650;white-space:nowrap}
+#app .topbar .header-actions :is(.text-button,#inventory-toggle):hover{border-color:#c1a67b55;background:#ffffff07;color:#e7c181}
+#app .topbar .header-actions .ui-icon{width:14px;height:14px}
+#app .topbar .header-actions .text-button span{margin:0;color:inherit}
+/* Landscape phones: the app fits the screen height (the match picture and its controls stay in view). */
+@media(max-height:500px){
+  #app{min-height:0}
+  #app .topbar.topbar{height:44px;min-height:44px}
+  .prep-stage-nav{height:44px}
+}
+/* Phones: the mark alone, short labels, the current step's name only. */
+@media(max-width:720px){
+  #app .topbar.topbar{height:50px;min-height:50px;padding:0 12px}
+  #app .topbar .brand>span:not(.brand-mark),#app .topbar .nav-long{display:none}
+  #app .topbar .header-actions{gap:6px}
+  #app .topbar .header-actions :is(.text-button,#inventory-toggle){padding:6px 9px;gap:6px}
+  .prep-stage-nav{right:12px;height:50px}
+  .prep-stage-nav ol{gap:8px}
+  .prep-stage-nav li{gap:6px;font-size:10px}
+  .prep-stage-nav li+li::before{width:10px;margin-right:2px}
+  .prep-stage-nav li:not([aria-current=step]) span{display:none}
+  .prep-stage-nav b{width:22px;height:22px}
+}
+#app #selection-screen{font-family:var(--als-font);color:var(--als-text);background-color:var(--als-bg)}
+#app #selection-screen :is(button,input,select){font-family:var(--als-font)}
+#app #selection-screen :is(.selection-confirm,.selection-add-guest,.selection-retry){display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:var(--als-radius);font-size:12px;font-weight:750;line-height:1.4;letter-spacing:0}
+#app #selection-screen .selection-confirm{min-height:44px;gap:18px;padding:11px 18px}
+#app #selection-screen .selection-add-guest{min-height:36px;padding:8px 11px;font-size:10px}
+#app #selection-screen .selection-retry{min-height:40px;padding:9px 13px;border:1px solid #596984;background:#243143;color:#dac299}
+#app #selection-screen :is(.squad-profile,.pool-profile){width:27px;height:28px;align-self:center;display:grid;place-items:center;padding:0;flex:none;background:#ffffff03;border:1px solid #ffffff0d;border-radius:var(--als-radius);color:#8fa1ba}
+#app #selection-screen :is(.squad-profile,.pool-profile):hover{background:#ffffff09;border-color:#c1a67b55;color:var(--als-gold)}
+#app #selection-screen .squad-profile{margin-right:2px}
+#app #selection-screen .pool-profile{margin-right:8px}
+#app #selection-screen :is(.squad-profile,.pool-profile) .ui-icon{width:14px;height:14px;stroke-width:1.5}
+#app #selection-screen .squad-clear{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:25px;padding:3px 5px;font-size:9px;font-weight:650;text-decoration:none;color:#93a5bf;border:1px solid transparent;border-radius:4px}
+#app #selection-screen .squad-clear .ui-icon{width:12px;height:12px}
+#app #selection-screen .squad-clear:hover:not(:disabled){color:#e6b0b8;background:#e28a9909;border-color:#e28a9929}
+#app #selection-screen .squad-clear:disabled{opacity:.35}
+#app #selection-screen .selection-note>.note-symbol{display:grid;place-items:center;width:18px;height:18px;border:0;color:#8a9db7}
+#app #selection-screen .selection-note>.note-symbol .ui-icon{width:17px;height:17px}
+#app #selection-screen .squad-select{min-height:101px;padding:15px 17px;gap:12px}
+#app #selection-screen .team-shirt{display:grid;place-items:center;flex:none;width:57px;height:67px;filter:none}
+#app #selection-screen .team-shirt .bp-shirt{width:70px;height:70px;fill:none;stroke:none;filter:drop-shadow(0 5px 4px #07101b55)}
+#app #selection-screen .squad-select .active-team-check{width:23px;height:23px;flex:none}
+#app #selection-screen .squad-select .active-team-check .ui-icon{width:14px;height:14px;stroke-width:1.6}
+#app #selection-screen .squad-avatar{width:35px;height:38px}
+#app #selection-screen .squad-avatar .bp-shirt{width:43px;height:43px}
+#app #selection-screen .pool-player.is-assigned .pool-avatar{opacity:.85}
+#app #selection-screen .pool-plus{display:grid;place-items:center;width:16px;color:#8ea5c5}
+#app #selection-screen .pool-plus .ui-icon{width:14px;height:14px}
+#app #selection-screen .selection-search .ui-icon{width:16px;height:16px;stroke-width:1.5}
+#app #selection-screen .squad-select small{letter-spacing:.9px;font-weight:650}
+#app #selection-screen .squad-select strong{font-weight:800}
+#app #selection-screen .squad-context{font-weight:600}
+#app #selection-screen .squad-context label{font-weight:500}
+#app #selection-screen .squad-select>b{font-variant-numeric:tabular-nums;font-weight:750}
+#app #selection-screen :is(.squad-column-labels,.pool-target){font-family:var(--als-font)}
+@media(max-height:850px) and (min-width:1001px){
+  #app #selection-screen .squad-select{min-height:88px;padding-block:10px}
+  #app #selection-screen .team-shirt{height:60px;width:50px}
+  #app #selection-screen .team-shirt .bp-shirt{height:64px;width:64px}
+}
+@media(max-width:1250px){
+  #app #selection-screen .squad-select{padding-inline:12px;gap:9px}
+  #app #selection-screen .team-shirt{width:44px;height:58px}
+  #app #selection-screen .team-shirt .bp-shirt{width:60px;height:60px}
+  #app #selection-screen .squad-select strong{font-size:16px}
+}

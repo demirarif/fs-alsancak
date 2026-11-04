@@ -1,0 +1,63 @@
+      <template id="archived-demo">
+        <div id="scene"></div>
+        <div id="labels" aria-hidden="true"></div>
+        <div class="top-scrim"></div><div class="bottom-scrim"></div>
+
+        <section class="scoreboard" aria-label="Örnek takımlar">
+          <div class="score-meta"><span>ALSANCAK STADYUMU</span><span>11 × 11</span></div>
+          <div class="score-main"><span class="team-name"><i class="kit home"></i> MAVİ TAKIM</span><span class="score">0 <em>:</em> 0</span><span class="team-name">KIRMIZI TAKIM <i class="kit away"></i></span></div>
+          <div class="score-footer"><span class="status-dot"></span><span>Örnek kadrolar · Görünüm çalışması</span></div>
+        </section>
+
+        <div class="view-tools">
+          <span class="tool-caption">KAMERA · OTOMATİK AÇI</span>
+          <div class="segmented" id="camera-controls" role="group" aria-label="Otomatik kamera açısı">
+            <button data-camera="broadcast" class="active" aria-pressed="true" title="Ana tribünden, orta saha hizasından televizyon yayını (1)">TV yayını</button>
+            <button data-camera="wide" aria-pressed="false" title="Köşeden tüm saha (2)">Geniş</button>
+            <button data-camera="goal" aria-pressed="false" title="Hücum edilen kalenin arkasından (3)">Kale arkası</button>
+          </div>
+          <div class="camera-manual" role="group" aria-label="Elle kamera ayarı">
+            <div class="camera-state"><span id="camera-status" role="status"><i></i><b>Otomatik takip</b></span><button id="camera-follow" hidden>Otomatiğe dön</button></div>
+            <div class="camera-pad">
+              <button data-orbit="1" aria-label="Kamerayı sola döndür" title="Sola döndür">⟲</button>
+              <button data-orbit="-1" aria-label="Kamerayı sağa döndür" title="Sağa döndür">⟳</button>
+              <button data-tilt="1" aria-label="Kamerayı yükselt" title="Daha yukarıdan">▴</button>
+              <button data-tilt="-1" aria-label="Kamerayı alçalt" title="Daha alçaktan">▾</button>
+              <button data-zoom="0.84" aria-label="Yaklaş" title="Yaklaş">+</button>
+              <button data-zoom="1.19" aria-label="Uzaklaş" title="Uzaklaş">−</button>
+              <button id="camera-reset" class="camera-reset" title="Seçili açının varsayılanına dön" disabled>Sıfırla</button>
+            </div>
+            <p class="camera-hint">Sürükle: açı · Tekerlek: yakınlık · Sağ tık veya Shift + sürükle: kaydır · Çift tık: otomatiğe dön</p>
+          </div>
+          <div class="view-secondary">
+            <button id="names-toggle" class="small-toggle active" aria-pressed="true"><span class="name-icon">Aa</span> Akıllı isimler</button>
+            <button id="fullscreen" class="icon-button" aria-label="Tam ekran" title="Tam ekran">⛶</button>
+          </div>
+        </div>
+
+        <aside id="roster" class="roster-panel" hidden>
+          <div class="panel-title"><div><span class="eyebrow">GÖRÜNÜM İÇİN</span><h2>Örnek kadrolar</h2></div><button id="roster-close" class="icon-button" aria-label="Kadroları kapat">×</button></div>
+          <p>Görünüm için hazır örnekler: her takımda 1 kaleci ve 10 saha oyuncusu. Kendi seçimlerin kadro ekranında saklanır.</p>
+          <div class="roster-columns" id="roster-content"></div>
+        </aside>
+
+        <div class="scene-caption">
+          <div class="eyebrow"><span class="phase-line"></span><span id="phase-index">01 / 05</span> <span>HAREKET PROVASI</span></div>
+          <h1 id="phase-title">Oyun merkezde kuruluyor.</h1>
+          <p id="phase-description">Kısa paslar, destek koşuları ve topun çevresinde görünen isimler.</p>
+          <div class="phase-tags" id="phase-tags"><span>Orta saha</span><span>Bağlamsal isimler</span></div>
+        </div>
+
+        <div class="pitch-note"><span>105 × 68 m</span><span>22 oyuncu</span><span id="camera-note">TV yayını açısı</span></div>
+        <div id="loading" class="loading"><span class="loader"></span><strong>Saha hazırlanıyor</strong><span>Birazdan sahadayız.</span></div>
+        <div id="scene-error" class="scene-error" hidden><strong>3D görünüm başlatılamadı</strong><p>Tarayıcının donanım hızlandırmasını açıp sayfayı yenilemeyi deneyebilirsin.</p><p id="error-detail"></p></div>
+
+      <footer class="playback" hidden>
+        <div class="playback-top">
+          <div class="transport"><button id="restart" class="icon-button" aria-label="Provayı başa al" title="Başa al (R)">↺</button><button id="play-pause" class="play-button" aria-label="Duraklat" title="Oynat / duraklat (Boşluk)"><span id="play-icon">Ⅱ</span></button><div class="timecode"><strong id="current-time">00:00</strong><span>/ 01:12</span></div></div>
+          <div class="playback-middle"><span class="eyebrow">ÖNİZLEME HIZI</span><div class="speed-controls" role="group" aria-label="Oynatma hızı"><button data-speed="0.25">¼×</button><button data-speed="0.5">½×</button><button data-speed="1" class="active" aria-pressed="true">1×</button><button data-speed="2">2×</button><button data-speed="4">4×</button></div></div>
+        </div>
+        <div class="timeline-row"><input id="timeline" type="range" min="0" max="72" value="0" step="0.05" aria-label="Prova zaman çizelgesi" /><div class="timeline-marks" aria-hidden="true"><i style="left:22.2%"></i><i style="left:44.4%"></i><i style="left:66.7%"></i><i style="left:88.9%"></i></div></div>
+        <div class="playback-bottom"><div class="phase-links" role="group" aria-label="Prova pozisyonları"><button data-time="0" class="active">01 <span>Oyun kurulumu</span></button><button data-time="16">02 <span>Çapraz pas</span></button><button data-time="32">03 <span>Hücum koşusu</span></button><button data-time="48">04 <span>Ceza sahası</span></button><button data-time="64">05 <span>Kaleci</span></button></div><span class="demo-disclaimer">Hazır hareket sekansı · Maç motoru sonraki aşamada</span></div>
+      </footer>
+      </template>

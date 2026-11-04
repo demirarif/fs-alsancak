@@ -1,0 +1,186 @@
+/* Match preparation shares the approved player library's navy, gold and typography. */
+#app:is(.selection-mode) .topbar{background:#141b25;border-bottom-color:#ffffff12;box-shadow:none}
+#app #selection-screen,#app #lineup-screen{--prep-line:#ffffff12;--prep-gold:#e7c181;--prep-muted:#9caec4;background:radial-gradient(ellipse at 90% 0,#39445c16,transparent 45%),#171f2b;color:#edf1f7;font-family:'Manrope','Segoe UI',sans-serif;padding:25px 30px 0;scrollbar-color:#4c5d75 #171f2b}
+#app :is(#selection-screen,#lineup-screen) :is(button,input,select){font-family:inherit}
+#app :is(.selection-heading,.tactics-heading){max-width:1600px;margin:0 auto 24px;gap:24px;align-items:center}
+#app :is(.selection-heading,.tactics-heading) h1{font-family:inherit;font-size:30px;line-height:1.25;font-weight:800;letter-spacing:-1.1px;margin:8px 0 9px;color:#f2f4f8}
+#app :is(.selection-heading,.tactics-heading) p{font-size:12px;line-height:1.7;color:#9badc4;max-width:none}
+#app .selection-eyebrow{font-size:8px;font-weight:750;letter-spacing:1.8px;color:#d4b77f}
+#app .selection-steps{gap:23px;display:flex;font-size:11px;font-weight:600;color:#6f829c}
+#app .selection-steps b{width:28px;height:28px;background:#202c3c;border:1px solid #46536a;font-size:9px;font-weight:700}
+#app .selection-steps .current{color:#ebcfa0}
+#app .selection-steps .current b{background:#d5b2780d;border-color:#bfa273;color:#eac78f;box-shadow:none}
+#app .selection-workspace{max-width:1600px;grid-template-columns:minmax(0,1fr) 340px;gap:24px}
+#app .squad-context{height:38px;align-items:center;font-size:9px;letter-spacing:1.4px;margin-bottom:9px;color:#a4b3c7}
+#app .squad-context>span{display:flex;gap:8px;padding:0}
+#app .squad-context input{height:30px;border:1px solid #425069;background:#202c3c;font-family:inherit;font-size:10px;color:#bac7db;padding:5px 9px}
+#app .squad-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#app #selection-screen .squad-card{background:linear-gradient(145deg,#252f3f,#202a39 75%);border:1px solid #3f4b5e;border-radius:8px;box-shadow:0 7px 18px #070d182b,0 1px 0 #ffffff04 inset;overflow:hidden}
+#app #selection-screen .squad-card.is-active{border-color:color-mix(in srgb,var(--team-color) 65%,#8997ad);box-shadow:0 0 0 1px color-mix(in srgb,var(--team-color) 12%,transparent),0 7px 20px #070d1833}
+#app #selection-screen .squad-select{min-height:89px;padding:18px 17px;gap:13px;background:linear-gradient(120deg,color-mix(in srgb,var(--team-color) 16%,#273345),#242f40 75%);border-bottom:1px solid #ffffff10;box-shadow:none}
+#app #selection-screen .squad-select strong{font-size:19px;font-weight:800;letter-spacing:-.5px;line-height:1.4;gap:8px}
+#app #selection-screen .squad-select small{font-size:7px;font-weight:600;line-height:1.4;letter-spacing:1px;color:#9cacc1;margin-bottom:5px}
+#app #selection-screen .squad-select>b{font-size:29px;line-height:1.1;font-weight:750;color:#edf1f8;letter-spacing:-1px}
+#app #selection-screen .squad-select>b>small{font-size:10px;letter-spacing:0;color:#8c9eb7;margin-top:5px;margin-bottom:0}
+#app .team-shirt{width:38px;height:42px;filter:drop-shadow(0 4px 3px #0004)}
+#app .active-team-check{display:grid;width:22px;height:22px;background:transparent;border-color:#7386a540}
+#app .active-team-check svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#app .squad-card.is-active .active-team-check{background:var(--team-color);color:white;border-color:transparent}
+#app #selection-screen .squad-column-labels{padding:12px 17px 9px 48px;font-size:7px;font-weight:650;color:#8192aa;letter-spacing:.9px}
+#app #selection-screen .squad-card ol{padding:0 12px}
+#app #selection-screen :is(.squad-player,.squad-empty){height:43px;gap:7px;border-color:#ffffff09}
+#app #selection-screen .squad-player:nth-child(even){background:#ffffff02}
+#app .squad-number,#app .squad-empty>span{width:16px;font-size:8px;color:#70819a}
+#app .squad-player-remove{gap:9px;min-height:38px;padding:2px;border-radius:4px}
+#app #selection-screen .squad-player strong{font-size:12px;font-weight:750;line-height:1.35;color:#e8edf5}
+#app #selection-screen .squad-player small{font-size:9px;line-height:1.4;color:#8da0bc;margin-top:3px}
+#app #selection-screen .squad-player b{font-size:14px;font-weight:800;line-height:1.3}
+#app #selection-screen :is(.squad-avatar,.pool-avatar){display:grid;place-items:center;flex:none;width:34px;height:36px;border:0;border-radius:0;background:none;box-shadow:none;overflow:visible}
+#app #selection-screen :is(.squad-avatar,.pool-avatar) .bp-shirt{display:block;width:40px;height:40px;max-width:none;filter:drop-shadow(0 2px 2px #0005)}
+#app #selection-screen .squad-profile{display:grid;place-items:center;width:23px;height:30px;color:#7187a6}
+#app #selection-screen :is(.squad-profile,.pool-profile) svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+#app #selection-screen :is(.squad-profile,.pool-profile):hover{color:#e7c181}
+#app #selection-screen .squad-empty i{width:29px;height:29px;border-color:#7386a52b;background:#ffffff02;border-radius:4px}
+#app #selection-screen .squad-empty small{font-size:10px;font-weight:500;color:#657891}
+#app #selection-screen .squad-empty:first-child small{color:#8d9eb6}
+#app #selection-screen .squad-card>footer{min-height:43px;margin-top:5px;padding:11px 15px;align-items:center;font-size:9px;line-height:1.5;color:#91a3bd;background:#1a2331;border-color:#ffffff10}
+#app .squad-clear{font-size:9px;font-weight:600;line-height:1.4;color:#a8b8ce;border:0;text-decoration:underline;text-decoration-color:#64758a;text-underline-offset:3px}
+#app .selection-note{gap:10px;margin:17px 0 0;font-size:10px;color:#8b9eb7;line-height:1.7}
+#app .selection-note p{max-width:450px}
+#app .selection-note a{font-size:10px;color:#c7b18d}
+#app #selection-screen .selection-inventory{position:static;top:auto;height:673px;min-height:450px;background:#1d2735;border:1px solid #3f4b5e;border-radius:8px;box-shadow:0 7px 18px #070d182b}
+#app #selection-screen .selection-inventory>header{padding:18px;background:linear-gradient(130deg,#293546,#222c3b);border-color:#ffffff10;gap:10px}
+#app #selection-screen .selection-inventory h2{font-size:18px;font-weight:800;letter-spacing:-.5px;line-height:1.4;margin-top:5px}
+#app #selection-screen .selection-inventory h2 small{font-size:9px;border:1px solid #ffffff0a;background:#ffffff06;color:#9caec7;font-weight:600;padding:2px 5px}
+#app #selection-screen .selection-add-guest{display:inline-flex;align-items:center;justify-content:center;gap:5px;font-size:10px;font-weight:700;line-height:1.4;min-height:34px;padding:8px 10px;background:#d6b97c0c;border:1px solid #bda17177;color:#e0c18a;border-radius:4px;box-shadow:none;white-space:nowrap}
+#app #selection-screen .selection-add-guest svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.5;flex:none}
+#app #selection-screen .selection-search{min-height:39px;margin:15px 15px 10px;background:#141d29;border-color:#445065;padding:9px 11px;box-shadow:0 2px 4px #080d171c inset}
+#app #selection-screen .selection-search input{font-size:12px;font-weight:500}
+#app #selection-screen .selection-filters{margin:0 15px 13px;gap:9px}
+#app #selection-screen .selection-filters select{font-size:10px;min-height:33px;width:157px;padding:5px 8px;background:#263243;border-color:#46546a;color:#b9c7dc}
+#app #selection-screen .selection-filters label{font-size:9px;color:#a2b2c9;white-space:nowrap}
+#app #selection-screen .pool-target{min-height:34px;padding:9px 17px;background:#172130;border-color:#ffffff0c;font-size:9px}
+#app #selection-screen .pool-target strong{color:#d7e1ee}
+#app #selection-screen .selection-player-list{padding:5px 10px;background:#1a2432;scrollbar-color:#536079 #1a2432}
+#app #selection-screen .pool-player{min-height:59px;margin:5px 0;border:1px solid #ffffff0e;border-radius:5px;background:linear-gradient(130deg,#273346,#222d3c);box-shadow:0 3px 5px #0c142129;transition:background .15s,border-color .15s}
+#app #selection-screen .pool-player:hover{border-color:#9a8a7066;background:#2a384b}
+#app #selection-screen .pool-add{gap:10px;padding:8px 9px;border-radius:5px}
+#app #selection-screen .pool-add:hover:not(:disabled){background:transparent}
+#app #selection-screen .pool-player-name strong{font-size:12px;font-weight:750;line-height:1.4}
+#app #selection-screen .pool-player-name small{font-size:9px;color:#91a4c1;line-height:1.4;margin-top:3px}
+#app #selection-screen .pool-player-rating{font-size:15px;font-weight:800;margin-right:4px}
+#app #selection-screen .pool-profile{display:grid;place-items:center;width:29px;color:#8196b2}
+#app #selection-screen .pool-player.is-assigned{background:#192432;border-color:#ffffff07;box-shadow:none}
+#app #selection-screen .pool-player.is-assigned .pool-player-name{opacity:.6}
+#app #selection-screen .selection-inventory>footer{min-height:36px;padding:11px 17px;background:#172130;border-color:#ffffff10;font-size:9px;color:#8fa3bf}
+#app #selection-screen .selection-footer,#app #lineup-screen .tactics-footer{max-width:1600px;position:sticky;bottom:0;z-index:5;margin:20px auto 0;padding:17px 0 20px;background:#171f2bf5;backdrop-filter:blur(10px);border-top:1px solid #ffffff14;box-shadow:0 -8px 18px #171f2b66}
+#app #selection-screen .selection-progress>span{font-size:31px;font-weight:750;color:#e7c181;letter-spacing:-1px}
+#app #selection-screen .selection-progress strong,#app #lineup-screen .tactics-footer strong{font-size:12px;font-weight:700;color:#dce5f2}
+#app #selection-screen .selection-progress>div>span,#app #lineup-screen .tactics-footer #tactics-status{font-size:9px;color:#8399b7}
+#app #selection-screen .selection-confirm,#app #lineup-screen #tactics-confirm{display:inline-flex;align-items:center;justify-content:center;gap:20px;min-height:44px;padding:11px 18px;border:1px solid #ecd09c;border-radius:5px;background:linear-gradient(#e7c994,#d8b778);color:#262a30;font-size:12px;line-height:1.4;font-weight:800;box-shadow:0 1px 0 #fff3 inset,0 4px 12px #080e1733}
+#app #selection-screen .selection-confirm span,#app #lineup-screen #tactics-confirm span{margin:0;font-size:16px}
+#app #selection-screen .selection-confirm:disabled,#app #lineup-screen #tactics-confirm:disabled{border-color:#43516a;background:#253245;color:#7c92b0;box-shadow:none;opacity:1}
+#app #selection-screen .barkuz-keeper-toggle{font-size:8px;margin-right:4px}
+#app #selection-screen .barkuz-keeper-toggle .switch-track{width:24px;height:13px}
+#app #selection-screen .barkuz-keeper-toggle .switch-label{font-size:8px}
+.prep-transfer{position:fixed;z-index:1000;pointer-events:none;display:flex;align-items:center;gap:10px;padding:6px 12px;background:linear-gradient(130deg,#35435a,#273347);border:1px solid #d4bc8b88;border-radius:6px;box-shadow:0 12px 24px #0005;font-family:'Manrope','Segoe UI',sans-serif;color:#eff3fa;transform-origin:left center;will-change:transform,opacity}
+.prep-transfer-avatar{display:grid;place-items:center;width:34px;height:35px;flex:none}
+.prep-transfer-avatar svg{width:40px;height:40px;filter:drop-shadow(0 3px 3px #0005)}
+.prep-transfer>strong{font-size:12px;font-weight:750;white-space:nowrap}
+/* Tactic room: two calm fields and a numeric comparison, without an aggregate score. */
+#app #lineup-screen .tactics-heading>a{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:9px 12px;background:#202c3b;border:1px solid #46546a;border-radius:5px;font-size:11px;font-weight:650;line-height:1.4;color:#d4c09b}
+#app #lineup-screen .tactics-heading>a svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+#app #lineup-screen .tactics-layout{max-width:1600px;grid-template-columns:minmax(0,1fr) 310px;gap:22px}
+#app #lineup-screen .tactics-pitches{gap:18px;align-items:start}
+#app #lineup-screen .tactic-team{background:linear-gradient(145deg,#252f3f,#202a39 75%);border:1px solid #3f4b5e;border-radius:8px;box-shadow:0 7px 18px #070d182b}
+#app #lineup-screen .tactic-team>header{min-height:83px;padding:17px 17px;background:linear-gradient(120deg,color-mix(in srgb,var(--team-color) 16%,#273345),#242f40 75%);border-color:#ffffff10;gap:12px}
+#app #lineup-screen .tactic-team h2{font-size:18px;font-weight:800;letter-spacing:-.4px;line-height:1.4}
+#app #lineup-screen .tactic-team header>div>span{font-size:7px;font-weight:600;letter-spacing:1px;color:#9cacc1;padding-left:13px;margin-top:3px}
+#app #lineup-screen .tactic-team select{min-height:36px;min-width:91px;padding:8px 10px;font-family:inherit;font-size:11px;font-weight:700;border:1px solid #5a6880;background:#1b2738;border-radius:5px;color:#e7edf7}
+#app #lineup-screen .tactic-pitch{height:550px;margin:17px 15px 13px;background:radial-gradient(ellipse at 50% 45%,#49726922,transparent 75%),repeating-linear-gradient(0deg,#233f3b 0,#233f3b 10%,#203b37 10%,#203b37 20%);border-color:#8cae9e3d;border-radius:5px;box-shadow:0 3px 15px #080f1726 inset}
+#app #lineup-screen .tactic-pitch-lines{stroke:#afc6bb45;stroke-width:1.6}
+#app #lineup-screen .tactic-attack-direction{top:9px;left:15px;transform:none;font-family:inherit;font-size:7px;font-weight:600;letter-spacing:1.6px;color:#a6c4b681}
+#app #lineup-screen .tactic-player{width:110px;gap:3px;transform:translate(-50%,-85%);will-change:translate}
+#app #lineup-screen .tactic-token{width:41px;height:41px;filter:drop-shadow(0 4px 3px #050d1266);border-radius:5px;transition:filter .16s,background .16s}
+#app #lineup-screen .tactic-token svg{stroke:#e0e9f082;stroke-width:.7}
+#app #lineup-screen .tactic-token b{font-family:inherit;font-size:12px;font-weight:800;padding-top:4px;color:#fff}
+#app #lineup-screen .tactic-player.is-keeper b{color:var(--team-color)}
+#app #lineup-screen .tactic-player.is-selected .tactic-token{outline:1px solid #eacb90;outline-offset:4px;border-radius:6px;background:#e3c18116;filter:drop-shadow(0 0 7px #e3c18133)}
+#app #lineup-screen .tactic-player.is-drop-target .tactic-token{background:#e3c18130;outline:2px solid #f0d49d;outline-offset:4px;filter:drop-shadow(0 0 7px #e3c18155)}
+#app #lineup-screen .tactic-player-label{max-width:115px;gap:3px;padding:4px 5px 4px 7px;border:1px solid #aec8bd1d;border-radius:4px;background:#152c29f0;box-shadow:0 2px 4px #07141138}
+#app #lineup-screen .tactic-player-label strong{font-size:10px;font-weight:700;color:#e8eeef;line-height:1.35}
+#app #lineup-screen .tactic-player-label button{display:grid;place-items:center;width:14px;height:15px;border:0;border-radius:2px;background:none;color:#91b2a4;padding:0;flex:none}
+#app #lineup-screen .tactic-player-label button:hover{color:#e7c181}
+#app #lineup-screen .tactic-player-label button svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.4}
+#app #lineup-screen .tactic-player>small{font-size:7px;font-weight:500;color:#9fbbad;background:#18322c90;padding:2px 5px;border-radius:3px;line-height:1.4}
+#app #lineup-screen .tactic-player>small>span{font-size:9px;font-weight:800;margin-left:4px}
+#app #lineup-screen .tactic-alternatives{padding:12px 15px 15px;gap:6px;border-color:#ffffff0d;align-items:center}
+#app #lineup-screen .tactic-alternatives>span{font-size:7px;letter-spacing:1px;font-weight:650;color:#8195b2;margin-right:6px}
+#app #lineup-screen .tactic-alternatives button{min-height:30px;padding:6px 9px;border:1px solid #ffffff12;border-radius:4px;background:#1b2636;font-family:inherit;font-size:10px;line-height:1.4;font-weight:650;color:#9fadc2;transition:background .16s,border-color .16s}
+#app #lineup-screen .tactic-alternatives button.active{background:#d5b2780d;border-color:#b39a706b;color:#e6c893}
+#app #lineup-screen .tactics-analysis{max-height:710px;background:#1e2836;border:1px solid #3f4b5e;border-radius:8px;box-shadow:0 7px 18px #070d182b;scrollbar-color:#536079 #1e2836}
+#app #lineup-screen .tactics-analysis>header{padding:20px 18px;background:linear-gradient(130deg,#293546,#222c3b);border-color:#ffffff10}
+#app #lineup-screen .tactics-analysis h2{font-size:22px;font-weight:800;letter-spacing:-.7px;margin:7px 0 9px}
+#app #lineup-screen .tactics-analysis header p{font-size:10px;line-height:1.7;color:#8fa4c0}
+#app #lineup-screen .tactic-metrics{display:block;padding:10px 17px}
+#app #lineup-screen .tactic-metric-heading{display:grid;grid-template-columns:45px 1fr 45px;gap:8px;align-items:center;padding:4px 0 8px;color:#788fae;font-size:8px;text-align:center}
+#app #lineup-screen .tactic-metric-heading>span:first-child{color:#8cb4ed;text-align:left}
+#app #lineup-screen .tactic-metric-heading>span:last-child{color:#e598a8;text-align:right}
+#app #lineup-screen .tactic-metric{display:grid;grid-template-columns:45px 1fr 45px;gap:8px;min-height:55px;padding:13px 0;border-color:#ffffff0c;min-width:0}
+#app #lineup-screen .tactic-metric b{font-family:inherit;font-size:21px;font-weight:750;line-height:1.4;letter-spacing:-.5px}
+#app #lineup-screen .tactic-metric b:last-child{text-align:right}
+#app #lineup-screen .tactic-metric span{font-size:10px;font-weight:600;text-align:center;color:#afbed2;line-height:1.6}
+#app #lineup-screen .blue-value{color:#8cb4ed}
+#app #lineup-screen .red-value{color:#e598a8}
+#app #lineup-screen :is(.tactic-formula,.tactic-pending){padding:12px 17px;font-size:10px;color:#9eafc6;border-color:#ffffff0c}
+#app #lineup-screen :is(.tactic-formula,.tactic-pending) summary{font-size:10px;color:#d9bf93}
+#app #lineup-screen .tactic-reports{padding:0 17px 16px}
+#app #lineup-screen .tactic-report h3{font-size:12px;font-weight:750;margin:20px 0 10px}
+#app #lineup-screen .tactic-report p{padding:10px 11px;background:#ffffff03;border-radius:0 4px 4px 0;font-size:10px;line-height:1.8;color:#a9bad1}
+#app #lineup-screen .tactic-report p.positive{border-color:#70a790}
+#app #lineup-screen .tactic-report p.negative{border-color:#b37580}
+#app #lineup-screen .tactic-pending{padding:12px 0 0}
+#app #lineup-screen .tactics-loading{margin:65px auto;border-color:#3f4b5e;background:#222d3d;border-radius:8px}
+#app #lineup-screen .tactics-loading h1{font-family:inherit;font-weight:800;font-size:30px;letter-spacing:-.9px}
+@media(max-height:850px) and (min-width:1001px){
+  #app #selection-screen,#app #lineup-screen{padding-top:20px}
+  #app :is(.selection-heading,.tactics-heading){margin-bottom:18px}
+  #app :is(.selection-heading,.tactics-heading) h1{font-size:27px}
+  #app #selection-screen .squad-select{min-height:77px;padding:13px 16px}
+  #app #selection-screen :is(.squad-player,.squad-empty){height:36px}
+  #app #selection-screen .selection-inventory{height:585px}
+  #app #lineup-screen .tactic-pitch{height:462px}
+  #app #lineup-screen .tactics-analysis{max-height:621px}
+}
+@media(max-width:1250px){
+  #app .selection-workspace{grid-template-columns:minmax(0,1fr) 305px;gap:18px}
+  #app #selection-screen .squad-select{padding-inline:12px;gap:8px}
+  #app #selection-screen .squad-select strong{font-size:16px}
+  #app .team-shirt{width:31px;height:37px}
+  #app .active-team-check{display:none}
+  #app #selection-screen .squad-select>b{font-size:25px}
+  #app #selection-screen .squad-card ol{padding:0 9px}
+  #app #selection-screen .squad-player strong{font-size:11px}
+  #app #selection-screen .squad-player small{font-size:8px}
+  #app #selection-screen .selection-inventory h2{font-size:16px}
+  #app #selection-screen .selection-filters select{width:142px}
+  #app #lineup-screen .tactics-layout{grid-template-columns:1fr}
+  #app #lineup-screen .tactics-analysis{max-height:none}
+  #app #lineup-screen .tactic-metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+  #app #lineup-screen .tactic-metric-heading{grid-column:1/-1;grid-template-columns:45px 1fr 45px}
+  #app #lineup-screen .tactic-metric{grid-template-columns:1fr;gap:3px;text-align:center;padding:6px 0 12px}
+  #app #lineup-screen .tactic-metric b:last-child{text-align:center}
+  #app #lineup-screen .tactic-reports{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+}
+@media(max-width:1000px){
+  #app #selection-screen,#app #lineup-screen{padding:23px 22px 0}
+  #app .selection-workspace{grid-template-columns:minmax(0,1fr) 290px;gap:18px}
+  #app .squad-grid{grid-template-columns:1fr}
+  #app .selection-steps{display:none}
+  #app #selection-screen .selection-inventory{position:sticky;top:0;height:calc(100dvh - 100px);min-height:550px}
+  #app #selection-screen :is(.squad-player,.squad-empty){height:41px}
+  #app #selection-screen .squad-select strong{font-size:19px}
+  #app #selection-screen .squad-player strong{font-size:12px}
+  #app #lineup-screen .tactic-pitch{height:540px}
+}
+@media(prefers-reduced-motion:reduce){#app :is(#selection-screen,#lineup-screen) *{transition:none!important}}

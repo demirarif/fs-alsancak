@@ -1,0 +1,196 @@
+/* Selection is a working roster: keep the chrome quiet and players close together. The top bar is shared (ui/design-system.css). */
+#app #selection-screen:not([hidden]){--squad-row-height:clamp(31px,calc((100dvh - 280px) / 11),38px);display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:14px 24px 0;background:#171f2b}
+#app #selection-screen .selection-workspace{display:grid;grid-template-columns:minmax(480px,.9fr) minmax(500px,1.1fr);gap:20px;width:100%;max-width:1600px;min-height:0;flex:1;align-items:start;margin:0 auto}
+#app #selection-screen .squad-area{min-width:0;max-height:100%;overflow:auto;scrollbar-width:thin;scrollbar-color:#536079 transparent}
+#app #selection-screen .squad-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#app #selection-screen .squad-select{min-height:68px;padding:8px 12px;gap:8px}
+#app #selection-screen .team-shirt{width:38px;height:46px}
+#app #selection-screen .team-shirt .bp-shirt{width:50px;height:50px}
+#app #selection-screen .squad-select strong{font-size:16px;line-height:1.4;letter-spacing:-.45px;gap:6px;white-space:nowrap}
+#app #selection-screen .squad-select>b{display:flex;align-items:baseline;gap:3px;white-space:nowrap;font-size:21px;letter-spacing:-.7px;line-height:1.2}
+#app #selection-screen .squad-select>b>small{display:inline;margin:0;font-size:10px;font-weight:500;color:#95a6bd}
+#app #selection-screen .squad-select .active-team-check{display:grid;width:18px;height:18px;border-color:#ffffff25}
+#app #selection-screen .squad-select .active-team-check .ui-icon{width:12px;height:12px}
+#app #selection-screen .squad-column-labels{display:grid;grid-template-columns:minmax(0,1fr) 24px;gap:6px;height:22px;align-items:center;padding:0 44px 0 53px;font-size:9px;font-weight:500;letter-spacing:0;color:#8397b2}
+#app #selection-screen .squad-column-labels>span:last-child{margin:0;text-align:right}
+#app #selection-screen .squad-card ol{padding:0 8px}
+#app #selection-screen :is(.squad-player,.squad-empty){height:var(--squad-row-height);gap:4px}
+#app #selection-screen .squad-number,#app #selection-screen .squad-empty>span{width:13px;font-size:8px}
+#app #selection-screen .squad-player-remove{display:grid;grid-template-columns:29px minmax(0,1fr) 24px;align-items:center;gap:6px;min-height:30px;padding:0;min-width:0}
+#app #selection-screen .squad-player-remove>span:nth-child(2){width:auto;min-width:0}
+#app #selection-screen .squad-avatar{width:29px;height:30px}
+#app #selection-screen .squad-avatar .bp-shirt{width:33px;height:33px}
+#app #selection-screen .squad-player strong{font-size:11px;font-weight:750;line-height:1.35}
+#app #selection-screen .squad-player small{font-size:8px;line-height:1.35;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app #selection-screen .squad-player b{font-size:13px;text-align:right;padding:0;font-weight:800}
+#app #selection-screen .squad-profile{width:22px;height:24px;margin:0;border-color:transparent;background:none;border-radius:4px}
+#app #selection-screen .squad-profile .ui-icon{width:12px;height:12px}
+#app #selection-screen .squad-empty i{width:25px;height:27px}
+#app #selection-screen .squad-empty small{font-size:9px}
+#app #selection-screen .squad-card>footer{min-height:31px;gap:6px;padding:5px 11px;margin-top:2px;font-size:9px;justify-content:space-between}
+#app #selection-screen .squad-clear{min-height:22px;font-size:9px;padding:1px 2px}
+#app #selection-screen .squad-clear .ui-icon{width:11px;height:11px}
+#app #selection-screen .selection-inventory{height:100%;min-height:0;position:static;align-self:stretch;overflow:hidden}
+#app #selection-screen .selection-inventory>header{min-height:62px;padding:12px 15px;gap:12px}
+#app #selection-screen .selection-inventory h2{margin:0;font-size:18px;font-weight:750;letter-spacing:-.4px;line-height:1.4}
+#app #selection-screen .selection-inventory h2 small{font-size:10px;margin-left:4px}
+#app #selection-screen .pool-header-actions{display:flex;align-items:center;gap:8px;flex:none}
+#app #selection-screen .pool-library{display:grid;place-items:center;width:28px;height:30px;padding:0;border:1px solid #ffffff12;border-radius:5px;background:#ffffff03;color:#92a5c1}
+#app #selection-screen .pool-library:hover{color:#e7c181;background:#ffffff08}
+#app #selection-screen .pool-library .ui-icon{width:14px;height:14px}
+#app #selection-screen .selection-add-guest{min-height:32px;padding:7px 10px;font-size:10px}
+#app #selection-screen .pool-controls{display:grid;grid-template-columns:minmax(130px,1fr) auto;gap:12px;padding:12px 15px;align-items:center}
+#app #selection-screen .selection-search{margin:0;min-height:35px;padding:8px 10px;gap:8px}
+#app #selection-screen .selection-search input{font-size:11px;line-height:1.4}
+#app #selection-screen .selection-search .ui-icon{width:14px;height:14px}
+#app #selection-screen .selection-filters{margin:0;display:flex;align-items:center;gap:10px}
+#app #selection-screen .selection-filters select{width:151px;min-height:35px;font-size:10px;padding:6px 8px}
+#app #selection-screen .selection-filters label{font-size:9px;gap:5px;white-space:nowrap}
+#app #selection-screen .pool-target{min-height:28px;padding:6px 15px;gap:7px;font-size:9px}
+#app #selection-screen .pool-target strong{font-weight:600}
+#app #selection-screen .selection-player-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:max-content;gap:6px;align-content:start;flex:1;min-height:0;padding:9px;overflow:auto}
+#app #selection-screen .pool-player{min-height:51px;height:51px;min-width:0;margin:0;border-radius:5px;box-shadow:0 2px 4px #0c14211c;align-items:center}
+#app #selection-screen .pool-add{gap:7px;padding:6px 7px;min-width:0;align-self:stretch}
+#app #selection-screen .pool-avatar{width:29px;height:33px}
+#app #selection-screen .pool-avatar .bp-shirt{width:37px;height:37px}
+#app #selection-screen .pool-player-name{min-width:0}
+#app #selection-screen .pool-player-name strong{font-size:11px;line-height:1.35;font-weight:750}
+#app #selection-screen .pool-player-name small{font-size:8px;line-height:1.35;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#app #selection-screen .pool-player-rating{font-size:13px;font-weight:800;margin:0 2px}
+#app #selection-screen .pool-profile{height:24px;width:23px;margin-right:5px;border-color:transparent;background:none;border-radius:4px}
+#app #selection-screen .pool-profile .ui-icon{width:12px;height:12px}
+#app #selection-screen .pool-empty{grid-column:1/-1}
+#app #selection-screen .selection-inventory>footer{min-height:31px;padding:8px 15px;font-size:9px}
+#app #selection-screen .barkuz-keeper-toggle{gap:3px;padding:2px;margin-right:2px}
+#app #selection-screen .barkuz-keeper-toggle .switch-label{font-size:7px}
+#app #selection-screen .barkuz-keeper-toggle .switch-track{width:21px;height:12px}
+#app #selection-screen .barkuz-keeper-toggle .switch-knob{width:8px;height:8px}
+#app #selection-screen .barkuz-keeper-toggle[aria-checked=true] .switch-knob{transform:translateX(9px)}
+#app #selection-screen .selection-footer{width:100%;max-width:1600px;flex:none;min-height:62px;position:static;margin:10px auto 0;padding:9px 0 12px;gap:18px;background:#171f2b;border-color:#ffffff12;box-shadow:none;backdrop-filter:none}
+#app #selection-screen .selection-footer-meta{display:flex;align-items:center;gap:22px;min-width:0}
+#app #selection-screen .selection-date-label{display:flex;align-items:center;gap:9px;font-size:10px;font-weight:500;color:#96a8c1;white-space:nowrap}
+#app #selection-screen .selection-date-label input{height:32px;padding:5px 8px;background:#212d3e;color:#c2cede;border:1px solid #44536b;border-radius:4px;font-size:10px;color-scheme:dark}
+#app #selection-screen #selection-total{display:flex;align-items:baseline;gap:4px;font-size:23px;font-weight:750;letter-spacing:-.7px;color:#e7c181;line-height:1.3;white-space:nowrap}
+#app #selection-screen #selection-total small{font-size:11px;color:#8397b3;letter-spacing:0;margin:0}
+#app #selection-screen #selection-readiness{font-size:10px;color:#dfb887;font-weight:600}
+#app #selection-screen #selection-save-status.save-failed{font-size:10px;line-height:1.5;color:#ed9ca8}
+#app #selection-screen .selection-confirm{min-height:39px;font-size:11px;padding:9px 14px;gap:15px}
+#app #selection-screen .selection-confirm .ui-icon{width:15px;height:15px}
+#app #selection-screen .selection-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1150px){
+  #app #selection-screen:not([hidden]){padding:16px 18px 0}
+  #app #selection-screen .selection-workspace{grid-template-columns:minmax(420px,.95fr) minmax(400px,1.05fr);gap:14px}
+  #app #selection-screen .squad-grid{gap:9px}
+  #app #selection-screen .squad-select{padding:10px 9px;gap:5px;min-height:70px}
+  #app #selection-screen .team-shirt{width:34px;height:46px}
+  #app #selection-screen .team-shirt .bp-shirt{width:48px;height:48px}
+  #app #selection-screen .squad-select strong{font-size:13px}
+  #app #selection-screen .squad-select>b{font-size:19px}
+  #app #selection-screen .squad-select .active-team-check{display:none}
+  #app #selection-screen .pool-controls{grid-template-columns:1fr;gap:9px;padding:10px 12px}
+  #app #selection-screen .selection-filters{justify-content:space-between}
+  #app #selection-screen .pool-add{gap:5px;padding:6px}
+  #app #selection-screen .pool-avatar{width:25px}
+  #app #selection-screen .pool-avatar .bp-shirt{width:33px;height:33px}
+  #app #selection-screen .pool-player-name strong{font-size:10px}
+  #app #selection-screen .pool-profile{width:19px;margin-right:2px}
+}
+@media(max-width:900px){
+  #app #selection-screen .selection-workspace{grid-template-columns:minmax(390px,1.03fr) minmax(360px,1fr);gap:12px}
+  #app #selection-screen .squad-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  #app #selection-screen .squad-select strong{font-size:13px}
+  #app #selection-screen .squad-select .active-team-check{display:none}
+  #app #selection-screen .squad-number,#app #selection-screen .squad-empty>span{width:11px}
+  #app #selection-screen .squad-player-remove{grid-template-columns:24px minmax(0,1fr) 20px;gap:4px}
+  #app #selection-screen .squad-avatar{width:24px}
+  #app #selection-screen .squad-avatar .bp-shirt{width:30px;height:30px}
+  #app #selection-screen .squad-profile{width:18px}
+  #app #selection-screen .squad-column-labels{padding-left:46px;padding-right:33px}
+}
+@media(max-height:800px) and (min-width:1001px){
+  #app #selection-screen :is(.squad-player,.squad-empty){height:var(--squad-row-height)}
+  #app #selection-screen .squad-player-remove{min-height:30px}
+  #app #selection-screen .squad-avatar{height:30px}
+  #app #selection-screen .squad-avatar .bp-shirt{width:33px;height:33px}
+  #app #selection-screen .pool-player{height:47px;min-height:47px}
+}
+/* The team switch in the pool header is for phones; desktop keeps both team cards in view. */
+#app #selection-screen .pool-team-switch{display:none}
+/* Phones and narrow tablets up to 800 px (2026-11-04): one column that scrolls. Both team headers sit side by side as the team switch with the active team's list under
+ * them, then the pool (its own team switch stays pinned while it scrolls), and the footer with the next step pinned at the bottom.
+ * Inputs use 16 px text so phones do not zoom in on focus. */
+@media(max-width:800px),(max-height:500px){
+  #app #selection-screen:not([hidden]){--squad-row-height:42px;overflow-x:hidden;overflow-y:auto;padding:10px 12px 0;overscroll-behavior:contain}
+  #app #selection-screen .selection-workspace{grid-template-columns:minmax(0,1fr);gap:14px;flex:none;align-items:stretch}
+  #app #selection-screen .squad-area{max-height:none;overflow:visible}
+  #app #selection-screen .squad-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}
+  #app #selection-screen .squad-card{display:contents}
+  #app #selection-screen .squad-card>.squad-select{grid-row:1;align-self:stretch;min-height:58px;margin-bottom:8px;padding:8px 10px;gap:7px;border:1px solid #3f4b5e;border-radius:7px;box-shadow:var(--als-shadow)}
+  #app #selection-screen .squad-card[data-team="team-1"]>.squad-select{grid-column:1}
+  #app #selection-screen .squad-card[data-team="team-2"]>.squad-select{grid-column:2}
+  #app #selection-screen .squad-card.is-active>.squad-select{border-color:color-mix(in srgb,var(--team-color) 70%,#8997ad);box-shadow:0 0 0 1px color-mix(in srgb,var(--team-color) 30%,transparent) inset,var(--als-shadow)}
+  #app #selection-screen .squad-select .team-shirt{width:30px;height:38px}
+  #app #selection-screen .squad-select .team-shirt .bp-shirt{width:40px;height:40px}
+  #app #selection-screen .squad-select>span:not(.team-shirt){flex:1;min-width:0}
+  #app #selection-screen .squad-select strong{display:block;font-size:13px;line-height:1.2;letter-spacing:-.3px;white-space:normal}
+  #app #selection-screen .squad-select>b{margin-left:auto;font-size:17px}
+  #app #selection-screen .squad-select>b>small{font-size:9px}
+  #app #selection-screen .squad-select .active-team-check{display:none}
+  #app #selection-screen .squad-card:not(.is-active)>:not(.squad-select){display:none}
+  #app #selection-screen .squad-card.is-active>:not(.squad-select){grid-column:1/-1;background:#202a39;border:1px solid color-mix(in srgb,var(--team-color) 40%,#3f4b5e);border-block-width:0}
+  #app #selection-screen .squad-card.is-active>.squad-column-labels{grid-row:2;height:28px;padding:0 50px 0 56px;border-top-width:1px;border-radius:7px 7px 0 0;font-size:10px}
+  #app #selection-screen .squad-card.is-active>ol{grid-row:3;padding:0 8px}
+  #app #selection-screen .squad-card.is-active>footer{grid-row:4;margin:0;border-bottom-width:1px;border-radius:0 0 7px 7px;font-size:11px}
+  #app #selection-screen .squad-player-remove{grid-template-columns:32px minmax(0,1fr) 28px;min-height:38px;gap:8px}
+  #app #selection-screen .squad-avatar{width:32px;height:34px}
+  #app #selection-screen .squad-avatar .bp-shirt{width:38px;height:38px}
+  #app #selection-screen .squad-number,#app #selection-screen .squad-empty>span{width:16px;font-size:9px}
+  #app #selection-screen .squad-player strong{font-size:13px}
+  #app #selection-screen .squad-player small,#app #selection-screen .squad-empty small{font-size:11px}
+  #app #selection-screen .squad-player b{font-size:15px}
+  #app #selection-screen .squad-profile{width:34px;height:34px}
+  #app #selection-screen .squad-clear{min-height:32px;font-size:11px}
+  #app #selection-screen .barkuz-keeper-toggle .switch-label{font-size:9px}
+  #app #selection-screen .barkuz-keeper-toggle .switch-track{width:26px;height:15px}
+  #app #selection-screen .barkuz-keeper-toggle .switch-knob{width:11px;height:11px}
+  #app #selection-screen .barkuz-keeper-toggle[aria-checked=true] .switch-knob{transform:translateX(11px)}
+  #app #selection-screen .selection-inventory{height:auto;overflow:visible}
+  #app #selection-screen .selection-inventory>header{min-height:54px;padding:10px 12px}
+  #app #selection-screen .pool-library{width:36px;height:36px}
+  #app #selection-screen .selection-add-guest{min-height:36px;font-size:12px}
+  #app #selection-screen .pool-controls{grid-template-columns:minmax(0,1fr);gap:10px;padding:10px 12px}
+  #app #selection-screen .selection-search{min-height:42px}
+  #app #selection-screen .selection-search input,#app #selection-screen .selection-filters select,#app #selection-screen .selection-date-label input{font-size:16px}
+  #app #selection-screen .selection-filters{justify-content:space-between;gap:12px}
+  #app #selection-screen .selection-filters select{flex:1;width:auto;min-height:42px}
+  #app #selection-screen .selection-filters label{font-size:12px}
+  #app #selection-screen .pool-target{position:sticky;top:0;z-index:3;min-height:0;padding:8px 10px;background:#172130f7;backdrop-filter:blur(8px)}
+  #app #selection-screen .pool-target-name{display:none}
+  #app #selection-screen .pool-team-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+  #app #selection-screen .pool-team{display:flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid #ffffff14;border-radius:6px;background:#202a39;color:#a8b7cb;font-family:var(--als-font);font-size:12px;font-weight:650;text-align:left}
+  #app #selection-screen .pool-team strong{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:750;color:inherit}
+  #app #selection-screen .pool-team span{font-variant-numeric:tabular-nums;color:#8fa1ba}
+  #app #selection-screen .pool-team .team-marker{width:8px;height:8px}
+  #app #selection-screen .pool-team.is-active{border-color:color-mix(in srgb,var(--team-color) 70%,#8997ad);background:color-mix(in srgb,var(--team-color) 14%,#202a39);color:#edf1f7}
+  #app #selection-screen .pool-team.is-active span{color:#e7c181}
+  #app #selection-screen .selection-player-list{grid-template-columns:minmax(0,1fr);overflow:visible;padding:8px 10px;gap:7px}
+  #app #selection-screen .pool-player{height:58px;min-height:58px}
+  #app #selection-screen .pool-add{gap:9px;padding:6px 9px}
+  #app #selection-screen .pool-avatar{width:32px;height:36px}
+  #app #selection-screen .pool-avatar .bp-shirt{width:40px;height:40px}
+  #app #selection-screen .pool-player-name strong{font-size:13px}
+  #app #selection-screen .pool-player-name small{font-size:11px}
+  #app #selection-screen .pool-player-rating{font-size:16px;margin:0 4px}
+  #app #selection-screen .pool-profile{width:36px;height:36px;margin-right:8px}
+  #app #selection-screen .selection-inventory>footer{font-size:11px;padding:10px 12px}
+  #app #selection-screen .selection-footer{position:sticky;bottom:0;z-index:6;display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:14px -12px 0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#171f2bf5;border-top:1px solid #ffffff14;backdrop-filter:blur(10px)}
+  #app #selection-screen .selection-footer-meta{justify-content:space-between;gap:10px;flex-wrap:wrap}
+  #app #selection-screen .selection-date-label{font-size:12px}
+  #app #selection-screen .selection-date-label input{height:38px}
+  #app #selection-screen .selection-footer-actions{display:flex;gap:8px}
+  #app #selection-screen .selection-footer-actions>:is(.squad-export,.selection-retry){flex:none;min-height:44px}
+  #app #selection-screen .selection-confirm{flex:1;min-height:46px;font-size:13px}
+}
+@media(min-width:521px) and (max-width:800px),(min-width:521px) and (max-height:500px){
+  #app #selection-screen .selection-player-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

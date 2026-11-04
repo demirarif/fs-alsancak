@@ -1,0 +1,60 @@
+.social-export{box-sizing:border-box;width:960px;max-width:calc(100vw - 36px);max-height:calc(100dvh - 32px);padding:0;border:1px solid #46546b;border-radius:12px;color:#edf1f7;background:#171f2b;box-shadow:0 32px 100px #0009;font-family:var(--als-font,'Manrope','Segoe UI',sans-serif)}
+.social-export *{box-sizing:border-box}
+.social-export::backdrop{background:#090e17e8;backdrop-filter:blur(14px)}
+.social-export button{font-family:inherit;cursor:pointer}
+.social-export .ui-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.se-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid #ffffff12;background:#1e2938}
+.se-header>div{display:flex;align-items:center;gap:22px}
+.se-header span{font-size:10px;font-weight:800;letter-spacing:2.8px;color:#e7c181}
+.se-header h2{font:750 20px/1.4 var(--als-font,'Manrope',sans-serif);letter-spacing:-.5px;margin:0}
+.se-close{display:grid;place-items:center;width:32px;height:32px;padding:0;background:#ffffff04;color:#a9b7cb;border:1px solid #ffffff15;border-radius:5px}
+.se-body{display:grid;grid-template-columns:minmax(0,1fr) 248px;height:min(690px,calc(100dvh - 111px));min-height:0}
+.se-preview{display:flex;align-items:center;justify-content:center;min-width:0;min-height:0;padding:22px;background:radial-gradient(ellipse at 50% 25%,#303b4c,#101823);overflow:hidden}
+.se-preview img{display:block;max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 10px 30px #0006}
+.se-preview img[hidden]{display:none}
+.se-preview p{font-size:12px;color:#a7b7cc;text-align:center;line-height:1.8;max-width:300px}
+.se-preview p[hidden]{display:none}
+.se-options{display:flex;flex-direction:column;gap:30px;padding:24px 20px;border-left:1px solid #ffffff12;background:#1c2634;overflow:auto}
+.se-options h3{font-size:11px;font-weight:750;letter-spacing:.3px;color:#aab9cc;margin:0 0 12px}
+.se-formats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.se-formats button{display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;padding:13px 8px;background:#243143;border:1px solid #ffffff15;border-radius:6px;color:#aebcd0}
+.se-formats strong{font-size:19px;font-weight:800;line-height:1.3}
+.se-formats span{font-size:10px;font-weight:600}
+.se-formats button[aria-pressed=true]{background:#d5b27812;color:#edcf99;border-color:#c5a87380}
+.se-pages{display:flex;flex-direction:column;gap:8px}
+.se-pages button{display:flex;align-items:center;gap:9px;min-height:45px;padding:10px 11px;text-align:left;border:1px solid #ffffff12;border-radius:5px;background:#243143;color:#a9b8cc}
+.se-pages button>span{font-size:10px;color:#6f829e;font-variant-numeric:tabular-nums}
+.se-pages button>strong{font-size:11px;font-weight:700;line-height:1.5}
+.se-pages .ui-icon{margin-left:auto;width:14px;height:14px;visibility:hidden;color:#e7c181}
+.se-pages button[aria-pressed=true]{border-color:#a7b5c540;background:#2c394c;color:#edf1f7}
+.se-pages button[aria-pressed=true] .ui-icon{visibility:visible}
+.se-download-area{margin-top:auto;display:flex;flex-direction:column;gap:12px}
+.se-size{font-size:10px;font-weight:600;color:#899bb4;text-align:center;font-variant-numeric:tabular-nums}
+.se-download{display:flex;align-items:center;justify-content:center;gap:9px;min-height:41px;padding:10px;border:1px solid #ecd09c;border-radius:6px;background:linear-gradient(#e7c994,#d8b778);color:#262a30;font-size:12px;font-weight:800;line-height:1.4}
+.se-download:disabled{opacity:.45;cursor:wait}
+.social-export button:focus-visible{outline:2px solid #e7c181;outline-offset:3px}
+#player-library .bp-export{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:34px;padding:7px 11px;margin-left:auto;border:1px solid #ffffff18;border-radius:5px;background:#ffffff04;color:#d4bf99;font:700 11px/1.4 var(--als-font,'Manrope',sans-serif);white-space:nowrap;cursor:pointer}
+#player-library .bp-export+.bp-close{margin-left:0}
+#player-library .bp-export .ui-icon{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+#player-library .bp-export:hover{background:#e7c18110;border-color:#c1a67b55}
+#app :is(#selection-screen,#lineup-screen) .squad-export{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:35px;padding:8px 11px;border:1px solid #ffffff18;border-radius:5px;background:#222e3e;color:#d4bf99;font:700 11px/1.4 var(--als-font,'Manrope',sans-serif);white-space:nowrap;cursor:pointer}
+#app :is(#selection-screen,#lineup-screen) .squad-export .ui-icon{width:15px;height:15px}
+#app :is(#selection-screen,#lineup-screen) .squad-export:hover{background:#2a384b;border-color:#c1a67b55}
+#app :is(#selection-screen,#lineup-screen) .squad-export:disabled{opacity:.4;cursor:default}
+/* Phones (2026-11-04): full screen, the image on top as large as it fits, the options in a strip below. */
+@media(max-width:720px){
+  .social-export{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;border:0;border-radius:0}
+  .se-header{padding:10px 14px}
+  .se-header>div{gap:12px}
+  .se-header h2{font-size:17px}
+  .se-body{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;height:calc(100dvh - 53px)}
+  .se-preview{padding:12px}
+  .se-options{gap:12px;padding:12px 14px calc(12px + env(safe-area-inset-bottom));border-left:0;border-top:1px solid #ffffff12;overflow:visible}
+  .se-options h3{margin-bottom:8px}
+  .se-formats button{flex-direction:row;gap:8px;padding:9px 8px}
+  .se-formats strong{font-size:16px}
+  .se-pages{flex-direction:row;overflow-x:auto}
+  .se-pages button{flex:1 0 auto;min-height:40px}
+  .se-download-area{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
+  .se-download{flex:1}
+}

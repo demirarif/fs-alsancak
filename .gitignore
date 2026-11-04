@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.cache/
+*.log
+# Arkadaşların gerçek fotoğrafları: portre çalışması için kaynak, uygulama kullanmıyor; herkese açık repoya konmaz.
+futbolcu gorselleri/
+.vercel
