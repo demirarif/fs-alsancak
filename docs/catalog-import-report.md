@@ -2,8 +2,8 @@
 
 > `npm run import:catalog` ile üretilir. Kaynak Markdown değiştirilmez.
 
-Katalog sürümü: `catalog-v1-a44f7b90ba11484c`  
-Kaynak SHA-256: `3fe014d6e832ca10f19be9a32b8627a67eaa664ae34ca31eb5d133295be78b4f`
+Katalog sürümü: `catalog-v1-9347d28af9853371`  
+Kaynak SHA-256: `71a05733134776e6cf834c665d6ae0a6b2a631611637e23adea96e4001f2da46`
 
 ## Sonuç
 

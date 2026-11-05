@@ -20,6 +20,8 @@
 #app .topbar .header-actions :is(.text-button,#inventory-toggle):hover{border-color:#c1a67b55;background:#ffffff07;color:#e7c181}
 #app .topbar .header-actions .ui-icon{width:14px;height:14px}
 #app .topbar .header-actions .text-button span{margin:0;color:inherit}
+/* The app frame is the window: no minimum height, so no screen ever scrolls the page under the fixed stage steps (2026-11-05). */
+#app{min-height:0}
 /* Landscape phones: the app fits the screen height (the match picture and its controls stay in view). */
 @media(max-height:500px){
   #app{min-height:0}

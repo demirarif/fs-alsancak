@@ -77,6 +77,8 @@
 #app #selection-screen .selection-confirm{min-height:39px;font-size:11px;padding:9px 14px;gap:15px}
 #app #selection-screen .selection-confirm .ui-icon{width:15px;height:15px}
 #app #selection-screen .selection-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* The view tabs exist for phones only (below). */
+#app #selection-screen .selection-view-tabs{display:none}
 @media(max-width:1150px){
   #app #selection-screen:not([hidden]){padding:16px 18px 0}
   #app #selection-screen .selection-workspace{grid-template-columns:minmax(420px,.95fr) minmax(400px,1.05fr);gap:14px}
@@ -120,9 +122,9 @@
  * them, then the pool (its own team switch stays pinned while it scrolls), and the footer with the next step pinned at the bottom.
  * Inputs use 16 px text so phones do not zoom in on focus. */
 @media(max-width:800px),(max-height:500px){
-  #app #selection-screen:not([hidden]){--squad-row-height:42px;overflow-x:hidden;overflow-y:auto;padding:10px 12px 0;overscroll-behavior:contain}
-  #app #selection-screen .selection-workspace{grid-template-columns:minmax(0,1fr);gap:14px;flex:none;align-items:stretch}
-  #app #selection-screen .squad-area{max-height:none;overflow:visible}
+  #app #selection-screen:not([hidden]){--squad-row-height:38px;overflow:hidden;padding:8px 10px 0}
+  #app #selection-screen .selection-workspace{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:10px;flex:1;min-height:0;align-items:stretch}
+  #app #selection-screen .squad-area{max-height:none;min-height:0;overflow:auto}
   #app #selection-screen .squad-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 8px}
   #app #selection-screen .squad-card{display:contents}
   #app #selection-screen .squad-card>.squad-select{grid-row:1;align-self:stretch;min-height:58px;margin-bottom:8px;padding:8px 10px;gap:7px;border:1px solid #3f4b5e;border-radius:7px;box-shadow:var(--als-shadow)}
@@ -132,7 +134,7 @@
   #app #selection-screen .squad-select .team-shirt{width:30px;height:38px}
   #app #selection-screen .squad-select .team-shirt .bp-shirt{width:40px;height:40px}
   #app #selection-screen .squad-select>span:not(.team-shirt){flex:1;min-width:0}
-  #app #selection-screen .squad-select strong{display:block;font-size:13px;line-height:1.2;letter-spacing:-.3px;white-space:normal}
+  #app #selection-screen .squad-select strong{display:block;font-size:12px;line-height:1.2;letter-spacing:-.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   #app #selection-screen .squad-select>b{margin-left:auto;font-size:17px}
   #app #selection-screen .squad-select>b>small{font-size:9px}
   #app #selection-screen .squad-select .active-team-check{display:none}
@@ -154,7 +156,7 @@
   #app #selection-screen .barkuz-keeper-toggle .switch-track{width:26px;height:15px}
   #app #selection-screen .barkuz-keeper-toggle .switch-knob{width:11px;height:11px}
   #app #selection-screen .barkuz-keeper-toggle[aria-checked=true] .switch-knob{transform:translateX(11px)}
-  #app #selection-screen .selection-inventory{height:auto;overflow:visible}
+  #app #selection-screen .selection-inventory{height:auto;min-height:0;overflow:hidden;display:flex;flex-direction:column}
   #app #selection-screen .selection-inventory>header{min-height:54px;padding:10px 12px}
   #app #selection-screen .pool-library{width:36px;height:36px}
   #app #selection-screen .selection-add-guest{min-height:36px;font-size:12px}
@@ -164,7 +166,7 @@
   #app #selection-screen .selection-filters{justify-content:space-between;gap:12px}
   #app #selection-screen .selection-filters select{flex:1;width:auto;min-height:42px}
   #app #selection-screen .selection-filters label{font-size:12px}
-  #app #selection-screen .pool-target{position:sticky;top:0;z-index:3;min-height:0;padding:8px 10px;background:#172130f7;backdrop-filter:blur(8px)}
+  #app #selection-screen .pool-target{position:static;min-height:0;padding:8px 10px;background:#172130f7}
   #app #selection-screen .pool-target-name{display:none}
   #app #selection-screen .pool-team-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
   #app #selection-screen .pool-team{display:flex;align-items:center;gap:7px;min-height:40px;padding:6px 10px;border:1px solid #ffffff14;border-radius:6px;background:#202a39;color:#a8b7cb;font-family:var(--als-font);font-size:12px;font-weight:650;text-align:left}
@@ -173,8 +175,8 @@
   #app #selection-screen .pool-team .team-marker{width:8px;height:8px}
   #app #selection-screen .pool-team.is-active{border-color:color-mix(in srgb,var(--team-color) 70%,#8997ad);background:color-mix(in srgb,var(--team-color) 14%,#202a39);color:#edf1f7}
   #app #selection-screen .pool-team.is-active span{color:#e7c181}
-  #app #selection-screen .selection-player-list{grid-template-columns:minmax(0,1fr);overflow:visible;padding:8px 10px;gap:7px}
-  #app #selection-screen .pool-player{height:58px;min-height:58px}
+  #app #selection-screen .selection-player-list{grid-template-columns:minmax(0,1fr);flex:1;min-height:0;overflow:auto;padding:8px 10px;gap:6px}
+  #app #selection-screen .pool-player{height:52px;min-height:52px}
   #app #selection-screen .pool-add{gap:9px;padding:6px 9px}
   #app #selection-screen .pool-avatar{width:32px;height:36px}
   #app #selection-screen .pool-avatar .bp-shirt{width:40px;height:40px}
@@ -183,7 +185,7 @@
   #app #selection-screen .pool-player-rating{font-size:16px;margin:0 4px}
   #app #selection-screen .pool-profile{width:36px;height:36px;margin-right:8px}
   #app #selection-screen .selection-inventory>footer{font-size:11px;padding:10px 12px}
-  #app #selection-screen .selection-footer{position:sticky;bottom:0;z-index:6;display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:14px -12px 0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#171f2bf5;border-top:1px solid #ffffff14;backdrop-filter:blur(10px)}
+  #app #selection-screen .selection-footer{position:static;display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:10px;min-height:0;margin:8px -10px 0;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:#171f2b;border-top:1px solid #ffffff12}
   #app #selection-screen .selection-footer-meta{justify-content:space-between;gap:10px;flex-wrap:wrap}
   #app #selection-screen .selection-date-label{font-size:12px}
   #app #selection-screen .selection-date-label input{height:38px}
@@ -191,6 +193,19 @@
   #app #selection-screen .selection-footer-actions>:is(.squad-export,.selection-retry){flex:none;min-height:44px}
   #app #selection-screen .selection-confirm{flex:1;min-height:46px;font-size:13px}
 }
-@media(min-width:521px) and (max-width:800px),(min-width:521px) and (max-height:500px){
-  #app #selection-screen .selection-player-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* Phones and narrow windows (≤ 680 px), 2026-11-05 — user: nothing scrolls but a list: the squads or the player pool, switched by the two tabs; the
+ * pool's own team switch picks the team players go to. */
+@media(max-width:680px){
+  #app #selection-screen .selection-workspace{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:8px}
+  #app #selection-screen .selection-view-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;grid-row:1}
+  #app #selection-screen .selection-view-tabs button{min-height:36px;padding:6px 8px;border:1px solid #ffffff14;border-radius:6px;background:#ffffff03;color:#aab9cd;font-size:12px;font-weight:700;cursor:pointer}
+  #app #selection-screen .selection-view-tabs button[aria-pressed=true]{border-color:#d4b57866;background:#d4b5780f;color:#e7c181}
+  #app #selection-screen .selection-workspace>:is(.squad-area,.selection-inventory){grid-row:2;grid-column:1}
+  #app #selection-screen .selection-workspace[data-view=squad] .selection-inventory,#app #selection-screen .selection-workspace[data-view=pool] .squad-area{display:none}
+  #app #selection-screen .selection-footer{flex-direction:column;align-items:stretch;gap:6px}
+}
+/* Two columns at 681–800 px: each team card is too narrow for the shirt and the full name, so the card keeps the name (its colour marks it). */
+@media(min-width:681px) and (max-width:800px){
+  #app #selection-screen .squad-select .team-shirt{display:none}
+  #app #selection-screen .pool-team{font-size:11px;padding-inline:8px}
 }

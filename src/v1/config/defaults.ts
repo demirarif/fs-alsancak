@@ -85,6 +85,10 @@ export const CAMERA_POLICY = {
   /** Presentation-time easing constants in seconds; never simulation time. */
   smoothing: { target: .38, rig: .6, transition: .5, transitionSeconds: 1.6 },
   ballLeadSeconds: .45,
+  /** Ball tracking (2026-11-05, user: "top takibi daha smooth olsun"): the aim point is a critically damped spring (followSeconds) on the
+   * ball plus a lead that is itself eased (leadEase s) and capped (leadMaxMeters), so a kick, a trap or a deflection no longer jerks the
+   * view; the ball moving inside deadZoneMeters of the aim (a dribble) pulls it at deadZonePull strength only. */
+  follow: { followSeconds: .6, leadEase: .35, leadMaxMeters: 6, deadZoneMeters: 1.2, deadZonePull: .3 },
   /** Initial tuning, not user-given numbers. Pitch: x along length (goals at ±52.5), z across. */
   presets: {
     // Main-stand gantry at the halfway line; slides on a rail and tightens toward the attacked goal.

@@ -211,3 +211,12 @@
 #match-screen .match-archive footer{display:flex;flex-wrap:wrap;gap:8px}
 #match-screen .match-archive .archive-note,#match-screen .match-archive .archive-empty{margin:10px 0 0;color:#8d99a8;font-size:11px}
 
+/* Canlı yayın (online, 2026-11-05): the on-air badge on the scoreboard and the way back to the live picture. */
+#match-screen .match-onair{position:absolute;top:-8px;right:12px;padding:2px 8px;border-radius:999px;background:#d9485f;color:#fff;font-size:9px;font-weight:800;letter-spacing:1.6px;animation:onair-pulse 1.6s ease-in-out infinite}
+#match-screen .match-onair[hidden]{display:none}
+@keyframes onair-pulse{50%{opacity:.65}}
+#match-screen .mc-golive{position:absolute;right:18px;bottom:18px;z-index:7;padding:9px 14px;border:0;border-radius:999px;background:#d9485f;color:#fff;font:inherit;font-size:12px;font-weight:800;letter-spacing:.6px;cursor:pointer;box-shadow:0 8px 22px #0008}
+#match-screen .mc-golive[hidden]{display:none}
+#match-screen .mc-speeds button:disabled{opacity:.4;cursor:default}
+@media(max-width:720px){#match-screen .mc-golive{right:10px;bottom:118px}}
+

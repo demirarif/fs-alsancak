@@ -1,0 +1,12 @@
+// Alsancak online (2026-11-05): one Worker serves the built site (dist/) and the /api routes on the same address, so the login cookie
+// works on every phone. Data in D1, match recordings in KV. Deploy: npm run deploy (builds, then wrangler deploy).
+{
+  "name": "alsancak",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  // Every request runs the Worker first: the site's files are served to signed-in users only.
+  "assets": { "directory": "./dist", "binding": "ASSETS", "run_worker_first": true },
+  "d1_databases": [{ "binding": "DB", "database_name": "alsancak", "database_id": "06b199ae-c9ba-47af-91eb-93576d5c606a" }],
+  "kv_namespaces": [{ "binding": "FILES", "id": "0759de8152d942069be60501812580bb" }],
+  "observability": { "enabled": true }
+}

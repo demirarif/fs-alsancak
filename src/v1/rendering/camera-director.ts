@@ -10,6 +10,11 @@ const P = CAMERA_POLICY, DEG = Math.PI / 180, TAU = Math.PI * 2;
 const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const smoothstep = (a: number, b: number, v: number) => { const t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+/** Critically damped spring toward goal (the SmoothDamp form): position and velocity stay continuous, no overshoot. */
+function spring(x: number, v: number, goal: number, smoothTime: number, dt: number): [number, number] {
+  const w = 2 / smoothTime, k = w * dt, decay = 1 / (1 + k + .48 * k * k + .235 * k * k * k), change = x - goal, temp = (v + w * change) * dt;
+  return [goal + (change + temp) * decay, (v - w * temp) * decay];
+}
 const wrap = (a: number) => { const r = ((a + Math.PI) % TAU + TAU) % TAU - Math.PI; return r === -Math.PI ? Math.PI : r; };
 const ELEVATION = { min: P.elevationDegrees.min * DEG, max: P.elevationDegrees.max * DEG };
 const zero = (): Offset => ({ azimuth: 0, elevation: 0, zoom: 1 });
@@ -50,6 +55,8 @@ export function createCameraDirector(initial: CameraPreset = P.defaultPreset): C
   // The user's rotation relative to the preset, carried through free mode so resume restores it.
   let freeOffset: Offset | null = null;
   let focus: Point3 = { x: 0, y: 0, z: 0 };
+  // Eased lead and the spring-tracked aim point (position and velocity).
+  let lead = { x: 0, z: 0 }, aim: { x: number; z: number; vx: number; vz: number } | null = null, lastBall: { x: number; z: number } | null = null;
 
   function desired(f: { x: number; z: number }): Rig {
     if (preset === 'broadcast') {
@@ -133,19 +140,35 @@ export function createCameraDirector(initial: CameraPreset = P.defaultPreset): C
     },
     update(subject: CameraSubject, dt: number, nextAspect: number) {
       aspect = nextAspect > 0 ? nextAspect : aspect; dt = clamp(dt, 0, .1);
-      const lead = P.ballLeadSeconds, v = subject.ballVelocity;
-      focus = { x: clamp(subject.ball.x + (v?.x ?? 0) * lead, -54, 54), y: 0, z: clamp(subject.ball.z + (v?.z ?? 0) * lead, -35, 35) };
+      const F = P.follow, v = subject.ballVelocity, ball = subject.ball;
+      // No velocity (paused, seeked): hold the lead while the ball stands still, let it go when the ball has jumped (a seek, a restart).
+      const jumped = !!lastBall && Math.hypot(ball.x - lastBall.x, ball.z - lastBall.z) > 8;lastBall = { x: ball.x, z: ball.z };
+      let want = v ? { x: v.x * P.ballLeadSeconds, z: v.z * P.ballLeadSeconds } : jumped ? { x: 0, z: 0 } : lead;
+      const len = Math.hypot(want.x, want.z);if (len > F.leadMaxMeters) want = { x: want.x / len * F.leadMaxMeters, z: want.z / len * F.leadMaxMeters };
+      const e = jumped ? 1 : 1 - Math.exp(-dt / F.leadEase);lead = { x: lerp(lead.x, want.x, e), z: lerp(lead.z, want.z, e) };
+      focus = { x: clamp(ball.x + lead.x, -54, 54), y: 0, z: clamp(ball.z + lead.z, -35, 35) };
+      // A restart that moves the ball (goal kick, kick-off) is panned to, not cut to.
+      if (!aim) aim = { x: focus.x, z: focus.z, vx: 0, vz: 0 };
+      else {
+        // Soft dead zone: inside it only deadZonePull of the error pulls (a dribble barely moves the view, a still ball is still centred);
+        // beyond twice its size the spring takes the full error.
+        const ex = focus.x - aim.x, ez = focus.z - aim.z, d = Math.hypot(ex, ez), dz = F.deadZoneMeters * (1 - F.deadZonePull) * (1 - smoothstep(F.deadZoneMeters, 2 * F.deadZoneMeters, d));
+        const k = d > 1e-6 ? Math.max(F.deadZonePull * d, d - dz) / d : 0;
+        const sx = spring(aim.x, aim.vx, aim.x + ex * k, F.followSeconds, dt), sz = spring(aim.z, aim.vz, aim.z + ez * k, F.followSeconds, dt);
+        aim = { x: sx[0], z: sz[0], vx: sx[1], vz: sz[1] };
+      }
       const hysteresis = P.presets.goal.switchHysteresisMeters;
       if (subject.attackedEnd) end = subject.attackedEnd;
       else if (!endKnown) end = focus.x >= 0 ? 1 : -1;
       else if (focus.x > hysteresis) end = 1;
       else if (focus.x < -hysteresis) end = -1;
       endKnown = true;
-      const goal = desired(focus);
+      const goal = desired(aim);
       if (!base) base = copy(goal);
       else {
         const s = P.smoothing, slow = transition > 0, a = (tau: number) => 1 - Math.exp(-dt / tau);
-        const t = a(slow ? s.transition : s.target), r = a(slow ? s.transition : s.rig);
+        const t = slow ? a(s.transition) : 1, r = a(slow ? s.transition : s.rig);
+        // The aim is already smooth; only a preset change eases the target on top of it.
         base.target.x = lerp(base.target.x, goal.target.x, t); base.target.z = lerp(base.target.z, goal.target.z, t);
         base.azimuth = wrap(base.azimuth + azimuthStep(base.azimuth, goal.azimuth) * r);
         base.elevation = lerp(base.elevation, goal.elevation, r); base.distance = lerp(base.distance, goal.distance, r); base.hfov = lerp(base.hfov, goal.hfov, r);

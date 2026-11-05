@@ -5,3 +5,6 @@ dist/
 # Arkadaşların gerçek fotoğrafları: portre çalışması için kaynak, uygulama kullanmıyor; herkese açık repoya konmaz.
 futbolcu gorselleri/
 .vercel
+# Cloudflare: yerel geliştirme durumu ve şifre özetli tohum dosyası
+.wrangler/
+worker/seed.local.sql

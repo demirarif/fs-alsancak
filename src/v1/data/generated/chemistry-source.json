@@ -1,6 +1,6 @@
 {
   "status": "source-only",
-  "version": "catalog-v1-a44f7b90ba11484c",
+  "version": "catalog-v1-9347d28af9853371",
   "markdown": "# ARŞİV BÖLÜMÜ 3: `Hali_Saha_Kimya_Performans_Kural_Kitapcigi.md`\n\n# Halı Saha — Kimya ve Performans Kural Kitapçığı\n\n> Kaynak: `Hali_Saha_Kimya_Performans_Kural_Kitapcigi.pdf` · 7 sayfa. Aşağıdaki metin, tablo satırları ve tüm sayfa içerikleri aktarılmıştır.\n\n\n---\n\n<!-- Kaynak: Hali_Saha_Kimya_Performans_Kural_Kitapcigi.pdf; sayfa 1/7 -->\n\nHALI SAHA\n\nKİMYA VE PERFORMANS\n\nKURAL KİTAPÇIĞI\n\nTakım dengesi • oyuncu kimyası • form • eşleşme • maç içi modifier sistemi\n\nSistem Halı saha oyuncu veritabanı ve takım optimizasyonu\n\nSürüm Kimya / performans kuralları - 2026\n\nTemel ilke Ana rating sabit, maçlık efektif rating dinamik\n\nHalı Saha Kimya ve Performans Kural Kitapçığı\n\n\n---\n\n<!-- Kaynak: Hali_Saha_Kimya_Performans_Kural_Kitapcigi.pdf; sayfa 2/7 -->\n\n## 1. Sistemin Temel Mantığı\n\n\nBu kitapçık, oyuncuların kalıcı yetenek puanlarını değiştirmeden; aynı takımda oynayan isimlerin ilişkisini, takım atmosferini, form durumunu, eşleşme avantajlarını ve maç içi psikolojik etkileri geçici “efektif puanlar” üzerinden değerlendirir.\n\n- Stage 2 ana yetenek puanları kalıcıdır. Kimya, form ve matchup kuralları sadece o maç veya oyun fazı için efektif değeri değiştirir.\n\n- Normal şartlarda aynı özelliğe gelen toplam bonus +1.0, toplam ceza -1.0 ile sınırlandırılır. Kilitli özel kurallar bu sınırı aşabilir.\n\n- Takım kimyası, bireysel özellik bonuslarından ayrı bir katmandır. Bir oyuncu kendi statını kaybetmeden takımın atmosferini aşağı veya yukarı çekebilir.\n\n- Takım kurucu, kuralları yalnız maçtan sonra yorumlamaz; kadroyu oluştururken olumlu eşleşmeleri, negatif kombinasyonları ve kritik mismatch risklerini önceden hesaba katar.\n\n- Özel çift ve üçlü kimyalar genel atmosfer tarafından otomatik silinmez. Özellikle Arif-Barkuz gibi kilitli negatif ilişkiler ayrıca uygulanır.\n\n## 2. Takım Kimyası Kaynakları\n\n\n### 2.1 Güçlü olumlu stabilizatörler\n\n\nBu oyuncular normal davranışlarında takımın iletişimini, sakinliğini ve birlik duygusunu artırır. Kötü atmosferi tek başlarına tamamen yok etmezler; ancak hafif negatif bir kaynağı dengeleyebilirler.\n\n- Baran - saha içi yönlendirme, iletişim ve oyun organizasyonu. Kavgacı değildir; düşük PAS/GÖR çevresinde yaşadığı frustrasyon teknik bağlantı problemidir.\n\n- Kamil Reis - liderlik ve abi/reis etkisi; takım kimyası +0.5.\n\n- Süleyman - sakin, olgun, pas odaklı ve kapsayıcı; takım kimyası +0.5.\n\n- Alper - moral yükselten, hata sonrası destekleyen ve takım odaklı; gergin ortamda +0.5 kimya eğilimi.\n\n- Hakan Göktuğ - özellikle savunma hattında yapıcı iletişim; +0.5 kimya eğilimi.\n\n- Mali - pozitif ve proaktif takım etkisi; +0.5 kimya eğilimi.\n\n- Onur - saygılı, görev disiplinli ve iyi niyetli; +0.5 kimya eğilimi.\n\n- Ömer - sürekli pozitif ve mücadeleci; +0.5 kimya eğilimi.\n\n- Eto - hatalara yargısız yaklaşan, dirençli ve pozitif; +0.5 kimya eğilimi.\n\n- Melih - uyumlu, pozitif iletişimli ve kombinasyon oyununa açık; +0.5 kimya eğilimi.\n\n- Taha - iyi niyetli, takım odaklı ve güvenilir; +0.5 kimya eğilimi.\n\n- M.Emre - deneyimli savunma lideri ve dengeleyici; özellikle savunma ünitesinde +0.5 kimya eğilimi.\n\n- Arif - genel olarak uyumlu ve dengeli; Barkuz eşleşmesi dışında nötr-pozitif.\n\n- Eren - teknik/pas kalitesi yüksek gruplarda pozitif etkileşim verir; tek başına genel kimya kaynağı sayılmaz.\n\n### 2.2 Nötr / düşük kimya etkili oyuncular\n\n\nAli Efe, Çaça, Emir, Eren Emeksiz, Halit, Metehan, Yiğit Çetinkaya, Oğuz, Akın, Batu, Berkin, Direnç, Fuat, Şeker ve Arda Barin kendi başlarına takım atmosferini otomatik olarak yukarı veya aşağı çekmez. Özel tetikleyicileri devreye girerse maçlık modifier uygulanır.\n\n### 2.3 Kolay etkilenebilen / sinirlenebilen oyuncular\n\n\n- Altuğ - pas alamazsa veya sevmediği oyuncuyla oynarsa oyundan kopabilir.\n\n- Barkuz - form ve mental olarak dalgalı; Arif ile aynı takım özel negatif eşleşmedir.\n\n- İsmail - negatif atmosferden ve yıldız rolü çatışmasından etkilenir.\n\n- Tevfik - M.Emre kendi takımında değilse daha kolay irrite olabilir.\n\n- Mustafa - kötü karar/bencillik günlerinde takım arkadaşlarını frustrasyona sokabilir.\n\n- Göktuğ - servis alamadığında küsme/tartışma riski vardır; aynı zamanda kavgacı profildir.\n\n- Uğur - negatif atmosferde tartışmayı büyütebilir; kendi performansı nispeten stabildir.\n\n- Mensur - hafif kavgacı; rakibi ve bazen ortamı mental olarak zorlayabilir.\n\n- Mahmut - hafif kavgacı.\n\n- Utku - yalnız takımında en az iki başka kavgacı varsa kavgacı trait aktif olur.\n\nHalı Saha Kimya ve Performans Kural Kitapçığı\n\n\n---\n\n<!-- Kaynak: Hali_Saha_Kimya_Performans_Kural_Kitapcigi.pdf; sayfa 3/7 -->\n\n- Servan - güçlü kavgacı/negatif risk; küçümseme ve yapı bozma davranışı tetikleyicidir.\n\n### 2.4 Kavgacı / aktif negatif kimya riski\n\n\nGöktuğ (güçlü), Servan (güçlü), Uğur, Mensur (hafif), Mahmut (hafif) ve koşullu olarak Utku. Bu isimlerin yalnız kadroda bulunması otomatik ceza yaratmaz; negatif davranış tetiklendiğinde aktif negatif kaynak sayılırlar.\n\n## 3. Takım Atmosferi Eşik Kuralları\n\n\n- İyi kimya: en az 2 aktif olumlu stabilizatör + en fazla 1 aktif negatif kaynak. Kimyaya hassas oyuncular pozitif ortam bonusu alabilir.\n\n- Kötü kimya: en az 2 aktif negatif kaynak veya Göktuğ/Servan gibi 1 güçlü negatif kaynak + başka bir irrite/kavgacı oyuncu. Hassas oyuncular negatif ortam cezası alabilir.\n\n- Baran, Kamil Reis, Süleyman, M.Emre, Alper ve Hakan Göktuğ gibi güçlü stabilizatörlerden biri, atmosfer hesabında 1 hafif negatif kaynağı dengeleyebilir.\n\n- Arif-Barkuz gibi kilitli çift cezası, genel pozitif atmosfer nedeniyle otomatik iptal edilmez.\n\n- Takım kimyası raporu mutlaka isimlerle açıklanır: “kimya iyi” demek yerine hangi oyuncuların ortamı yükselttiği veya düşürdüğü belirtilir.\n\n## 4. Kilitli Özel Kimya ve Eşleşme Kuralları\n\n| Oyuncu / Durum | Tetikleyici | Aktif etki |\n| --- | --- | --- |\n| Alper + Taha | Aynı takım | İkisine de PAS +0.5, GÖR +0.5. |\n| Arif + Barkuz | Aynı takım | İkisinin de PAS -0.5, GÖR -0.5; takım kimyası -1. |\n| Baran + Eren | Aynı takım | İkisine de PAS +0.5, GÖR +0.5. |\n| Baran + Eren + Arif | Aynı takım ve bağlantılı orta saha/build-up rolleri | Üçüne de PAS +0.5, GÖR +0.5. Baran-Eren bonusuyla stack olmaz. |\n| Onur + Ömer | Aynı takım | İkisinin de tüm 12 Stage 2 özelliği +1.0. |\n| Onur vs Ömer | Rakip takımlar | İkisinin de tüm 12 Stage 2 özelliği -0.5. |\n| Yankı | Takımı aktif hücum fazında | Efektif HIZ = 10, PAS = 1. Oyun fazı bitince base değerlere döner. |\n| M.Emre + Tevfik | Aynı takım | Tevfik’in M.Emre yokluğuna bağlı negatif kimya cezası tamamen kalkar. |\n\n## 5. Oyuncu Bazlı Maçlık Modifier Kuralları\n\n| Oyuncu / Durum | Tetikleyici | Aktif etki |\n| --- | --- | --- |\n| Akın | Yakın maçın son bölümü / clutch anı | ŞUT +0.5, BİT +0.5, POZ +0.5. |\n| Ali Efe | Belirgin kötü form günü | DAY -0.5, PRES -0.5, POZ -0.5. |\n| Alper | Taha ile aynı takım | PAS +0.5, GÖR +0.5. Genel pozitif kişiliği ayrıca direkt stat bonusu üretmez. |\n| Altuğ | Pas alamama, mental kopma veya sevmediği oyuncuyla oynama | DAY -0.5, PRES -0.5, PAS -0.5. |\n| Arda Barin | Pozitif clutch modu | ŞUT +0.5, BİT +0.5, POZ +0.5. |\n| Arda Barin | Kötü varyans günü | PAS -0.5, KNTRL -0.5, POZ -0.5. |\n| Arif | Barkuz ile aynı takım | PAS -0.5, GÖR -0.5; Barkuz da aynı cezayı alır; takım kimyası -1. |\n| Baran | Güçlü PAS/GÖR oyuncularıyla çevrili | GÖR +0.5, POZ +0.5. |\n\nHalı Saha Kimya ve Performans Kural Kitapçığı\n\n\n---\n\n<!-- Kaynak: Hali_Saha_Kimya_Performans_Kural_Kitapcigi.pdf; sayfa 4/7 -->\n\n| Oyuncu / Durum | Tetikleyici | Aktif etki |\n| --- | --- | --- |\n| Baran | Çok düşük PAS/GÖR çevresi | GÖR -0.5, POZ -0.5. Bu kavgacılık değil teknik bağlantı/frustrasyon etkisidir. |\n| Barkuz | Çok iyi form günü | ŞUT +0.5, BİT +0.5. |\n| Barkuz | Çok kötü form günü | KNTRL -0.5, ŞUT -0.5, BİT -0.5. |\n| Batu | Nefes/fizik problemi | İlgili fazda HIZ -0.5, DAY -1.0. |\n| Berkin | Güçlü savunmacı yanında | DEF +0.5, POZ +0.5. |\n| Berkin | Savunmayı tek başına taşıma | DEF -0.5, POZ -0.5. |\n| Çaça | Normal kullanım | Özel modifier yok; stabil/nötr. |\n| Direnç | Güçlü savunmacı yanında | DEF +0.5, POZ +0.5. |\n| Direnç | Kötü gün | PAS -0.5, DEF -0.5, POZ -0.5. |\n| Emir | Normal kullanım | Özel modifier yok. |\n| Eren | Bağlantılı hattında PAS>=8 ve GÖR>=8 oyuncular | PAS +0.5, GÖR +0.5. |\n| Eren | Düşük PAS/GÖR desteği | PAS -0.5, GÖR -0.5. |\n| Eren | Çok iyi / kötü form | Uygun teknik özelliklerde +0.5 / -0.5. |\n| Eren Emeksiz | Şimdilik | Veri az; modifier yok. |\n| Erhan | Hızlı ve kooperatif koşucularla | PAS +0.5, GÖR +0.5. |\n| Erhan | Bencil/top ezen veya çatışmalı hücum grubu | PAS -0.5, GÖR -0.5. |\n| Eto | Rakip hücumcu HIZ/GÜÇ yaklaşık 7 | DEF -0.5, POZ -0.5. |\n| Eto | Rakip hem HIZ hem GÜÇ 8+ | DEF -1.0, POZ -1.0; kritik mismatch. |\n| Eto | Güçlü savunmacı yanında | Yukarıdaki matchup cezası uygun durumda 0.5 azaltılır. |\n| Fuat | Kontrolsüz ileri koşular | POZ -1.0, DEF -0.5. |\n| Fuat | Aşırı özgüvenli top kullanımı | KNTRL -0.5, PAS -0.5. |\n| Fuat | Güçlü stoper yanında | Negatif etkinin bir kısmı absorbe edilir. |\n| Göktuğ | Çok iyi gün | ŞUT +0.5, BİT +0.5. |\n| Göktuğ | Pas gelmemesi, tartışma, küsme | PRES -0.5, POZ -0.5, BİT -0.5; aktif güçlü negatif kaynağa dönüşebilir. |\n| Hakan Göktuğ | Fiziksel / yüksek GÜÇ stoper partneri | DEF +0.5, POZ +0.5. |\n| Hakan Göktuğ | Rakibin yüksek PAS ile uzun/hava topu tehdidi | İlgili durumda DEF -0.5. |\n| Halit | Fazla build-up sorumluluğu | PAS -0.5, KNTRL -0.5, GÖR -0.5. |\n| İsmail | Baran-Arif-Eren üçlüsünden en az 2 kişi aynı takımda | PAS +0.5, GÖR +0.5. |\n| İsmail | Göktuğ+Barkuz gibi iki dominant hücumcu ile | PAS -0.5, GÖR -0.5. |\n| İsmail | Negatif takım atmosferi | KNTRL -0.5, GÖR -0.5. |\n| Kamil Reis | Takımda normal rolünde | Takım kimyası +0.5; kişisel stat bonusu yok. |\n| M.Emre | Berkin/Direnç/Şeker/Halit/Metehan gibi daha zayıf-ortalama stoperle | Partnerine DEF +0.5, POZ +0.5. |\n| Mahmut | Çok kavgacı ortam | Takım kimyasında -0.5 risk. |\n| Mali | Normal kullanım | Sabit kişisel modifier yok; pozitif/proaktif kimya kaynağı. |\n| Mamadou | Normal kullanım | Özel modifier yok. |\n\nHalı Saha Kimya ve Performans Kural Kitapçığı\n\n\n---\n\n<!-- Kaynak: Hali_Saha_Kimya_Performans_Kural_Kitapcigi.pdf; sayfa 5/7 -->\n\n| Oyuncu / Durum | Tetikleyici | Aktif etki |\n| --- | --- | --- |\n| Melih | Güçlü pozitif pas/kombinasyon ortamı | PAS +0.5, GÖR +0.5. |\n| Mensur | İyi gün | PAS +0.5, GÖR +0.5, KNTRL +0.5. |\n| Mensur | Kötü gün | PAS -0.5, GÖR -0.5, KNTRL -0.5. |\n| Mensur | Rakibi mental olarak bozması | Küçük mental/matchup etkisi; kalıcı stat değişmez. |\n| Metehan | Fazla build-up sorumluluğu | PAS -0.5, KNTRL -0.5, GÖR -0.5. |\n| Mustafa | Sorumluluk aldığı iyi gün | POZ +0.5, ŞUT +0.5. |\n| Mustafa | Bencil/kötü karar günü | PAS -0.5, GÖR -0.5. |\n| Oğuz | Şimdilik | Veri yetersiz; modifier yok. |\n| Onur + Ömer | Aynı takım | Her iki oyuncunun tüm 12 özelliği +1.0. |\n| Onur vs Ömer | Rakip takımlar | Her iki oyuncunun tüm 12 özelliği -0.5. |\n| Servan | Zayıf oyuncuları aşağılama / pozisyon terk etme | Servan POZ -0.5, PAS -0.5; takım kimyası -1; aktif güçlü negatif kaynak. |\n| Servan | Rol net ve yapı sağlıklı | Ceza yok. |\n| Süleyman | Takımda normal rolünde | Takım kimyası +0.5; sakinleştirici liderlik. |\n| Şeker | Güçlü stoper yanında | DEF +0.5, POZ +0.5. |\n| Şeker | Rakibin onu hedeflemesi | DEF -0.5, POZ -0.5. |\n| Taha | Alper ile aynı takım | PAS +0.5, GÖR +0.5. |\n| Tevfik | M.Emre aynı takımda | Negatif kimya cezası yok. |\n| Tevfik | M.Emre yok veya rakipte | Takım kimyası -0.5; irritasyon görünürse PAS -0.5, GÖR -0.5. |\n| Uğur | Negatif/tartışmalı ortam | Kendi performansı büyük ölçüde sabit; takım kimyası -0.5. |\n| Utku | Takımında en az 2 başka kavgacı | Kavgacı trait aktif; atmosfer riskini artırır. |\n| Utku | Takımı önde | DEF +0.5, PRES +0.5, POZ +0.5, DAY +0.5. |\n| Utku | Takımı geride | DEF -0.5, PRES -0.5, POZ -0.5, DAY -0.5. |\n| Yankı | Takım aktif hücum fazında | HIZ=10, PAS=1; faz bitince base değerlere döner. |\n| Yiğit Çetinkaya | Normal kullanım | Özel modifier yok. |\n| Kiyan / Şahin / Talha / Yusuf / Sarp | Kaleci kimyası | Şimdilik özel modifier yok. |\n\n## 6. İsim Bazlı Atmosfer Örnekleri\n\n| Senaryo | İsimler | Sonuç |\n| --- | --- | --- |\n| Pozitif teknik çekirdek | Baran + Eren + Arif | Üçlü PAS/GÖR bonusu aktif olur. İsmail de aynı takımda ise kendi PAS/GÖR bonusunu tetikleyebilir. Bu takım yapısı kombinasyon oyununu destekler. |\n| Pozitif liderlik çekirdeği | Baran + Süleyman + Kamil Reis | Üç güçlü stabilizatör. Tek bir hafif negatif kaynak atmosferi otomatik kötüye çeviremez. |\n| Savunma güven ağı | M.Emre + Berkin | Berkin DEF +0.5 ve POZ +0.5 alır; M.Emre savunma kimyasını stabilize eder. |\n| Savunma tamamlayıcılığı | Hakan Göktuğ + yüksek GÜÇ stoper | Hakan DEF +0.5 ve POZ +0.5 alır; fiziksel eksikliği partner tarafından kapatılır. |\n\nHalı Saha Kimya ve Performans Kural Kitapçığı\n\n\n---\n\n<!-- Kaynak: Hali_Saha_Kimya_Performans_Kural_Kitapcigi.pdf; sayfa 6/7 -->\n\n| Senaryo | İsimler | Sonuç |\n| --- | --- | --- |\n| Negatif güçlü çift | Göktuğ + Servan | İkisinden biri tetiklenirse kötü kimya eşiğine çok hızlı ulaşılır. İsmail gibi hassas oyuncular negatif atmosfer cezasına girebilir. |\n| Negatif zincir | Göktuğ + Uğur + Utku | Göktuğ/Uğur aktif negatifleşirse Utku’nun koşullu kavgacı trait’i açılabilir ve atmosfer daha da bozulabilir. |\n| Kilitli negatif çift | Arif + Barkuz | Genel takım çok pozitif olsa bile çiftin PAS/GÖR -0.5 ve takım kimyası -1 cezası ayrıca uygulanır. |\n| Pozitif hücum ikilisi | Alper + Taha | İkisine PAS +0.5 ve GÖR +0.5; ayrıca iki oyuncu da takım atmosferini aşağı çekmez. |\n| Aşırı özel pozitif çift | Onur + Ömer | Aynı takımda ikisinin tüm 12 özelliği +1.0. Bu kural normal +1 cap mantığının kilitli özel örneğidir. |\n| Aşırı özel negatif çift | Onur vs Ömer | Rakip takımlardaysa ikisinin tüm 12 özelliği -0.5. |\n| Pas ortamı | Baran + Süleyman + Melih | Melih’in pozitif kombinasyon ortamı bonusu PAS +0.5 / GÖR +0.5 aktive olabilir. |\n| Teknik uyumsuzluk | Baran + çok düşük PAS/GÖR profilleri | Baran’ın GÖR -0.5 / POZ -0.5 bağlantı cezası tetiklenebilir; bu durum Baran’ın kavgacı olduğu anlamına gelmez. |\n\n## 7. Takım Kurucunun Uygulama Sırası\n\n\n- 1) Önce oyuncuların base yetenek ve mevki skorlarını hesapla.\n\n- 2) Takımdaki pozitif stabilizatörleri, kavgacıları ve kimyaya hassas isimleri belirle.\n\n- 3) Kilitli çift/üçlü kuralları uygula: Alper-Taha, Arif-Barkuz, Baran-Eren, Baran-Eren-Arif, Onur-Ömer vb.\n\n- 4) Takım atmosferinin iyi/kötü eşiğe ulaşıp ulaşmadığını isimlerle kontrol et.\n\n- 5) Oyuncu bazlı pozitif veya negatif ortam modifierlarını uygula.\n\n- 6) Rakip eşleşmelerini kontrol et: özellikle Eto, Şeker, savunma partnerleri ve fiziksel/hız mismatchleri.\n\n- 7) Maç içi skor/form tetikleyicilerini uygula: Utku, Barkuz, Göktuğ, Mensur, Arda Barin, Akın vb.\n\n- 8) Son efektif takım gücünü yalnız toplam rating ile değil; HIZ, PAS, DEF, BİT, PRES, POZ dağılımları ve kritik mismatchlerle birlikte değerlendir.\n\n- 9) Raporlama yaparken “kimya +0.5” demekle yetinme; bonusu/cezayı hangi isimlerin tetiklediğini açıkça yaz.\n\n## 8. Kısa Referans - Stabilizatörler ve Risk Kaynakları\n\n| Kategori | Oyuncular |\n| --- | --- |\n| Güçlü pozitif stabilizatörler | Baran, Kamil Reis, Süleyman, Alper, Hakan Göktuğ, M.Emre |\n| Pozitif destekçiler | Mali, Onur, Ömer, Eto, Melih, Taha |\n| Genel uyumlu | Arif (Barkuz hariç), Eren (teknik gruplarda) |\n| Kolay etkilenebilen | Altuğ, Barkuz, İsmail, Tevfik, Mustafa |\n| Kavgacı güçlü risk | Göktuğ, Servan |\n| Kavgacı / orta risk | Uğur |\n\nHalı Saha Kimya ve Performans Kural Kitapçığı\n\n\n---\n\n<!-- Kaynak: Hali_Saha_Kimya_Performans_Kural_Kitapcigi.pdf; sayfa 7/7 -->\n\n| Kategori | Oyuncular |\n| --- | --- |\n| Hafif kavgacı | Mensur, Mahmut |\n| Koşullu kavgacı | Utku - takımında en az 2 başka kavgacı varsa |\n\n## 9. Not\n\n\nBu kural seti yaşayan bir modeldir. Yeni maç gözlemleri, yeni oyuncu verileri veya tekrarlanan davranış örüntüleri geldikçe kurallar revize edilebilir. Ancak revizyon yapılırken kalıcı base rating ile maçlık kimya/form modifierı birbirine karıştırılmamalıdır.\n\nHalı Saha Kimya ve Performans Kural Kitapçığı\n\n\n\n---\n",
   "rows": [
     {
@@ -18,7 +18,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-        "detail": "Markdown satırı 675"
+        "detail": "Markdown satırı 685"
       }
     },
     {
@@ -36,7 +36,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-        "detail": "Markdown satırı 676"
+        "detail": "Markdown satırı 686"
       }
     },
     {
@@ -54,7 +54,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-        "detail": "Markdown satırı 677"
+        "detail": "Markdown satırı 687"
       }
     },
     {
@@ -73,7 +73,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-        "detail": "Markdown satırı 678"
+        "detail": "Markdown satırı 688"
       }
     },
     {
@@ -91,7 +91,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-        "detail": "Markdown satırı 679"
+        "detail": "Markdown satırı 689"
       }
     },
     {
@@ -109,7 +109,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-        "detail": "Markdown satırı 680"
+        "detail": "Markdown satırı 690"
       }
     },
     {
@@ -126,7 +126,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-        "detail": "Markdown satırı 681"
+        "detail": "Markdown satırı 691"
       }
     },
     {
@@ -144,7 +144,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-        "detail": "Markdown satırı 682"
+        "detail": "Markdown satırı 692"
       }
     },
     {
@@ -161,7 +161,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 688"
+        "detail": "Markdown satırı 698"
       }
     },
     {
@@ -178,7 +178,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 689"
+        "detail": "Markdown satırı 699"
       }
     },
     {
@@ -195,7 +195,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 690"
+        "detail": "Markdown satırı 700"
       }
     },
     {
@@ -212,7 +212,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 691"
+        "detail": "Markdown satırı 701"
       }
     },
     {
@@ -229,7 +229,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 692"
+        "detail": "Markdown satırı 702"
       }
     },
     {
@@ -246,7 +246,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 693"
+        "detail": "Markdown satırı 703"
       }
     },
     {
@@ -263,7 +263,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 694"
+        "detail": "Markdown satırı 704"
       }
     },
     {
@@ -280,7 +280,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 695"
+        "detail": "Markdown satırı 705"
       }
     },
     {
@@ -297,7 +297,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 706"
+        "detail": "Markdown satırı 716"
       }
     },
     {
@@ -314,7 +314,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 707"
+        "detail": "Markdown satırı 717"
       }
     },
     {
@@ -331,7 +331,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 708"
+        "detail": "Markdown satırı 718"
       }
     },
     {
@@ -348,7 +348,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 709"
+        "detail": "Markdown satırı 719"
       }
     },
     {
@@ -365,7 +365,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 710"
+        "detail": "Markdown satırı 720"
       }
     },
     {
@@ -382,7 +382,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 711"
+        "detail": "Markdown satırı 721"
       }
     },
     {
@@ -399,7 +399,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 712"
+        "detail": "Markdown satırı 722"
       }
     },
     {
@@ -416,7 +416,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 713"
+        "detail": "Markdown satırı 723"
       }
     },
     {
@@ -433,7 +433,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 714"
+        "detail": "Markdown satırı 724"
       }
     },
     {
@@ -450,7 +450,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 715"
+        "detail": "Markdown satırı 725"
       }
     },
     {
@@ -467,7 +467,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 716"
+        "detail": "Markdown satırı 726"
       }
     },
     {
@@ -484,7 +484,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 717"
+        "detail": "Markdown satırı 727"
       }
     },
     {
@@ -501,7 +501,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 718"
+        "detail": "Markdown satırı 728"
       }
     },
     {
@@ -518,7 +518,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 719"
+        "detail": "Markdown satırı 729"
       }
     },
     {
@@ -535,7 +535,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 720"
+        "detail": "Markdown satırı 730"
       }
     },
     {
@@ -552,7 +552,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 721"
+        "detail": "Markdown satırı 731"
       }
     },
     {
@@ -569,7 +569,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 722"
+        "detail": "Markdown satırı 732"
       }
     },
     {
@@ -586,7 +586,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 723"
+        "detail": "Markdown satırı 733"
       }
     },
     {
@@ -603,7 +603,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 724"
+        "detail": "Markdown satırı 734"
       }
     },
     {
@@ -620,7 +620,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 725"
+        "detail": "Markdown satırı 735"
       }
     },
     {
@@ -637,7 +637,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 726"
+        "detail": "Markdown satırı 736"
       }
     },
     {
@@ -654,7 +654,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 727"
+        "detail": "Markdown satırı 737"
       }
     },
     {
@@ -671,7 +671,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 728"
+        "detail": "Markdown satırı 738"
       }
     },
     {
@@ -688,7 +688,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 729"
+        "detail": "Markdown satırı 739"
       }
     },
     {
@@ -705,7 +705,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 730"
+        "detail": "Markdown satırı 740"
       }
     },
     {
@@ -722,7 +722,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 731"
+        "detail": "Markdown satırı 741"
       }
     },
     {
@@ -739,7 +739,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 732"
+        "detail": "Markdown satırı 742"
       }
     },
     {
@@ -756,7 +756,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 733"
+        "detail": "Markdown satırı 743"
       }
     },
     {
@@ -773,7 +773,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 734"
+        "detail": "Markdown satırı 744"
       }
     },
     {
@@ -790,7 +790,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 735"
+        "detail": "Markdown satırı 745"
       }
     },
     {
@@ -807,7 +807,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 736"
+        "detail": "Markdown satırı 746"
       }
     },
     {
@@ -824,7 +824,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 737"
+        "detail": "Markdown satırı 747"
       }
     },
     {
@@ -841,7 +841,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 738"
+        "detail": "Markdown satırı 748"
       }
     },
     {
@@ -858,7 +858,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 739"
+        "detail": "Markdown satırı 749"
       }
     },
     {
@@ -875,7 +875,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 740"
+        "detail": "Markdown satırı 750"
       }
     },
     {
@@ -892,7 +892,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 751"
+        "detail": "Markdown satırı 761"
       }
     },
     {
@@ -909,7 +909,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 752"
+        "detail": "Markdown satırı 762"
       }
     },
     {
@@ -926,7 +926,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 753"
+        "detail": "Markdown satırı 763"
       }
     },
     {
@@ -943,7 +943,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 754"
+        "detail": "Markdown satırı 764"
       }
     },
     {
@@ -960,7 +960,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 755"
+        "detail": "Markdown satırı 765"
       }
     },
     {
@@ -977,7 +977,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 756"
+        "detail": "Markdown satırı 766"
       }
     },
     {
@@ -994,7 +994,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 757"
+        "detail": "Markdown satırı 767"
       }
     },
     {
@@ -1011,7 +1011,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 758"
+        "detail": "Markdown satırı 768"
       }
     },
     {
@@ -1029,7 +1029,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 759"
+        "detail": "Markdown satırı 769"
       }
     },
     {
@@ -1047,7 +1047,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 760"
+        "detail": "Markdown satırı 770"
       }
     },
     {
@@ -1064,7 +1064,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 761"
+        "detail": "Markdown satırı 771"
       }
     },
     {
@@ -1081,7 +1081,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 762"
+        "detail": "Markdown satırı 772"
       }
     },
     {
@@ -1098,7 +1098,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 763"
+        "detail": "Markdown satırı 773"
       }
     },
     {
@@ -1115,7 +1115,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 764"
+        "detail": "Markdown satırı 774"
       }
     },
     {
@@ -1132,7 +1132,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 765"
+        "detail": "Markdown satırı 775"
       }
     },
     {
@@ -1149,7 +1149,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 766"
+        "detail": "Markdown satırı 776"
       }
     },
     {
@@ -1166,7 +1166,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 767"
+        "detail": "Markdown satırı 777"
       }
     },
     {
@@ -1183,7 +1183,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 768"
+        "detail": "Markdown satırı 778"
       }
     },
     {
@@ -1200,7 +1200,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 769"
+        "detail": "Markdown satırı 779"
       }
     },
     {
@@ -1217,7 +1217,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 770"
+        "detail": "Markdown satırı 780"
       }
     },
     {
@@ -1234,7 +1234,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 771"
+        "detail": "Markdown satırı 781"
       }
     },
     {
@@ -1251,7 +1251,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 772"
+        "detail": "Markdown satırı 782"
       }
     },
     {
@@ -1268,7 +1268,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 773"
+        "detail": "Markdown satırı 783"
       }
     },
     {
@@ -1285,7 +1285,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 774"
+        "detail": "Markdown satırı 784"
       }
     },
     {
@@ -1306,7 +1306,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-        "detail": "Markdown satırı 775"
+        "detail": "Markdown satırı 785"
       }
     },
     {
@@ -1325,7 +1325,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 781"
+        "detail": "Markdown satırı 791"
       }
     },
     {
@@ -1344,7 +1344,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 782"
+        "detail": "Markdown satırı 792"
       }
     },
     {
@@ -1362,7 +1362,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 783"
+        "detail": "Markdown satırı 793"
       }
     },
     {
@@ -1379,7 +1379,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 784"
+        "detail": "Markdown satırı 794"
       }
     },
     {
@@ -1397,7 +1397,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 795"
+        "detail": "Markdown satırı 805"
       }
     },
     {
@@ -1416,7 +1416,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 796"
+        "detail": "Markdown satırı 806"
       }
     },
     {
@@ -1434,7 +1434,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 797"
+        "detail": "Markdown satırı 807"
       }
     },
     {
@@ -1452,7 +1452,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 798"
+        "detail": "Markdown satırı 808"
       }
     },
     {
@@ -1470,7 +1470,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 799"
+        "detail": "Markdown satırı 809"
       }
     },
     {
@@ -1488,7 +1488,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 800"
+        "detail": "Markdown satırı 810"
       }
     },
     {
@@ -1507,7 +1507,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 801"
+        "detail": "Markdown satırı 811"
       }
     },
     {
@@ -1524,7 +1524,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-        "detail": "Markdown satırı 802"
+        "detail": "Markdown satırı 812"
       }
     }
   ]

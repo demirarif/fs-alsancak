@@ -30,6 +30,8 @@ export function mountLineupReview(host:HTMLElement,library:PlayerLibrary){
   let context:LineupContext|null=null,draft:LineupDraft|null=null,result:OptimizationResult|null=null;
   let generation=0,worker:Worker|null=null,cancelWorker:()=>void=()=>{},busy=false,writing=false,error='',conflict=false,disposed=false;
   let selected:{teamId:TeamId;slotId:string}|null=null,dragged:{teamId:TeamId;slotId:string}|null=null;
+  // Phones show one team's pitch at a time (tactics-room.css); the choice survives re-renders.
+  let shownTeam:TeamId='team-1';
   const queue:LineupDraft[]=[],motion=createPrepMotion(host);
   function status(text:string){const node=host.querySelector('#tactics-status');if(node)node.textContent=text;}
   async function drain(){
@@ -70,7 +72,7 @@ export function mountLineupReview(host:HTMLElement,library:PlayerLibrary){
       const effects=[...new Map(assessment.applied.filter(a=>a.playerIds.some(id=>draft!.lineups[index]!.assignments.some(s=>s.playerId===id))).map(a=>[a.ruleId,a])).values()];
       return `<section class="tactic-report"><h3 style="color:${TEAM_PRESENTATION[team.teamId].color}">${html(context!.selection.teams[index]!.name)}</h3><p class="tactic-atmosphere ${team.atmosphere.state}">${html(team.atmosphere.text)}</p>${effects.length?effects.map(e=>`<p class="${e.effect.kind==='attribute-delta'&&e.effect.delta<0||e.effect.kind==='team-atmosphere'&&e.effect.delta<0?'negative':'positive'}">${html(e.explanation)}</p>`).join(''):'<p>Bu yerleşimde özel isim eşleşmesi tetiklenmedi.</p>'}${team.warnings.map(w=>`<p class="tactic-warning">${html(w.text)}</p>`).join('')}</section>`;
     }).join('');
-    host.innerHTML=`${prepSteps('lineup')}<h1 class="tactics-sr-only">${halftime?'Devre arası dizilişi':'Diziliş'}</h1><div class="tactics-layout"><div class="tactics-pitches">${cards[0]}<section class="tactics-balance" aria-label="İki takımın pas, uyum ve oyun dengesi">${metrics}<button class="tactics-detail-button" data-open-reports>${uiIcon('info')}Uyum detayları</button></section>${cards[1]}</div></div>
+    host.innerHTML=`${prepSteps('lineup')}<h1 class="tactics-sr-only">${halftime?'Devre arası dizilişi':'Diziliş'}</h1><div class="tactics-layout"><div class="tactics-pitches" data-show="${shownTeam}">${cards[0]}<section class="tactics-balance" aria-label="İki takımın pas, uyum ve oyun dengesi">${metrics}<button class="tactics-detail-button" data-open-reports>${uiIcon('info')}Uyum detayları</button></section>${cards[1]}<div class="tactics-team-tabs" role="group" aria-label="Sahada gösterilen takım">${context.selection.teams.map(t=>`<button type="button" data-show-team="${t.teamId}" aria-pressed="${t.teamId===shownTeam}" style="--team-color:${TEAM_PRESENTATION[t.teamId].color}">${html(t.name)}</button>`).join('')}</div></div></div>
     <footer class="tactics-footer"><div class="tactics-footer-left">${halftime?`<span class="tactics-halftime">Devre arası <strong>${halftime.score[0]}–${halftime.score[1]}</strong></span><a class="tactics-back" href="#mac">${uiIcon('arrowLeft')}Maça dön</a>`:`<a class="tactics-back" href="#kadrolar">${uiIcon('arrowLeft')}Kadrolar</a>`}<button class="squad-export" data-export-lineup>${uiIcon('download')}İndir</button><span id="tactics-status" role="status" class="tactics-sr-only"></span></div><div><button id="tactics-retry" hidden>Tekrar dene</button><button id="tactics-confirm">${halftime?'İkinci yarıyı başlat':'Maça geç'}${uiIcon('arrowRight')}</button></div></footer>
     <dialog class="tactics-detail-dialog" id="tactics-details" aria-labelledby="tactics-detail-title"><header><h2 id="tactics-detail-title">Uyum detayları</h2><button data-close-reports aria-label="Uyum detaylarını kapat">${uiIcon('close')}</button></header><div class="tactic-reports">${reports}</div></dialog><p class="tactics-notice" id="tactics-notice" role="status" hidden></p>`;
     renderFooter();
@@ -86,7 +88,8 @@ export function mountLineupReview(host:HTMLElement,library:PlayerLibrary){
   }
   host.addEventListener('click',event=>{
     const button=(event.target as Element).closest<HTMLButtonElement>('button');if(!button||button.disabled)return;
-    if(button.hasAttribute('data-open-reports'))host.querySelector<HTMLDialogElement>('#tactics-details')?.showModal();
+    if(button.dataset.showTeam){shownTeam=button.dataset.showTeam as TeamId;host.querySelector('.tactics-pitches')?.setAttribute('data-show',shownTeam);host.querySelectorAll<HTMLButtonElement>('[data-show-team]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.showTeam===shownTeam)));}
+    else if(button.hasAttribute('data-open-reports'))host.querySelector<HTMLDialogElement>('#tactics-details')?.showModal();
     else if(button.hasAttribute('data-close-reports'))host.querySelector<HTMLDialogElement>('#tactics-details')?.close();
     else if(button.hasAttribute('data-export-lineup')&&draft&&context)openSocialExport({kind:'squads',selection:context.selection,catalog:resolveMatchCatalog(context.catalog,context.selection),lineups:draft},button);
     else if(button.dataset.formationId)apply({kind:'change-formation',teamId:button.dataset.team as TeamId,formationId:button.dataset.formationId as keyof typeof FORMATIONS});
