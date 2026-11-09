@@ -63,3 +63,12 @@ Görsel geri bildirim kabul edildi. V1 mimarisi `src/v1` altında tanımlandı; 
 ## Doğrulama
 
 Derleme: Vite. Oynatma demosu sabit bir fonksiyon olduğundan zaman çizelgesinde geri/ileri gitmek aynı kareyi üretir. Tarayıcıda WebGL desteği gerekir. Yazı tipleri yüklenmezse yerel sistem fontları kullanılır.
+
+## Yayın (Cloudflare)
+
+Site: https://alsancak.alsancak-match-preview.workers.dev. `main` dalına gönderilen her commit Cloudflare Workers Builds ile kendiliğinden yayına çıkar (`npm run build`, sonra `npx wrangler deploy`; Node sürümü `.node-version`). Başka dallar derlenmez.
+
+- Yayın canlı maç sırasında da olur; maç saatinde `main`'e göndermeyin.
+- Veritabanı değişiklikleri otomatik uygulanmaz: yalnız ekleme yapan bir göç dosyası (`worker/migrations/`) yazılır, önce üretimin kopyasında denenir, sonra elle uygulanır; kod, göçten önce yayına gitmemeli.
+- Kaynak belgesi (`Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md`) değişirse önce `npm run import:catalog`; katalog eskiyse derleme ve yayın durur.
+- Şifreler ve gerçek kullanıcı bilgileri depoya girmez.
