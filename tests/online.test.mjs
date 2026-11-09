@@ -1,14 +1,18 @@
-// Online mode (2026-11-05): login names, the dinar bets (settlement, loss bonus, odds rounding and movement, the suggested book and the
+// Online mode (2026-11-05): login names, the Alsancak coin bets (settlement, loss bonus, odds rounding and movement, the suggested book and the
 // holes an edited book can open), the recording file, the reel's trimmed copy and the live broadcast schedule.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildMatch,playMatch,SAMPLE_ROSTERS} from '../scripts/simulate-match.mjs';
 import {getBundledCatalog} from '../src/v1/data/bundled-catalog.ts';
 import {usernameFor,loginKey,firstPasswordKey,firstPassword} from '../src/v1/online/usernames.ts';
-import {wins,settle,floorOdds,fairOdds,liveOdds,buildBook,bookWarnings,covers,scoreOutcome,manOfTheMatch,DINAR,ODDS} from '../src/v1/online/markets.ts';
+import {wins,settle,floorOdds,fairOdds,liveOdds,buildBook,bookWarnings,covers,scoreOutcome,manOfTheMatch,couponQuote,couponPossible,packSample,unpackSample,COIN,ODDS,COUPON} from '../src/v1/online/markets.ts';
 import {encodeRecording,decodeRecording} from '../src/v1/online/recording.ts';
 import {buildMatchRecord} from '../src/online/match-record.js';
-import {broadcastPlan,broadcastAt,BROADCAST} from '../src/match/broadcast-plan.js';
+import {broadcastPlan,broadcastAt,broadcastEdit,BROADCAST} from '../src/match/broadcast-plan.js';
+import {EDIT,EDIT_V1} from '../src/match/highlight-edit.js';
+import {commentary,withoutEffect,announcedRule} from '../src/match/commentary.js';
+import {FRAME_HEADER,PLAYER_CHANNELS} from '../src/v1/engine/replay.ts';
+import {CHEMISTRY_RULEBOOK} from '../src/v1/config/chemistry-rulebook.ts';
 import {planReel} from '../src/match/reel-plan.js';
 
 const played=(()=>{const {snapshot}=buildMatch(SAMPLE_ROSTERS[0][0],SAMPLE_ROSTERS[0][1],4242),m=playMatch(snapshot);return {snapshot,m};})();
@@ -52,7 +56,7 @@ test('settlement pays stake × locked odds, 30 % back on a match\'s net loss onl
     {id:'b1',user:2,family:'ft',params:{},code:'X',stake:1000,odds:8.75},{id:'c1',user:3,family:'total',params:{line:10.5},code:'under',stake:2000,odds:1.95}],facts);
   assert.deepEqual(results.map(r=>[r.id,r.won,r.payout]),[['a1',true,1350],['a2',false,0],['b1',false,0],['c1',true,3900]]);
   assert.deepEqual(bonuses,[{user:1,amount:45},{user:2,amount:300}],'user 1 lost 150 net, user 2 lost 1000; user 3 won');
-  assert.equal(DINAR.lossBonus,.3);assert.equal(DINAR.start,30000);assert.equal(DINAR.minStake,100);assert.equal(DINAR.maxStake,5000);
+  assert.equal(COIN.lossBonus,.3);assert.equal(COIN.start,30000);assert.equal(COIN.minStake,100);assert.equal(COIN.maxStake,5000);
 });
 
 test('odds: rounded down from fair, never under 1,05 or over 200; near-certain ones (held up at 1,05) not playable',()=>{
@@ -93,6 +97,34 @@ test('no bettor may hold bets that win whatever happens (hem kazanan hem kaybede
   const t0=performance.now();assert.ok(c([bet('ht-total','over',{line:1.5}),bet('ht-total','under',{line:3.5}),bet('half-more','first'),bet('margin','x')]));assert.ok(performance.now()-t0<200,'the half search is quick');
 });
 
+test('coupons: odds multiplied, lowered when the picks come together more often than chance, impossible ones refused, paid only if all win',()=>{
+  // 200 simulated matches: blue wins 120 (50 of them by 3+), draws 30, red wins 50; a penalty in every second match, independently.
+  const sim=(a,b,pen)=>({...facts,ht:[0,0],ft:[a,b],penalties:pen,goals:a+b?[{t:10,team:a?0:1,player:a?'alper':'ismail'}]:[]});
+  const samples=[];for(let i=0;i<200;i++){const pen=i%2;samples.push(i<50?sim(6,2,pen):i<120?sim(5,4,pen):i<150?sim(4,4,pen):sim(3,5,pen));}
+  const leg=(family,code,odds,params={})=>({family,code,params,odds});
+  const implied=couponQuote([leg('ft','1',1.65),leg('margin','b3',4)],samples);
+  assert.ok(implied.factor>1.4&&implied.odds<=4.1&&implied.odds>=3.6,`Mavi kazanır + Mavi 3+ farkla: ${JSON.stringify(implied)} (the second alone pays 4)`);
+  const independent=couponQuote([leg('ft','1',1.65),leg('penalty','yes',2)],samples);
+  assert.equal(independent.factor,1,'a penalty says nothing about the winner');assert.equal(independent.odds,3.3,'1,65 × 2');
+  assert.equal(couponQuote([leg('ft','X',6.5)],samples).odds,6.5,'one pick is a plain bet');
+  assert.ok(couponQuote([leg('ft','1',200),leg('penalty','yes',200)],samples).odds<=COUPON.maxOdds,'capped');
+  const teamOf=p=>({alper:0,ismail:1})[p];
+  assert.ok(!couponPossible([leg('ft','1'),leg('margin','r3')],teamOf),'blue wins and red wins by 3+');
+  assert.ok(!couponPossible([leg('first-team','none'),leg('total','over',1,{line:.5})],teamOf),'no goal and a goal');
+  assert.ok(!couponPossible([leg('player-goals','yes',1,{player:'alper',k:2}),leg('player-goals','no',1,{player:'alper',k:2})],teamOf),'2+ and not 2+');
+  assert.ok(!couponPossible([leg('team-total','under',1,{team:0,line:1.5}),leg('player-goals','yes',1,{player:'alper',k:3})],teamOf),'blue scores at most once, Alper three');
+  assert.ok(couponPossible([leg('ft','1'),leg('total','over',1,{line:7.5}),leg('player-goals','yes',1,{player:'alper',k:2}),leg('ht','2')],teamOf),'a comeback with Alper 2+');
+  const back=unpackSample(packSample(facts));assert.deepEqual([back.ft,back.ht,back.motm,back.goals.length,back.corners],[facts.ft,facts.ht,'alper',facts.goals.length,facts.corners]);
+  for(const [family,code,params] of [['player-goals','yes',{player:'alper',k:3}],['top-scorer','alper',{}],['motm','alper',{listed:['alper']}],['first-scorer','alper',{listed:['alper']}],['player-assist','yes',{player:'taha'}]])
+    assert.equal(wins(family,params,code,back),wins(family,params,code,facts),`${family} decided the same on a stored simulation`);
+  const {results}=settle([{id:'c1',user:1,stake:1000,odds:3.3,legs:[{family:'ft',params:{},code:'1'},{family:'penalty',params:{},code:'yes'}]},{id:'c2',user:1,stake:1000,odds:9,legs:[{family:'ft',params:{},code:'1'},{family:'score',params:{},code:'5-4'}]}],facts);
+  assert.deepEqual(results.map(r=>[r.id,r.won,r.payout]),[['c1',true,3300],['c2',false,0]],'6–4 with a penalty: the first coupon wins, the second misses its score');
+  // A coupon among one's bets: under 7,5 alone and over 7,5 as a one-pick coupon cover everything; with "Mavi kazanır" added they do not.
+  const pos=(family,code,params={})=>({family,code,params});
+  assert.ok(covers([pos('total','under',{line:7.5}),{legs:[pos('total','over',{line:7.5})]}],teamOf));
+  assert.ok(!covers([pos('total','under',{line:7.5}),{legs:[pos('total','over',{line:7.5}),pos('ft','1')]}],teamOf),'8+ goals and blue not winning loses both');
+});
+
 test('odds move with the money: the backed side shortens, the others lengthen, slowly and within 30 %',()=>{
   const market={id:'ft',family:'ft',group:'Maç',label:'Maç sonucu',params:{},exclusive:true,active:true,outcomes:[{code:'1',label:'Mavi',prob:.7,odds:1.35,playable:true},{code:'X',label:'Ber.',prob:.11,odds:8.75,playable:true},{code:'2',label:'Kırmızı',prob:.19,odds:5,playable:true}]};
   const at=st=>Object.fromEntries(liveOdds(market,st,ODDS.liquidity).map(o=>[o.code,o.odds]));
@@ -125,4 +157,36 @@ test('broadcast: about 11 minutes, everybody at the same match second for the sa
   for(let e=0;e<plan.total;e+=.5){const at=broadcastAt(plan,e);if(keys.at(-1)!==at.key)keys.push(at.key);
     if(at.kind==='half'){const h=record.recording.halves[at.half-1];assert.ok(at.t>=h.startSeconds&&at.t<=h.endSeconds);if(last&&last.half===at.half)assert.ok(at.t>=last.t-1e-6,`time went back at ${e}`);last=at;}}
   assert.deepEqual(keys,['walkout1','half1','halftime1','walkout2','half2']);
+});
+
+test('live copy (user, 2026-11-06): a few MB, carries its edit, and every frame the broadcast shows is as in the full recording',async()=>{
+  const bytes=await encodeRecording(record.live),live=await decodeRecording(bytes),full=record.recording;
+  assert.ok(bytes.length<4.5e6,`live ${(bytes.length/1e6).toFixed(1)} MB`);assert.ok(live.trimmed&&!full.trimmed);
+  assert.deepEqual(live.edit,full.edit,'the same edit travels with both');assert.equal(live.edit.version,EDIT.version);
+  assert.deepEqual(live.edit.plan,broadcastPlan(full.halves),'the stored plan is the broadcast of the full recording');
+  assert.deepEqual(broadcastEdit(full.halves),full.edit);assert.equal(record.plan,full.edit.plan);
+  for(const i of [0,1]){
+    const a=full.halves[i],b=live.halves[i],st=FRAME_HEADER+a.playerOrder.length*PLAYER_CHANNELS.length,segs=live.edit.segments[i];let shown=0,kept=0;
+    assert.deepEqual(b.events,a.events);assert.deepEqual(b.ballKeys,a.ballKeys);assert.equal(b.frameCount,a.frameCount);
+    for(let f=0;f<a.frameCount;f++){const t=a.samples[f*st],same=b.samples.subarray(f*st,(f+1)*st).every((x,j)=>x===a.samples[f*st+j]);if(same)kept++;
+      if(segs.some(s=>t>=s.start&&t<=s.end)){shown++;assert.ok(same,`frame at ${t.toFixed(1)} s of half ${i+1} kept`);}}
+    assert.ok(shown>0&&kept<a.frameCount*.45,`half ${i+1}: ${kept}/${a.frameCount} frames kept`);
+  }
+});
+test('edit versions: recordings planned before 6 Nov replay with the v1 edit they were timed with; v2 keeps the broadcast about 10 minutes',()=>{
+  const v1=broadcastPlan(record.recording.halves,EDIT_V1),v2=broadcastPlan(record.recording.halves),B=BROADCAST,cards=B.walkoutSeconds*2+B.halftimeSeconds;
+  assert.notDeepEqual(v1.pieces,v2.pieces);
+  for(const plan of [v1,v2])assert.ok(plan.total>cards+400&&plan.total<cards+2*B.budgetSeconds+5,`total ${plan.total.toFixed(0)} s`);
+  assert.ok(Math.abs(v2.total-v1.total)<90,`v2 ${v2.total.toFixed(0)} s against v1 ${v1.total.toFixed(0)} s`);
+});
+test('in-match rule numbers stay off the screen (user, 2026-11-06: "Utku … −0,5 yazmasın", "hepsini gizle"); the rule still acts',()=>{
+  const ev=(text,importance=.32)=>({id:'e1',kind:'mood',importance,reason:{explanation:text}}),none=()=>'';
+  const announced=CHEMISTRY_RULEBOOK.rules.filter(announcedRule);
+  assert.ok(announced.length>=8&&announced.some(r=>r.id==='utku-trailing'));
+  for(const r of announced){assert.equal(commentary(ev(r.description),none),'',r.id);assert.ok(!/[+−]\d/.test(withoutEffect(r.description)),r.id);assert.ok(withoutEffect(r.description).length>3,r.id);}
+  assert.equal(withoutEffect('Utku gerideyken: savunma/pres/pozisyon/dayanıklılık −0,5.'),'Utku gerideyken');
+  assert.equal(commentary(ev('Göktuğ uzun süredir pas alamadı, küstü · Göktuğ küsünce: pas/görüş −0,5.',.25),none),'Göktuğ uzun süredir pas alamadı, küstü');
+  assert.equal(commentary(ev('Günün formu · Batu kötü gününde: hız −0,5.',.2),none),'');
+  assert.equal(commentary(ev('Altuğ oyundan koptu',.25),none),'Altuğ oyundan koptu');
+  assert.ok(CHEMISTRY_RULEBOOK.rules.find(r=>r.id==='utku-trailing').effects.every(e=>e.delta===-.5),'the effect itself is unchanged');
 });

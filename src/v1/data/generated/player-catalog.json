@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "version": "catalog-v1-9347d28af9853371",
-  "importedAt": "2026-11-05T13:48:49.460Z",
+  "version": "catalog-v1-910d601b51bfd25c",
+  "importedAt": "2026-11-06T15:43:32.968Z",
   "source": {
     "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
     "section": "ARŞİV BÖLÜMÜ 5 / Oyuncu Veritabanı; bölüm 4 / rol tercihleri"
@@ -15,7 +15,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 945; Stage 2: MD 999; Stage 1: MD 1053; Excel ana puan: =H3"
+          "detail": "Mevki/rol: MD 957; Stage 2: MD 1011; Stage 1: MD 1065; Excel ana puan: =H3"
         }
       },
       "suitability": {
@@ -38,7 +38,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 685"
+            "detail": "Markdown satırı 697"
           }
         },
         {
@@ -46,7 +46,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 776"
+            "detail": "Markdown satırı 788"
           }
         },
         {
@@ -54,7 +54,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 808"
+            "detail": "Markdown satırı 820"
           }
         },
         {
@@ -62,7 +62,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 618"
+            "detail": "Markdown satırı 630"
           }
         }
       ],
@@ -100,7 +100,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 946; Stage 2: MD 1000; Stage 1: MD 1054; Excel ana puan: =D4"
+          "detail": "Mevki/rol: MD 958; Stage 2: MD 1012; Stage 1: MD 1066; Excel ana puan: =D4"
         }
       },
       "suitability": {
@@ -122,7 +122,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 771"
+            "detail": "Markdown satırı 783"
           }
         },
         {
@@ -130,7 +130,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 772"
+            "detail": "Markdown satırı 784"
           }
         },
         {
@@ -138,7 +138,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 805"
+            "detail": "Markdown satırı 817"
           }
         },
         {
@@ -146,7 +146,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 661"
+            "detail": "Markdown satırı 673"
           }
         }
       ],
@@ -184,7 +184,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 947; Stage 2: MD 1001; Stage 1: MD 1055; Excel ana puan: =H5"
+          "detail": "Mevki/rol: MD 959; Stage 2: MD 1013; Stage 1: MD 1067; Excel ana puan: =H5"
         }
       },
       "suitability": {
@@ -207,7 +207,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 685"
+            "detail": "Markdown satırı 697"
           }
         },
         {
@@ -215,7 +215,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 700"
+            "detail": "Markdown satırı 712"
           }
         },
         {
@@ -223,7 +223,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 808"
+            "detail": "Markdown satırı 820"
           }
         },
         {
@@ -231,7 +231,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 604"
+            "detail": "Markdown satırı 616"
           }
         }
       ],
@@ -269,7 +269,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 948; Stage 2: MD 1002; Stage 1: MD 1056; Excel ana puan: =G6"
+          "detail": "Mevki/rol: MD 960; Stage 2: MD 1014; Stage 1: MD 1068; Excel ana puan: =G6"
         }
       },
       "suitability": {
@@ -291,7 +291,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 748"
+            "detail": "Markdown satırı 760"
           }
         },
         {
@@ -299,7 +299,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 650"
+            "detail": "Markdown satırı 662"
           }
         }
       ],
@@ -337,7 +337,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 949; Stage 2: MD 1003; Stage 1: MD 1057; Excel ana puan: =H7"
+          "detail": "Mevki/rol: MD 961; Stage 2: MD 1015; Stage 1: MD 1069; Excel ana puan: =H7"
         }
       },
       "suitability": {
@@ -360,7 +360,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 738"
+            "detail": "Markdown satırı 750"
           }
         },
         {
@@ -368,7 +368,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 739"
+            "detail": "Markdown satırı 751"
           }
         },
         {
@@ -376,7 +376,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 805"
+            "detail": "Markdown satırı 817"
           }
         },
         {
@@ -384,7 +384,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 806"
+            "detail": "Markdown satırı 818"
           }
         },
         {
@@ -392,7 +392,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 644"
+            "detail": "Markdown satırı 656"
           }
         }
       ],
@@ -430,7 +430,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 950; Stage 2: MD 1004; Stage 1: MD 1058; Excel ana puan: =I8"
+          "detail": "Mevki/rol: MD 962; Stage 2: MD 1016; Stage 1: MD 1070; Excel ana puan: =I8"
         }
       },
       "suitability": {
@@ -452,7 +452,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 686"
+            "detail": "Markdown satırı 698"
           }
         },
         {
@@ -460,7 +460,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 717"
+            "detail": "Markdown satırı 729"
           }
         },
         {
@@ -468,7 +468,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 718"
+            "detail": "Markdown satırı 730"
           }
         },
         {
@@ -476,7 +476,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 807"
+            "detail": "Markdown satırı 819"
           }
         },
         {
@@ -484,7 +484,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 636"
+            "detail": "Markdown satırı 648"
           }
         }
       ],
@@ -522,7 +522,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 951; Stage 2: MD 1005; Stage 1: MD 1059; Excel ana puan: =C9"
+          "detail": "Mevki/rol: MD 963; Stage 2: MD 1017; Stage 1: MD 1071; Excel ana puan: =C9"
         }
       },
       "suitability": {
@@ -543,7 +543,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 785"
+            "detail": "Markdown satırı 797"
           }
         }
       ],
@@ -560,7 +560,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 952; Stage 2: MD 1006; Stage 1: MD 1060; Excel ana puan: =D10"
+          "detail": "Mevki/rol: MD 964; Stage 2: MD 1018; Stage 1: MD 1072; Excel ana puan: =D10"
         }
       },
       "suitability": {
@@ -582,7 +582,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 692"
+            "detail": "Markdown satırı 704"
           }
         },
         {
@@ -590,7 +590,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 747"
+            "detail": "Markdown satırı 759"
           }
         },
         {
@@ -598,7 +598,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 793"
+            "detail": "Markdown satırı 805"
           }
         },
         {
@@ -606,7 +606,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 620"
+            "detail": "Markdown satırı 632"
           }
         }
       ],
@@ -644,7 +644,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 953; Stage 2: MD 1007; Stage 1: MD 1061; Excel ana puan: =G11"
+          "detail": "Mevki/rol: MD 965; Stage 2: MD 1019; Stage 1: MD 1073; Excel ana puan: =G11"
         }
       },
       "suitability": {
@@ -667,7 +667,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 730"
+            "detail": "Markdown satırı 742"
           }
         },
         {
@@ -675,7 +675,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 731"
+            "detail": "Markdown satırı 743"
           }
         }
       ],
@@ -713,7 +713,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 954; Stage 2: MD 1008; Stage 1: MD 1062; Excel ana puan: =I12"
+          "detail": "Mevki/rol: MD 966; Stage 2: MD 1020; Stage 1: MD 1074; Excel ana puan: =I12"
         }
       },
       "suitability": {
@@ -736,7 +736,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 743"
+            "detail": "Markdown satırı 755"
           }
         },
         {
@@ -744,7 +744,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 744"
+            "detail": "Markdown satırı 756"
           }
         },
         {
@@ -752,7 +752,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 745"
+            "detail": "Markdown satırı 757"
           }
         },
         {
@@ -760,7 +760,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 638"
+            "detail": "Markdown satırı 650"
           }
         }
       ],
@@ -798,7 +798,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 955; Stage 2: MD 1009; Stage 1: MD 1063; Excel ana puan: =F13"
+          "detail": "Mevki/rol: MD 967; Stage 2: MD 1021; Stage 1: MD 1075; Excel ana puan: =F13"
         }
       },
       "suitability": {
@@ -821,7 +821,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 687"
+            "detail": "Markdown satırı 699"
           }
         },
         {
@@ -829,7 +829,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 688"
+            "detail": "Markdown satırı 700"
           }
         },
         {
@@ -837,7 +837,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 705"
+            "detail": "Markdown satırı 717"
           }
         },
         {
@@ -845,7 +845,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 716"
+            "detail": "Markdown satırı 728"
           }
         },
         {
@@ -853,7 +853,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 791"
+            "detail": "Markdown satırı 803"
           }
         },
         {
@@ -861,7 +861,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 792"
+            "detail": "Markdown satırı 804"
           }
         },
         {
@@ -869,7 +869,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 811"
+            "detail": "Markdown satırı 823"
           }
         },
         {
@@ -877,7 +877,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 812"
+            "detail": "Markdown satırı 824"
           }
         },
         {
@@ -885,7 +885,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 598"
+            "detail": "Markdown satırı 610"
           }
         }
       ],
@@ -923,7 +923,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 956; Stage 2: MD 1010; Stage 1: MD 1064; Excel ana puan: =G14"
+          "detail": "Mevki/rol: MD 968; Stage 2: MD 1022; Stage 1: MD 1076; Excel ana puan: =G14"
         }
       },
       "suitability": {
@@ -946,7 +946,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 687"
+            "detail": "Markdown satırı 699"
           }
         },
         {
@@ -954,7 +954,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 688"
+            "detail": "Markdown satırı 700"
           }
         },
         {
@@ -962,7 +962,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 726"
+            "detail": "Markdown satırı 738"
           }
         },
         {
@@ -970,7 +970,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 727"
+            "detail": "Markdown satırı 739"
           }
         },
         {
@@ -978,7 +978,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 728"
+            "detail": "Markdown satırı 740"
           }
         },
         {
@@ -986,7 +986,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 791"
+            "detail": "Markdown satırı 803"
           }
         },
         {
@@ -994,7 +994,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 624"
+            "detail": "Markdown satırı 636"
           }
         }
       ],
@@ -1032,7 +1032,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 957; Stage 2: MD 1011; Stage 1: MD 1065; Excel ana puan: =F15"
+          "detail": "Mevki/rol: MD 969; Stage 2: MD 1023; Stage 1: MD 1077; Excel ana puan: =F15"
         }
       },
       "suitability": {
@@ -1054,7 +1054,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 686"
+            "detail": "Markdown satırı 698"
           }
         },
         {
@@ -1062,7 +1062,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 688"
+            "detail": "Markdown satırı 700"
           }
         },
         {
@@ -1070,7 +1070,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 704"
+            "detail": "Markdown satırı 716"
           }
         },
         {
@@ -1078,7 +1078,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 791"
+            "detail": "Markdown satırı 803"
           }
         },
         {
@@ -1086,7 +1086,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 807"
+            "detail": "Markdown satırı 819"
           }
         },
         {
@@ -1094,7 +1094,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 622"
+            "detail": "Markdown satırı 634"
           }
         }
       ],
@@ -1132,7 +1132,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 958; Stage 2: MD 1012; Stage 1: MD 1066; Excel ana puan: =H16"
+          "detail": "Mevki/rol: MD 970; Stage 2: MD 1024; Stage 1: MD 1078; Excel ana puan: =H16"
         }
       },
       "suitability": {
@@ -1155,7 +1155,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 725"
+            "detail": "Markdown satırı 737"
           }
         }
       ],
@@ -1193,7 +1193,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 959; Stage 2: MD 1013; Stage 1: MD 1067; Excel ana puan: =D17"
+          "detail": "Mevki/rol: MD 971; Stage 2: MD 1025; Stage 1: MD 1079; Excel ana puan: =D17"
         }
       },
       "suitability": {
@@ -1215,7 +1215,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 740"
+            "detail": "Markdown satırı 752"
           }
         },
         {
@@ -1223,7 +1223,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 741"
+            "detail": "Markdown satırı 753"
           }
         },
         {
@@ -1231,7 +1231,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 794"
+            "detail": "Markdown satırı 806"
           }
         },
         {
@@ -1239,7 +1239,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 606"
+            "detail": "Markdown satırı 618"
           }
         }
       ],
@@ -1277,7 +1277,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 960; Stage 2: MD 1014; Stage 1: MD 1068; Excel ana puan: =G18"
+          "detail": "Mevki/rol: MD 972; Stage 2: MD 1026; Stage 1: MD 1080; Excel ana puan: =G18"
         }
       },
       "suitability": {
@@ -1300,7 +1300,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 761"
+            "detail": "Markdown satırı 773"
           }
         },
         {
@@ -1308,7 +1308,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 811"
+            "detail": "Markdown satırı 823"
           }
         },
         {
@@ -1316,7 +1316,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 616"
+            "detail": "Markdown satırı 628"
           }
         }
       ],
@@ -1354,7 +1354,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 961; Stage 2: MD 1015; Stage 1: MD 1069; Excel ana puan: =C19"
+          "detail": "Mevki/rol: MD 973; Stage 2: MD 1027; Stage 1: MD 1081; Excel ana puan: =C19"
         }
       },
       "suitability": {
@@ -1375,7 +1375,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 785"
+            "detail": "Markdown satırı 797"
           }
         }
       ],
@@ -1392,7 +1392,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 962; Stage 2: MD 1016; Stage 1: MD 1070; Excel ana puan: =G20"
+          "detail": "Mevki/rol: MD 974; Stage 2: MD 1028; Stage 1: MD 1082; Excel ana puan: =G20"
         }
       },
       "suitability": {
@@ -1414,7 +1414,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 766"
+            "detail": "Markdown satırı 778"
           }
         },
         {
@@ -1422,7 +1422,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 767"
+            "detail": "Markdown satırı 779"
           }
         },
         {
@@ -1430,7 +1430,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 642"
+            "detail": "Markdown satırı 654"
           }
         }
       ],
@@ -1468,7 +1468,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 963; Stage 2: MD 1017; Stage 1: MD 1071; Excel ana puan: =D21"
+          "detail": "Mevki/rol: MD 975; Stage 2: MD 1029; Stage 1: MD 1083; Excel ana puan: =D21"
         }
       },
       "suitability": {
@@ -1491,7 +1491,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 749"
+            "detail": "Markdown satırı 761"
           }
         },
         {
@@ -1499,7 +1499,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 608"
+            "detail": "Markdown satırı 620"
           }
         }
       ],
@@ -1537,7 +1537,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 964; Stage 2: MD 1018; Stage 1: MD 1072; Excel ana puan: =G22"
+          "detail": "Mevki/rol: MD 976; Stage 2: MD 1030; Stage 1: MD 1084; Excel ana puan: =G22"
         }
       },
       "suitability": {
@@ -1559,7 +1559,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 762"
+            "detail": "Markdown satırı 774"
           }
         },
         {
@@ -1567,7 +1567,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 763"
+            "detail": "Markdown satırı 775"
           }
         },
         {
@@ -1575,7 +1575,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 764"
+            "detail": "Markdown satırı 776"
           }
         },
         {
@@ -1583,7 +1583,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 648"
+            "detail": "Markdown satırı 660"
           }
         }
       ],
@@ -1621,7 +1621,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 965; Stage 2: MD 1019; Stage 1: MD 1073; Excel ana puan: =H23"
+          "detail": "Mevki/rol: MD 977; Stage 2: MD 1031; Stage 1: MD 1085; Excel ana puan: =H23"
         }
       },
       "suitability": {
@@ -1643,7 +1643,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 773"
+            "detail": "Markdown satırı 785"
           }
         },
         {
@@ -1651,7 +1651,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 792"
+            "detail": "Markdown satırı 804"
           }
         },
         {
@@ -1659,7 +1659,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 811"
+            "detail": "Markdown satırı 823"
           }
         },
         {
@@ -1667,7 +1667,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 602"
+            "detail": "Markdown satırı 614"
           }
         }
       ],
@@ -1705,7 +1705,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 966; Stage 2: MD 1020; Stage 1: MD 1074; Excel ana puan: =E24"
+          "detail": "Mevki/rol: MD 978; Stage 2: MD 1032; Stage 1: MD 1086; Excel ana puan: =E24"
         }
       },
       "suitability": {
@@ -1727,7 +1727,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 689"
+            "detail": "Markdown satırı 701"
           }
         },
         {
@@ -1735,7 +1735,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 690"
+            "detail": "Markdown satırı 702"
           }
         },
         {
@@ -1743,7 +1743,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 769"
+            "detail": "Markdown satırı 781"
           }
         },
         {
@@ -1751,7 +1751,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 770"
+            "detail": "Markdown satırı 782"
           }
         },
         {
@@ -1759,7 +1759,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 809"
+            "detail": "Markdown satırı 821"
           }
         },
         {
@@ -1767,7 +1767,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 810"
+            "detail": "Markdown satırı 822"
           }
         },
         {
@@ -1775,7 +1775,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 610"
+            "detail": "Markdown satırı 622"
           }
         }
       ],
@@ -1813,7 +1813,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 967; Stage 2: MD 1021; Stage 1: MD 1075; Excel ana puan: =D25"
+          "detail": "Mevki/rol: MD 979; Stage 2: MD 1033; Stage 1: MD 1087; Excel ana puan: =D25"
         }
       },
       "suitability": {
@@ -1835,7 +1835,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 689"
+            "detail": "Markdown satırı 701"
           }
         },
         {
@@ -1843,7 +1843,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 690"
+            "detail": "Markdown satırı 702"
           }
         },
         {
@@ -1851,7 +1851,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 769"
+            "detail": "Markdown satırı 781"
           }
         },
         {
@@ -1859,7 +1859,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 770"
+            "detail": "Markdown satırı 782"
           }
         },
         {
@@ -1867,7 +1867,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 809"
+            "detail": "Markdown satırı 821"
           }
         },
         {
@@ -1875,7 +1875,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 810"
+            "detail": "Markdown satırı 822"
           }
         },
         {
@@ -1883,7 +1883,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 612"
+            "detail": "Markdown satırı 624"
           }
         }
       ],
@@ -1921,7 +1921,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 968; Stage 2: MD 1022; Stage 1: MD 1076; Excel ana puan: =F26"
+          "detail": "Mevki/rol: MD 980; Stage 2: MD 1034; Stage 1: MD 1088; Excel ana puan: =F26"
         }
       },
       "suitability": {
@@ -1943,7 +1943,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 750"
+            "detail": "Markdown satırı 762"
           }
         }
       ],
@@ -1981,7 +1981,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 969; Stage 2: MD 1023; Stage 1: MD 1077; Excel ana puan: =F27"
+          "detail": "Mevki/rol: MD 981; Stage 2: MD 1035; Stage 1: MD 1089; Excel ana puan: =F27"
         }
       },
       "suitability": {
@@ -2003,7 +2003,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 722"
+            "detail": "Markdown satırı 734"
           }
         }
       ],
@@ -2041,7 +2041,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 970; Stage 2: MD 1024; Stage 1: MD 1078; Excel ana puan: =D28"
+          "detail": "Mevki/rol: MD 982; Stage 2: MD 1036; Stage 1: MD 1090; Excel ana puan: =D28"
         }
       },
       "suitability": {
@@ -2063,7 +2063,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 780"
+            "detail": "Markdown satırı 792"
           }
         },
         {
@@ -2071,7 +2071,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 781"
+            "detail": "Markdown satırı 793"
           }
         },
         {
@@ -2079,7 +2079,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 782"
+            "detail": "Markdown satırı 794"
           }
         },
         {
@@ -2087,7 +2087,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 806"
+            "detail": "Markdown satırı 818"
           }
         },
         {
@@ -2095,7 +2095,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 652"
+            "detail": "Markdown satırı 664"
           }
         }
       ],
@@ -2133,7 +2133,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 971; Stage 2: MD 1025; Stage 1: MD 1079; Excel ana puan: =H29"
+          "detail": "Mevki/rol: MD 983; Stage 2: MD 1037; Stage 1: MD 1091; Excel ana puan: =H29"
         }
       },
       "suitability": {
@@ -2156,7 +2156,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 746"
+            "detail": "Markdown satırı 758"
           }
         },
         {
@@ -2164,7 +2164,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 792"
+            "detail": "Markdown satırı 804"
           }
         },
         {
@@ -2172,7 +2172,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 600"
+            "detail": "Markdown satırı 612"
           }
         }
       ],
@@ -2210,7 +2210,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 972; Stage 2: MD 1026; Stage 1: MD 1080; Excel ana puan: =G30"
+          "detail": "Mevki/rol: MD 984; Stage 2: MD 1038; Stage 1: MD 1092; Excel ana puan: =G30"
         }
       },
       "suitability": {
@@ -2232,7 +2232,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 699"
+            "detail": "Markdown satırı 711"
           }
         }
       ],
@@ -2270,7 +2270,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 973; Stage 2: MD 1027; Stage 1: MD 1081; Excel ana puan: =C31"
+          "detail": "Mevki/rol: MD 985; Stage 2: MD 1039; Stage 1: MD 1093; Excel ana puan: =C31"
         }
       },
       "suitability": {
@@ -2291,7 +2291,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 785"
+            "detail": "Markdown satırı 797"
           }
         }
       ],
@@ -2308,7 +2308,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 974; Stage 2: MD 1028; Stage 1: MD 1082; Excel ana puan: =C32"
+          "detail": "Mevki/rol: MD 986; Stage 2: MD 1040; Stage 1: MD 1094; Excel ana puan: =C32"
         }
       },
       "suitability": {
@@ -2329,7 +2329,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 785"
+            "detail": "Markdown satırı 797"
           }
         }
       ],
@@ -2346,7 +2346,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 975; Stage 2: MD 1029; Stage 1: MD 1083; Excel ana puan: =E33"
+          "detail": "Mevki/rol: MD 987; Stage 2: MD 1041; Stage 1: MD 1095; Excel ana puan: =E33"
         }
       },
       "suitability": {
@@ -2368,7 +2368,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 691"
+            "detail": "Markdown satırı 703"
           }
         },
         {
@@ -2376,7 +2376,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 783"
+            "detail": "Markdown satırı 795"
           }
         }
       ],
@@ -2414,7 +2414,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 976; Stage 2: MD 1030; Stage 1: MD 1084; Excel ana puan: =D34"
+          "detail": "Mevki/rol: MD 988; Stage 2: MD 1042; Stage 1: MD 1096; Excel ana puan: =D34"
         }
       },
       "suitability": {
@@ -2436,7 +2436,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 4. Kilitli Özel Kimya ve Eşleşme Kuralları",
-            "detail": "Markdown satırı 692"
+            "detail": "Markdown satırı 704"
           }
         },
         {
@@ -2444,7 +2444,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 777"
+            "detail": "Markdown satırı 789"
           }
         },
         {
@@ -2452,7 +2452,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 778"
+            "detail": "Markdown satırı 790"
           }
         },
         {
@@ -2460,7 +2460,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 640"
+            "detail": "Markdown satırı 652"
           }
         }
       ],
@@ -2498,7 +2498,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 977; Stage 2: MD 1031; Stage 1: MD 1085; Excel ana puan: =D35"
+          "detail": "Mevki/rol: MD 989; Stage 2: MD 1043; Stage 1: MD 1097; Excel ana puan: =D35"
         }
       },
       "suitability": {
@@ -2520,7 +2520,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 720"
+            "detail": "Markdown satırı 732"
           }
         },
         {
@@ -2528,7 +2528,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 721"
+            "detail": "Markdown satırı 733"
           }
         },
         {
@@ -2536,7 +2536,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 793"
+            "detail": "Markdown satırı 805"
           }
         }
       ],
@@ -2574,7 +2574,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 978; Stage 2: MD 1032; Stage 1: MD 1086; Excel ana puan: =D36"
+          "detail": "Mevki/rol: MD 990; Stage 2: MD 1044; Stage 1: MD 1098; Excel ana puan: =D36"
         }
       },
       "suitability": {
@@ -2596,7 +2596,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 723"
+            "detail": "Markdown satırı 735"
           }
         },
         {
@@ -2604,7 +2604,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 724"
+            "detail": "Markdown satırı 736"
           }
         }
       ],
@@ -2642,7 +2642,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 979; Stage 2: MD 1033; Stage 1: MD 1087; Excel ana puan: =D37"
+          "detail": "Mevki/rol: MD 991; Stage 2: MD 1045; Stage 1: MD 1099; Excel ana puan: =D37"
         }
       },
       "suitability": {
@@ -2664,7 +2664,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 732"
+            "detail": "Markdown satırı 744"
           }
         },
         {
@@ -2672,7 +2672,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 733"
+            "detail": "Markdown satırı 745"
           }
         },
         {
@@ -2680,7 +2680,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 734"
+            "detail": "Markdown satırı 746"
           }
         },
         {
@@ -2688,7 +2688,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 614"
+            "detail": "Markdown satırı 626"
           }
         }
       ],
@@ -2726,7 +2726,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 980; Stage 2: MD 1034; Stage 1: MD 1088; Excel ana puan: =D38"
+          "detail": "Mevki/rol: MD 992; Stage 2: MD 1046; Stage 1: MD 1100; Excel ana puan: =D38"
         }
       },
       "suitability": {
@@ -2748,7 +2748,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 779"
+            "detail": "Markdown satırı 791"
           }
         },
         {
@@ -2756,7 +2756,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 6. İsim Bazlı Atmosfer Örnekleri",
-            "detail": "Markdown satırı 806"
+            "detail": "Markdown satırı 818"
           }
         },
         {
@@ -2764,7 +2764,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 646"
+            "detail": "Markdown satırı 658"
           }
         }
       ],
@@ -2802,7 +2802,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 981; Stage 2: MD 1035; Stage 1: MD 1089; Excel ana puan: =F39"
+          "detail": "Mevki/rol: MD 993; Stage 2: MD 1047; Stage 1: MD 1101; Excel ana puan: =F39"
         }
       },
       "suitability": {
@@ -2825,7 +2825,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 702"
+            "detail": "Markdown satırı 714"
           }
         },
         {
@@ -2833,7 +2833,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 703"
+            "detail": "Markdown satırı 715"
           }
         }
       ],
@@ -2871,7 +2871,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 982; Stage 2: MD 1036; Stage 1: MD 1090; Excel ana puan: =E40"
+          "detail": "Mevki/rol: MD 994; Stage 2: MD 1048; Stage 1: MD 1102; Excel ana puan: =E40"
         }
       },
       "suitability": {
@@ -2893,7 +2893,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 784"
+            "detail": "Markdown satırı 796"
           }
         }
       ],
@@ -2931,7 +2931,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 983; Stage 2: MD 1037; Stage 1: MD 1091; Excel ana puan: =E41"
+          "detail": "Mevki/rol: MD 995; Stage 2: MD 1049; Stage 1: MD 1103; Excel ana puan: =E41"
         }
       },
       "suitability": {
@@ -2953,7 +2953,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 719"
+            "detail": "Markdown satırı 731"
           }
         }
       ],
@@ -2991,7 +2991,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 984; Stage 2: MD 1038; Stage 1: MD 1092; Excel ana puan: =D42"
+          "detail": "Mevki/rol: MD 996; Stage 2: MD 1050; Stage 1: MD 1104; Excel ana puan: =D42"
         }
       },
       "suitability": {
@@ -3013,7 +3013,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 774"
+            "detail": "Markdown satırı 786"
           }
         },
         {
@@ -3021,7 +3021,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 775"
+            "detail": "Markdown satırı 787"
           }
         }
       ],
@@ -3059,7 +3059,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 985; Stage 2: MD 1039; Stage 1: MD 1093; Excel ana puan: =D43"
+          "detail": "Mevki/rol: MD 997; Stage 2: MD 1051; Stage 1: MD 1105; Excel ana puan: =D43"
         }
       },
       "suitability": {
@@ -3081,7 +3081,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 742"
+            "detail": "Markdown satırı 754"
           }
         }
       ],
@@ -3119,7 +3119,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 986; Stage 2: MD 1040; Stage 1: MD 1094; Excel ana puan: =D44"
+          "detail": "Mevki/rol: MD 998; Stage 2: MD 1052; Stage 1: MD 1106; Excel ana puan: =D44"
         }
       },
       "suitability": {
@@ -3141,7 +3141,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 765"
+            "detail": "Markdown satırı 777"
           }
         }
       ],
@@ -3179,7 +3179,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 987; Stage 2: MD 1041; Stage 1: MD 1095; Excel ana puan: =C45"
+          "detail": "Mevki/rol: MD 999; Stage 2: MD 1053; Stage 1: MD 1107; Excel ana puan: =C45"
         }
       },
       "suitability": {
@@ -3200,7 +3200,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 785"
+            "detail": "Markdown satırı 797"
           }
         }
       ],
@@ -3217,7 +3217,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 988; Stage 2: MD 1042; Stage 1: MD 1096; Excel ana puan: =F46"
+          "detail": "Mevki/rol: MD 1000; Stage 2: MD 1054; Stage 1: MD 1108; Excel ana puan: =F46"
         }
       },
       "suitability": {
@@ -3239,7 +3239,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 701"
+            "detail": "Markdown satırı 713"
           }
         },
         {
@@ -3247,7 +3247,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / oyuncu profili",
-            "detail": "Markdown satırı 634"
+            "detail": "Markdown satırı 646"
           }
         }
       ],
@@ -3285,7 +3285,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 989; Stage 2: MD 1043; Stage 1: MD 1097; Excel ana puan: =D47"
+          "detail": "Mevki/rol: MD 1001; Stage 2: MD 1055; Stage 1: MD 1109; Excel ana puan: =D47"
         }
       },
       "suitability": {
@@ -3308,7 +3308,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 768"
+            "detail": "Markdown satırı 780"
           }
         }
       ],
@@ -3346,7 +3346,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 990; Stage 2: MD 1044; Stage 1: MD 1098; Excel ana puan: =E48"
+          "detail": "Mevki/rol: MD 1002; Stage 2: MD 1056; Stage 1: MD 1110; Excel ana puan: =E48"
         }
       },
       "suitability": {
@@ -3368,7 +3368,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 729"
+            "detail": "Markdown satırı 741"
           }
         }
       ],
@@ -3406,7 +3406,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 991; Stage 2: MD 1045; Stage 1: MD 1099; Excel ana puan: =D49"
+          "detail": "Mevki/rol: MD 1003; Stage 2: MD 1057; Stage 1: MD 1111; Excel ana puan: =D49"
         }
       },
       "suitability": {
@@ -3428,7 +3428,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 735"
+            "detail": "Markdown satırı 747"
           }
         },
         {
@@ -3436,7 +3436,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 736"
+            "detail": "Markdown satırı 748"
           }
         },
         {
@@ -3444,7 +3444,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 737"
+            "detail": "Markdown satırı 749"
           }
         }
       ],
@@ -3482,7 +3482,7 @@
         "source": {
           "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
           "section": "Oyuncu Veritabanı",
-          "detail": "Mevki/rol: MD 992; Stage 2: MD 1046; Stage 1: MD 1100; Excel ana puan: =D50"
+          "detail": "Mevki/rol: MD 1004; Stage 2: MD 1058; Stage 1: MD 1112; Excel ana puan: =D50"
         }
       },
       "suitability": {
@@ -3504,7 +3504,7 @@
           "source": {
             "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
             "section": "Kimya ve Performans / 5. Oyuncu Bazlı Maçlık Modifier Kuralları",
-            "detail": "Markdown satırı 698"
+            "detail": "Markdown satırı 710"
           }
         }
       ],

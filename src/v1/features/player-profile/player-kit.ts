@@ -19,21 +19,22 @@ export const CONFIRMED_PLAYER_CLUBS:Readonly<Record<string,ClubId>>=Object.freez
   servan:'galatasaray',fuat:'galatasaray',taha:'trabzonspor',
 });
 
-/** Photo-backed portraits keyed by stable ID. Framing, sources and prompts: docs/portraits/batch-03.md. */
+/** Photo-backed portraits keyed by stable ID. Framing, sources and prompts: docs/portraits/batch-03.md. Served as 448×560 WebP (~23 kB
+ * each; user, 2026-11-06: "portreleri webp'ye çevirelim, kalitesi önemli değil"); the 1122×1402 PNG originals are in archive/portraits-png. */
 export const PLAYER_PORTRAITS:Readonly<Record<string,string>>=Object.freeze({
-  baran:new URL('../../../assets/portraits/baran-v2.png',import.meta.url).href,
-  onur:new URL('../../../assets/portraits/onur-v1.png',import.meta.url).href,
-  goktug:new URL('../../../assets/portraits/goktug-v1.png',import.meta.url).href,
-  utku:new URL('../../../assets/portraits/utku-v1.png',import.meta.url).href,
-  'akin':new URL('../../../assets/portraits/akin-v1.png',import.meta.url).href,
-  'arif':new URL('../../../assets/portraits/arif-v1.png',import.meta.url).href,
-  'arda-barin':new URL('../../../assets/portraits/arda-barin-v1.png',import.meta.url).href,
-  'barkuz':new URL('../../../assets/portraits/barkuz-v1.png',import.meta.url).href,
-  'batu':new URL('../../../assets/portraits/batu-v1.png',import.meta.url).href,
-  'kamil-reis':new URL('../../../assets/portraits/kamil-reis-v1.png',import.meta.url).href,
-  'mamadou':new URL('../../../assets/portraits/mamadou-v1.png',import.meta.url).href,
-  'ugur':new URL('../../../assets/portraits/ugur-v1.png',import.meta.url).href,
-  'fuat':new URL('../../../assets/portraits/fuat-v1.png',import.meta.url).href,
+  baran:new URL('../../../assets/portraits/baran-v2.webp',import.meta.url).href,
+  onur:new URL('../../../assets/portraits/onur-v1.webp',import.meta.url).href,
+  goktug:new URL('../../../assets/portraits/goktug-v1.webp',import.meta.url).href,
+  utku:new URL('../../../assets/portraits/utku-v1.webp',import.meta.url).href,
+  'akin':new URL('../../../assets/portraits/akin-v1.webp',import.meta.url).href,
+  'arif':new URL('../../../assets/portraits/arif-v1.webp',import.meta.url).href,
+  'arda-barin':new URL('../../../assets/portraits/arda-barin-v1.webp',import.meta.url).href,
+  'barkuz':new URL('../../../assets/portraits/barkuz-v1.webp',import.meta.url).href,
+  'batu':new URL('../../../assets/portraits/batu-v1.webp',import.meta.url).href,
+  'kamil-reis':new URL('../../../assets/portraits/kamil-reis-v1.webp',import.meta.url).href,
+  'mamadou':new URL('../../../assets/portraits/mamadou-v1.webp',import.meta.url).href,
+  'ugur':new URL('../../../assets/portraits/ugur-v1.webp',import.meta.url).href,
+  'fuat':new URL('../../../assets/portraits/fuat-v1.webp',import.meta.url).href,
 });
 
 const CLUB_NAMES:Readonly<Record<ClubId,string>>={

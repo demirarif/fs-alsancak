@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "importerVersion": "1.0.0",
   "ratingModelVersion": "source-92-8-two-decimals-v1",
-  "catalogVersion": "catalog-v1-9347d28af9853371",
-  "importedAt": "2026-11-05T13:48:49.460Z",
+  "catalogVersion": "catalog-v1-910d601b51bfd25c",
+  "importedAt": "2026-11-06T15:43:32.968Z",
   "sourceFile": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
-  "sourceSha256": "71a05733134776e6cf834c665d6ae0a6b2a631611637e23adea96e4001f2da46",
+  "sourceSha256": "15b5490946b11aa6a95449af69b17d4319edf17c31a2b8be07cfe6bb86c6a076",
   "definitionSha256": "35a2dd3f942b1d185307353f03acfb723ede88bcba7c4f03ec0a4482c0c8ab8b",
   "discrepancies": [
     {
@@ -16,7 +16,7 @@
       "source": {
         "file": "Hali_Saha_Tum_Kaynaklar_Birlestirilmis.md",
         "section": "Güncel Mevki Listesi / PDF aktarımı",
-        "detail": "Markdown satırı 899"
+        "detail": "Markdown satırı 911"
       },
       "resolution": "Tek ondalıklı Excel/PDF gösterimleri arşivde korundu; uygulama puanı kaynak formülünden iki ondalıkla hesaplandı."
     }

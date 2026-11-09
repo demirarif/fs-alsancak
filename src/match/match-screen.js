@@ -4,11 +4,11 @@ import { createLineupRepository } from '../v1/data/local-lineups.ts';
 import { rebaseLineupDraft } from '../v1/domain/lineups.ts';
 import { createMatchSnapshot } from '../v1/application/match-factory.ts';
 import { freshSeed } from '../v1/engine/rng.ts';
-import { halfHighlights } from './highlight-edit.js';
+import { EDIT, EDIT_V1, editOf, halfHighlights } from './highlight-edit.js';
 import { walkoutState, walkoutPose, WALKOUT_MIN_SECONDS } from './walkout.js';
 import { teamKitMarkup } from '../v1/features/player-profile/player-kit.ts';
 import { uiIcon } from '../v1/features/ui/icons.ts';
-import { commentary } from './commentary.js';
+import { announcedRule, commentary, withoutEffect } from './commentary.js';
 import { positionFit } from '../v1/engine/position-fit.ts';
 import { FORMATIONS } from '../v1/config/formations.ts';
 import { createMatchArchive } from '../v1/data/match-archive.ts';
@@ -41,7 +41,8 @@ export function mountMatchScreen(host){
     <section class="match-scoreboard" aria-live="polite"><div class="match-team">${shirtIcon(0)}<b data-name="0"></b></div><strong class="match-score">0 <em>–</em> 0</strong><div class="match-team right"><b data-name="1"></b>${shirtIcon(1)}</div>
       <div class="match-clock"><span data-clock>00:00</span><small data-period>1. yarı</small></div><span class="match-onair" hidden>CANLI</span></section>
     <ol class="match-ticker" aria-label="Son olaylar"></ol><section class="match-why" role="dialog" aria-label="Neden oldu?" hidden></section><div class="match-goal-banner" hidden></div><div class="match-chapter" aria-hidden="true"></div><div class="match-cut" aria-hidden="true"></div><div class="match-blackout on" aria-hidden="true"></div>
-    <div class="match-camera"><div class="mc-segmented" role="group" aria-label="Kamera açısı"><button data-preset="broadcast" class="active" aria-pressed="true">TV yayını</button><button data-preset="wide" aria-pressed="false">Geniş</button><button data-preset="goal" aria-pressed="false">Kale arkası</button></div></div>
+    <div class="match-camera"><div class="mc-segmented" role="group" aria-label="Kamera açısı"><button data-preset="broadcast" data-short="TV" class="active" aria-pressed="true">TV yayını</button><button data-preset="wide" data-short="Geniş" aria-pressed="false">Geniş</button><button data-preset="goal" data-short="Kale" aria-pressed="false">Kale arkası</button></div></div>
+    <a class="mc-exit" href="#gunun-maci" aria-label="Yayından çık, Günün maçına dön"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></a>
     <button class="mc-golive" data-golive hidden>CANLI'ya dön</button><div class="match-overlay" role="dialog" aria-modal="false" hidden></div></div>
   <footer class="match-controls"><button class="mc-play" data-play aria-label="Duraklat"><span class="mc-play-symbol" aria-hidden="true">${uiIcon('pause')}</span><span class="mc-play-label">Duraklat</span></button>
     <button class="mc-replay" data-replay title="Son pozisyonu yarı hızda tekrar izle" aria-label="Son pozisyonu yarı hızda tekrar izle">${uiIcon('reset')}<span>Son pozisyon</span></button>
@@ -64,16 +65,16 @@ export function mountMatchScreen(host){
 
   function status(html){overlay.hidden=false;overlay.innerHTML=html;replay=null;transport();}
   /** Transport follows the state: nothing to play under a half-time / full-time card, no seeking or replay during the walk-out. */
-  function transport(){const card=!overlay.hidden,live=phase==='play'&&!card,locked=mode==='broadcast'&&!broadcastOver();if(card){$('.match-why').hidden=true;whyResume=false;}$('[data-play]').disabled=card;$('[data-skip]').disabled=!live||locked;$('[data-replay]').disabled=!live;$('[data-timeline]').disabled=!live||locked;
+  function transport(){const card=!overlay.hidden,live=phase==='play'&&!card,locked=mode==='broadcast'&&(!broadcastOver()||bcast.trimmed);if(card){$('.match-why').hidden=true;whyResume=false;}$('[data-play]').disabled=card;$('[data-skip]').disabled=!live||locked;$('[data-replay]').disabled=!live;$('[data-timeline]').disabled=!live||locked;
     // During the broadcast nobody skips ahead or changes the edit: it is the same programme for everybody until it has ended.
-    $$('[data-speed]').forEach(b=>{b.disabled=locked;});$('[data-golive]').hidden=!(mode==='broadcast'&&!bcast.live&&!broadcastOver());$('.match-onair').hidden=!(mode==='broadcast'&&bcast.live);}
+    $$('[data-speed]').forEach(b=>{b.disabled=locked;});$('[data-golive]').hidden=!(mode==='broadcast'&&!bcast.live&&!broadcastOver());$('.match-onair').hidden=!(mode==='broadcast'&&bcast.live);$('.match-scoreboard').classList.toggle('is-live',mode==='broadcast'&&!!bcast?.live);}
   const broadcastOver=()=>mode==='broadcast'&&(bcast.clock()-bcast.kickoffAt)/1000>=bcast.plan.total;
   function teamName(i){return mode==='broadcast'?bcast.names[i]:context.selection.teams[i].name;}
   function scoreRow(score){return `<div class="mc-score-row"><div class="mc-side">${shirtIcon(0)}<b>${esc(teamName(0))}</b></div><strong class="mc-score">${score[0]}<em>–</em>${score[1]}</strong><div class="mc-side right"><b>${esc(teamName(1))}</b>${shirtIcon(1)}</div></div>`;}
   /** Same 22 players, team by team, as the match in progress. */
   const samePlayers=ls=>!!snapshot&&ls.every((l,i)=>{const a=new Set(l.assignments.map(x=>x.playerId)),b=snapshot.lineups[i].assignments.map(x=>x.playerId);return a.size===b.length&&b.every(id=>a.has(id));});
   async function open(next){
-    if(mode==='broadcast'){mode='local';bcast=null;snapshot=null;transport();}
+    if(mode==='broadcast'){mode='local';bcast=null;snapshot=null;host.classList.remove('is-broadcast');transport();}
     const saved=await repository.loadLineups(next.selection.id),value=saved.ok&&saved.value?rebaseLineupDraft(saved.value,next):null;
     if(snapshot&&value&&samePlayers(value.lineups)&&phase!=='idle'){
       context=next;
@@ -109,7 +110,7 @@ export function mountMatchScreen(host){
   }
   function startHalf(h){
     half=h;const r=halves[h-1];phase='play';blackout.classList.remove('on');overlay.hidden=true;playing=true;setPlayIcon();cut();replay=null;transport();
-    editSegments();stops=stoppages(r);segIndex=0;t=highlighting()?segments[0].start:r.startSeconds;seeked=true;
+    editSegments();stops=stopsOf(h);segIndex=0;t=highlighting()?segments[0].start:r.startSeconds;seeked=true;
     $('[data-timeline]').min=String(r.startSeconds);$('[data-timeline]').max=String(r.endSeconds);$('[data-period]').textContent=h===1?'1. yarı':'2. yarı';
     $('.match-ticker').innerHTML='';{const skip=h===1?'Devre arasına geç':'Maç sonuna geç';$('[data-skip] span').textContent=skip;$('[data-skip]').title=skip;$('[data-skip]').setAttribute('aria-label',skip);}
     if(highlighting())chapter();
@@ -118,10 +119,15 @@ export function mountMatchScreen(host){
   function stop(){if(raf)cancelAnimationFrame(raf);raf=null;worker?.terminate();worker=null;}
   function setPlayIcon(){$('.mc-play-symbol').innerHTML=uiIcon(playing?'pause':'play');$('.mc-play-label').textContent=playing?'Duraklat':'Devam et';$('[data-play]').setAttribute('aria-label',playing?'Duraklat':'Devam et');$('[data-play]').classList.toggle('is-paused',!playing);}
   const highlighting=()=>typeof speed==='string';
+  /** The edit being played: a broadcast keeps the one it was planned with (v1 for the first broadcasts), a local match today's. */
+  const currentEdit=()=>mode==='broadcast'?editOf(bcast?.edit?.version):EDIT;
+  /** A half's dead-ball stretches; a recording with its edit stored carries them (the trimmed live copy cannot be scanned for them). */
+  const stopsOf=h=>(mode==='broadcast'&&bcast?.edit?.stops?.[h-1])||stoppages(halves[h-1]);
   /** Segments of the chosen edit (the 10-minute one marks the timeline in full-speed modes too). Important moments, not goals: the
    * marks are neutral so the timeline never gives the score away. */
   function editSegments(){
-    const r=halves[half-1];segments=halfHighlights(r,BUDGET[speed]??BUDGET.h10).segments;const span=r.endSeconds-r.startSeconds;
+    const r=halves[half-1],stored=mode==='broadcast'&&bcast?.edit&&(speed==='h10'||bcast.trimmed)?bcast.edit.segments[half-1]:null;
+    segments=stored??halfHighlights(r,BUDGET[speed]??BUDGET.h10,currentEdit()).segments;const span=r.endSeconds-r.startSeconds;
     $('.match-marks').innerHTML=segments.slice(1).map(s=>`<i style="left:${(s.start-r.startSeconds)/span*100}%;width:${Math.max(.25,(s.end-s.start)/span*100)}%"></i>`).join('');
   }
   /** Quick dip between highlight segments, like a TV edit. */
@@ -132,7 +138,9 @@ export function mountMatchScreen(host){
   function startReplay(){
     const r=phase==='play'&&overlay.hidden?halves[half-1]:null;if(!r)return;
     if(mode==='broadcast'&&bcast.live){bcast.live=false;transport();}
-    const back=r.events.filter(e=>e.seconds<=t&&t-e.seconds<20&&e.importance>=.45).at(-1),from=Math.max(r.startSeconds,back?back.seconds-4:t-8),to=back?Math.min(t,back.seconds+2.5):t;
+    // The trimmed live copy holds only the edit's moments: a replay stays within the one on air.
+    const floor=mode==='broadcast'&&bcast.trimmed?segments[segIndex]?.start??r.startSeconds:r.startSeconds;
+    const back=r.events.filter(e=>e.seconds<=t&&t-e.seconds<20&&e.importance>=.45&&e.seconds>=floor).at(-1),from=Math.max(r.startSeconds,floor,back?back.seconds-4:t-8),to=back?Math.min(t,back.seconds+2.5):t;
     if(to-from<1)return;
     replay={to,returnT:replay?.returnT??t};t=from;seeked=true;playing=true;setPlayIcon();cut();
     const el=$('.match-chapter');el.textContent='TEKRAR · 0,5×';el.classList.add('on');chapterUntil=performance.now()+2200;
@@ -162,7 +170,7 @@ export function mountMatchScreen(host){
       if(t>=seg.end&&moving&&t<r.endSeconds){if(segIndex<segments.length-1){segIndex++;t=segments[segIndex].start;seeked=true;cut();chapter();}else{t=r.endSeconds;seeked=true;}}
     }else{step=moving?real*speed:0;t=Math.min(r.endSeconds,t+step);}
     // Nobody watches the players walk to a set piece (user): a quick cut to just before the kick.
-    if(moving&&!replay){const stop=stops.find(s=>t>=s[0]&&t<s[1]);if(stop&&stop[1]-t>2){t=stop[1]-.8;seeked=true;cut();}}
+    if(moving&&!replay){const ed=currentEdit(),stop=stops.find(s=>t>=s[0]&&t<s[1]);if(stop&&stop[1]-t>ed.cutOver){t=stop[1]-ed.cutKeep;seeked=true;cut();}}
     const jumped=seeked,state=sampleReplay(r,t);renderer.render(state,{realDt:real,simDt:jumped?0:step,events:r.events,seeked:jumped});seeked=false;
     hud(state,r,jumped?t:prev);
     if(chapterUntil&&performance.now()>chapterUntil){$('.match-chapter').classList.remove('on');chapterUntil=0;}
@@ -188,15 +196,16 @@ export function mountMatchScreen(host){
     if(at.kind==='before'){phase='idle';blackout.classList.add('on');status(card({label:'Canlı yayın',title:'<h2>Maç birazdan başlıyor</h2>',lead:'Başlamasına <b data-countdown></b>'}));return;}
     if(at.kind==='walkout'){phase='walkout';half=at.half;blackout.classList.remove('on');$('.match-ticker').innerHTML='';$('.match-marks').innerHTML='';const score=at.half===1?[0,0]:results[0].score;
       $('.match-score').innerHTML=`${score[0]} <em>–</em> ${score[1]}`;$('[data-clock]').textContent=at.half===1?'00:00':'30:00';$('[data-period]').textContent=at.half===1?'1. yarı':'2. yarı';transport();return;}
-    if(at.kind==='half'){half=at.half;phase='play';blackout.classList.remove('on');const r=halves[half-1];editSegments();stops=stoppages(r);segIndex=0;bcast.piece=-1;seeked=true;
+    if(at.kind==='half'){half=at.half;phase='play';blackout.classList.remove('on');const r=halves[half-1];editSegments();stops=stopsOf(half);segIndex=0;bcast.piece=-1;seeked=true;
       $('[data-timeline]').min=String(r.startSeconds);$('[data-timeline]').max=String(r.endSeconds);$('[data-period]').textContent=half===1?'1. yarı':'2. yarı';$('.match-ticker').innerHTML='';transport();return;}
     if(at.kind==='halftime'){phase='play';half=1;t=halves[0].endSeconds;status(card({wide:true,label:'Devre arası',title:scoreRow(results[0].score),lead:'İkinci yarı <b data-countdown></b> sonra başlıyor.',body:scorers(1)+stats(1)}));}
   }
   /** Plays a planned match from its recording (mode 'broadcast'). Opened after the broadcast, it starts from the top with no score card. */
   function openBroadcast({recording,kickoffAt,clock}){
-    stop();runId++;mode='broadcast';changingLineup=false;
+    stop();runId++;mode='broadcast';changingLineup=false;host.classList.add('is-broadcast');
     snapshot=recording.snapshot;lineups=recording.lineups[1];halves=[recording.halves[0],recording.halves[1]];results=[recording.results[0],recording.results[1]];carry=null;
-    bcast={kickoffAt,clock,plan:broadcastPlan(halves),live:true,names:recording.teamNames,key:'',piece:-1,overSeen:false};
+    // A recording planned since 6 Nov carries its edit (and the live copy is trimmed to it); the first ones replay with the v1 edit they had.
+    bcast={kickoffAt,clock,plan:recording.edit?.plan??broadcastPlan(halves,EDIT_V1),edit:recording.edit??null,trimmed:!!recording.trimmed,live:true,names:recording.teamNames,key:'',piece:-1,overSeen:false};
     const names=new Map(snapshot.players.map(p=>[p.id,p.name]));nameOf=id=>names.get(id);
     $$('[data-name]').forEach(el=>{el.textContent=teamName(Number(el.dataset.name));});
     speed='h10';$$('[data-speed]').forEach(x=>{const on=x.dataset.speed==='h10';x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on));});
@@ -212,7 +221,7 @@ export function mountMatchScreen(host){
     $('.match-score').innerHTML=`${state.score[0]} <em>–</em> ${state.score[1]}`;$('[data-clock]').textContent=clock(Math.min(r.endSeconds,state.t));
     const tl=$('[data-timeline]');if(document.activeElement!==tl){tl.value=String(state.t);tl.style.setProperty('--progress',`${(state.t-r.startSeconds)/(r.endSeconds-r.startSeconds)*100}%`);}
     const fresh=replay?[]:r.events.filter(e=>e.seconds>prev&&e.seconds<=state.t&&e.importance>=.3);
-    if(fresh.length){const list=$('.match-ticker');for(const e of fresh){const li=document.createElement('li');li.className=`${e.kind==='goal'?'is-goal':''} ${e.teamId==='team-2'?'red':'blue'}`;li.innerHTML=`<button type="button" data-why="${e.id}" title="Neden oldu?"><b>${minute(e.seconds)}</b><span>${esc(commentary(e,nameOf))}</span></button>`;list.prepend(li);}while(list.children.length>3)list.lastChild.remove();}
+    if(fresh.length){const list=$('.match-ticker');for(const e of fresh){const line=commentary(e,nameOf);if(!line)continue;const li=document.createElement('li');li.className=`${e.kind==='goal'?'is-goal':''} ${e.teamId==='team-2'?'red':'blue'}`;li.innerHTML=`<button type="button" data-why="${e.id}" title="Neden oldu?"><b>${minute(e.seconds)}</b><span>${esc(line)}</span></button>`;list.prepend(li);}while(list.children.length>3)list.lastChild.remove();}
     const goal=fresh.find(e=>e.kind==='goal');
     if(goal){const b=$('.match-goal-banner'),team=goal.teamId==='team-2'?1:0;b.hidden=false;b.className=`match-goal-banner ${team?'red':'blue'}`;b.innerHTML=`<strong>GOL!</strong><span>${shirtIcon(team)}${esc(goalText(goal))}</span>`;bannerUntil=performance.now()+3200;}
     if(bannerUntil&&performance.now()>bannerUntil){$('.match-goal-banner').hidden=true;bannerUntil=0;}
@@ -224,7 +233,9 @@ export function mountMatchScreen(host){
     if(id==='team-chemistry')return'Takım kimyası (lider oyuncular ya da gergin ortam) takım arkadaşlarının pas/görüş/pozisyonuna yansıyor.';
     if(id==='position-fit'){const ls=e.seconds<halves[0]?.endSeconds?snapshot.lineups:lineups,team=e.teamId==='team-2'?1:0,l=ls[team],a=l?.assignments.find(x=>x.playerId===e.actorId),slot=a&&FORMATIONS[l.formationId]?.slots.find(s=>s.id===a.slotId),p=snapshot.players.find(x=>x.id===e.actorId);
       return(p&&slot&&positionFit(p.name,p.positionRatings,slot.position)?.[0]?.explanation)??'Mevkisinin dışında oynuyor.';}
-    return snapshot.rulebook.rules.find(r=>r.id===id)?.description??id;
+    // An in-match rule says what switches it on, not its numbers (user, 2026-11-06: "Utku … −0,5 yazmasın", "hepsini gizle"); it still acts.
+    const rule=snapshot.rulebook.rules.find(r=>r.id===id);
+    return rule?.description?(announcedRule(rule)?withoutEffect(rule.description):rule.description):id;
   }
   function openWhy(id){
     const e=[...(halves[0]?.events??[]),...(halves[1]?.events??[])].find(x=>x.id===id);if(!e)return;const r=e.reason,box=$('.match-why');
@@ -255,6 +266,7 @@ export function mountMatchScreen(host){
     const score=results[half-1].score;
     if(mode==='broadcast'){
       if(half===1)status(card({wide:true,label:'Devre arası',title:scoreRow(score),body:scorers(1)+stats(1),actions:`<button class="match-button" data-action="second">İkinci yarıyı izle${uiIcon('arrowRight')}</button>`}));
+      else if(bcast.trimmed)status(card({wide:true,label:'Maç sonu',title:scoreRow(score),body:scorers(2)+stats(2),actions:`<a class="match-button ghost" href="#gunun-maci">Günün maçına dön</a><a class="match-button" href="#gunun-maci/sonuclar">Özeti izle${uiIcon('arrowRight')}</a>`}));
       else status(card({wide:true,label:'Maç sonu',title:scoreRow(score),body:scorers(2)+stats(2),status:true,actions:`<button class="match-button ghost" data-action="rewatch">${uiIcon('reset')}Baştan izle</button><a class="match-button ghost" href="#gunun-maci">Günün maçına dön</a><button class="match-button" data-action="export">${uiIcon('download')}Özeti indir · 9:16</button>`}));
       return;
     }
@@ -308,7 +320,7 @@ export function mountMatchScreen(host){
     else if(b.dataset.why)openWhy(b.dataset.why);
     else if(b.dataset.whyClose!==undefined)closeWhy();
     else if(b.dataset.speed){replay=null;speed=BUDGET[b.dataset.speed]?b.dataset.speed:Number(b.dataset.speed);$$('[data-speed]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b));});if(phase==='play'){editSegments();if(highlighting())alignToSegments();}}
-    else if(b.dataset.skip!==undefined&&!(mode==='broadcast'&&!broadcastOver())){const r=phase==='play'?halves[half-1]:null;if(r){replay=null;t=r.endSeconds;segIndex=segments.length-1;seeked=true;}}
+    else if(b.dataset.skip!==undefined&&!(mode==='broadcast'&&(!broadcastOver()||bcast.trimmed))){const r=phase==='play'?halves[half-1]:null;if(r){replay=null;t=r.endSeconds;segIndex=segments.length-1;seeked=true;}}
     else if(b.dataset.action==='tactics'){changingLineup=true;location.hash='#dizilis';}
     else if(b.dataset.action==='second'){changingLineup=false;if(mode==='broadcast')startHalf(2);else simulate(2);}
     else if(b.dataset.action==='rewatch'){startHalf(1);}
@@ -326,7 +338,7 @@ export function mountMatchScreen(host){
       finally{actions.forEach(x=>{x.disabled=false;});exporting=false;}
     }
   });
-  $('[data-timeline]').addEventListener('input',e=>{if(phase!=='play'||(mode==='broadcast'&&!broadcastOver()))return;replay=null;t=Number(e.target.value);seeked=true;if(highlighting())alignToSegments();});
+  $('[data-timeline]').addEventListener('input',e=>{if(phase!=='play'||(mode==='broadcast'&&(!broadcastOver()||bcast.trimmed)))return;replay=null;t=Number(e.target.value);seeked=true;if(highlighting())alignToSegments();});
   // HUD boxes the name labels must avoid.
   const hudObserver=new ResizeObserver(()=>{if(!renderer)return;const box=host.querySelector('.match-stage').getBoundingClientRect();renderer.setHudExclusions([...host.querySelectorAll('.match-scoreboard,.match-camera,.match-ticker')].map(el=>el.getBoundingClientRect()).map(r=>({x:r.left-box.left,y:r.top-box.top,width:r.width,height:r.height})));});
   hudObserver.observe(host.querySelector('.match-stage'));

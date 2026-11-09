@@ -1,9 +1,9 @@
-/* Dinar betting (user decisions 2026-11-05): a game currency only — never bought, never paid out. Fixed odds against the house with no
- * margin; the house may lose ("kasa da kaybedebilsin"), so a good predictor multiplies his dinar. No risk-free play: one side per market
+/* Alsancak coin betting (user decisions 2026-11-05; first called dinar): a game currency only — never bought, never paid out. Fixed odds against the house with no
+ * margin; the house may lose ("kasa da kaybedebilsin"), so a good predictor multiplies his coins. No risk-free play: one side per market
  * per user, odds always rounded down, near-certain outcomes shown but not playable unless the admin opens them, the 30 % bonus only on a
  * match's net loss. The same `wins` decides an outcome in the Monte Carlo (its probability) and at settlement. Shared by the Worker. */
-export const DINAR = { start: 30_000, minStake: 100, maxStake: 5_000, lossBonus: .3 } as const;
-/** Odds bounds; `liquidity` (dinar) sets how slowly money moves the odds, `drift` the most they move from the admin's odds. */
+export const COIN = { start: 30_000, minStake: 100, maxStake: 5_000, lossBonus: .3 } as const;
+/** Odds bounds; `liquidity` (coins) sets how slowly money moves the odds, `drift` the most they move from the admin's odds. */
 export const ODDS = { min: 1.05, max: 200, playableFrom: 1.1, liquidity: 200_000, drift: .3 } as const;
 export const SCORE_MAX = 25;
 
@@ -17,6 +17,8 @@ export interface MatchFacts {
   readonly goals: readonly { readonly t: number; readonly team: 0 | 1; readonly player: string | null }[];
   readonly corners: number; readonly penalties: number; readonly headerGoals: number;
   readonly players: readonly PlayerLine[];
+  /** Kept with a stored simulation (its players are only the scorers and assisters); worked out from `players` otherwise. */
+  readonly motm?: string | null;
 }
 export type Family = 'ft' | 'ht' | 'sh' | 'htft' | 'margin' | 'half-more' | 'total' | 'team-total' | 'ht-total' | 'sh-total' | 'both-4plus' | 'score'
   | 'player-goals' | 'player-assist' | 'top-scorer' | 'motm' | 'first-team' | 'first-scorer' | 'penalty' | 'header-goal' | 'corners';
@@ -67,7 +69,7 @@ export function wins(family: Family, params: Readonly<Record<string, unknown>>, 
     case 'player-goals': return yes(goalsOf(f, String(params.player)) >= Number(params.k));
     case 'player-assist': return yes((f.players.find(p => p.id === params.player)?.assists ?? 0) >= 1);
     case 'top-scorer': return topScorers(f).includes(code);
-    case 'motm': { const m = manOfTheMatch(f);return code === m || (code === 'other' && !!m && !(params.listed as string[]).includes(m)); }
+    case 'motm': { const m = f.motm !== undefined ? f.motm : manOfTheMatch(f);return code === m || (code === 'other' && !!m && !(params.listed as string[]).includes(m)); }
     case 'first-team': return code === (f.goals[0] ? (f.goals[0].team ? 'red' : 'blue') : 'none');
     case 'first-scorer': { const g = f.goals[0];if (!g) return code === 'none';const p = g.player;return p && (params.listed as string[]).includes(p) ? code === p : code === 'other'; }
     case 'penalty': return yes(f.penalties > 0);
@@ -76,10 +78,10 @@ export function wins(family: Family, params: Readonly<Record<string, unknown>>, 
 }
 
 /** Odds steps, always rounded down (so a fair book never adds up to a sure win): 0,05 to 2, 0,1 to 5, 0,25 to 10, 0,5 to 20, 1 to 50, then 5. */
-export function floorOdds(o: number) {
-  if (!Number.isFinite(o)) return ODDS.max;
+export function floorOdds(o: number, max: number = ODDS.max) {
+  if (!Number.isFinite(o)) return max;
   const step = o < 2 ? .05 : o < 5 ? .1 : o < 10 ? .25 : o < 20 ? .5 : o < 50 ? 1 : 5;
-  return Math.min(ODDS.max, Math.max(ODDS.min, Math.round(Math.floor(o / step + 1e-9) * step * 100) / 100));
+  return Math.min(max, Math.max(ODDS.min, Math.round(Math.floor(o / step + 1e-9) * step * 100) / 100));
 }
 export const fairOdds = (p: number) => floorOdds(1 / Math.max(p, 1e-9));
 const outcome = (code: string, label: string, prob: number): Outcome => { const odds = fairOdds(prob);return { code, label, prob, odds, playable: odds >= ODDS.playableFrom }; };
@@ -206,9 +208,13 @@ export function bookWarnings(book: Book): string[] {
  * player's "1+ evet" with his "2+ hayır", "iki takım 4+" with both teams' 3,5 alt. Scores are searched exactly (to 8 goals a team in a half,
  * 16 in a match); everything else is set against the bettor wherever the score allows it. */
 export interface Position { readonly family: Family; readonly params: Readonly<Record<string, unknown>>; readonly code: string }
+/** A coupon among one's bets: it wins only when every pick does. */
+export interface CouponPosition { readonly legs: readonly Position[] }
+const isCoupon = (b: Position | CouponPosition): b is CouponPosition => 'legs' in b;
 const SCORE_FAMILIES = new Set<Family>(['ft', 'ht', 'sh', 'htft', 'margin', 'half-more', 'total', 'team-total', 'ht-total', 'sh-total', 'both-4plus', 'score']);
 const HALF_FAMILIES = new Set<Family>(['ht', 'sh', 'htft', 'half-more', 'ht-total', 'sh-total']);
-export function covers(bets: readonly Position[], teamOf: (player: string) => 0 | 1 | undefined): boolean {
+export function covers(all: readonly (Position | CouponPosition)[], teamOf: (player: string) => 0 | 1 | undefined): boolean {
+  const bets = all.filter((b): b is Position => !isCoupon(b)), coupons = all.filter(isCoupon);
   const byScore = bets.filter(b => SCORE_FAMILIES.has(b.family)), rest = bets.filter(b => !SCORE_FAMILIES.has(b.family) && b.family !== 'player-goals');
   // A player's goal bets all lose with g goals when every "evet" needs more and every "hayır" fewer: g < min k(evet), g ≥ max k(hayır).
   const ladders = new Map<string, { yes: number; no: number }>();
@@ -223,15 +229,69 @@ export function covers(bets: readonly Position[], teamOf: (player: string) => 0 
       default: return false;
     }
   };
-  const [H, S] = bets.some(b => HALF_FAMILIES.has(b.family)) ? [8, 8] : [0, 16];
+  // A coupon must win only if each of its picks must (a player's goals are left free, so a coupon with one never must).
+  const mustWin = (l: Position, a: number, c: number, f: MatchFacts) => SCORE_FAMILIES.has(l.family) ? wins(l.family, l.params, l.code, f) : l.family !== 'player-goals' && forced(l, a, c);
+  const [H, S] = [...bets, ...coupons.flatMap(x => x.legs)].some(b => HALF_FAMILIES.has(b.family)) ? [8, 8] : [0, 16];
   for (let ha = 0; ha <= H; ha++) for (let hb = 0; hb <= H; hb++) for (let sa = 0; sa <= S; sa++) for (let sb = 0; sb <= S; sb++) {
     const a = ha + sa, c = hb + sb, f: MatchFacts = { ht: [ha, hb], ft: [a, c], goals: [], corners: 0, penalties: 0, headerGoals: 0, players: [] };
-    if (byScore.some(b => wins(b.family, b.params, b.code, f)) || rest.some(b => forced(b, a, c))) continue;
+    if (byScore.some(b => wins(b.family, b.params, b.code, f)) || rest.some(b => forced(b, a, c)) || coupons.some(x => x.legs.every(l => mustWin(l, a, c, f)))) continue;
     let lost = true;
     for (const [p, l] of ladders) { const team = teamOf(p), max = team === 1 ? c : team === 0 ? a : a + c;if (l.no > Math.min(max, l.yes - 1)) { lost = false;break; } }
     if (lost) return false;
   }
   return true;
+}
+
+/** Coupons (user, 2026-11-05: "seçilen hepsi birlikte olup oranlar çarpılmalı"): several picks of one match in one bet, paid only if all
+ * of them win, at the picks' odds multiplied. Picks of one match are seldom independent (Mavi kazanır and Mavi 3+ farkla, 7,5 üst and 9,5
+ * üst, a striker's goal and his team's win), and a plain product would pay far more than they are worth together; so the simulated
+ * matches the odds were made from are kept, and the product is divided by how much more often the picks came together in them than
+ * chance would have it. Picks that cannot happen together are refused. */
+export const COUPON = { maxLegs: 10, maxOdds: 500 } as const;
+/** A stored simulation: half-time and final score, corners, penalties, header goals, the man of the match, the goals in order (time,
+ * team, scorer), and who scored or assisted (id, team, goals, assists). About 300 bytes a match. */
+export type Sample = [number, number, number, number, number, number, number, string | null, [number, 0 | 1, string | null][], [string, 0 | 1, number, number][]];
+export const packSample = (f: MatchFacts): Sample => [f.ht[0], f.ht[1], f.ft[0], f.ft[1], f.corners, f.penalties, f.headerGoals, manOfTheMatch(f),
+  f.goals.map(g => [Math.round(g.t), g.team, g.player]), f.players.filter(p => p.goals || p.assists).map(p => [p.id, p.team, p.goals, p.assists])];
+export const unpackSample = (s: Sample): MatchFacts => ({ ht: [s[0], s[1]], ft: [s[2], s[3]], corners: s[4], penalties: s[5], headerGoals: s[6], motm: s[7],
+  goals: s[8].map(([t, team, player]) => ({ t, team, player })),
+  players: s[9].map(([id, team, goals, assists]) => ({ id, team, goals, assists, shots: 0, onTarget: 0, tackles: 0, interceptions: 0, saves: 0, completed: 0, headersWon: 0 })) });
+/** Can every pick win in the same match? Scores searched as in `covers`; the rest only needs the score to allow it (a first scorer
+ * needs a goal, "gol olmaz" none, a player's k+ goals his team's k goals, his 1+ and 2+ "hayır" cannot both win and so on). */
+export function couponPossible(legs: readonly Position[], teamOf: (player: string) => 0 | 1 | undefined): boolean {
+  const byScore = legs.filter(l => SCORE_FAMILIES.has(l.family)), rest = legs.filter(l => !SCORE_FAMILIES.has(l.family) && l.family !== 'player-goals');
+  const ladders = new Map<string, { atLeast: number; below: number }>();
+  for (const l of legs) if (l.family === 'player-goals') { const p = String(l.params.player), x = ladders.get(p) ?? { atLeast: 0, below: Infinity }, k = Number(l.params.k);if (l.code === 'yes') x.atLeast = Math.max(x.atLeast, k);else x.below = Math.min(x.below, k);ladders.set(p, x); }
+  const goalsOf = (p: string, a: number, c: number) => { const t = teamOf(p);return t === 1 ? c : t === 0 ? a : a + c; };
+  const canWin = (l: Position, a: number, c: number) => {
+    const goals = a + c;
+    switch (l.family) {
+      case 'first-team': return l.code === 'none' ? goals === 0 : l.code === 'blue' ? a > 0 : c > 0;
+      case 'first-scorer': return l.code === 'none' ? goals === 0 : l.code === 'other' ? goals > 0 : goalsOf(l.code, a, c) > 0;
+      case 'header-goal': return l.code === 'no' || goals > 0;
+      case 'top-scorer': return goalsOf(l.code, a, c) > 0;
+      case 'player-assist': return l.code === 'no' || goalsOf(String(l.params.player), a, c) > 0;
+      default: return true;
+    }
+  };
+  const [H, S] = legs.some(l => HALF_FAMILIES.has(l.family)) ? [8, 8] : [0, 16];
+  for (let ha = 0; ha <= H; ha++) for (let hb = 0; hb <= H; hb++) for (let sa = 0; sa <= S; sa++) for (let sb = 0; sb <= S; sb++) {
+    const a = ha + sa, c = hb + sb, f: MatchFacts = { ht: [ha, hb], ft: [a, c], goals: [], corners: 0, penalties: 0, headerGoals: 0, players: [] };
+    if (!byScore.every(l => wins(l.family, l.params, l.code, f)) || !rest.every(l => canWin(l, a, c))) continue;
+    if ([...ladders].every(([p, x]) => x.atLeast < x.below && x.atLeast <= goalsOf(p, a, c))) return true;
+  }
+  return false;
+}
+/** A coupon's odds from its picks' odds of the moment and the stored simulations (none kept: no coupon). `factor` is how much more often
+ * the picks came together than chance would have it (shrunk towards 1 by two matches either way); under 1,1 it is the noise of a few
+ * hundred matches and the plain product stands, above that the product is divided by it. */
+export function couponQuote(legs: readonly (Position & { readonly odds: number })[], samples: readonly MatchFacts[]) {
+  const product = legs.reduce((x, l) => x * l.odds, 1), N = samples.length;
+  if (legs.length < 2) return { odds: floorOdds(product, COUPON.maxOdds), product, factor: 1 };
+  let joint = 0;const each = legs.map(() => 0);
+  for (const f of samples) { let all = true;legs.forEach((l, i) => { if (wins(l.family, l.params, l.code, f)) each[i]!++;else all = false; });if (all) joint++; }
+  const expected = N * each.reduce((x, c) => x * (c + .5) / (N + 1), 1), raw = (joint + 2) / (expected + 2), factor = raw < 1.1 ? 1 : raw;
+  return { odds: floorOdds(product / factor, COUPON.maxOdds), product, factor };
 }
 
 /** Facts of a played match from its two halves (simulation output): the planner's result and each Monte Carlo run. */
@@ -250,8 +310,10 @@ export function factsOf(first: HalfLike, second: HalfLike): MatchFacts {
       interceptions: p.stats.interceptions, saves: p.stats.saves, completed: p.stats.completed, headersWon: p.stats.headersWon })) };
 }
 /** A bet's payout and each user's loss bonus for a settled match. */
-export function settle(bets: readonly { readonly id: string; readonly user: number; readonly family: Family; readonly params: Readonly<Record<string, unknown>>; readonly code: string; readonly stake: number; readonly odds: number }[], f: MatchFacts) {
-  const results = bets.map(b => { const won = wins(b.family, b.params, b.code, f);return { id: b.id, user: b.user, won, payout: won ? Math.floor(b.stake * b.odds) : 0, stake: b.stake }; });
+export type SettleBet = { readonly id: string; readonly user: number; readonly stake: number; readonly odds: number } & (Position | CouponPosition);
+export function settle(bets: readonly SettleBet[], f: MatchFacts) {
+  const results = bets.map(b => { const won = isCoupon(b) ? b.legs.every(l => wins(l.family, l.params, l.code, f)) : wins(b.family, b.params, b.code, f);
+    return { id: b.id, user: b.user, won, payout: won ? Math.floor(b.stake * b.odds) : 0, stake: b.stake }; });
   const net = new Map<number, number>();for (const r of results) net.set(r.user, (net.get(r.user) ?? 0) + r.payout - r.stake);
-  return { results, bonuses: [...net].filter(([, n]) => n < 0).map(([user, n]) => ({ user, amount: Math.floor(-n * DINAR.lossBonus) })) };
+  return { results, bonuses: [...net].filter(([, n]) => n < 0).map(([user, n]) => ({ user, amount: Math.floor(-n * COIN.lossBonus) })) };
 }

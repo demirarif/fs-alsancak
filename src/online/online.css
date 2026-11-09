@@ -17,7 +17,7 @@
 /* Both pages scroll inside the fixed-height app frame (#app is 100dvh with overflow hidden), as the tactics room does. */
 #app #today-screen,#app #admin-screen{position:relative;flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--als-bg,#171f2b);font-family:var(--als-font,'Manrope',sans-serif);color:var(--als-text,#edf1f7)}
 #today-screen{padding:20px 16px 48px}
-.tm{max-width:880px;margin:0 auto;display:grid;gap:18px}
+.tm{max-width:880px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
 .tm-card{padding:20px 20px 18px;border:1px solid var(--als-line,#ffffff12);border-radius:10px;background:var(--als-panel,#222d3d);box-shadow:var(--als-shadow,0 7px 18px #070d182b)}
 .tm-next.is-live{border-color:#e598a880}
 .tm-eyebrow{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--als-gold,#e7c181)}
@@ -33,12 +33,22 @@
 .tm-error{color:#f0a7a7}
 .tm-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:4px 0 14px}
 .tm-status{font-size:13px;color:var(--als-muted,#9caec4)}
-.tm-teams{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.tm-team{padding:12px;border-radius:8px;background:var(--als-raised,#293546);border-top:3px solid #8cb4ed}
+/* Kadrolar, before the bulletin: the two teams side by side (on a phone too), each player with a place code coloured by line. */
+.tm-lineups{margin:14px 0 16px;padding-top:12px;border-top:1px solid var(--als-line,#ffffff12);scroll-margin-top:130px}
+.tm-lineups-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}.tm-lineups-head h2{margin:0;font-size:16px}
+.tm-lineups-head span{font-size:12px;font-weight:700;color:var(--als-gold,#e7c181)}
+.tm-teams{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.tm-team{min-width:0;padding:12px;border-radius:8px;background:var(--als-raised,#293546);border-top:3px solid #8cb4ed}
 .tm-team.red{border-top-color:#e598a8}
-.tm-team h3{display:flex;justify-content:space-between;gap:8px}.tm-team h3 small{color:var(--als-muted,#9caec4);font-weight:600}
-.tm-team ul{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-size:13px}
-.tm-team li span{display:inline-block;min-width:118px;color:var(--als-muted,#9caec4);font-size:11px}
+.tm-team h3{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 8px;font-size:14px}.tm-team h3 span{min-width:0;overflow-wrap:anywhere}
+.tm-team h3 small{flex:none;color:var(--als-muted,#9caec4);font-size:12px;font-weight:700}
+.tm-team ul{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-size:13px}
+.tm-team li{display:grid;grid-template-columns:38px minmax(0,1fr) auto;align-items:center;gap:8px;min-height:22px}
+.tm-team .tm-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}
+.tm-team li small{color:var(--als-muted,#9caec4);font-size:11px;white-space:nowrap}
+.tm-slot{display:grid;place-items:center;height:20px;border-radius:5px;background:#c9d4e3;color:#171f2b;font-size:10px;font-weight:800;letter-spacing:.3px;text-decoration:none;cursor:help}
+.tm-slot.gk{background:#e7c181}.tm-slot.def{background:#8cb4ed}.tm-slot.mid{background:#d5ee90}.tm-slot.fw{background:#f0b3bf}
+.tm-legend{margin:8px 0 0;font-size:11px;line-height:1.5;color:var(--als-muted,#9caec4)}.tm-legend b{color:#c9d4e3}
 .tm-section{padding:0 4px}
 .tm-later,.tm-recent{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .tm-later li{display:flex;flex-wrap:wrap;gap:4px 12px;padding:10px 12px;border-radius:8px;background:var(--als-panel,#222d3d);font-size:13px}.tm-later span{color:var(--als-muted,#9caec4)}
@@ -134,7 +144,7 @@
   .adm-nav-items small{display:none}
   .adm-main{padding:18px 20px 48px;border-left:0}
 }
-/* Dinar: wallet, requests, the bulletin with its tabs and odds buttons, the bet slip, one's bets and everybody's after the match. */
+/* Alsancak coin: wallet, requests, the bulletin with its tabs and odds buttons, the bet slip, one's bets and everybody's after the match. */
 .tm-wallet-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px}
 .tm-balance{display:block;margin-top:4px;font-size:26px;font-weight:800;color:var(--als-gold,#e7c181);font-variant-numeric:tabular-nums}.tm-balance small{font-size:13px;color:var(--als-muted,#9caec4);font-weight:700}
 .tm-ghost{font:inherit;font-weight:700;font-size:13px;padding:9px 13px;border:1px solid #ffffff26;border-radius:8px;background:transparent;color:var(--als-text,#edf1f7);cursor:pointer}
@@ -143,7 +153,6 @@
 .tm-ask label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--als-muted,#9caec4)}
 .tm-ask select,.tm-ask input,.tm-slip input,.tm-other-score input{font:inherit;font-size:16px;font-weight:700;padding:9px 10px;border:1px solid #ffffff24;border-radius:8px;background:#111a26;color:var(--als-text,#edf1f7)}
 .tm-request{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding:10px 12px;border-radius:8px;background:#e7c18112;border:1px solid #e7c18133;font-size:13px}
-.tm-squads{margin:4px 0 14px}.tm-squads summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--als-muted,#9caec4)}.tm-squads .tm-teams{margin-top:10px}
 .tm-bulletin{display:grid;gap:12px;padding-top:12px;border-top:1px solid var(--als-line,#ffffff12)}
 .tm-tabs,.adm-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .tm-tabs button,.adm-tabs button{flex:none;font:inherit;font-size:12px;font-weight:700;padding:7px 12px;border:1px solid #ffffff1a;border-radius:999px;background:#111a2699;color:#aab9cd;cursor:pointer}
@@ -165,11 +174,70 @@
 .tm-slip .tm-actions{margin:0}
 .tm-mybets,.tm-everyone{margin-top:14px}.tm-mybets h3{margin:0 0 6px}
 .tm-mybets ul,.tm-person ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-.tm-mybets li,.tm-person li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:7px 10px;border-radius:6px;background:#111a2680;font-size:12px}
+.tm-person li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:7px 10px;border-radius:6px;background:#111a2680;font-size:12px}
 .tm-mybets li span:first-child,.tm-person li span:first-child{min-width:0;overflow-wrap:break-word}
 .tm-person{margin-top:8px}.tm-person h4{display:flex;justify-content:space-between;margin:0 0 4px;font-size:13px}.tm-person .up{color:#d5ee90}.tm-person .down{color:#e598a8}
 .tm-person li.won b{color:#d5ee90}.tm-person li.lost b{color:#e598a8}
+/* The coupon slip: its picks (each can be taken out), the coupon's odds, then the stake. */
+.tm-slip-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}.tm-slip-head>b{font-size:15px}.tm-slip-head .tm-link{margin-left:auto}
+.tm-link{padding:0;border:0;background:none;color:var(--als-gold,#e7c181);font:inherit;font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.tm-slip-legs{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.tm-slip-legs li{display:grid;grid-template-columns:minmax(0,1fr) auto 32px;align-items:center;gap:8px;padding:4px 4px 4px 10px;border-radius:7px;background:#111a26;font-size:13px;font-weight:700}
+.tm-slip-legs li span{min-width:0;overflow-wrap:break-word}.tm-slip-legs li b{color:var(--als-gold,#e7c181);font-variant-numeric:tabular-nums}
+.tm-slip-legs button{width:32px;height:32px;padding:0;border:0;border-radius:6px;background:transparent;color:var(--als-muted,#9caec4);font:inherit;font-size:19px;line-height:1;cursor:pointer}
+.tm-slip-legs button:hover{background:#e598a826;color:#f0b3bf}
+.tm-slip-total{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding-top:8px;border-top:1px dashed #e7c18140;font-size:13px;font-weight:700;color:var(--als-muted,#9caec4)}
+.tm-slip-total b{font-size:20px;color:var(--als-gold,#e7c181);font-variant-numeric:tabular-nums}
+.tm-slip .tm-hint{margin:0}.tm-slip .tm-hint.tm-error{color:#f0b3bf}
 .tm-points.down{background:#e598a826;color:#f0b3bf}
+/* The players' page: four tabs and the balance, staying at the top while a tab scrolls. */
+.tm-nav{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;padding:8px 0 10px;background:var(--als-bg,#171f2b)}
+.tm-tabs-main{display:flex;flex:1;gap:3px;min-width:0;padding:3px;border:1px solid var(--als-line,#ffffff12);border-radius:10px;background:#111a26}
+.tm-tabs-main button{flex:1 1 0;min-width:0;padding:8px 6px;border:0;border-radius:7px;background:none;color:#aab9cd;font:inherit;font-size:13px;font-weight:800;white-space:nowrap;cursor:pointer}
+.tm-tabs-main button:hover{color:var(--als-text,#edf1f7)}.tm-tabs-main button[aria-selected=true]{background:var(--als-gold,#e7c181);color:#171f2b}
+.tm-tabs-main button:focus-visible{outline:2px solid #e7c18199;outline-offset:1px}
+.tm-purse{display:grid;justify-items:end;flex:none;line-height:1.15}.tm-purse b{font-size:16px;color:var(--als-gold,#e7c181);font-variant-numeric:tabular-nums}.tm-purse small{font-size:10px;font-weight:700;color:var(--als-muted,#9caec4)}
+/* The admin's preview of the players' page. */
+.tm-admin-note{display:grid;gap:10px;border:1px solid #e7c18166;background:#e7c18112}.tm-admin-note p{margin:0;font-size:14px;line-height:1.5}.tm-admin-note .tm-button{justify-self:start}
+.tm-purse.is-admin b{color:#c9d4e3}
+.tm-more{justify-self:start;margin-top:8px;padding:0;border:0;background:none;color:var(--als-gold,#e7c181);font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+/* Kuponlarım: totals, a filter, every match's coupon. */
+.tm-coupons h2{margin:0}
+.tm-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
+.tm-stat{padding:9px 11px;border-radius:8px;background:var(--als-raised,#293546)}.tm-stat span{display:block;font-size:11px;font-weight:700;color:var(--als-muted,#9caec4)}
+.tm-stat b{font-size:17px;font-variant-numeric:tabular-nums}.tm-stat.up b{color:#d5ee90}.tm-stat.down b{color:#f0b3bf}
+.tm-coupon{margin-top:10px;padding:10px 12px;border:1px solid var(--als-line,#ffffff12);border-radius:10px;background:#111a2666}
+.tm-coupon header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:8px;font-size:13px}.tm-coupon header strong{margin:0 4px;color:var(--als-gold,#e7c181)}
+.tm-coupon ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.tm-coupon li,.tm-mybets li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:7px 10px;border-radius:6px;background:#111a2680;font-size:12px}
+.tm-coupon li span:first-child{min-width:0;overflow-wrap:break-word}
+.tm-coupon li.won b,.tm-mybets li.won b{color:#d5ee90}.tm-coupon li.lost b,.tm-mybets li.lost b{color:#e598a8}.tm-coupon li.void b,.tm-mybets li.void b{color:var(--als-muted,#9caec4)}
+.tm-points.wait{background:#ffffff10;color:#c9d4e3}
+li>ul.tm-legs{grid-column:1/-1;display:grid;gap:1px;margin:0;padding:2px 0 0 10px;border-left:2px solid #e7c18140;list-style:none}
+.tm-mybets .tm-legs li,.tm-coupon .tm-legs li,.tm-person .tm-legs li{display:flex;justify-content:space-between;gap:10px;padding:2px 0;border-radius:0;background:none;font-size:11px;color:#c9d4e3}
+.tm-mybets .tm-legs li b,.tm-coupon .tm-legs li b,.tm-person .tm-legs li b{flex:none;color:var(--als-muted,#9caec4);font-variant-numeric:tabular-nums}
+/* A paid coupon's picks: the ones that came in green, the ones that did not red (a ✓ / ✗ says it without colour too). */
+ul.tm-legs li.won span,ul.tm-legs li.won b{color:#d5ee90}ul.tm-legs li.lost span,ul.tm-legs li.lost b{color:#f0b3bf}
+.tm-bet-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
+.tm-bet-actions button{font:inherit;font-size:12px;font-weight:700;padding:6px 12px;border:1px solid #ffffff26;border-radius:6px;background:transparent;color:var(--als-text,#edf1f7);cursor:pointer}
+.tm-bet-actions button:hover{border-color:#e7c18166;color:var(--als-gold,#e7c181)}.tm-bet-actions button[data-bet-cancel]:hover{border-color:#e598a866;color:#f0b3bf}
+/* Alsancak coin tablosu: place (the first three as medals), the player and their bets, profit against the start, the balance. */
+.tm-board-card h2{margin:0 0 4px}
+.tm-board-head,.tm-board li{display:grid;grid-template-columns:34px minmax(0,1fr) auto minmax(78px,auto);align-items:center;gap:12px}
+.tm-board-head{margin:14px 0 6px;padding:0 12px;color:var(--als-muted,#9caec4);font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase}
+.tm-board-head span:nth-child(n+3){text-align:right}
+.tm-board{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tm-board li{padding:10px 12px;border:1px solid var(--als-line,#ffffff12);border-radius:10px;background:var(--als-raised,#293546)}
+.tm-board li.is-me{border-color:#e7c18199;background:#e7c18114}
+.tm-pos{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#ffffff0d;color:#c9d4e3;font-size:13px;font-weight:800}
+.tm-board li.is-top1 .tm-pos{background:linear-gradient(#f2d48f,#cfa75e);color:#2a2112}
+.tm-board li.is-top2 .tm-pos{background:linear-gradient(#e4e9f0,#a9b4c3);color:#1d2430}
+.tm-board li.is-top3 .tm-pos{background:linear-gradient(#e8b98d,#b47a4d);color:#2a1a10}
+.tm-who{display:grid;min-width:0}.tm-who b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14px}
+.tm-who b em{margin-left:6px;padding:1px 6px;border-radius:999px;background:#e7c18126;color:var(--als-gold,#e7c181);font-size:10px;font-style:normal;vertical-align:1px}
+.tm-who small{color:var(--als-muted,#9caec4);font-size:11px}
+.tm-diff{color:var(--als-muted,#9caec4);font-size:12px;font-weight:800;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}.tm-diff.up{color:#d5ee90}.tm-diff.down{color:#f0b3bf}
+.tm-board strong{color:var(--als-gold,#e7c181);font-size:16px;font-weight:800;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 /* Bahisler: the odds editor. */
 .adm-odds{gap:14px}
 .adm-odds-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 16px}
@@ -236,14 +304,33 @@
 /* Oyuncular, Gözlemciler. */
 .adm-people-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
 .adm-observers .adm-users{grid-template-columns:minmax(0,1fr)}.adm-observers .adm-users li{grid-template-columns:minmax(0,1fr) auto auto}
-.adm-observers .adm-users .adm-chip{grid-column:1}.adm-observers .adm-listed{grid-column:2;grid-row:1/span 2}.adm-observers .adm-users .adm-button{grid-column:3;grid-row:1/span 2}
+.adm-observers .adm-users .adm-chip{grid-column:1}.adm-observers .adm-listed{grid-column:2;grid-row:1/span 2}.adm-observers .adm-users li>.adm-user-actions{grid-column:3;grid-row:1/span 2}
+/* A user's balance (the admin sets it) and deleting a finished match. */
+/* The card's buttons, one under the other (the card's other divs are grids: this one must say flex louder). */
+.adm-users li>.adm-user-actions{grid-column:2;grid-row:1/span 2;display:flex;flex-direction:column;align-items:stretch;gap:4px}
+.adm-users .adm-user-actions .adm-button{grid-column:auto;grid-row:auto;min-height:28px;padding:4px 10px;font-size:12px}
+/* A balance: what it is now, then set it or add to it, each a field that takes the room and its button. */
+.adm-balance{grid-column:1/-1;display:grid;gap:8px;margin-top:6px;padding-top:8px;border-top:1px solid #ffffff12}
+.adm-balance label{display:grid;gap:4px;font-size:11px;font-weight:700;color:var(--als-muted,#9caec4)}
+.adm-balance input{width:150px;font:inherit;font-size:15px;font-weight:700;padding:7px 9px;border:1px solid #ffffff24;border-radius:8px;background:#111a26;color:var(--als-text,#edf1f7)}
+.adm-balance .adm-button{min-height:36px}.adm-balance .adm-hint{margin:0}.adm-balance .adm-hint b{color:var(--als-text,#edf1f7)}
+.adm-balance form{display:flex;align-items:flex-end;gap:8px}.adm-balance form label{flex:1;min-width:0}.adm-balance form input{width:100%;box-sizing:border-box}
+.adm-balance form .adm-button{flex:none;width:124px}.adm-balance-close{justify-self:start}
+.adm-users .adm-balance .adm-button{grid-column:auto;grid-row:auto}
+.adm-everyone h2{margin:0 0 10px}.adm-everyone .adm-hint{margin:8px 0 0}.adm-everyone input{width:150px}
+.adm-move{margin-top:10px;padding-top:10px;border-top:1px solid #ffffff12}.adm-move .adm-hint{flex-basis:100%;margin:0}
+.adm-move input{font-size:14px}
+.adm-row-links{display:flex;flex-wrap:wrap;gap:6px 16px}
+.adm-confirm{display:grid;gap:8px;padding:10px 12px;border:1px solid #e598a866;border-radius:8px;background:#e598a814}.adm-confirm p{margin:0;font-size:13px}
 @media(max-width:720px){
   #today-screen{padding:14px 16px 40px}
   .tm-card{padding:16px 14px}
   .tm h1{font-size:20px}
-  .tm-teams{grid-template-columns:1fr}
-  .tm-team li span{min-width:104px}
-  .tm-board li{grid-template-columns:24px 1fr auto 44px;padding:8px 10px}
+  .tm-teams{gap:8px}.tm-team{padding:10px 8px}.tm-team h3{flex-direction:column;align-items:flex-start;gap:1px;font-size:13px}.tm-team h3 small{font-size:11px}
+  .tm-team ul{font-size:12px}.tm-team li{grid-template-columns:32px minmax(0,1fr);gap:6px}.tm-team li small{display:none}
+  .tm-board-head,.tm-board li{grid-template-columns:30px minmax(0,1fr) auto auto;gap:8px}
+  .tm-board li{padding:9px 10px}.tm-board strong{font-size:15px}
+  .tm-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   #app .topbar .account-menu{margin-left:10px;padding-left:10px}
   .account-name{display:none}
   .tm-balance{font-size:22px}
@@ -258,7 +345,7 @@
   .adm-pb-pick label{flex:1 1 100%}.adm-pb-pick select{min-width:0;width:100%}
   .adm-pb-grid thead th:not(:first-child){width:40px}.adm-pb-grid th{padding:4px 3px}.adm-pb-cell{min-height:26px;font-size:11px}
   .adm-pb-grid tbody th{white-space:normal;line-height:1.25}
-  .adm-observers .adm-users li{grid-template-columns:minmax(0,1fr) auto}.adm-observers .adm-listed{grid-column:2;grid-row:1}.adm-observers .adm-users .adm-button{grid-column:2;grid-row:2}
+  .adm-observers .adm-users li{grid-template-columns:minmax(0,1fr) auto}.adm-observers .adm-listed{grid-column:2;grid-row:1}.adm-observers .adm-users li>.adm-user-actions{grid-column:2;grid-row:2}
   /* The odds table fits a phone: no suggestion column, the switch without its word, labels and stakes wrap. */
   .adm-market{padding:10px 8px}
   .adm-table th:nth-child(3),.adm-table td:nth-child(3),.adm-table .adm-switch em{display:none}
@@ -267,5 +354,12 @@
   .adm-table th{white-space:nowrap}.adm-table th[data-short]{font-size:0}.adm-table th[data-short]::after{content:attr(data-short);font-size:12px}
   .adm-table input[type=number]{width:64px;padding:5px 5px}
 }
+@media(max-width:520px){.tm-coupons .tm-tabs button{padding:6px 9px;font-size:11px}.tm-nav{flex-wrap:wrap;row-gap:6px}.tm-purse{order:-1;display:flex;justify-content:flex-end;align-items:baseline;gap:6px;width:100%}.tm-tabs-main button{padding:7px 2px;font-size:12px}}
 /* The smallest phones (after the 720 px rules, which it narrows further). */
 @media(max-width:400px){.adm-nav-items{gap:2px}.adm-nav-items button{padding:7px 1px;font-size:10px}.adm-pb-grid thead th:not(:first-child){width:34px}.adm-pb-cell{font-size:10px}}
+/* The 9:16 summary over the page (user, 2026-11-06: "özeti izle olsun, ordan izleyip indirebilsin"): the video as tall as the screen
+   allows, the download and close buttons under it. */
+.tm-reel-view{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:#070b12e6;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.tm-reel-card{display:grid;justify-items:center;gap:12px;max-width:100%}
+.tm-reel-card video{display:block;width:min(calc(100vw - 32px),calc((100vh - 110px) * .5625),428px);width:min(calc(100vw - 32px),calc((100dvh - 110px) * .5625),428px);height:auto;aspect-ratio:9/16;border-radius:10px;background:#000;box-shadow:0 18px 50px #0009}
+.tm-reel-actions{display:flex;gap:10px}

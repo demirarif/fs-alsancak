@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildMatch,playMatch,SAMPLE_ROSTERS} from '../scripts/simulate-match.mjs';
 import {planReel,reelCameraPath,reelReplayPath,REEL} from '../src/match/reel-plan.js';
-import {halfHighlights,attackDir,teamIndex} from '../src/match/highlight-edit.js';
+import {halfHighlights,attackDir,teamIndex,EDIT,stoppages,playedPieces} from '../src/match/highlight-edit.js';
 import {ballAt} from '../src/match/replay-sampling.js';
 import {createMp4Muxer} from '../src/match/mp4-muxer.js';
 import {walkoutState,walkoutPose} from '../src/match/walkout.js';
@@ -26,6 +26,24 @@ test('moments start from the stoppage that put the ball back in play when it is 
     if(s.start<=restart.seconds-1+.05)anchored++;
   }
   assert.ok(total>10&&anchored/total>.9,`${anchored}/${total}`);
+});
+test('v2 edit (user, 2026-11-06): a moment from a throw-in, goal kick, free kick or corner shows how the ball went dead; short waits run on',()=>{
+  let fromRestart=0,early=0,short=0,segs=0,throwIns=0,throwInsCut=0;
+  for(const m of matches)for(const r of m.halves){
+    const stops=stoppages(r),{segments}=halfHighlights(r,300);
+    segments.forEach((s,i)=>{
+      segs++;if(s.end-s.start<EDIT.minLength-1e-6)short++;
+      if(i)assert.ok(s.start-segments[i-1].end>EDIT.mergeGap,'moments closer than 8 s play as one stretch');
+      const restart=r.events.filter(e=>RESTARTS.has(e.kind)&&e.seconds<s.key-.5&&e.seconds>=s.key-EDIT.lookback).pop();
+      if(restart&&restart.kind!=='kick-off'){fromRestart++;const dead=stops.find(x=>x[0]<=restart.seconds+.6&&x[1]>=restart.seconds-.6);if(s.start<=(dead?dead[0]:restart.seconds)-EDIT.deadLead+1e-6)early++;}
+      const played=playedPieces(s.start,s.end,stops);
+      for(const e of r.events.filter(e=>e.kind==='throw-in'&&e.seconds>s.start&&e.seconds<s.end)){const stop=stops.find(x=>x[0]<=e.seconds+.6&&x[1]>=e.seconds-.6);
+        if(!stop||stop[1]-stop[0]>EDIT.cutOver)continue;throwIns++;if(!played.some(p=>p.t0<=stop[0]+1e-6&&p.t1>=stop[1]-1e-6))throwInsCut++;}
+    });
+  }
+  assert.ok(fromRestart>10&&early/fromRestart>.85,`${early}/${fromRestart} start ${EDIT.deadLead} s before the ball went dead`);
+  assert.ok(short<=matches.length*2,`${short}/${segs} segments under ${EDIT.minLength} s (the kick-off and half ends only)`);
+  assert.ok(throwIns>5&&throwInsCut===0,`${throwInsCut}/${throwIns} short throw-in waits cut`);
 });
 test('the reel is the goals: each from the final third, every goal kept, replays after their goal, within a minute',()=>{
   for(const m of matches){

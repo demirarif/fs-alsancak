@@ -1,4 +1,4 @@
-import { buildBook } from '../v1/online/markets.ts';
+import { buildBook, packSample } from '../v1/online/markets.ts';
 
 /* Prices a planned match in the admin's browser: the same lineups played `count` times with fresh seeds over several workers (one per
  * spare core, at most 8), then the suggested book. A desktop does 160 runs in a minute or two; a phone takes longer. */
@@ -19,8 +19,9 @@ export function simulateMany(snapshot,count,onProgress=()=>{}){
     if(finished===workers)resolve(facts);
   });
 }
-/** The suggested book for a match from its snapshot and public teams. */
+/** The suggested book for a match from its snapshot and public teams, and the simulated matches it came from (packed; kept on the server
+ * for pricing coupons). */
 export async function suggestBook({snapshot,teams,count=160,onProgress}){
   const sims=await simulateMany(snapshot,count,onProgress);
-  return buildBook(sims,[{name:teams.names[0],players:teams.teams[0].players},{name:teams.names[1],players:teams.teams[1].players}]);
+  return {book:buildBook(sims,[{name:teams.names[0],players:teams.teams[0].players},{name:teams.names[1],players:teams.teams[1].players}]),samples:sims.map(packSample)};
 }

@@ -1,7 +1,7 @@
 import { FORMATIONS } from '../v1/config/formations.ts';
 import { factsOf, manOfTheMatch, topScorers } from '../v1/online/markets.ts';
-import { broadcastPlan } from '../match/broadcast-plan.js';
-import { trimForReel } from '../match/reel-trim.js';
+import { broadcastEdit } from '../match/broadcast-plan.js';
+import { trimForLive, trimForReel } from '../match/reel-trim.js';
 
 /* A planned match as the admin's browser uploads it (pure: no network, no worker, so tests run it in Node). The recording holds the
  * seed and every frame and is served only from the kick-off; `teams` is all anyone sees before; `result` (with the facts every bet is
@@ -19,9 +19,11 @@ export function matchResult(snapshot,halfResults){
   const motm=manOfTheMatch(facts);
   return {score:[...facts.ft],halfTime:[...facts.ht],goals,topScorers:topScorers(facts),motm:motm?{id:motm,name:names.get(motm)??motm}:null,facts};
 }
-/** halfResults: the two HalfResult objects of the simulation. */
+/** halfResults: the two HalfResult objects of the simulation. The recording carries its edit (the broadcast plan, the highlight segments,
+ * the dead-ball stretches); `live` is the trimmed copy everybody watches the broadcast from, `reel` the one the 9:16 summary is made from. */
 export function buildMatchRecord({snapshot,lineups,teamNames,halfResults}){
-  const halves=halfResults.map(r=>r.replay),results=halfResults.map(r=>({score:[...r.score],teamStats:r.teamStats}));
-  const recording={format:1,snapshot,lineups:[lineups[0],lineups[1]],halves,results,teamNames:[...teamNames]};
-  return {recording,reel:{...recording,halves:trimForReel(halves)},plan:broadcastPlan(halves),teams:publicTeams(snapshot,lineups[1],teamNames),result:matchResult(snapshot,halfResults)};
+  const halves=halfResults.map(r=>r.replay),results=halfResults.map(r=>({score:[...r.score],teamStats:r.teamStats})),edit=broadcastEdit(halves);
+  const recording={format:1,snapshot,lineups:[lineups[0],lineups[1]],halves,results,teamNames:[...teamNames],edit};
+  return {recording,live:{...recording,halves:trimForLive(halves,edit),trimmed:true},reel:{...recording,halves:trimForReel(halves)},plan:edit.plan,
+    teams:publicTeams(snapshot,lineups[1],teamNames),result:matchResult(snapshot,halfResults)};
 }

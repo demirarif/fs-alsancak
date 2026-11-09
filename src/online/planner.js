@@ -25,15 +25,19 @@ export async function planMatch({draft,context,kickoffAt,replaces=null,onStep=()
   onStep('Yükleniyor…');
   const {id}=await api.admin.create({kickoffAt,broadcastMs:Math.round(record.plan.total*1000),teams:record.teams,result:record.result,engineVersion:snapshot.tuning?.version??'',replaces});
   await api.admin.upload(id,'recording',await encodeRecording(record.recording));
+  // The trimmed copy everybody watches the broadcast from (~3 MB instead of ~10).
+  await api.admin.upload(id,'live',await encodeRecording(record.live));
   await api.admin.upload(id,'reel',await encodeRecording(record.reel));
   await api.admin.publish(id);
   // The suggested odds: the same lineups played `sims` more times with other seeds; the admin edits them before opening the bulletin.
-  const book=await suggestBook({snapshot,teams:record.teams,count:sims,onProgress:f=>onStep(`Oranlar hesaplanıyor… %${Math.round(f*100)}`)});
-  await api.admin.saveBook(id,book);
+  const {book,samples}=await suggestBook({snapshot,teams:record.teams,count:sims,onProgress:f=>onStep(`Oranlar hesaplanıyor… %${Math.round(f*100)}`)});
+  await api.admin.saveBook(id,book);await api.admin.uploadSamples(id,samples);
   return {id,broadcastSeconds:record.plan.total,book};
 }
-/** New suggested odds for a planned match (its snapshot comes back from the recording, which the admin may read before kick-off). */
+/** New suggested odds for a planned match (its snapshot comes back from the recording, which the admin may read before kick-off); the
+ * new simulations replace the stored ones at once (coupons are priced on them), the book only once the admin saves it. */
 export async function repriceMatch({id,teams,sims=160,onProgress}){
   const recording=await decodeRecording(await api.recording(id));
-  return suggestBook({snapshot:recording.snapshot,teams,count:sims,onProgress});
+  const {book,samples}=await suggestBook({snapshot:recording.snapshot,teams,count:sims,onProgress});
+  await api.admin.uploadSamples(id,samples);return book;
 }

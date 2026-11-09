@@ -37,7 +37,7 @@ export function inventoryPlayerMarkup(player:Player,catalog:PlayerCatalog):strin
   const stats=player.kind==='goalkeeper'?`<span class="ri-keeper-stat"><span>Kalecilik</span><strong class="${gradeClass(roleOnTwenty(player.goalkeeperRating))}">${roleOnTwenty(player.goalkeeperRating)}<small>/ 20</small></strong></span>`:
     cardKeys[player.mainPosition].map(([key,label])=>{const value=attributeOnTwenty(player.attributes[key]);return `<span class="ri-stat"><span>${label}</span><strong class="${gradeClass(value)}">${value}</strong></span>`;}).join('');
   return `<button class="ri-player" data-player="${html(player.id)}" data-club="${identity.club}" aria-label="${html(player.name)} profilini aç">
-    <span class="ri-card-main"><span class="ri-shirt" data-portrait-player="${html(player.id)}" aria-hidden="true">${identity.portraitUrl?`<img src="${html(identity.portraitUrl)}" alt=""/>`:playerKitMarkup(player)}</span>
+    <span class="ri-card-main"><span class="ri-shirt" data-portrait-player="${html(player.id)}" aria-hidden="true">${identity.portraitUrl?`<img src="${html(identity.portraitUrl)}" alt="" loading="lazy" decoding="async"/>`:playerKitMarkup(player)}</span>
     <span class="ri-card-identity"><strong>${html(player.name)}</strong><span>${CARD_POSITIONS[player.mainPosition]}</span>${roleStars(mainRating(player))}${player.origin.kind==='guest'?'<small>Misafir oyuncu</small>':insight.style!==CARD_POSITIONS[player.mainPosition]?`<small>${html(insight.style)}</small>`:''}</span></span>
     <span class="ri-card-stats">${stats}</span><span class="ri-card-bottom"><span>Profili incele</span>${arrowIcon}</span>
   </button>`;

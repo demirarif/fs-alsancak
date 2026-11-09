@@ -9,12 +9,14 @@ import './online.css';
  *   priced by playing the same lineups again); the planned ones with "Sonucu gör", re-generate, cancel.
  * - Bahisler: the odds editor (the suggestion, near-certain picks closed); any player's goal or assist bet from two drop-downs, priced from
  *   his simulated goals, with a player × bet table to see and pick them; save, open the bulletin; read-only from the kick-off.
- * - Sonuçlar: finished matches, what was staked, paid and given back, the house's balance, everybody's bets.
- * - Oyuncular, Gözlemciler: balances, password resets, observers (on the table only once listed). */
+ * - Sonuçlar: finished matches, what was staked, paid and given back, the house's balance, everybody's bets; deleting a match, keeping or
+ *   taking back what it paid.
+ * - Oyuncular, Gözlemciler: balances (the admin may set one; the difference is a ledger entry), password resets, observers (on the table
+ *   only once listed). Planned or live matches can be deleted too (their bets refunded). Coins are Alsancak coin, a game currency. */
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const DAY=new Intl.DateTimeFormat('tr-TR',{weekday:'long',day:'numeric',month:'long'}),TIME=new Intl.DateTimeFormat('tr-TR',{hour:'2-digit',minute:'2-digit'}),SHORT=new Intl.DateTimeFormat('tr-TR',{day:'numeric',month:'long'});
-const when=ms=>`${DAY.format(ms)} · ${TIME.format(ms)}`,dinar=n=>Math.round(n).toLocaleString('tr-TR'),odd=o=>o.toFixed(2).replace('.',','),pct=p=>`%${(p*100).toFixed(p<.1?1:0).replace('.',',')}`;
-const signed=n=>`${n>0?'+':n<0?'−':''}${dinar(Math.abs(n))}`;
+const when=ms=>`${DAY.format(ms)} · ${TIME.format(ms)}`,coin=n=>Math.round(n).toLocaleString('tr-TR'),odd=o=>o.toFixed(2).replace('.',','),pct=p=>`%${(p*100).toFixed(p<.1?1:0).replace('.',',')}`;
+const signed=n=>`${n>0?'+':n<0?'−':''}${coin(Math.abs(n))}`;
 const SPEEDS=[[400_000,'Yavaş'],[200_000,'Orta'],[100_000,'Hızlı']];
 // The editor's tabs; a player's goal and assist bets (suggested or added, whatever their players' tab) are all edited in "Oyuncular".
 const GROUPS=['Maç','Yarılar','Goller','Skor','Oyuncular','Diğer'],PLAYER_BETS=new Set(['player-goals','player-assist']);
@@ -22,9 +24,9 @@ const KINDS=[['1','Gol atar'],['2','2+ gol'],['3','Hat-trick (3+)'],['4','4+ gol
 const SECTIONS=[
   {id:'simulasyon',label:'Simülasyon',lead:'Maçı bu cihazda üret: sonucu gizli kalır, oranları önerilir.'},
   {id:'bahisler',label:'Bahisler',lead:'Oranları gözden geçir ve düzenle, bültene aç. Maç başlayınca kilitlenir.'},
-  {id:'sonuclar',label:'Sonuçlar',lead:'Biten maçlar: oynanan, ödenen ve geri verilen dinar, kasanın durumu.'},
-  {id:'oyuncular',label:'Oyuncular',lead:'Bakiyeler, şifre durumu ve şifre sıfırlama.'},
-  {id:'gozlemciler',label:'Gözlemciler',lead:'Futbol oynamayan arkadaşlar: bahis oynar, dinar toplar; kadroda yoktur.'},
+  {id:'sonuclar',label:'Sonuçlar',lead:'Biten maçlar: oynanan, ödenen ve geri verilen Alsancak coin, kasanın durumu; maç silme.'},
+  {id:'oyuncular',label:'Oyuncular',lead:'Bakiyeler (düzenlenebilir), şifre durumu ve şifre sıfırlama.'},
+  {id:'gozlemciler',label:'Gözlemciler',lead:'Futbol oynamayan arkadaşlar: bahis oynar, Alsancak coin toplar; kadroda yoktur.'},
 ];
 const ICONS={
   simulasyon:'<circle cx="10" cy="10" r="7.5"/><path d="M8.6 7.1v5.8l4.6-2.9z"/>',
@@ -39,7 +41,7 @@ const scorers=r=>!r.goals.length?'Gol yok':[0,1].map(i=>{const tally=new Map();f
   return tally.size?`<span class="${i?'red':'blue'}">${[...tally].map(([n,c])=>esc(c>1?`${n} ${c}`:n)).join(', ')}</span>`:'';}).filter(Boolean).join(' · ');
 
 export function mountAdmin(host,{plannerInput}){
-  let data=null,users=null,section='simulasyon',filter='',busy=false,planStatus='',editing=null,observerNote='';
+  let data=null,users=null,section='simulasyon',filter='',busy=false,planStatus='',editing=null,observerNote='',userNote='',resultNote='',balanceOf=null,removing=null,moving=null;
   const revealed=new Map(),details=new Map(),form={day:defaultDay(),time:'20:00',sims:'160'};
   function defaultDay(){const d=new Date(serverNow());if(d.getHours()>=19)d.setDate(d.getDate()+1);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
   const playersOf=m=>m.teams.teams.flatMap((t,i)=>t.players.map(p=>({id:p.id,name:p.name,team:i})));
@@ -82,8 +84,13 @@ export function mountAdmin(host,{plannerInput}){
   function matchRow(m){
     const started=serverNow()>=m.kickoffAt;
     return `<li class="adm-match"><div class="adm-match-main"><b>${esc(when(m.kickoffAt))}</b>${chips(m)}<span class="adm-teams">${esc(m.teams.names[0])} – ${esc(m.teams.names[1])}</span></div>
-      <div class="adm-actions"><button type="button" class="adm-button" data-odds-of="${m.id}">${started?'Bahisleri gör':'Oranlar'}</button><button type="button" class="adm-button ghost" data-reveal="${m.id}">${revealed.has(m.id)?'Sonucu gizle':'Sonucu gör'}</button>${started?'':`<button type="button" class="adm-button ghost" data-replan="${m.id}">Yeniden üret</button><button type="button" class="adm-button danger" data-cancel="${m.id}">İptal et</button>`}</div>
-      ${revealed.has(m.id)?`<p class="adm-result">${revealed.get(m.id)}</p>`:''}</li>`;
+      <div class="adm-actions"><button type="button" class="adm-button" data-odds-of="${m.id}">${started?'Bahisleri gör':'Oranlar'}</button><button type="button" class="adm-button ghost" data-reveal="${m.id}">${revealed.has(m.id)?'Sonucu gizle':'Sonucu gör'}</button>${started?'':`<button type="button" class="adm-button ghost" data-move="${m.id}">Saati değiştir</button><button type="button" class="adm-button ghost" data-replan="${m.id}">Yeniden üret</button>`}<button type="button" class="adm-button danger" data-delete="${m.id}" data-started="${started?1:''}">Sil</button></div>
+      ${moving===m.id&&!started?moveForm(m):''}${revealed.has(m.id)?`<p class="adm-result">${revealed.get(m.id)}</p>`:''}</li>`;
+  }
+  function moveForm(m){
+    const d=new Date(m.kickoffAt),p=n=>String(n).padStart(2,'0');
+    return `<form class="adm-form adm-move" data-move-form="${m.id}"><label>Yeni gün<input type="date" name="day" value="${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}" required></label><label>Saat<input type="time" name="time" value="${p(d.getHours())}:${p(d.getMinutes())}" required></label>
+      <button class="adm-button" type="submit">Kaydet</button><button class="adm-button ghost" type="button" data-move-cancel>Vazgeç</button><p class="adm-hint">Bahisler yerinde kalır; oyuncular yeni saati görür.</p></form>`;
   }
   async function showLineup(){
     const el=host.querySelector('[data-lineup]'),input=await plannerInput();if(!el||!el.isConnected)return;
@@ -116,7 +123,7 @@ export function mountAdmin(host,{plannerInput}){
     const content=e.group==='Oyuncular'?`${playerBets(m,locked)}<h3 class="adm-sub">Diğer oyuncu bahisleri</h3>${blocks(indexed.filter(([x])=>x.group==='Oyuncular'&&!PLAYER_BETS.has(x.family)))}`
       :blocks(indexed.filter(([x])=>x.group===e.group&&!PLAYER_BETS.has(x.family)))||'<p class="adm-hint">Bu sekmede bahis yok.</p>';
     return `<section class="adm-card adm-odds"><div class="adm-odds-head"><div>${title}<div class="adm-odds-state">${status}${m.regenerated?'<span class="adm-chip muted">yeniden üretildi</span>':''}</div></div>${actions}</div>
-      <p class="adm-hint">${b.meta.sims} simülasyondan öneri (gerçek maçın tohumu değil) · kâr payı yok, oranlar hep aşağı yuvarlanır · ${open.length} bahis açık · ${closed} seçenek kesine yakın, kapalı · ${betCount?`<b>${betCount} bahis oynandı, ${dinar(stakedSum)} dinar</b>`:'henüz bahis yok'}</p>
+      <p class="adm-hint">${b.meta.sims} simülasyondan öneri (gerçek maçın tohumu değil) · kâr payı yok, oranlar hep aşağı yuvarlanır · ${open.length} bahis açık · ${closed} seçenek kesine yakın, kapalı · ${betCount?`<b>${betCount} bahis oynandı, ${coin(stakedSum)} Alsancak coin</b>`:'henüz tekli bahis yok'}${e.coupons?.count?` · <b>${e.coupons.count} kupon, ${coin(e.coupons.staked)} Alsancak coin</b>`:''}</p>
       ${warnings.length?`<div class="adm-warn"><b>Dikkat: bu oranlar adil olanın üstünde.</b> Tek kişi bunu kullanamaz (her sonuçta kazandıran bahis takımı reddedilir), ama farklı taraflara oynayan birkaç kişi birlikte kazanır. Bilerek yaptıysan sorun yok.<ul>${warnings.map(w=>`<li>${esc(w)}</li>`).join('')}</ul></div>`:''}
       ${e.note?`<p class="adm-status" role="status">${esc(e.note)}</p>`:''}
       <div class="adm-tabs" role="tablist" aria-label="Bahis grubu">${GROUPS.map(g=>`<button type="button" role="tab" aria-selected="${g===e.group}" data-edit-group="${esc(g)}">${esc(g)}</button>`).join('')}</div>
@@ -125,18 +132,18 @@ export function mountAdmin(host,{plannerInput}){
       ${e.dirty&&!locked?`<div class="adm-savebar" role="region" aria-label="Kaydedilmemiş değişiklik"><span>Kaydedilmemiş değişiklik var.</span><button type="button" class="adm-button ghost" data-discard>Vazgeç</button>${saveButtons}</div>`:''}</section>`;
   }
   function marketBlock(market,mi,locked){
-    const played=editing.staked?.[market.id]??{},others=market.family==='score'?Object.entries(played).filter(([c])=>!market.outcomes.some(o=>o.code===c)):[];
+    const played=editing.staked?.[market.id]??{},inCoupons=editing.coupons?.markets?.[market.id]??{},others=market.family==='score'?Object.entries(played).filter(([c])=>!market.outcomes.some(o=>o.code===c)):[];
     return `<div class="adm-market${market.active?'':' is-closed'}"><div class="adm-market-head"><b>${esc(market.label)}</b>${market.custom?'<span class="adm-chip muted">senin eklediğin</span>':''}
-        <label class="adm-switch"><input type="checkbox" data-active="${mi}" ${market.active?'checked':''} ${locked?'disabled':''}><span aria-hidden="true"></span><em>${market.active?'açık':'kapalı'}</em></label>${market.custom&&!Object.keys(played).length&&!locked?`<button type="button" class="adm-link" data-remove="${mi}">Sil</button>`:''}</div>
+        <label class="adm-switch"><input type="checkbox" data-active="${mi}" ${market.active?'checked':''} ${locked?'disabled':''}><span aria-hidden="true"></span><em>${market.active?'açık':'kapalı'}</em></label>${market.custom&&!Object.keys(played).length&&!Object.keys(inCoupons).length&&!locked?`<button type="button" class="adm-link" data-remove="${mi}">Sil</button>`:''}</div>
       <div class="adm-table-wrap"><table class="adm-table"><thead><tr><th>Seçenek</th><th data-short="%">Olasılık</th><th>Öneri</th><th>Oran</th><th data-short="Açık">Oynanır mı</th><th>Oynanan</th></tr></thead><tbody>${market.outcomes.map((o,oi)=>row(market,o,`${mi}:${oi}`,locked)).join('')}</tbody></table></div>
-      ${others.length?`<p class="adm-hint">Listede olmayan skorlara: ${others.map(([c,s])=>`${esc(c.replace('-','–'))} (${editing.counts?.[market.id]?.[c]??0} bahis · ${dinar(s)})`).join(', ')}</p>`:''}</div>`;
+      ${others.length?`<p class="adm-hint">Listede olmayan skorlara: ${others.map(([c,s])=>`${esc(c.replace('-','–'))} (${editing.counts?.[market.id]?.[c]??0} bahis · ${coin(s)})`).join(', ')}</p>`:''}</div>`;
   }
   function row(market,o,k,locked){
-    const staked=editing.staked?.[market.id]?.[o.code]??0,count=editing.counts?.[market.id]?.[o.code]??0;
+    const staked=editing.staked?.[market.id]?.[o.code]??0,count=editing.counts?.[market.id]?.[o.code]??0,coupons=editing.coupons?.markets?.[market.id]?.[o.code]??0;
     return `<tr class="${o.playable?'':'is-off'}"><td>${esc(o.label)}</td><td>${pct(o.prob)}</td><td>${odd(fairOdds(o.prob))}</td>
       <td><input type="number" step="0.05" min="${ODDS.min}" max="${ODDS.max}" value="${o.odds.toFixed(2)}" data-odds="${k}" aria-label="${esc(market.label)} ${esc(o.label)} oranı" ${locked?'disabled':''}></td>
       <td><label class="adm-switch"><input type="checkbox" data-playable="${k}" ${o.playable?'checked':''} ${locked?'disabled':''} aria-label="${esc(o.label)} oynanır"><span aria-hidden="true"></span><em>${o.playable?'oynanır':'kapalı'}</em></label></td>
-      <td>${count?`${count} bahis · ${dinar(staked)}`:'—'}</td></tr>`;
+      <td>${[count?`${count} bahis · ${coin(staked)}`:'',coupons?`${coupons} kuponda`:''].filter(Boolean).join(' · ')||'—'}</td></tr>`;
   }
   /** The market for a player and a kind of bet, priced from his simulated goals or assists (an added one goes to players' "Özel" tab). */
   function betFor(b,who,kind){
@@ -167,49 +174,62 @@ export function mountAdmin(host,{plannerInput}){
 
   // --- Sonuçlar --------------------------------------------------------------------------------------------------------------------
   function resultsSection(){
-    const list=data.recent;if(!list.length)return '<section class="adm-card"><p class="adm-hint">Henüz biten maç yok. Yayın bitince bahisler ödenir ve maç buraya düşer.</p></section>';
+    const list=data.recent;if(!list.length)return `${resultNote?`<p class="adm-status" role="status">${esc(resultNote)}</p>`:''}<section class="adm-card"><p class="adm-hint">Henüz biten maç yok. Yayın bitince bahisler ödenir ve maç buraya düşer.</p></section>`;
     const zero={bets:0,staked:0,paid:0,bonus:0},sum=list.reduce((s,m)=>{const h=m.house??zero;return {bets:s.bets+h.bets,staked:s.staked+h.staked,paid:s.paid+h.paid,bonus:s.bonus+h.bonus};},zero),net=h=>h.staked-h.paid-h.bonus;
     const stat=(label,value,cls='')=>`<div class="adm-stat ${cls}"><span>${label}</span><b>${value}</b></div>`;
-    return `<section class="adm-card"><h2>Kasa · son ${list.length} maç</h2><div class="adm-stats">${stat('Bahis',dinar(sum.bets))}${stat('Oynanan',dinar(sum.staked))}${stat('Ödenen',dinar(sum.paid))}${stat('Kayıp bonusu',dinar(sum.bonus))}${stat('Kasa',signed(net(sum)),net(sum)>=0?'up':'down')}</div>
-        <p class="adm-hint">Kasa = oynanan − ödenen − kayıp bonusu. Eksiye düşebilir (kasa da kaybedebilir); dinar yalnız oyun parası.</p></section>
+    return `${resultNote?`<p class="adm-status" role="status">${esc(resultNote)}</p>`:''}<section class="adm-card"><h2>Kasa · son ${list.length} maç</h2><div class="adm-stats">${stat('Bahis',coin(sum.bets))}${stat('Oynanan',coin(sum.staked))}${stat('Ödenen',coin(sum.paid))}${stat('Kayıp bonusu',coin(sum.bonus))}${stat('Kasa',signed(net(sum)),net(sum)>=0?'up':'down')}</div>
+        <p class="adm-hint">Kasa = oynanan − ödenen − kayıp bonusu. Eksiye düşebilir (kasa da kaybedebilir); Alsancak coin yalnız oyun parası.</p></section>
       <section class="adm-card"><h2>Biten maçlar</h2><ul class="adm-results">${list.map(m=>resultRow(m,net)).join('')}</ul></section>`;
   }
   function resultRow(m,net){
     const r=m.result,h=m.house??{bets:0,staked:0,paid:0,bonus:0},n=net(h),d=details.get(m.id);
     return `<li><div class="adm-result-head"><span>${esc(SHORT.format(m.kickoffAt))}</span><b>${esc(m.teams.names[0])} <strong>${r.score[0]}–${r.score[1]}</strong> ${esc(m.teams.names[1])}</b>${h.bets?`<span class="adm-chip ${n>=0?'ok':'warn'}">kasa ${signed(n)}</span>`:''}</div>
       <small>${scorers(r)}${r.motm?` · Maçın oyuncusu ${esc(r.motm.name)}`:''}</small>
-      <small class="adm-muted">${h.bets?`${h.bets} bahis · oynanan ${dinar(h.staked)} · ödenen ${dinar(h.paid)} · kayıp bonusu ${dinar(h.bonus)}`:'Bu maça bahis oynanmadı.'}</small>
-      ${h.bets?`<div><button type="button" class="adm-link gold" data-everyone="${m.id}">${d?.open?'Bahisleri gizle':'Herkesin bahisleri'}</button></div>`:''}${d?.open?everyone(d):''}</li>`;
+      <small class="adm-muted">${h.bets?`${h.bets} bahis · oynanan ${coin(h.staked)} · ödenen ${coin(h.paid)} · kayıp bonusu ${coin(h.bonus)}`:'Bu maça bahis oynanmadı.'}</small>
+      <div class="adm-row-links">${h.bets?`<button type="button" class="adm-link gold" data-everyone="${m.id}">${d?.open?'Bahisleri gizle':'Herkesin bahisleri'}</button>`:''}<button type="button" class="adm-link" data-delete-finished="${m.id}">Maçı sil</button></div>
+      ${removing===m.id?`<div class="adm-confirm" role="group" aria-label="Maçı sil"><p><b>Bu maç silinsin mi?</b> ${h.bets?`${h.bets} bahis oynanmıştı.`:'Bahis oynanmamıştı.'}</p>
+        ${h.bets?`<div class="adm-actions"><button type="button" class="adm-button danger" data-delete-undo="${m.id}">Sil, Alsancak coinleri geri al</button><button type="button" class="adm-button ghost" data-delete-keep="${m.id}">Sil, bakiyeler kalsın</button><button type="button" class="adm-button ghost" data-delete-cancel>Vazgeç</button></div>
+        <p class="adm-hint">Geri alırsan bahisler iade edilir; kazançlar ve kayıp bonusu geri çekilir, herkesin bakiyesi bu maç hiç oynanmamış gibi olur (geri alınan Alsancak coin sonradan harcandıysa bakiye eksiye düşebilir; Oyuncular'dan düzeltebilirsin).</p>`
+        :`<div class="adm-actions"><button type="button" class="adm-button danger" data-delete-keep="${m.id}">Sil</button><button type="button" class="adm-button ghost" data-delete-cancel>Vazgeç</button></div>`}</div>`:''}
+      ${d?.open?everyone(d):''}</li>`;
   }
   function everyone(d){
     if(!d.bets)return '<p class="adm-hint">Yükleniyor…</p>';
     const by=new Map();for(const b of d.bets){const l=by.get(b.name)??[];l.push(b);by.set(b.name,l);}
     return `<div class="tm-everyone">${[...by].map(([n,list])=>{const net=list.reduce((s,b)=>s+b.payout-(b.status==='void'?0:b.stake),0);
-      return `<div class="tm-person"><h4>${esc(n)}<span class="${net>=0?'up':'down'}">${net>=0?'+':''}${dinar(net)}</span></h4><ul>${list.map(b=>`<li class="${b.status}"><span>${esc(b.label)}</span><span>${dinar(b.stake)} @ ${odd(b.odds)}</span><b>${statusText[b.status]}${b.payout?` · ${dinar(b.payout)}`:''}</b></li>`).join('')}</ul></div>`;}).join('')}</div>`;
+      return `<div class="tm-person"><h4>${esc(n)}<span class="${net>=0?'up':'down'}">${net>=0?'+':''}${coin(net)}</span></h4><ul>${list.map(b=>`<li class="${b.status}"><span>${esc(b.label)}</span><span>${coin(b.stake)} @ ${odd(b.odds)}</span><b>${statusText[b.status]}${b.payout?` · ${coin(b.payout)}`:''}</b>${b.legs?`<ul class="tm-legs">${b.legs.map(l=>`<li class="${l.won===true?'won':l.won===false?'lost':''}"><span>${l.won===true?'✓ ':l.won===false?'✗ ':''}${esc(l.label)}</span><b>${odd(l.odds)}</b></li>`).join('')}</ul>`:''}</li>`).join('')}</ul></div>`;}).join('')}</div>`;
   }
 
   // --- Oyuncular, Gözlemciler ------------------------------------------------------------------------------------------------------
+  function userItem(u,extra=''){
+    return `<li><div><b>${esc(u.displayName)}</b><code>${esc(u.username)} · <span>${coin(u.balance)} Alsancak coin</span></code></div>${u.mustChange?'<span class="adm-chip muted">ilk şifrede</span>':'<span class="adm-chip ok">şifresini değiştirdi</span>'}
+      ${extra}<div class="adm-user-actions"><button type="button" class="adm-button ghost" data-balance="${esc(u.username)}">Bakiye</button><button type="button" class="adm-button ghost" data-reset="${esc(u.username)}" data-name="${esc(u.displayName)}">Şifreyi sıfırla</button></div>
+      ${balanceOf===u.username?`<div class="adm-balance"><p class="adm-hint">${esc(u.displayName)}: şu an <b>${coin(u.balance)}</b> Alsancak coin. Fark admin düzeltmesi olarak kayda geçer.</p>
+        <form data-balance-form="${esc(u.username)}" data-mode="set"><label>Yeni bakiye<input name="amount" type="number" min="0" max="10000000" step="1" value="${u.balance}" inputmode="numeric" required></label><button class="adm-button" type="submit">Bakiye bu olsun</button></form>
+        <form data-balance-form="${esc(u.username)}" data-mode="add"><label>Ekle (eksi: çıkar)<input name="amount" type="number" min="-10000000" max="10000000" step="1" placeholder="1000" inputmode="numeric" required></label><button class="adm-button ghost" type="submit">Ekle</button></form>
+        <button class="adm-button ghost adm-balance-close" type="button" data-balance-cancel>Kapat</button></div>`:''}</li>`;
+  }
   function userRows(){
     if(!users)return '<p class="adm-hint">Yükleniyor…</p>';
     const q=filter.trim().toLocaleLowerCase('tr-TR'),list=users.filter(u=>u.kind==='player'&&(!q||u.displayName.toLocaleLowerCase('tr-TR').includes(q)||u.username.includes(q)));
-    return list.length?`<ul class="adm-users">${list.map(u=>`<li><div><b>${esc(u.displayName)}</b><code>${esc(u.username)} · <span>${dinar(u.balance)} dinar</span></code></div>${u.mustChange?'<span class="adm-chip muted">ilk şifrede</span>':'<span class="adm-chip ok">şifresini değiştirdi</span>'}
-      <button type="button" class="adm-button ghost" data-reset="${esc(u.username)}" data-name="${esc(u.displayName)}">Şifreyi sıfırla</button></li>`).join('')}</ul>`:'<p class="adm-hint">Eşleşen kullanıcı yok.</p>';
+    return list.length?`<ul class="adm-users">${list.map(u=>userItem(u)).join('')}</ul>`:'<p class="adm-hint">Eşleşen kullanıcı yok.</p>';
   }
   function playersSection(){
     const list=(users??[]).filter(u=>u.kind==='player'),changed=list.filter(u=>!u.mustChange).length;
-    return `<section class="adm-card adm-people"><div class="adm-people-head"><input type="search" class="adm-search" placeholder="Ad ya da kullanıcı adı ara" value="${esc(filter)}" data-filter aria-label="Oyuncu ara">
+    return `<section class="adm-card adm-everyone"><h2>Herkese Alsancak coin ekle</h2><form class="adm-form" data-add-all><label>Tutar (eksi: çıkar)<input name="amount" type="number" min="-1000000" max="1000000" step="1" placeholder="5000" inputmode="numeric" required></label>
+        <label>Kime<select name="who"><option value="">Herkes (oyuncular ve gözlemciler)</option><option value="player">Yalnız oyuncular</option><option value="observer">Yalnız gözlemciler</option></select></label><button class="adm-button" type="submit">Ekle</button></form>
+        <p class="adm-hint">Her kişiye ayrı admin düzeltmesi yazılır; çıkarırken kimse sıfırın altına inmez.</p></section>
+      <section class="adm-card adm-people"><div class="adm-people-head"><input type="search" class="adm-search" placeholder="Ad ya da kullanıcı adı ara" value="${esc(filter)}" data-filter aria-label="Oyuncu ara">
         <p class="adm-hint">${list.length} oyuncu · ${changed} kişi şifresini değiştirdi (en az bir kez girdi)</p></div>
-      <div data-userlist>${userRows()}</div><p class="adm-hint">Sıfırlanan kullanıcı ilk şifresiyle (kullanıcı adı ve !) girer, sonra yeniden değiştirir.</p></section>`;
+      ${userNote?`<p class="adm-status" role="status">${esc(userNote)}</p>`:''}<div data-userlist>${userRows()}</div><p class="adm-hint">Sıfırlanan kullanıcı ilk şifresiyle (kullanıcı adı ve !) girer, sonra yeniden değiştirir.</p></section>`;
   }
   function observersSection(){
     const list=(users??[]).filter(u=>u.kind==='observer'),shown=list.filter(u=>u.listed).length;
     return `<div class="adm-grid"><section class="adm-card adm-observers"><h2>Gözlemci ekle</h2><form class="adm-form" data-observer-form><label>Ad<input name="name" required maxlength="30" placeholder="Örneğin Ece"></label><button class="adm-button" type="submit">Gözlemci ekle</button></form>
-        ${observerNote?`<p class="adm-status" role="status">${esc(observerNote)}</p>`:''}<p class="adm-hint">Kullanıcı adı adın küçük harfle yazılışı, ilk şifre sonuna ! eklenmiş hali; ilk girişte şifresini değiştirir.</p></section>
+        ${observerNote?`<p class="adm-status" role="status">${esc(observerNote)}</p>`:''}${userNote?`<p class="adm-status" role="status">${esc(userNote)}</p>`:''}<p class="adm-hint">Kullanıcı adı adın küçük harfle yazılışı, ilk şifre sonuna ! eklenmiş hali; ilk girişte şifresini değiştirir.</p></section>
       <section class="adm-card adm-observers"><h2>Gözlemciler${list.length?` <small>${list.length} · ${shown} tabloda</small>`:''}</h2>
-        ${list.length?`<ul class="adm-users">${list.map(u=>`<li><div><b>${esc(u.displayName)}</b><code>${esc(u.username)} · <span>${dinar(u.balance)} dinar</span></code></div>${u.mustChange?'<span class="adm-chip muted">ilk şifrede</span>':'<span class="adm-chip ok">şifresini değiştirdi</span>'}
-          <label class="adm-switch adm-listed"><input type="checkbox" data-listed="${esc(u.username)}" ${u.listed?'checked':''}><span aria-hidden="true"></span><em>${u.listed?'tabloda':'tabloda değil'}</em></label>
-          <button type="button" class="adm-button ghost" data-reset="${esc(u.username)}" data-name="${esc(u.displayName)}">Şifreyi sıfırla</button></li>`).join('')}</ul>`:'<p class="adm-hint">Henüz gözlemci yok.</p>'}
-        <p class="adm-hint">Anahtarı açmadıkça genel dinar tablosunda görünmez.</p></section></div>`;
+        ${list.length?`<ul class="adm-users">${list.map(u=>userItem(u,`<label class="adm-switch adm-listed"><input type="checkbox" data-listed="${esc(u.username)}" ${u.listed?'checked':''}><span aria-hidden="true"></span><em>${u.listed?'tabloda':'tabloda değil'}</em></label>`)).join('')}</ul>`:'<p class="adm-hint">Henüz gözlemci yok.</p>'}
+        <p class="adm-hint">Anahtarı açmadıkça genel Alsancak coin tablosunda görünmez.</p></section></div>`;
   }
 
   // --- data and actions ------------------------------------------------------------------------------------------------------------
@@ -222,7 +242,7 @@ export function mountAdmin(host,{plannerInput}){
   /** The book to edit carries the admin's odds (the live ones move with bets); what is staked shows beside each outcome. */
   async function edit(id,note=''){
     const d=await api.match(id),book=d.book?{...d.book,markets:d.book.markets.map(m=>({...m,outcomes:m.outcomes.map(({base,...o})=>({...o,odds:base??o.odds}))}))}:null,same=editing?.id===id;
-    editing={id,book,staked:d.staked,counts:d.counts,dirty:false,group:same?editing.group:'Maç',pb:same?editing.pb:null,note};render();
+    editing={id,book,staked:d.staked,counts:d.counts,coupons:d.coupons,dirty:false,group:same?editing.group:'Maç',pb:same?editing.pb:null,note};render();
   }
   function goto(id){
     section=SECTIONS.some(x=>x.id===id)?id:'simulasyon';history.replaceState(null,'',`#yonetim/${section}`);render();host.scrollTop=0;
@@ -256,6 +276,16 @@ export function mountAdmin(host,{plannerInput}){
     if(t.matches('[data-pb-kind]')){editing.pb={...editing.pb,kind:t.value};render();}
   });
   host.addEventListener('submit',async event=>{
+    const bf=event.target.closest('[data-balance-form]');
+    if(bf){event.preventDefault();const username=bf.dataset.balanceForm,amount=Math.round(Number(bf.amount.value)),u=users.find(x=>x.username===username);
+      try{const r=await api.admin.setBalance(username,bf.dataset.mode==='add'?{add:amount}:{balance:amount});balanceOf=null;userNote=`${u?.displayName??username}: ${coin(r.from)} → ${coin(r.balance)} Alsancak coin.`;users=await api.admin.users();render();}catch(e){userNote=e.message;render();}return;}
+    const all=event.target.closest('[data-add-all]');
+    if(all){event.preventDefault();const add=Math.round(Number(all.amount.value)),who=all.who.value||null,whom=who==='player'?'oyunculara':who==='observer'?'gözlemcilere':'herkese';
+      if(!add||!confirm(`${whom.charAt(0).toLocaleUpperCase('tr-TR')+whom.slice(1)} ${add>0?`${coin(add)} Alsancak coin eklensin`:`${coin(-add)} Alsancak coin çıkarılsın`} mi?`))return;
+      try{const r=await api.admin.addAll(add,who);userNote=`${r.users} kişiye ${add>0?'+':'−'}${coin(Math.abs(add))} Alsancak coin yazıldı.`;users=await api.admin.users();render();}catch(e){userNote=e.message;render();}return;}
+    const mf=event.target.closest('[data-move-form]');
+    if(mf){event.preventDefault();const at=new Date(`${mf.day.value}T${mf.time.value}`).getTime();
+      try{await api.admin.moveMatch(mf.dataset.moveForm,at);moving=null;planStatus=`Maçın saati değişti: ${when(at)}.`;await refresh();}catch(e){alert(e.message);}return;}
     const f=event.target.closest('[data-observer-form]');if(!f)return;event.preventDefault();
     try{const r=await api.admin.addObserver(f.name.value);observerNote=`Eklendi: kullanıcı adı ${r.username}, ilk şifre ${r.password}. Anahtarı açmadıkça tabloda görünmez.`;users=await api.admin.users();render();}
     catch(e){observerNote=e.message;render();}
@@ -294,7 +324,7 @@ export function mountAdmin(host,{plannerInput}){
       editing.busy='Oranlar hesaplanıyor… %0';render();
       try{const book=await repriceMatch({id:editing.id,teams:m.teams,sims,onProgress:f=>{editing.busy=`Oranlar hesaplanıyor… %${Math.round(f*100)}`;const el=host.querySelector('.adm-odds .adm-status');if(el)el.textContent=editing.busy;}});
         // Markets already played keep their options and odds (their bets are paid on them); one the new suggestion lacks stays, closed.
-        const played=(editing.book?.markets??[]).filter(x=>editing.staked?.[x.id]);
+        const played=(editing.book?.markets??[]).filter(x=>editing.staked?.[x.id]||editing.coupons?.markets?.[x.id]);
         for(const old of played){const i=book.markets.findIndex(y=>y.id===old.id);if(i>=0)book.markets[i]=old;else book.markets.push({...old,active:false});}
         editing.busy=null;editing.book=book;editing.dirty=true;editing.note=`Yeni öneri hazır; kaydetmeyi unutma.${played.length?` Oynanmış ${played.length} bahis eski seçenek ve oranlarıyla kaldı.`:''}`;render();}
       catch(e){editing.busy=null;editing.note=e.message;render();}
@@ -302,7 +332,20 @@ export function mountAdmin(host,{plannerInput}){
     }
     if(b.dataset.remove){editing.book.markets.splice(Number(b.dataset.remove),1);editing.dirty=true;render();return;}
     if(b.dataset.replan){const m=data.upcoming.find(x=>x.id===b.dataset.replan);if(m&&confirm('Kayıtlı dizilişle bu maç yeniden üretilsin mi? Oynanan bahisler iade edilir, oranlar yeniden hesaplanır.'))await plan(m.kickoffAt,m.id);return;}
-    if(b.dataset.cancel){if(!confirm('Bu maç iptal edilsin mi? Oynanan bahisler iade edilir.'))return;try{await api.admin.cancel(b.dataset.cancel);revealed.delete(b.dataset.cancel);if(editing?.id===b.dataset.cancel)editing=null;await refresh();}catch(e){alert(e.message);}return;}
+    if(b.dataset.delete){
+      const id=b.dataset.delete;if(!confirm(b.dataset.started?'Yayın başladı. Maç silinirse yayın durur, oynanan bahisler iade edilir. Silinsin mi?':'Bu maç silinsin mi? Oynanan bahisler iade edilir.'))return;
+      try{await api.admin.remove(id);revealed.delete(id);if(editing?.id===id)editing=null;await refresh();}catch(e){alert(e.message);}return;
+    }
+    if(b.dataset.deleteFinished){removing=removing===b.dataset.deleteFinished?null:b.dataset.deleteFinished;resultNote='';render();return;}
+    if(b.dataset.deleteCancel!==undefined){removing=null;render();return;}
+    if(b.dataset.deleteUndo||b.dataset.deleteKeep){
+      const id=b.dataset.deleteUndo??b.dataset.deleteKeep,undo=!!b.dataset.deleteUndo;
+      try{const r=await api.admin.remove(id,undo);removing=null;details.delete(id);resultNote=undo?`Maç silindi; ${r.reverted??0} bahsin Alsancak coini geri alındı, bakiyeler maçtan önceki haline döndü.`:'Maç silindi; bakiyeler olduğu gibi kaldı.';await refresh();}catch(e){alert(e.message);}return;
+    }
+    if(b.dataset.balance){balanceOf=balanceOf===b.dataset.balance?null:b.dataset.balance;userNote='';render();host.querySelector('[data-balance-form] input')?.select();return;}
+    if(b.dataset.balanceCancel!==undefined){balanceOf=null;render();return;}
+    if(b.dataset.move){moving=moving===b.dataset.move?null:b.dataset.move;render();return;}
+    if(b.dataset.moveCancel!==undefined){moving=null;render();return;}
     if(b.dataset.reveal){
       const id=b.dataset.reveal;if(revealed.has(id)){revealed.delete(id);render();return;}
       try{const r=await api.admin.result(id),m=data.upcoming.find(x=>x.id===id);revealed.set(id,`${esc(m.teams.names[0])} <strong>${r.score[0]}–${r.score[1]}</strong> ${esc(m.teams.names[1])} · ilk yarı ${r.halfTime[0]}–${r.halfTime[1]}<br>${scorers(r)}${r.motm?` · Maçın oyuncusu ${esc(r.motm.name)}`:''}`);render();}catch(e){alert(e.message);}

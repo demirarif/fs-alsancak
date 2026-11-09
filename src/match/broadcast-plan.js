@@ -1,35 +1,30 @@
-import { halfHighlights } from './highlight-edit.js';
-import { BALL_STATE, FRAME_HEADER, PLAYER_CHANNELS } from '../v1/engine/replay.ts';
+import { EDIT, halfHighlights, playedPieces, stoppages } from './highlight-edit.js';
 
 /* Live broadcast of a planned match (user decision 2026-11-05): everybody watches the same 10-minute edit at the same moment. Where the
  * broadcast is comes from the server clock minus the kick-off, so whoever is ten minutes late joins where it is. Order: walk-out, the
  * first half's highlights at real speed, a half-time card, walk-out, the second half's; set-piece waits are cut as the match screen does. */
 export const BROADCAST={walkoutSeconds:8,halftimeSeconds:45,budgetSeconds:300};
+export { stoppages };
 
-/** Dead-ball stretches of a half (a corner or free kick being set up, the kick-off after a goal). */
-export function stoppages(r){const out=[],st=FRAME_HEADER+r.playerOrder.length*PLAYER_CHANNELS.length;let from=-1;for(let i=0;i<r.frameCount;i++){const dead=r.samples[i*st+4]===BALL_STATE.dead,at=r.samples[i*st];if(dead&&from<0)from=at;else if(!dead&&from>=0){out.push([from,at]);from=-1;}}if(from>=0)out.push([from,r.endSeconds]);return out;}
-
-/** The continuous stretches the edit plays: each highlight segment at real speed, a set-piece wait of more than 2 s cut to its last 0.8 s. */
-export function editPieces(r,budget=BROADCAST.budgetSeconds){
-  const segments=halfHighlights(r,budget).segments,stops=stoppages(r),pieces=[];
-  segments.forEach((s,seg)=>{
-    let t=s.start,first=true,cut=true;
-    while(t<s.end-1e-6){
-      const stop=stops.find(x=>t>=x[0]&&t<x[1]);
-      if(stop&&stop[1]-t>2){const next=stop[1]-.8;if(next>=s.end)break;t=next;cut=true;continue;}
-      const ahead=stops.find(x=>x[0]>t+1e-6&&x[0]<s.end),t1=ahead?ahead[0]:s.end;
-      pieces.push({t0:t,t1,seg,segStart:first,cut});first=false;cut=false;t=t1;
-    }
-  });
+/** The continuous stretches the edit plays: each highlight segment at real speed, a long set-piece wait cut to its last moments. */
+export function editPieces(r,budget=BROADCAST.budgetSeconds,edit=EDIT){
+  const segments=halfHighlights(r,budget,edit).segments,stops=stoppages(r),pieces=[];
+  segments.forEach((s,seg)=>playedPieces(s.start,s.end,stops,edit).forEach((p,i)=>pieces.push({t0:p.t0,t1:p.t1,seg,segStart:i===0,cut:p.cut})));
   return pieces;
 }
 
 /** The whole broadcast: parts in order with their lengths (seconds), and each half's pieces. */
-export function broadcastPlan(halves){
-  const B=BROADCAST,pieces=halves.map(h=>editPieces(h)),length=list=>list.reduce((n,x)=>n+x.t1-x.t0,0);
+export function broadcastPlan(halves,edit=EDIT){
+  const B=BROADCAST,pieces=halves.map(h=>editPieces(h,B.budgetSeconds,edit)),length=list=>list.reduce((n,x)=>n+x.t1-x.t0,0);
   const parts=[{kind:'walkout',half:1,seconds:B.walkoutSeconds},{kind:'half',half:1,seconds:length(pieces[0])},{kind:'halftime',half:1,seconds:B.halftimeSeconds},
     {kind:'walkout',half:2,seconds:B.walkoutSeconds},{kind:'half',half:2,seconds:length(pieces[1])}];
   return {pieces,parts,total:parts.reduce((n,p)=>n+p.seconds,0)};
+}
+
+/** What a recording carries of its edit (user, 2026-11-06): the plan the broadcast plays, each half's highlight segments and its dead-ball
+ * stretches. With them stored, the broadcast plays exactly as planned even from the trimmed live copy (which cannot be re-edited). */
+export function broadcastEdit(halves,edit=EDIT){
+  return {version:edit.version,plan:broadcastPlan(halves,edit),segments:halves.map(h=>halfHighlights(h,BROADCAST.budgetSeconds,edit).segments),stops:halves.map(stoppages)};
 }
 
 /** What is on air `elapsed` seconds after the kick-off: before, a walk-out or the half-time card (offset into it), a half (match second

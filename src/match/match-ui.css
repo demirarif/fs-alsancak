@@ -220,3 +220,52 @@
 #match-screen .mc-speeds button:disabled{opacity:.4;cursor:default}
 @media(max-width:720px){#match-screen .mc-golive{right:10px;bottom:118px}}
 
+/* Watching the broadcast on a phone, upright or sideways (user, 2026-11-05): the picture first. No top bar (a small way back instead),
+   the score with the two small shirts and the match clock (no names; user, 2026-11-06: "skorun yanında süre yazmıyor, onu da ekle"),
+   small see-through camera angles top right, the commentary from the bottom left, no transport (the broadcast runs on its own), the
+   half-time / full-time card small. The computer keeps the full layout. */
+#match-screen .mc-exit{display:none}
+@media(max-width:720px),(max-height:500px){
+  #app.is-watching .topbar.topbar{display:none}
+  #match-screen.is-broadcast .match-controls{display:none}
+  #match-screen.is-broadcast .mc-exit{position:absolute;left:10px;top:10px;z-index:7;display:grid;place-items:center;width:32px;height:32px;border:1px solid #ffffff1f;border-radius:50%;background:#0f1722a6;color:#e3e8ef;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  #match-screen.is-broadcast .mc-exit .ui-icon{width:16px;height:16px}
+  #match-screen.is-broadcast .match-scoreboard{left:50px;top:10px;grid-template-columns:auto auto auto auto;gap:6px;padding:3px 9px 3px 7px;border-color:#ffffff14;background:#0f1722b3;box-shadow:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  #match-screen.is-broadcast .match-team b{display:none}
+  /* The clock beside the score: match time, under it the half — or, while on air, a red "CANLI" in place of the badge, which keeps the row
+     narrow enough for the camera angles on a 360 px phone. */
+  #match-screen.is-broadcast .match-clock{display:flex;min-width:0;margin-left:1px;padding:1px 0 1px 8px;gap:2px;border-left:1px solid #ffffff1f;line-height:1}
+  #match-screen.is-broadcast .match-clock span{font-size:12.5px;font-variant-numeric:tabular-nums;letter-spacing:.2px}
+  #match-screen.is-broadcast .match-clock small{font-size:8px;white-space:nowrap}
+  #match-screen.is-broadcast .match-scoreboard.is-live .match-clock small{font-size:0}
+  #match-screen.is-broadcast .match-scoreboard.is-live .match-clock small::after{content:'● CANLI';font-size:7.5px;font-weight:800;letter-spacing:.9px;color:#ff7286}
+  #match-screen.is-broadcast .match-onair{display:none}
+  #match-screen.is-broadcast .match-kit{width:20px;height:24px}
+  #match-screen.is-broadcast .match-kit>.bp-shirt{width:27px;height:27px}
+  #match-screen.is-broadcast .match-score{font-size:18px}
+  #match-screen.is-broadcast .match-score em{margin:0 2px;font-size:15px}
+  #match-screen.is-broadcast .match-camera{left:auto;right:10px;top:10px;bottom:auto;align-items:flex-end}
+  #match-screen.is-broadcast .mc-segmented{display:flex;gap:2px;padding:2px;border-color:#ffffff14;border-radius:999px;background:#0f172273;box-shadow:none;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  #match-screen.is-broadcast .mc-segmented button{height:26px;min-height:26px;padding:4px 9px;border-radius:999px;color:#dce3eccc;font-size:10px}
+  #match-screen.is-broadcast .mc-segmented button.active{border-color:#ffffff2e;background:#ffffff1f;color:#fff}
+  #match-screen.is-broadcast .match-ticker{left:10px;right:auto;top:auto;bottom:10px;width:min(300px,calc(100% - 20px))}
+  #match-screen.is-broadcast .match-ticker li{background:#0f172299}
+  #match-screen.is-broadcast .match-ticker li:nth-child(n+3){display:none}
+  #match-screen.is-broadcast .match-goal-banner{bottom:84px;max-width:calc(100% - 24px);gap:10px;padding:8px 14px}
+  #match-screen.is-broadcast .match-goal-banner strong{font-size:24px}
+  #match-screen.is-broadcast .match-chapter{top:52px;bottom:auto}
+  #match-screen.is-broadcast .mc-golive{right:10px;bottom:10px}
+  #match-screen.is-broadcast .match-why{top:52px;max-height:calc(100% - 140px)}
+  #match-screen.is-broadcast .match-overlay{align-items:center;padding:10px;overflow-y:auto}
+  #match-screen.is-broadcast .match-card{width:min(560px,100%);max-height:calc(100% - 4px);overflow:auto}
+  #match-screen.is-broadcast .mc-side b,#match-screen.is-broadcast .mc-stats{display:none}
+  #match-screen.is-broadcast .mc-side .match-kit{width:30px;height:34px}
+  #match-screen.is-broadcast .mc-side .match-kit>.bp-shirt{width:40px;height:40px}
+  #match-screen.is-broadcast .mc-score{font-size:30px}
+  /* Stats are hidden on the phone card: the goals take its width, a long line wraps beside its minute. */
+  #match-screen.is-broadcast .wide .mc-body{grid-template-columns:minmax(0,1fr)}
+  #match-screen.is-broadcast .match-scorers li:not(.mc-col-title):not(.none){display:grid;grid-template-columns:30px minmax(0,1fr);line-height:1.45;margin-bottom:4px}
+}
+/* The narrowest phones: the camera angles by their short names. */
+@media(max-width:400px),(max-height:500px){#match-screen.is-broadcast .mc-segmented button{padding:4px 8px;font-size:0}#match-screen.is-broadcast .mc-segmented button::after{content:attr(data-short);font-size:10px}}
+

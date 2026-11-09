@@ -39,12 +39,13 @@ async function matchScreen(){loadingMatch??=import('./match/match-screen.js');co
  * server, no /api): the app as before. */
 async function route(){
   const token=++routeSequence,hash=location.hash,broadcast=online&&hash.startsWith('#yayin/');
-  if(online&&!user.isAdmin&&!broadcast&&hash!=='#gunun-maci'){location.replace('#gunun-maci');return;}
+  const todayRoute=online&&(hash==='#gunun-maci'||hash.startsWith('#gunun-maci/'));
+  if(online&&!user.isAdmin&&!broadcast&&!todayRoute){location.replace('#gunun-maci');return;}
   if(online&&user.isAdmin&&(hash===''||hash==='#')){location.replace('#yonetim');return;}
-  const todayRoute=online&&hash==='#gunun-maci',adminRoute=online&&(hash==='#yonetim'||hash.startsWith('#yonetim/')),tactics=hash==='#dizilis',game=hash==='#mac'||broadcast;
+  const adminRoute=online&&(hash==='#yonetim'||hash.startsWith('#yonetim/')),tactics=hash==='#dizilis',game=hash==='#mac'||broadcast;
   $('#selection-screen').hidden=tactics||game||todayRoute||adminRoute;$('#lineup-screen').hidden=!tactics;$('#match-screen').hidden=!game;$('#today-screen').hidden=!todayRoute;$('#admin-screen').hidden=!adminRoute;
   // The squad and tactics screens keep the top bar's right end for their stage steps; the other screens show the header buttons there.
-  $('#app').classList.toggle('selection-mode',!game&&!todayRoute&&!adminRoute);account?.current(hash);
+  $('#app').classList.toggle('selection-mode',!game&&!todayRoute&&!adminRoute);$('#app').classList.toggle('is-watching',broadcast);account?.current(hash);
   // At half time the squads must stay as they are, so the tactics room hides the way back to squad selection.
   const halftime=tactics?match?.halftime??null:null;
   $('#selection-nav').hidden=(!tactics&&!(game&&!broadcast))||!!halftime||(online&&!user.isAdmin);$('#tactics-nav').hidden=!game||broadcast;
@@ -53,7 +54,7 @@ async function route(){
   match?.setVisible(game);
   if(!todayRoute)today?.close();if(!adminRoute)admin?.close();
   if(!tactics)review.deactivate();
-  if(todayRoute){if(!today){const {mountToday}=await import('./online/today-screen.js');if(token!==routeSequence)return;today??=mountToday($('#today-screen'),{user});}today.open();return;}
+  if(todayRoute){if(!today){const {mountToday}=await import('./online/today-screen.js');if(token!==routeSequence)return;today??=mountToday($('#today-screen'),{user});}today.open(hash.slice('#gunun-maci/'.length));return;}
   if(adminRoute){if(!admin){const {mountAdmin}=await import('./online/admin-screen.js');if(token!==routeSequence)return;admin??=mountAdmin($('#admin-screen'),{plannerInput});}admin.open(hash.slice('#yonetim/'.length));return;}
   if(tactics){const ctx=await context(token);if(!ctx){if(token===routeSequence)$('#lineup-screen').textContent='Kadrolar yüklenemedi. Kadro seçimine dönüp tekrar dene.';return;}review.setHalftime(halftime);void review.open(ctx);}
   if(broadcast){
@@ -62,12 +63,15 @@ async function route(){
     try{
       const detail=await api.match(id);if(token!==routeSequence)return;
       if(serverNow()<detail.match.kickoffAt){screen.message({title:'Maç henüz başlamadı',lead:`Başlama: ${new Date(detail.match.kickoffAt).toLocaleString('tr-TR',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})}`,actions:back});return;}
-      if(!recordings.has(id)){
+      // While it is on (and a minute after) everybody watches from the trimmed live copy (~3 MB); afterwards only the admin replays the full
+      // recording (user, 2026-11-06: players get the summary instead).
+      const kind=serverNow()<detail.match.kickoffAt+detail.match.broadcastMs+60_000?'live':'recording',key=`${id}:${kind}`;
+      if(!recordings.has(key)){
         screen.message({title:'Maç yükleniyor…',lead:'Kayıt indiriliyor; birkaç saniye sürebilir.'});
-        const {decodeRecording}=await import('./v1/online/recording.ts');recordings.set(id,await decodeRecording(await api.recording(id)));if(token!==routeSequence)return;
+        const {decodeRecording}=await import('./v1/online/recording.ts');recordings.set(key,await decodeRecording(await (kind==='live'?api.live(id):api.recording(id))));if(token!==routeSequence)return;
       }
-      screen.openBroadcast({recording:recordings.get(id),kickoffAt:detail.match.kickoffAt,clock:serverNow});
-    }catch(e){if(token===routeSequence)screen.message({title:e.status===410?'Tam kayıt silindi':'Maç açılamadı',lead:esc(e.message),actions:back});}
+      screen.openBroadcast({recording:recordings.get(key),kickoffAt:detail.match.kickoffAt,clock:serverNow});
+    }catch(e){if(token===routeSequence)screen.message({title:e.status===410?'Tam kayıt silindi':e.status===403?'Yayın bitti':'Maç açılamadı',lead:esc(e.message),actions:back});}
     return;
   }
   if(game){

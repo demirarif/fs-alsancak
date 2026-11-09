@@ -8,6 +8,13 @@ export function plain(text){
   return text.replace(/\s*·\s*(gol olasılığı|başarı tahmini)\s*%\d+/g,'').replace(/\s*·\s*\d+\s*m\b/g,'').replace(/\s*\([^)]*\d[^)]*\)/g,'').replace(/\s*·\s*$/,'').trim();
 }
 
+/** In-match rule effects ("Utku gerideyken: savunma/pres/pozisyon/dayanıklılık −0,5.") act in the engine but are not shown (user,
+ * 2026-11-06: "yazmasın ama bu olsun", "hepsini gizle"): a rule's text keeps what switches it on, a line made only of them goes. */
+const EFFECT=/(^|[\s(/])[+−]\d/;
+export function withoutEffect(text){if(!EFFECT.test(text))return text;const i=text.indexOf(':');return i>0?text.slice(0,i):'';}
+/** Rules the engine announces when they switch on mid-match: score state, atmosphere, Batu's breath, Erhan's clash. */
+export const announcedRule=r=>r.trigger?.kind==='score'||r.trigger?.kind==='atmosphere'||(r.trigger?.kind==='behavior'&&(r.trigger.predicateId==='batu-breath'||r.trigger.predicateId==='erhan-clash'));
+
 export function commentary(e,nameOf){
   const a=nameOf(e.actorId)||'',b=nameOf(e.targetPlayerId)||'',o=e.outcome,say=lines=>fill(pick(e,lines),a,b);
   switch(e.kind){
@@ -45,7 +52,9 @@ export function commentary(e,nameOf){
       return plain(e.reason.explanation);
     case 'mood':
       if(e.importance>=.6)return /savunma/.test(e.reason.explanation)?say(['{a} savunmada topu aldı, gücüyle ilerliyor!','{a} tek başına çıktı, kimse durduramıyor!']):say(['{a} topu aldı, tek başına gidiyor!','{a} şov başlıyor, kimse yetişemiyor!']);
-      return plain(e.reason.explanation);
+      {// A mood keeps its words; a line that only announces a rule's numbers (or "Günün formu" with them) is not shown.
+        const kept=e.reason.explanation.split(' · ').filter(part=>!EFFECT.test(part));
+        return !kept.length||kept.every(part=>part==='Günün formu')?'':plain(kept.join(' · '));}
     default:return plain(e.reason.explanation);
   }
 }
