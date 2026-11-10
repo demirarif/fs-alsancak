@@ -37,11 +37,15 @@ export interface HalfCarry {
   readonly solo: Readonly<Record<string, 'pending' | 'done' | 'skip'>>;
   readonly keeperDay: Readonly<Record<string, number>>;
 }
+/** A line-up change during a half (user 2026-11-10: "maç sırasında da dizilişi değiştirebilelim"): from match time `seconds` on, the
+ * same eleven play in `lineups`. The half is simulated again from its kick-off with the changes in it, so everything before the first
+ * change is exactly what was already watched. */
+export interface LineupChange { readonly seconds: number; readonly lineups: readonly [Lineup, Lineup] }
 export interface HalfResult { readonly replay: HalfReplay; readonly carry: HalfCarry; readonly score: readonly [number, number]; readonly teamStats: readonly [TeamStats, TeamStats]; readonly players: readonly { id: string; name: string; team: Team; stats: RtPlayer['stats']; energy: number }[] }
 const emptyStats = (): TeamStats => ({ shots: 0, onTarget: 0, goals: 0, passes: 0, completed: 0, possession: 0, corners: 0, fouls: 0, penalties: 0, headerGoals: 0, saves: 0, freeKicks: 0 });
 const pct = (p: number) => `%${Math.round(clamp(p, 0, 1) * 100)}`;
 
-export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: readonly [Lineup, Lineup], carry: HalfCarry | null, onProgress?: (fraction: number) => void): HalfResult {
+export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: readonly [Lineup, Lineup], carry: HalfCarry | null, onProgress?: (fraction: number) => void, changes: readonly LineupChange[] = []): HalfResult {
   const rng = createRng(snapshot.settings.seed, carry?.rngState), C = T.calibration;
   const players = createRuntimePlayers(snapshot, lineups);
   if (carry) for (const p of players) { const c = carry.players.find(q => q.id === p.id); if (c) { p.energy = Math.min(1, c.energy + .1); p.mood = c.mood; p.moodUntil = c.moodUntil; p.dayForm = c.dayForm; p.lastReceived = c.lastReceived; p.stats = { ...c.stats }; } }
@@ -1260,6 +1264,31 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     frameCount++;
   }
 
+  // --- line-up changes during the half --------------------------------------------------
+  /** Same people, new slots: each man keeps where he is, what he is doing and his match so far (energy, mood, stats, rules that switched
+   * on during the game); his place in the shape, his position fit and the pregame chemistry follow the new line-up. The feed says what
+   * changed. Runtime order (idx) stays as it is, so the replay's player channels are unchanged. */
+  let current = lineups, nextChange = 0;
+  function changeLineups(next: readonly [Lineup, Lineup]) {
+    const fresh = createRuntimePlayers(snapshot, next), before = new Map(players.map(p => [p.id, p.slot.id]));
+    for (const p of players) {
+      const f = fresh.find(q => q.id === p.id);if (!f) continue;
+      const temporal = p.activeRuleIds.filter(id => id !== 'team-chemistry' && !p.pregame.some(m => m.ruleId === id));
+      p.slot = f.slot; p.pregame = f.pregame; p.a = f.a; p.aerial = f.aerial; p.distribution = f.distribution;
+      (p as { pregameAtmosphere: number }).pregameAtmosphere = f.pregameAtmosphere;
+      // Rules already on stay on (no second announcement); NaN makes the next temporal pass rebuild his attributes on the new base.
+      p.activeRuleIds = [...new Set([...f.activeRuleIds, ...temporal])]; p.chemistry = Number.NaN;
+    }
+    const a = pregameAssessment(snapshot, next);cohesion[0] = a.evaluation.teams[0].metrics.cohesion.score;cohesion[1] = a.evaluation.teams[1].metrics.cohesion.score;
+    for (const team of [0, 1] as Team[]) {
+      const moved = byTeam[team].filter(p => before.get(p.id) !== p.slot.id);
+      if (next[team].formationId !== current[team].formationId) log('tactics', team, null, null, .35, `Diziliş değişikliği: ${next[team].formationId}`);
+      else if (moved.length === 2) log('tactics', team, moved[0]!, moved[1]!, .35, `Yer değişikliği: ${moved[0]!.name} ↔ ${moved[1]!.name}`);
+      else if (moved.length) log('tactics', team, null, null, .35, `Yer değişikliği: ${moved.map(p => p.name).join(', ')}`);
+    }
+    current = next;
+  }
+
   // --- kickoff and loop -------------------------------------------------------------
   const firstKickoff: Team = carry ? carry.firstKickoff : (rng.chance(.5) ? 0 : 1);
   const kickoffTeam: Team = half === 1 ? firstKickoff : (1 - firstKickoff) as Team;
@@ -1270,6 +1299,7 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
   const totalTicks = Math.round(T.halfSeconds * T.tickHz);
   for (tick = 0; tick < totalTicks; tick++) {
     t = start + tick * DT;
+    while (nextChange < changes.length && t >= changes[nextChange]!.seconds) changeLineups(changes[nextChange++]!.lineups);
     if (tick % T.decisionEvery === 0) {
       if (restart) restartTargets(); else if (t >= celebrateUntil) assignRoles();
       if (t >= celebrateUntil) duels();

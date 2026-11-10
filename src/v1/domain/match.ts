@@ -46,7 +46,7 @@ export type FootballEventKind = 'kick-off' | 'pass' | 'through-pass' | 'diagonal
   | 'bad-touch' | 'miscommunication' | 'carry' | 'tackle' | 'interception' | 'shot'
   | 'save' | 'goal' | 'offside' | 'foul' | 'throw-in' | 'corner' | 'goal-kick'
   | 'free-kick' | 'penalty' | 'half-time' | 'full-time'
-  | 'cross' | 'header' | 'clearance' | 'beat' | 'mood' | 'keeper-claim';
+  | 'cross' | 'header' | 'clearance' | 'beat' | 'mood' | 'keeper-claim' | 'tactics';
 
 export interface EventReason {
   readonly attributeContributions: Readonly<Partial<Record<Attribute, number>>>;

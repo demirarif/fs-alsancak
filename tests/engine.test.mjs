@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {buildMatch,playMatch,SAMPLE_ROSTERS} from '../scripts/simulate-match.mjs';
 import {simulateHalf} from '../src/v1/engine/simulation.ts';
+import {FORMATIONS} from '../src/v1/config/formations.ts';
+import {assignFormation} from '../src/v1/domain/assignment.ts';
 import {aerialScore} from '../src/v1/engine/runtime.ts';
 import {ACTION,BALL_STATE,FRAME_HEADER,PLAYER_CHANNELS} from '../src/v1/engine/replay.ts';
 import {scanHalf} from '../scripts/scan-anomalies.mjs';
@@ -29,6 +31,22 @@ test('the second half continues the first: clock, score and the random stream',(
   assert.deepEqual([r.samples[6],r.samples[7]],[...m.first.score],'second half kicks off at the half-time score');
   const again=simulateHalf(m.snapshot,2,m.snapshot.lineups,m.first.carry);assert.deepEqual(again.score,m.second.score);assert.equal(again.replay.events.length,r.events.length);
   assert.ok(stride>0&&r.frameCount>=1800*10-1,'10 Hz samples for 30 minutes');
+});
+test('a line-up change during a half keeps everything before it and plays on in the new shape',()=>{
+  const m=match(0,3),[blue,red]=m.snapshot.lineups,at=600;
+  const team=l=>({teamId:l.teamId,name:l.teamId,playerIds:l.assignments.map(a=>a.playerId)}),catalog={players:m.snapshot.players};
+  const formation=Object.keys(FORMATIONS).find(id=>id!==blue.formationId);
+  const outfield=red.assignments.filter(a=>a.slotId!=='GK'),[x,y]=[outfield[0],outfield[outfield.length-1]];
+  const swapped={...red,assignments:red.assignments.map(a=>a===x?{...a,playerId:y.playerId}:a===y?{...a,playerId:x.playerId}:a)};
+  const changed=simulateHalf(m.snapshot,1,m.snapshot.lineups,null,undefined,[{seconds:at,lineups:[assignFormation(team(blue),formation,catalog),swapped]}]);
+  const a=m.first.replay,b=changed.replay,stride=FRAME_HEADER+a.playerOrder.length*PLAYER_CHANNELS.length,upTo=Math.floor(at*10)*stride;
+  assert.deepEqual(b.playerOrder,a.playerOrder,'same player channels');
+  assert.ok(Buffer.from(a.samples.buffer,0,upTo*4).equals(Buffer.from(b.samples.buffer,0,upTo*4)),'every frame before the change is the one already watched');
+  assert.deepEqual(b.events.filter(e=>e.seconds<at).map(e=>e.id+e.kind),a.events.filter(e=>e.seconds<at).map(e=>e.id+e.kind),'same events before it');
+  const notes=b.events.filter(e=>e.kind==='tactics');
+  assert.deepEqual(notes.map(e=>[e.teamId,e.seconds]),[['team-1',at],['team-2',at]],'the feed says what changed, for each side');
+  assert.match(notes[0].reason.explanation,new RegExp(formation));assert.match(notes[1].reason.explanation,/↔/);
+  assert.notDeepEqual(b.events.filter(e=>e.seconds>at+60).slice(0,20).map(e=>e.kind+e.seconds),a.events.filter(e=>e.seconds>at+60).slice(0,20).map(e=>e.kind+e.seconds),'the rest of the half plays differently');
 });
 test('no offside and no cards; fouls, free kicks and penalties happen',()=>{
   let fouls=0,penalties=0,freeKicks=0;

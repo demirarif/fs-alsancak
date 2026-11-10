@@ -17,6 +17,9 @@ import { matchReport, bestOfHalf, portraitOf } from './match-report.js';
 import { eventIcon } from './event-icons.js';
 import { createMatchAudio } from './match-audio.js';
 import { createScorebug } from './scorebug.js';
+import { lineupService } from '../v1/application/lineup-service.ts';
+import { roleOnTwenty } from '../v1/features/player-profile/presentation.ts';
+import './team-panel.css';
 import { TEAM_PRESENTATION } from '../v1/config/team-presentation.ts';
 import { FRAME_HEADER, PLAYER_CHANNELS, SAMPLE_HZ } from '../v1/engine/replay.ts';
 import './match.css';
@@ -30,6 +33,8 @@ import './match-premium.css';
  * "simulating" text). "Özet" plays the important moments at real speed (~5 or ~2.5 min a half),
  * 1×–8× play the whole half. At half time the full tactics room (#dizilis) changes formations and places; coming back plays half 2 with
  * them. Leaving and returning mid-match resumes instead of restarting. Visual language follows the player inventory and cards. */
+const TEAM_ICON='<svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><rect x="3.5" y="2.5" width="13" height="15" rx="1"/><path d="M3.5 10h13"/><circle cx="7.2" cy="6.3" r="1.1"/><circle cx="12.8" cy="6.3" r="1.1"/><circle cx="10" cy="13.8" r="1.1"/><path d="m11.8 7.4-1.2 5"/></svg>';
+const PITCH_LINES='<svg class="tp-lines" viewBox="0 0 680 1050" preserveAspectRatio="none" aria-hidden="true"><path d="M20 20h640v1010H20zM20 525h640M138 20v165h404V20M248 20v55h184V20M138 1030V865h404v165M248 1030v-55h184v55"/><circle cx="340" cy="525" r="91.5"/><circle cx="340" cy="525" r="3"/><path d="M268 185q72 70 144 0M268 865q72-70 144 0"/></svg>';
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
 const clock=s=>`${String(Math.floor(s/60)).padStart(2,'0')}:${String(Math.floor(s%60)).padStart(2,'0')}`;
 const minute=s=>`${Math.floor(s/60)+1}'`;
@@ -74,9 +79,11 @@ export function mountMatchScreen(host){
     <canvas class="match-radar" role="img" aria-label="Mini harita: oyuncuların sahadaki yerleri" hidden></canvas>
     <button class="mc-sound" data-sound aria-pressed="false" aria-label="Sesi kapat" title="Ses"></button>
     <a class="mc-exit" href="#gunun-maci" aria-label="Yayından çık, Günün maçına dön"><svg class="ui-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></a>
-    <button class="mc-golive" data-golive hidden>CANLI'ya dön</button><div class="match-overlay" role="dialog" aria-modal="false" hidden></div></div>
+    <button class="mc-golive" data-golive hidden>CANLI'ya dön</button><div class="match-overlay" role="dialog" aria-modal="false" hidden></div>
+    <section class="team-panel" role="dialog" aria-modal="true" aria-label="Takım yönetimi" hidden></section></div>
   <footer class="match-controls"><button class="mc-play" data-play aria-label="Duraklat"><span class="mc-play-symbol" aria-hidden="true">${uiIcon('pause')}</span><span class="mc-play-label">Duraklat</span></button>
-    <button class="mc-replay" data-replay title="Son pozisyonu yarı hızda tekrar izle" aria-label="Son pozisyonu yarı hızda tekrar izle">${uiIcon('reset')}<span>Son pozisyon</span></button>
+    <div class="mc-pair"><button class="mc-replay" data-replay title="Son pozisyonu yarı hızda tekrar izle" aria-label="Son pozisyonu yarı hızda tekrar izle">${uiIcon('reset')}<span>Son pozisyon</span></button>
+    <button class="mc-replay mc-team" data-team-panel title="Takım yönetimi: diziliş ve oyuncu yerleri" aria-label="Takım yönetimi">${TEAM_ICON}<span>Takım</span></button></div>
     <div class="mc-speeds" role="group" aria-label="İzleme biçimi">${SPEEDS.map(([v,l],i)=>`${i===2?'<i class="mc-speed-divider" aria-hidden="true"></i>':''}<button data-speed="${v}" ${v==='h10'?'class="active" aria-pressed="true"':'aria-pressed="false"'} ${BUDGET[v]?'title="Önemli anlar gerçek hızda"':''}>${l}</button>`).join('')}</div>
     <div class="match-timeline"><input type="range" data-timeline min="0" max="1800" step="1" value="0" aria-label="Yarı içinde zaman"/><div class="match-marks" aria-hidden="true"></div></div>
     <button class="match-skip" data-skip><span>Devre arasına geç</span>${uiIcon('skipForward')}</button></footer>`;
@@ -94,6 +101,10 @@ export function mountMatchScreen(host){
   // Online broadcast (user decision 2026-11-05): mode 'broadcast' plays a downloaded recording; while `bcast.live` the picture follows
   // the server clock (everybody at the same moment). Pausing or a replay leaves live play; "CANLI'ya dön" rejoins it.
   let mode='local',bcast=null;
+  // Team management (2026-11-10, user: "devre arasına diziliş değiştirme ekleyelim, öncesinde de dizilişi değiştirebilelim"; a panel on the
+  // match screen, formation and places only, before the kick-off, during a half and at half time). Each half keeps the line-up it kicked
+  // off in (halfBase) and the changes made during it (halfChanges); a change during a half simulates it again with the change in it.
+  let panel=null,matchOver=false;const halfBase=[null,null],halfChanges=[[],[]];
   // Premium theme: the score the scoreboard shows (its digits roll when a goal goes in), the strip under it that flips between facts, and
   // the half-time replays playing in the L screen's picture.
   const shownScore=[null,null];let flapAt=0,flapIndex=-1,intermission=null;
@@ -126,7 +137,8 @@ export function mountMatchScreen(host){
   /** Transport follows the state: nothing to play under a half-time / full-time card, no seeking or replay during the walk-out. */
   function transport(){const card=!overlay.hidden,live=phase==='play'&&!card,locked=mode==='broadcast'&&(!broadcastOver()||bcast.trimmed);if(card){$('.match-why').hidden=true;whyResume=false;}$('[data-play]').disabled=card;$('[data-skip]').disabled=!live||locked;$('[data-replay]').disabled=!live;$('[data-timeline]').disabled=!live||locked;
     // During the broadcast nobody skips ahead or changes the edit: it is the same programme for everybody until it has ended.
-    $$('[data-speed]').forEach(b=>{b.disabled=locked;});$('[data-golive]').hidden=!(mode==='broadcast'&&!bcast.live&&!broadcastOver());$('.match-onair').hidden=!(mode==='broadcast'&&bcast.live);$('.match-scoreboard').classList.toggle('is-live',mode==='broadcast'&&!!bcast?.live);}
+    $$('[data-speed]').forEach(b=>{b.disabled=locked;});$('[data-golive]').hidden=!(mode==='broadcast'&&!bcast.live&&!broadcastOver());$('.match-onair').hidden=!(mode==='broadcast'&&bcast.live);$('.match-scoreboard').classList.toggle('is-live',mode==='broadcast'&&!!bcast?.live);
+    const tb=$('[data-team-panel]');tb.hidden=mode==='broadcast';tb.disabled=!panelWhen();}
   const broadcastOver=()=>mode==='broadcast'&&(bcast.clock()-bcast.kickoffAt)/1000>=bcast.plan.total;
   function teamName(i){return mode==='broadcast'?bcast.names[i]:context.selection.teams[i].name;}
   /** A team's goals scorer by scorer ("Barkuz 10' 29' 32'"), as the night theme's card header lists them (2026-11-10). */
@@ -161,6 +173,7 @@ export function mountMatchScreen(host){
   }
   function newMatch(){
     snapshot=createMatchSnapshot(draft,context,freshSeed());lineups=snapshot.lineups;halves=[null,null];results=[null,null];carry=null;half=1;t=0;
+    matchOver=false;panel=null;renderPanel();
     const names=new Map(snapshot.players.map(p=>[p.id,p.name]));nameOf=id=>names.get(id);
     $$('[data-name]').forEach(el=>{el.textContent=teamName(Number(el.dataset.name));});
     renderer?.dispose();$('.match-scene').innerHTML='';$('.match-labels').innerHTML='';detachInput?.();
@@ -169,18 +182,23 @@ export function mountMatchScreen(host){
   }
   /** Computes half h in the worker while the players walk out; the kick-off follows once both are done. */
   function simulate(h){
-    const id=++runId;half=h;playing=true;setPlayIcon();overlay.hidden=true;phase='walkout';walkT=0;seeked=true;replay=null;intermission=null;transport();
+    half=h;playing=true;setPlayIcon();overlay.hidden=true;phase='walkout';walkT=0;seeked=true;replay=null;intermission=null;transport();
     blackout.classList.add('on');$('.match-ticker').innerHTML='';$('.match-marks').innerHTML='';$('.match-possession').hidden=true;
     const score=h===1?[0,0]:results[0].score;setScore(score);$('[data-clock]').textContent=h===1?'00:00':'30:00';$('[data-period]').textContent=h===1?'1. yarı':'2. yarı';
     if(h===1)showLineups(lineups);else hideLineups();
     if(visible&&!raf){last=performance.now();raf=requestAnimationFrame(frame);}
+    halfBase[h-1]=lineups;halfChanges[h-1]=[];computeHalf(h);
+  }
+  /** Runs half h in the worker: the line-up it kicked off in and the changes made during it; `done` follows the result. */
+  function computeHalf(h,done){
+    const id=++runId;
     worker?.terminate();worker=new Worker(new URL('../v1/workers/simulation.worker.ts',import.meta.url),{type:'module'});
-    const failed=message=>{phase='idle';blackout.classList.remove('on');status(card({label:'Maç',title:'<h2>Maç hesaplanamadı.</h2>',lead:esc(message),actions:'<button class="match-button" data-action="retry">Tekrar dene</button>'}));};
+    const failed=message=>{phase='idle';panel=null;renderPanel();blackout.classList.remove('on');status(card({label:'Maç',title:'<h2>Maç hesaplanamadı.</h2>',lead:esc(message),actions:'<button class="match-button" data-action="retry">Tekrar dene</button>'}));};
     worker.onmessage=event=>{const m=event.data;if(m.runId!==id||disposed)return;
       if(m.kind==='failed')failed(m.message);
-      if(m.kind==='half-complete'){worker.terminate();worker=null;results[h-1]=m.result;halves[h-1]=m.result.replay;carry=m.result.carry;}};
+      if(m.kind==='half-complete'){worker.terminate();worker=null;results[h-1]=m.result;halves[h-1]=m.result.replay;carry=m.result.carry;done?.();}};
     worker.onerror=()=>failed('Maç işçisi başlatılamadı.');
-    worker.postMessage({kind:'simulate-half',runId:id,snapshot,half:h,lineups,carry:h===1?null:carry});
+    worker.postMessage({kind:'simulate-half',runId:id,snapshot,half:h,lineups:halfBase[h-1],carry:h===1?null:results[0].carry,changes:halfChanges[h-1]});
   }
   function startHalf(h){
     half=h;const r=halves[h-1];phase='play';blackout.classList.remove('on');overlay.hidden=true;playing=true;setPlayIcon();cut();replay=null;autoReplay=null;intermission=null;flapAt=0;flapIndex=-1;hideLineups();transport();
@@ -290,7 +308,7 @@ export function mountMatchScreen(host){
   }
   /** Plays a planned match from its recording (mode 'broadcast'). Opened after the broadcast, it starts from the top with no score card. */
   function openBroadcast({recording,kickoffAt,clock}){
-    stop();runId++;mode='broadcast';changingLineup=false;host.classList.add('is-broadcast');
+    stop();runId++;mode='broadcast';changingLineup=false;host.classList.add('is-broadcast');panel=null;renderPanel();halfBase.fill(null);halfChanges[0]=[];halfChanges[1]=[];
     snapshot=recording.snapshot;lineups=recording.lineups[1];halves=[recording.halves[0],recording.halves[1]];results=[recording.results[0],recording.results[1]];carry=null;
     // A recording planned since 6 Nov carries its edit (and the live copy is trimmed to it); the first ones replay with the v1 edit they had.
     bcast={kickoffAt,clock,plan:recording.edit?.plan??broadcastPlan(halves,EDIT_V1),edit:recording.edit??null,trimmed:!!recording.trimmed,live:true,names:recording.teamNames,key:'',piece:-1,overSeen:false};
@@ -376,7 +394,7 @@ export function mountMatchScreen(host){
   const ATTR_TR={speed:'hız',stamina:'dayanıklılık',strength:'güç',passing:'pas',vision:'görüş',control:'kontrol',dribbling:'top sürme',shooting:'şut',finishing:'bitiricilik',defending:'savunma',pressing:'pres',positioning:'pozisyon'};
   function ruleText(id,e){
     if(id==='team-chemistry')return'Takım kimyası (lider oyuncular ya da gergin ortam) takım arkadaşlarının pas/görüş/pozisyonuna yansıyor.';
-    if(id==='position-fit'){const ls=e.seconds<halves[0]?.endSeconds?snapshot.lineups:lineups,team=e.teamId==='team-2'?1:0,l=ls[team],a=l?.assignments.find(x=>x.playerId===e.actorId),slot=a&&FORMATIONS[l.formationId]?.slots.find(s=>s.id===a.slotId),p=snapshot.players.find(x=>x.id===e.actorId);
+    if(id==='position-fit'){const ls=lineupsAt(e.seconds),team=e.teamId==='team-2'?1:0,l=ls[team],a=l?.assignments.find(x=>x.playerId===e.actorId),slot=a&&FORMATIONS[l.formationId]?.slots.find(s=>s.id===a.slotId),p=snapshot.players.find(x=>x.id===e.actorId);
       return(p&&slot&&positionFit(p.name,p.positionRatings,slot.position)?.[0]?.explanation)??'Mevkisinin dışında oynuyor.';}
     // An in-match rule says what switches it on, not its numbers (user, 2026-11-06: "Utku … −0,5 yazmasın", "hepsini gizle"); it still acts.
     const rule=snapshot.rulebook.rules.find(r=>r.id===id);
@@ -509,8 +527,8 @@ export function mountMatchScreen(host){
       else status(confetti(score)+card({wide:true,final:true,label:'Maç sonu',title:scoreRow(score,half),body:scorers(2)+stats(2)+report(),status:true,actions:`<button class="match-button ghost" data-action="rewatch">${uiIcon('reset')}Baştan izle</button><a class="match-button ghost" href="#gunun-maci">Günün maçına dön</a><button class="match-button" data-action="export">${uiIcon('download')}Özeti indir · 9:16</button>`}));
       return;
     }
-    if(half===1)halftime({actions:`<button class="match-button ghost" data-action="tactics">Dizilişi değiştir${uiIcon('arrowUpRight')}</button><button class="match-button" data-action="second">İkinci yarıyı başlat${uiIcon('arrowRight')}</button>`});
-    else{archiveMatch();status(confetti(score)+card({wide:true,final:true,label:'Maç sonu',title:scoreRow(score,half),body:scorers()+stats()+report()+'<p class="match-archived">Maç bu cihazda arşive kaydedildi.</p>',status:true,
+    if(half===1)halftime({actions:`<button class="match-button ghost" data-action="team">${TEAM_ICON}Dizilişi değiştir</button><button class="match-button" data-action="second">İkinci yarıyı başlat${uiIcon('arrowRight')}</button>`});
+    else{matchOver=true;archiveMatch();status(confetti(score)+card({wide:true,final:true,label:'Maç sonu',title:scoreRow(score,half),body:scorers()+stats()+report()+'<p class="match-archived">Maç bu cihazda arşive kaydedildi.</p>',status:true,
       actions:`<button class="match-button ghost" data-action="rewatch">${uiIcon('reset')}Tekrar izle</button><button class="match-button ghost" data-action="new">Yeni maç oyna${uiIcon('arrowRight')}</button><button class="match-button ghost" data-action="archive">Maç arşivi</button><button class="match-button" data-action="export">${uiIcon('download')}Özeti indir · 9:16</button>`}));}
   }
   // Match archive and backup (7. aşama): every finished match is kept on this device; one JSON file carries squads, lineups, guests,
@@ -532,6 +550,79 @@ export function mountMatchScreen(host){
       <footer><button type="button" class="match-button ghost" data-archive-backup>${uiIcon('download')}Yedeği indir</button><label class="match-button ghost">Yedek yükle<input type="file" accept="application/json,.json" data-archive-restore hidden></label></footer><p class="archive-note" role="status">${esc(note)}</p>`;
     if(!dlg.open)dlg.showModal();
   }
+  // ── Team management panel ──
+  const SIDE=['team-1','team-2'],sideColor=i=>TEAM_PRESENTATION[SIDE[i]].color;
+  /** The line-ups in effect at match time s: the half's starting line-up, then the last change made before s. */
+  function lineupsAt(s){const h=s<(halves[0]?.endSeconds??Infinity)?0:1,c=halfChanges[h].filter(x=>x.seconds<=s).at(-1);return c?c.lineups:halfBase[h]??(h===0?snapshot.lineups:lineups);}
+  /** When the panel can open: 'pre' before a kick-off, 'live' during a half, 'half' at half time; not in a broadcast, after the final
+   * whistle, or while re-watching a half whose sequel is already played. */
+  function panelWhen(){
+    if(mode!=='local'||!context||!snapshot||exporting||matchOver)return null;
+    if(phase==='walkout')return 'pre';
+    if(phase!=='play')return null;
+    if(!overlay.hidden)return half===1&&results[0]&&!halves[1]?'half':null;
+    return halves[half-1]&&!(half===1&&halves[1])?'live':null;
+  }
+  function openPanel(){
+    const when=panelWhen();if(!when||panel)return;
+    if(replay){t=replay.returnT;replay=null;seeked=true;}
+    panel={when,at:when==='live'?t:null,work:lineups,pick:null,tab:0,busy:false,wasPlaying:playing};
+    if(when!=='half'){playing=false;setPlayIcon();}
+    renderPanel();transport();
+  }
+  function closePanel(){const resume=panel&&panel.when!=='half'&&panel.wasPlaying;panel=null;renderPanel();if(resume){playing=true;setPlayIcon();}transport();}
+  function panelTeam(i){
+    const l=panel.work[i],f=FORMATIONS[l.formationId],pick=panel.pick?.team===i?panel.pick.slot:null;
+    const men=f.slots.map(slot=>{const a=l.assignments.find(x=>x.slotId===slot.id),p=snapshot.players.find(q=>q.id===a.playerId),keeper=p.kind==='goalkeeper';
+      const r=roleOnTwenty(keeper?p.goalkeeperRating:p.positionRatings[slot.position]??0);
+      return `<button type="button" class="tp-player${keeper?' is-keeper':''}${pick===slot.id?' is-picked':''}${pick&&pick!==slot.id&&!keeper?' is-target':''}" data-tp-slot="${slot.id}" data-tp-team="${i}" data-rating="${r}" style="left:${slot.anchor.z*100}%;top:${(1-slot.anchor.x)*100}%" ${keeper?'disabled':''} aria-pressed="${pick===slot.id}" aria-label="${esc(p.name)} · ${esc(slot.label)} · ${r}/20"><span class="tp-kit">${teamKitMarkup(SIDE[i],keeper,p)}</span><b>${esc(p.name)}</b></button>`;}).join('');
+    return `<section class="tp-team" style="--team-color:${sideColor(i)}"><header><h3>${esc(teamName(i))}</h3><span>${l.formationId}</span></header>
+      <div class="tp-formations" role="group" aria-label="${esc(teamName(i))} dizilişi">${Object.keys(FORMATIONS).map(id=>`<button type="button" data-tp-formation="${id}" data-tp-team="${i}" aria-pressed="${id===l.formationId}">${id}</button>`).join('')}</div>
+      <div class="tp-pitch">${PITCH_LINES}${men}</div></section>`;
+  }
+  function renderPanel(){
+    const el=$('.team-panel');$('.match-controls').inert=!!panel;document.documentElement.classList.toggle('tp-open',!!panel);if(!panel){el.hidden=true;el.innerHTML='';return;}
+    const note=panel.when==='live'?`${minute(panel.at)} · maç durdu; değişiklik bu andan itibaren geçerli`:panel.when==='half'||half===2?'İkinci yarı bu dizilişle başlar':'Başlama düdüğünden önce: maç bu dizilişle başlar';
+    el.hidden=false;el.dataset.tab=String(panel.tab);
+    el.innerHTML=`<div class="tp-card"><header class="tp-head"><div><small>Takım yönetimi</small><h2>Diziliş</h2></div><p>${note}</p><button type="button" class="tp-close" data-tp-cancel aria-label="Kapat">${uiIcon('close')}</button></header>
+      <div class="tp-tabs" role="group" aria-label="Gösterilen takım">${[0,1].map(i=>`<button type="button" data-tp-tab="${i}" aria-pressed="${panel.tab===i}" style="--team-color:${sideColor(i)}">${esc(teamName(i))}</button>`).join('')}</div>
+      <div class="tp-teams">${panelTeam(0)}${panelTeam(1)}</div>
+      <footer class="tp-foot"><p>Yer değiştirmek için aynı takımdan iki oyuncuya sırayla dokun. Kaleci sabit.</p><button type="button" class="match-button ghost" data-tp-cancel>Vazgeç</button><button type="button" class="match-button" data-tp-apply ${panel.busy?'disabled':''}>${panel.busy?'Uygulanıyor…':'Uygula'}</button></footer></div>`;
+  }
+  /** Formation and swaps go through the same service as the tactics room (best places for a new formation, then any swaps). */
+  function panelCommand(command){const r=lineupService.apply({...draft,lineups:panel.work},command,context);if(r.ok)panel.work=r.value.lineups;panel.pick=null;renderPanel();}
+  async function saveDraft(next){const value={...draft,revision:draft.revision+1,lineups:next},saved=await repository.saveLineups(value);if(saved.ok)draft=value;}
+  function applyPanel(){
+    if(!panel||panel.busy)return;const next=panel.work,when=panel.when;
+    if(JSON.stringify(next)===JSON.stringify(lineups)){closePanel();return;}
+    lineups=next;
+    if(when==='live'){
+      // From this moment on: the half again with the change in it (identical up to here), then on from the same moment.
+      const h=half,at=panel.at;halfChanges[h-1]=[...halfChanges[h-1].filter(c=>c.seconds<at),{seconds:at,lineups:next}];
+      panel.busy=true;renderPanel();
+      computeHalf(h,()=>{t=Math.min(at,halves[h-1].endSeconds);editSegments();stops=stopsOf(h);const i=segments.findIndex(s=>s.end>t);segIndex=i<0?segments.length-1:i;autoReplay=null;closePanel();});
+      return;
+    }
+    // Before a kick-off or at half time: the half kicks off in this line-up, saved as the line-up draft as the tactics room would.
+    saveDraft(next);
+    if(when==='pre'){
+      if(half===1){snapshot=createMatchSnapshot({...draft,lineups:next},context,snapshot.settings.seed,snapshot.createdAt);showLineups(lineups);}
+      halfBase[half-1]=next;halfChanges[half-1]=[];halves[half-1]=null;results[half-1]=null;computeHalf(half);
+    }
+    closePanel();
+  }
+  host.addEventListener('click',event=>{
+    const b=event.target.closest('[data-team-panel],[data-tp-tab],[data-tp-formation],[data-tp-slot],[data-tp-cancel],[data-tp-apply]');if(!b)return;
+    if(b.matches('[data-team-panel]')){openPanel();return;}
+    if(!panel||panel.busy)return;
+    if(b.matches('[data-tp-cancel]'))closePanel();
+    else if(b.matches('[data-tp-apply]'))applyPanel();
+    else if(b.matches('[data-tp-tab]')){panel.tab=Number(b.dataset.tpTab);panel.pick=null;renderPanel();}
+    else if(b.matches('[data-tp-formation]')){const team=Number(b.dataset.tpTeam);if(panel.work[team].formationId!==b.dataset.tpFormation)panelCommand({kind:'change-formation',teamId:SIDE[team],formationId:b.dataset.tpFormation});}
+    else{const team=Number(b.dataset.tpTeam),slot=b.dataset.tpSlot;
+      if(panel.pick?.team===team&&panel.pick.slot!==slot)panelCommand({kind:'swap-slots',teamId:SIDE[team],firstSlot:panel.pick.slot,secondSlot:slot});
+      else{panel.pick=panel.pick?.team===team&&panel.pick.slot===slot?null:{team,slot};renderPanel();}}
+  });
   host.addEventListener('click',async event=>{
     const b=event.target.closest('[data-archive-close],[data-archive-backup]');if(!b)return;const dlg=host.querySelector('.match-archive');
     if(b.dataset.archiveClose!==undefined){dlg?.close();return;}
@@ -561,6 +652,7 @@ export function mountMatchScreen(host){
     else if(b.dataset.speed){replay=null;speed=BUDGET[b.dataset.speed]?b.dataset.speed:Number(b.dataset.speed);$$('[data-speed]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b));});if(phase==='play'){editSegments();if(highlighting())alignToSegments();}}
     else if(b.dataset.skip!==undefined&&!(mode==='broadcast'&&(!broadcastOver()||bcast.trimmed))){const r=phase==='play'?halves[half-1]:null;if(r){replay=null;t=r.endSeconds;segIndex=segments.length-1;seeked=true;}}
     else if(b.dataset.action==='tactics'){changingLineup=true;location.hash='#dizilis';}
+    else if(b.dataset.action==='team')openPanel();
     else if(b.dataset.action==='second'){changingLineup=false;if(mode==='broadcast')startHalf(2);else simulate(2);}
     else if(b.dataset.action==='rewatch'){startHalf(1);}
     else if(b.dataset.action==='new'){newMatch();}
@@ -581,7 +673,7 @@ export function mountMatchScreen(host){
   // HUD boxes the name labels must avoid.
   const hudObserver=new ResizeObserver(()=>{layoutL();if(!renderer)return;const box=host.querySelector('.match-stage').getBoundingClientRect();renderer.setHudExclusions([...host.querySelectorAll('.match-scoreboard,.sbx,.match-possession,.match-camera,.match-ticker,.match-radar')].map(el=>el.getBoundingClientRect()).map(r=>({x:r.left-box.left,y:r.top-box.top,width:r.width,height:r.height})));});
   hudObserver.observe(host.querySelector('.match-stage'));
-  function onKey(event){if(visible)audio.unlock();if(visible&&event.code==='Escape'&&!$('.match-why').hidden){closeWhy();return;}if(!visible||!overlay.hidden||event.target.closest?.('input,select,button,a'))return;if(event.code==='Space'){event.preventDefault();playing=!playing;setPlayIcon();if(mode==='broadcast'&&bcast.live&&!playing){bcast.live=false;transport();}}}
+  function onKey(event){if(visible)audio.unlock();if(visible&&panel){if(event.code==='Escape'){event.preventDefault();if(!panel.busy)closePanel();}return;}if(visible&&event.code==='Escape'&&!$('.match-why').hidden){closeWhy();return;}if(!visible||!overlay.hidden||event.target.closest?.('input,select,button,a'))return;if(event.code==='Space'){event.preventDefault();playing=!playing;setPlayIcon();if(mode==='broadcast'&&bcast.live&&!playing){bcast.live=false;transport();}}}
   window.addEventListener('keydown',onKey);
   Object.defineProperty(window,'alsancakMatch',{configurable:true,get:()=>({phase,half,t,playing,speed,mode,live:!!bcast?.live,score:results[1]?.score??results[0]?.score??null,ready:!!halves[half-1],overlay:!overlay.hidden,
     events:halves.filter(Boolean).reduce((n,h)=>n+h.events.length,0),

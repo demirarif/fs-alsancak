@@ -13,6 +13,7 @@ const PATHS={
   cross:'<path d="M3.5 16C5.5 8 12 5.5 16.5 6.3"/><path d="m13.6 3.6 2.9 2.7-2.8 2.9"/>',
   claim:'<path d="M10 2.8v8.4M6.6 6.2 10 2.8l3.4 3.4"/><circle cx="10" cy="14.6" r="2.6"/>',
   mood:'<path d="M11.3 2.5 5 11h5l-1.2 6.5 6.3-8.6h-5Z"/>',
+  tactics:'<rect x="3.5" y="2.5" width="13" height="15" rx="1"/><path d="M3.5 10h13"/><circle cx="7.2" cy="6.3" r="1.1"/><circle cx="12.8" cy="6.3" r="1.1"/><circle cx="10" cy="13.8" r="1.1"/>',
   dot:'<circle cx="10" cy="10" r="2.6"/>',
 };
 /** Which icon a commentary line gets: the outcome decides for shots (in, saved, wide, post, blocked). */
@@ -30,6 +31,7 @@ export function eventIconName(e){
     case 'keeper-claim':return 'claim';
     case 'clearance':case 'tackle':case 'interception':return 'block';
     case 'mood':return 'mood';
+    case 'tactics':return 'tactics';
     default:return 'dot';
   }
 }

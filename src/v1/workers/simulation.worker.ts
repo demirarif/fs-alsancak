@@ -7,7 +7,7 @@ worker.onmessage = event => {
   const request = event.data;
   if (request.kind !== 'simulate-half') return;
   try {
-    const result = simulateHalf(request.snapshot, request.half, request.lineups, request.carry, fraction => worker.postMessage({ kind: 'progress', runId: request.runId, half: request.half, fraction }));
+    const result = simulateHalf(request.snapshot, request.half, request.lineups, request.carry, fraction => worker.postMessage({ kind: 'progress', runId: request.runId, half: request.half, fraction }), request.changes ?? []);
     worker.postMessage({ kind: 'half-complete', runId: request.runId, half: request.half, result }, [result.replay.samples.buffer, result.replay.ballKeys.buffer, result.replay.ballCuts.buffer]);
   } catch (error) {
     worker.postMessage({ kind: 'failed', runId: request.runId, message: error instanceof Error ? error.message : 'Maç hesaplanamadı.' });

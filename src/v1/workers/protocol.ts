@@ -4,7 +4,7 @@ import type { ReplayChunk, ReplayManifest } from '../domain/replay.js';
 import type { SimulationProgress } from '../engine/contracts.js';
 import type { OptimizationRequest, OptimizationResult } from '../application/services.js';
 import type { Lineup } from '../domain/teams.js';
-import type { HalfCarry, HalfResult } from '../engine/simulation.ts';
+import type { HalfCarry, HalfResult, LineupChange } from '../engine/simulation.ts';
 
 /** Late messages from superseded runId/revision pairs must be discarded. */
 export type SimulationWorkerRequest =
@@ -21,7 +21,7 @@ export type SimulationWorkerResponse =
 
 /** Half-by-half match simulation (user decision: half-time lineup changes). */
 export type MatchWorkerRequest =
-  | { readonly kind: 'simulate-half'; readonly runId: RunId; readonly snapshot: MatchSnapshot; readonly half: 1 | 2; readonly lineups: readonly [Lineup, Lineup]; readonly carry: HalfCarry | null };
+  | { readonly kind: 'simulate-half'; readonly runId: RunId; readonly snapshot: MatchSnapshot; readonly half: 1 | 2; readonly lineups: readonly [Lineup, Lineup]; readonly carry: HalfCarry | null; readonly changes?: readonly LineupChange[] };
 export type MatchWorkerResponse =
   | { readonly kind: 'progress'; readonly runId: RunId; readonly half: 1 | 2; readonly fraction: number }
   | { readonly kind: 'half-complete'; readonly runId: RunId; readonly half: 1 | 2; readonly result: HalfResult }

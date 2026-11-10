@@ -1,0 +1,80 @@
+/* Team management panel (2026-11-10): both sides' formation and places, on the match screen — before a kick-off, during a half (the
+   match waits) and at half time. Drawn in the FC theme's language: slanted strips, the side's colour on top, turquoise for the step. */
+#match-screen .team-panel{position:absolute;inset:0;z-index:40;display:grid;place-items:center;padding:14px;background:rgba(4,6,12,.66);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:tp-in .22s ease-out}
+#match-screen .team-panel[hidden]{display:none}
+@keyframes tp-in{from{opacity:0}}
+#match-screen .tp-card{width:min(1040px,100%);max-height:100%;overflow:auto;display:flex;flex-direction:column;color:#fff;font-family:'Barlow Condensed','Arial Narrow',sans-serif;
+  background:linear-gradient(180deg,rgba(16,22,38,.97),rgba(7,10,18,.97));border:1px solid rgba(255,255,255,.14);border-top:3px solid #1de9c8;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:tp-up .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes tp-up{from{transform:translateY(14px);opacity:0}}
+#match-screen .tp-head{display:flex;align-items:center;gap:16px;padding:12px 16px 12px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+#match-screen .tp-head small{display:block;font-weight:800;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#1de9c8}
+#match-screen .tp-head h2{margin:0;font-style:italic;font-weight:900;font-size:30px;line-height:1;letter-spacing:.03em;text-transform:uppercase}
+#match-screen .tp-head p{margin:0 0 0 auto;max-width:46%;font-weight:700;font-size:15px;line-height:1.25;letter-spacing:.03em;color:rgba(255,255,255,.78);text-align:right}
+#match-screen .tp-close{flex:none;display:grid;place-items:center;width:34px;height:34px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;cursor:pointer}
+#match-screen .tp-close .ui-icon{width:16px;height:16px}
+#match-screen .tp-tabs{display:none}
+#match-screen .tp-teams{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:14px 16px}
+#match-screen .tp-team{min-width:0;padding:10px 12px 12px;border-top:3px solid var(--team-color);background:linear-gradient(180deg,color-mix(in srgb,var(--team-color) 32%,transparent),transparent 110px)}
+#match-screen .tp-team>header{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+#match-screen .tp-team h3{margin:0;font-style:italic;font-weight:900;font-size:22px;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#match-screen .tp-team>header span{font-weight:900;font-size:18px;color:rgba(255,255,255,.7)}
+#match-screen .tp-formations{display:flex;gap:3px;margin:8px 0 10px}
+#match-screen .tp-formations button{flex:1 1 0;min-width:0;padding:7px 2px;border:0;background:rgba(5,7,13,.55);color:rgba(255,255,255,.78);font:800 14px/1 'Barlow Condensed','Arial Narrow',sans-serif;letter-spacing:.03em;
+  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%);cursor:pointer;transition:background .15s,color .15s}
+#match-screen .tp-formations button:hover{background:rgba(255,255,255,.18);color:#fff}
+#match-screen .tp-formations button[aria-pressed="true"]{background:#fff;color:#05070d}
+/* The pitch: the tactics room's floodlit grass, smaller. */
+#match-screen .tp-pitch{position:relative;height:min(52vh,500px);aspect-ratio:680/1050;max-width:100%;margin:0 auto;border:2px solid rgba(255,255,255,.55);
+  background:radial-gradient(ellipse 80% 45% at 50% 0%,rgba(255,255,255,.2),transparent 70%),radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(0,20,8,.4)),repeating-linear-gradient(0deg,#2a9a52 0 10%,#22884a 10% 20%);
+  box-shadow:0 0 0 4px rgba(5,7,13,.35),0 0 28px color-mix(in srgb,var(--team-color) 28%,transparent)}
+#match-screen .tp-lines{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:rgba(255,255,255,.75);stroke-width:2.2;pointer-events:none}
+#match-screen .tp-player{position:absolute;transform:translate(-50%,-62%);display:flex;flex-direction:column;align-items:center;gap:2px;width:84px;padding:0;border:0;background:none;color:#fff;cursor:pointer}
+#match-screen .tp-player:disabled{cursor:default;opacity:1}
+#match-screen .tp-kit{display:block;width:36px;height:36px;border-radius:50%;filter:drop-shadow(0 4px 4px rgba(0,0,0,.5)) drop-shadow(0 0 6px color-mix(in srgb,var(--team-color) 70%,transparent));transition:transform .15s}
+#match-screen .tp-kit svg{display:block;width:100%;height:100%}
+#match-screen .tp-player:not(:disabled):hover .tp-kit{transform:translateY(-2px) scale(1.07)}
+#match-screen .tp-player b{max-width:84px;padding:2px 6px 1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:rgba(5,7,13,.86);border-left:3px solid var(--team-color);
+  font-weight:800;font-size:13px;letter-spacing:.03em;text-transform:uppercase;box-shadow:0 3px 8px rgba(0,0,0,.4)}
+/* The player's mark for that place, on a plate at the shoulder; gold from 17. */
+#match-screen .tp-player::before{content:attr(data-rating);position:absolute;top:-5px;left:calc(50% + 9px);z-index:1;min-width:20px;padding:1px 3px;text-align:center;font-weight:900;font-size:13px;line-height:1.1;
+  color:#05070d;background:#e9eef7;clip-path:polygon(3px 0,100% 0,calc(100% - 3px) 100%,0 100%)}
+#match-screen .tp-player:is([data-rating="17"],[data-rating="18"],[data-rating="19"],[data-rating="20"])::before{background:linear-gradient(135deg,#fff2b0,#ffc83d 50%,#e0a21b)}
+#match-screen .tp-player.is-picked .tp-kit{outline:2px solid #1de9c8;outline-offset:3px;background:rgba(29,233,200,.22);animation:tp-ring 1.1s ease-in-out infinite}
+#match-screen .tp-player.is-picked b{border-left-color:#1de9c8;background:rgba(4,40,34,.94)}
+#match-screen .tp-player.is-target .tp-kit{outline:1px dashed rgba(255,255,255,.6);outline-offset:3px}
+@keyframes tp-ring{50%{outline-offset:6px;outline-color:rgba(29,233,200,.35)}}
+#match-screen .tp-foot{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid rgba(255,255,255,.1)}
+#match-screen .tp-foot p{margin:0 auto 0 0;font-weight:600;font-size:14px;letter-spacing:.03em;color:rgba(255,255,255,.65)}
+/* The controls bar's team button beside "Son pozisyon": the two share the replay button's cell. */
+#match-screen .match-controls .mc-pair{grid-column:2;grid-row:2;justify-self:start;display:flex;align-items:center;gap:8px;min-width:0}
+#match-screen .match-controls .mc-pair .mc-replay{grid-column:auto;grid-row:auto}
+/* Mid-width screens: the two show their icons only (their names stay in the tooltip), so the speeds keep their room. */
+@media (min-width:721px) and (max-width:1180px){#match-screen .match-controls .mc-pair .mc-replay span{display:none}#match-screen .match-controls .mc-pair .mc-replay{padding-inline:11px}}
+#match-screen .mc-team .ui-icon{fill:none;stroke:currentColor;stroke-width:1.4}
+#match-screen .match-button .ui-icon{fill:none;stroke:currentColor;stroke-width:1.4}
+/* Phones: one side at a time, chosen with the tabs. */
+@media (max-width:720px){
+  /* "Son pozisyon" shows its icon only, so "Takım" stands clear of the skip button. */
+  #match-screen .match-controls .mc-pair .mc-replay:not(.mc-team) span{display:none}
+  /* The whole screen, over the controls too, so the pitch and the buttons fit without scrolling. */
+  #match-screen .team-panel{position:fixed;inset:0;z-index:60;padding:0;align-items:stretch}
+  #match-screen .tp-card{width:100%;height:100%;max-height:none;border:0;border-top:3px solid #1de9c8}
+  /* The top bar and the controls sit in their own layers; while the panel is up on the match screen they step aside. */
+  html.tp-open #app:has(#match-screen:not([hidden])) .topbar,html.tp-open #match-screen .match-controls{visibility:hidden}
+  #match-screen .tp-head small{white-space:nowrap}
+  #match-screen .tp-foot{margin-top:auto;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+  #match-screen .tp-head{padding:10px 12px;gap:10px}
+  #match-screen .tp-head h2{font-size:24px}
+  #match-screen .tp-head p{font-size:13px;max-width:none}
+  #match-screen .tp-tabs{display:flex;gap:4px;padding:10px 12px 0}
+  #match-screen .tp-tabs button{flex:1;padding:8px;border:0;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);font:800 15px/1 'Barlow Condensed',sans-serif;letter-spacing:.05em;text-transform:uppercase;
+    clip-path:polygon(7px 0,100% 0,calc(100% - 7px) 100%,0 100%)}
+  #match-screen .tp-tabs button[aria-pressed="true"]{background:var(--team-color);color:#fff}
+  #match-screen .tp-teams{grid-template-columns:1fr;padding:10px 12px}
+  #match-screen .team-panel[data-tab="0"] .tp-team:nth-child(2),#match-screen .team-panel[data-tab="1"] .tp-team:nth-child(1){display:none}
+  #match-screen .tp-pitch{height:min(calc(100dvh - 300px),480px)}
+  #match-screen .tp-foot{padding:10px 12px}
+  #match-screen .tp-foot p{display:none}
+  #match-screen .tp-foot .match-button{flex:1}
+}
+@media (prefers-reduced-motion:reduce){#match-screen .team-panel,#match-screen .tp-card,#match-screen .tp-player.is-picked .tp-kit{animation:none}}
