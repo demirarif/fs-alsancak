@@ -34,6 +34,11 @@ test('login names: the user list, unique, typed with or without capitals and Tur
   assert.equal(usernameFor({id:'',name:'Ece'}),'ece');assert.equal(firstPassword(usernameFor({id:'',name:'Zeynep'})),'zeynep!');
 });
 
+test('a coupon with a big exact score is possible: the scan reaches the score market\'s own limit (it stopped at 16)',()=>{
+  const none=()=>undefined;
+  assert.equal(couponPossible([{family:'score',params:{},code:'17-0'},{family:'ft',params:{},code:'1'}],none),true);
+  assert.equal(couponPossible([{family:'score',params:{},code:'17-0'},{family:'ft',params:{},code:'2'}],none),false);
+});
 test('markets decide every family on the match facts',()=>{
   const w=(family,code,params={})=>wins(family,params,code,facts);
   assert.ok(w('ft','1')&&!w('ft','X')&&!w('ft','2'));assert.ok(w('ht','2'));assert.ok(w('sh','1'),'second half 4–1');assert.ok(w('htft','2/1'));

@@ -210,9 +210,12 @@ async function settleDue(env: Env, now: number) {
     }), { results, bonuses } = settle(known, result.facts);
     // A coupon's picks keep whether each came in (✓ / ✗ without reading the book again).
     const judged = new Map(bets.filter(b => b.legs).map(b => [b.id, JSON.stringify((JSON.parse(b.legs!) as LegRow[]).map(l => { const x = market.get(l.market);return { ...l, won: x ? wins(x.family, x.params, l.code, result.facts) : false }; }))]));
-    const statements = results.map(r => env.DB.prepare("UPDATE bets SET status = ?, payout = ?, legs = COALESCE(?, legs) WHERE id = ? AND status = 'open'").bind(r.won ? 'won' : 'lost', r.payout, judged.get(r.id) ?? null, r.id));
-    statements.push(...ledgerInserts(env, [...results.filter(r => r.payout > 0).map(r => ({ user: r.user, kind: 'win', ref: `win:${r.id}`, amount: r.payout, match: m.id })),
-      ...bonuses.filter(b => b.amount > 0).map(b => ({ user: b.user, kind: 'bonus', ref: `bonus:${m.id}:${b.user}`, amount: b.amount, match: m.id }))], now));
+    // The money goes in before the bets' status (2026-11-10): the batches commit one by one, and a pass that stops between them must leave
+    // every bet still 'open' that has not been paid, for the next pass to take again (the unique refs keep a payment to one). Status
+    // first lost the winnings of bets already marked won, and the next pass worked the loss bonus out on the leftovers only.
+    const statements = ledgerInserts(env, [...results.filter(r => r.payout > 0).map(r => ({ user: r.user, kind: 'win', ref: `win:${r.id}`, amount: r.payout, match: m.id })),
+      ...bonuses.filter(b => b.amount > 0).map(b => ({ user: b.user, kind: 'bonus', ref: `bonus:${m.id}:${b.user}`, amount: b.amount, match: m.id }))], now);
+    statements.push(...results.map(r => env.DB.prepare("UPDATE bets SET status = ?, payout = ?, legs = COALESCE(?, legs) WHERE id = ? AND status = 'open'").bind(r.won ? 'won' : 'lost', r.payout, judged.get(r.id) ?? null, r.id)));
     statements.push(env.DB.prepare("UPDATE matches SET status = 'settled' WHERE id = ? AND status = 'scheduled'").bind(m.id));
     // The table's balances are sums the triggers keep; once a match they are checked against the ledger (only a wrong one is written).
     statements.push(env.DB.prepare('UPDATE users SET balance = (SELECT COALESCE(SUM(amount), 0) FROM ledger l WHERE l.user_id = users.id) WHERE balance <> (SELECT COALESCE(SUM(amount), 0) FROM ledger l WHERE l.user_id = users.id)'));
@@ -221,8 +224,9 @@ async function settleDue(env: Env, now: number) {
 }
 async function refundAll(env: Env, matchId: string, now: number) {
   const bets = (await env.DB.prepare("SELECT * FROM bets WHERE match_id = ? AND status = 'open'").bind(matchId).all<BetRow>()).results;
-  await runBatches(env, [...bets.map(b => env.DB.prepare("UPDATE bets SET status = 'void' WHERE id = ?").bind(b.id)),
-    ...ledgerInserts(env, bets.map(b => ({ user: b.user_id, kind: 'refund', ref: `refund:${b.id}`, amount: b.stake, match: matchId })), now)]);
+  // Refunds before the status, as in settleDue: a pass that stops half way leaves the unrefunded bets open for the next one.
+  await runBatches(env, [...ledgerInserts(env, bets.map(b => ({ user: b.user_id, kind: 'refund', ref: `refund:${b.id}`, amount: b.stake, match: matchId })), now),
+    ...bets.map(b => env.DB.prepare("UPDATE bets SET status = 'void' WHERE id = ? AND status = 'open'").bind(b.id))]);
 }
 /** The table: listed players and observers with a bet, by balance (both kept on the user row, so this reads one row each). */
 async function leaderboard(env: Env) {
@@ -303,6 +307,20 @@ async function matchDetail(request: Request, env: Env, id: string) {
   return json({ now, match: publicMatch(m, now, !!user.is_admin), book: book ? liveBookOf(m.id, book, staked, now >= m.kickoff_at) : null, mine: (await myBets(env, user.id, [id])).map(b => betView(b, judge)),
     bets: all.map(b => ({ ...betView(b, judge), name: b.name })), ...(user.is_admin ? { staked, counts, coupons: await couponLegs(env, id) } : {}) });
 }
+/** Every pick can be played again in each new coupon (user, 2026-11-10: "her kupondan sonra oynanabilir iddaa bacaklarını sıfırlayalım";
+ * the earlier one-side-per-market lock is gone). Only a set of bets that wins whatever the result is refused: with what this user
+ * already holds on the match (the bet being replaced left out), some result must still lose them everything. */
+const COVER_ERROR = 'Bu bahisle birlikte her sonuçta en az bir bahsin kazanırdı; kesin kazanç olan bahis oynanmaz.';
+async function wouldCover(env: Env, userId: number, m: MatchRow, book: Book, picks: Pick[], replacing: string | null) {
+  const held = (await env.DB.prepare("SELECT id, market_id, code, legs FROM bets WHERE user_id = ? AND match_id = ? AND status NOT IN ('void', 'withdrawn')").bind(userId, m.id).all<{ id: string; market_id: string; code: string; legs: string | null }>()).results.filter(h => h.id !== replacing);
+  const byId = new Map(book.markets.map(x => [x.id, x])), position = (market: string, code: string): Position | null => { const x = byId.get(market);return x ? { family: x.family, params: x.params, code } : null; };
+  const positions: (Position | CouponPosition)[] = held.flatMap((h): (Position | CouponPosition)[] => {
+    if (h.legs) { const legs = (JSON.parse(h.legs) as LegRow[]).map(l => position(l.market, l.code));return legs.every(Boolean) ? [{ legs: legs as Position[] }] : []; }
+    const x = position(h.market_id, h.code);return x ? [x] : [];
+  });
+  const mine = picks.map(p => ({ family: p.market.family, params: p.market.params, code: p.outcome.code }));positions.push(mine.length === 1 ? mine[0]! : { legs: mine });
+  return covers(positions, teamsOf(m));
+}
 async function placeBet(request: Request, env: Env, id: string) {
   const user = await requireUser(request, env), now = Date.now();
   if (user.is_admin) throw new HttpError(403, 'Admin hesabı bahis oynamaz; kendi hesabınla gir.');
@@ -311,22 +329,10 @@ async function placeBet(request: Request, env: Env, id: string) {
   const b = await body<{ market?: string; code?: string; legs?: unknown; stake?: number; replaces?: string; seen?: number }>(request), stake = Math.round(Number(b.stake));
   if (!Number.isInteger(stake) || stake < COIN.minStake || stake > COIN.maxStake) throw new HttpError(400, `Bahis ${COIN.minStake} ile ${COIN.maxStake.toLocaleString('tr-TR')} Alsancak coin arasında olmalı.`);
   const book = bookOf(m)!, picks = resolvePicks(book, b.legs ?? [{ market: b.market, code: b.code }]);
-  // One side per market across one's bets, single picks and coupons alike: no backing the winner and the loser.
   // Editing (user, 2026-11-05: "maça kadar düzenleyebilsin"): the bet being replaced must be one's own, still open, on this match.
   const old = b.replaces ? await env.DB.prepare("SELECT * FROM bets WHERE id = ? AND user_id = ? AND match_id = ? AND status = 'open'").bind(String(b.replaces), user.id, id).first<BetRow>() : null;
   if (b.replaces && !old) throw new HttpError(409, 'Düzenlenen kupon bulunamadı ya da artık değiştirilemez.');
-  const held = (await env.DB.prepare("SELECT id, market_id, code, label, legs FROM bets WHERE user_id = ? AND match_id = ? AND status NOT IN ('void', 'withdrawn')").bind(user.id, id).all<{ id: string; market_id: string; code: string; label: string; legs: string | null }>()).results.filter(h => h.id !== old?.id);
-  const sides = new Map<string, { code: string; label: string }>();
-  for (const h of held) if (h.legs) for (const l of JSON.parse(h.legs) as LegRow[]) sides.set(l.market, { code: l.code, label: l.label });else sides.set(h.market_id, { code: h.code, label: h.label });
-  for (const p of picks) { const side = sides.get(p.market.id);if (side && side.code !== p.outcome.code) throw new HttpError(409, `${p.market.label}: zaten "${side.label.split(': ').pop()}" tarafındasın; aynı bahiste iki tarafa oynanmaz.`); }
-  // With what this user already holds on the match, some result must still lose them everything.
-  const byId = new Map(book.markets.map(x => [x.id, x])), position = (market: string, code: string): Position | null => { const x = byId.get(market);return x ? { family: x.family, params: x.params, code } : null; };
-  const positions: (Position | CouponPosition)[] = held.flatMap((h): (Position | CouponPosition)[] => {
-    if (h.legs) { const legs = (JSON.parse(h.legs) as LegRow[]).map(l => position(l.market, l.code));return legs.every(Boolean) ? [{ legs: legs as Position[] }] : []; }
-    const x = position(h.market_id, h.code);return x ? [x] : [];
-  });
-  const mine = picks.map(p => ({ family: p.market.family, params: p.market.params, code: p.outcome.code }));positions.push(mine.length === 1 ? mine[0]! : { legs: mine });
-  if (covers(positions, teamsOf(m))) throw new HttpError(409, 'Bu bahisle birlikte her sonuçta en az bir bahsin kazanıyor; hem kazanan hem kaybeden tarafa oynanmaz.');
+  if (await wouldCover(env, user.id, m, book, picks, old?.id ?? null)) throw new HttpError(409, COVER_ERROR);
   const q = await priceBet(env, m, book, picks), single = picks.length === 1, seen = Number(b.seen);
   // The odds on the player's screen (user, 2026-11-06): if they have dropped since, nothing is played and the new ones go back to the slip.
   if (Number.isFinite(seen) && seen > 0 && q.odds < seen - 0.005)
@@ -364,7 +370,12 @@ async function cancelBet(request: Request, env: Env, betId: string) {
 async function quote(request: Request, env: Env, id: string) {
   const user = await requireUser(request, env), m = await getMatch(env, id);if (!user.is_admin && m.odds_status !== 'open') throw new HttpError(404, 'Maç bulunamadı.');
   const book = bookOf(m);if (!book) throw new HttpError(409, 'Bu maçın oranı yok.');
-  try { const q = await priceBet(env, m, book, resolvePicks(book, (await body<{ legs?: unknown }>(request)).legs));return json({ ok: true, odds: q.odds, product: Math.round(q.product * 100) / 100, factor: q.factor, legs: q.legs.map(l => l.odds) }); }
+  const b = await body<{ legs?: unknown; replaces?: string }>(request);
+  try {
+    const picks = resolvePicks(book, b.legs);
+    if (!user.is_admin && await wouldCover(env, user.id, m, book, picks, b.replaces ? String(b.replaces) : null)) throw new HttpError(409, COVER_ERROR);
+    const q = await priceBet(env, m, book, picks);return json({ ok: true, odds: q.odds, product: Math.round(q.product * 100) / 100, factor: q.factor, legs: q.legs.map(l => l.odds) });
+  }
   catch (error) { if (error instanceof HttpError) return json({ ok: false, error: error.message });throw error; }
 }
 /** The simulated matches behind a match's odds (packed), kept until a day after the kick-off for pricing coupons. */
@@ -506,10 +517,11 @@ async function removeMatch(request: Request, env: Env, id: string, undo: boolean
     if (undo) {
       const bets = (await env.DB.prepare("SELECT * FROM bets WHERE match_id = ? AND status IN ('won', 'lost')").bind(id).all<BetRow>()).results;
       const bonus = (await env.DB.prepare("SELECT user_id, amount FROM ledger WHERE match_id = ? AND kind = 'bonus'").bind(id).all<{ user_id: number; amount: number }>()).results;
-      await runBatches(env, [...bets.map(b => env.DB.prepare("UPDATE bets SET status = 'void' WHERE id = ?").bind(b.id)),
-        ...ledgerInserts(env, [...bets.map(b => ({ user: b.user_id, kind: 'undo', ref: `undo-stake:${b.id}`, amount: b.stake, match: id })),
+      // The ledger entries before the bets' status, so a pass that stops half way can be run again (the refs are unique).
+      await runBatches(env, [...ledgerInserts(env, [...bets.map(b => ({ user: b.user_id, kind: 'undo', ref: `undo-stake:${b.id}`, amount: b.stake, match: id })),
           ...bets.filter(b => b.payout > 0).map(b => ({ user: b.user_id, kind: 'undo', ref: `undo-win:${b.id}`, amount: -b.payout, match: id })),
-          ...bonus.map(x => ({ user: x.user_id, kind: 'undo', ref: `undo-bonus:${id}:${x.user_id}`, amount: -x.amount, match: id }))], now)]);
+          ...bonus.map(x => ({ user: x.user_id, kind: 'undo', ref: `undo-bonus:${id}:${x.user_id}`, amount: -x.amount, match: id }))], now),
+        ...bets.map(b => env.DB.prepare("UPDATE bets SET status = 'void' WHERE id = ? AND status IN ('won', 'lost')").bind(b.id))]);
       reverted = bets.length;
     }
     await env.DB.prepare("UPDATE matches SET status = 'deleted' WHERE id = ?").bind(id).run();

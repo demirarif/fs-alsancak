@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS matches (
   settling_at INTEGER
 );
 CREATE INDEX IF NOT EXISTS matches_kickoff ON matches(kickoff_at);
--- A bet at the odds of the moment it was placed. One side per market per user (enforced on insert). status: open | won | lost |
+-- A bet at the odds of the moment it was placed. Any pick may be played again in a later coupon; a set of one user's bets that wins
+-- whatever the result is refused on insert (2026-11-10; before, one side per market). status: open | won | lost |
 -- void (refunded: the match was called off) | withdrawn (refunded: its owner edited or cancelled it before kick-off; shown nowhere).
 CREATE TABLE IF NOT EXISTS bets (
   id TEXT PRIMARY KEY,

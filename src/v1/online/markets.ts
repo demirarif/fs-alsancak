@@ -231,7 +231,7 @@ export function covers(all: readonly (Position | CouponPosition)[], teamOf: (pla
   };
   // A coupon must win only if each of its picks must (a player's goals are left free, so a coupon with one never must).
   const mustWin = (l: Position, a: number, c: number, f: MatchFacts) => SCORE_FAMILIES.has(l.family) ? wins(l.family, l.params, l.code, f) : l.family !== 'player-goals' && forced(l, a, c);
-  const [H, S] = [...bets, ...coupons.flatMap(x => x.legs)].some(b => HALF_FAMILIES.has(b.family)) ? [8, 8] : [0, 16];
+  const [H, S] = [...bets, ...coupons.flatMap(x => x.legs)].some(b => HALF_FAMILIES.has(b.family)) ? [8, 8] : [0, SCORE_MAX];
   for (let ha = 0; ha <= H; ha++) for (let hb = 0; hb <= H; hb++) for (let sa = 0; sa <= S; sa++) for (let sb = 0; sb <= S; sb++) {
     const a = ha + sa, c = hb + sb, f: MatchFacts = { ht: [ha, hb], ft: [a, c], goals: [], corners: 0, penalties: 0, headerGoals: 0, players: [] };
     if (byScore.some(b => wins(b.family, b.params, b.code, f)) || rest.some(b => forced(b, a, c)) || coupons.some(x => x.legs.every(l => mustWin(l, a, c, f)))) continue;
@@ -274,7 +274,7 @@ export function couponPossible(legs: readonly Position[], teamOf: (player: strin
       default: return true;
     }
   };
-  const [H, S] = legs.some(l => HALF_FAMILIES.has(l.family)) ? [8, 8] : [0, 16];
+  const [H, S] = legs.some(l => HALF_FAMILIES.has(l.family)) ? [8, 8] : [0, SCORE_MAX];
   for (let ha = 0; ha <= H; ha++) for (let hb = 0; hb <= H; hb++) for (let sa = 0; sa <= S; sa++) for (let sb = 0; sb <= S; sb++) {
     const a = ha + sa, c = hb + sb, f: MatchFacts = { ht: [ha, hb], ft: [a, c], goals: [], corners: 0, penalties: 0, headerGoals: 0, players: [] };
     if (!byScore.every(l => wins(l.family, l.params, l.code, f)) || !rest.every(l => canWin(l, a, c))) continue;
@@ -309,11 +309,14 @@ export function factsOf(first: HalfLike, second: HalfLike): MatchFacts {
     players: second.players.map(p => ({ id: p.id, team: p.team, goals: p.stats.goals, assists: p.stats.assists, shots: p.stats.shots, onTarget: p.stats.onTarget, tackles: p.stats.tackles,
       interceptions: p.stats.interceptions, saves: p.stats.saves, completed: p.stats.completed, headersWon: p.stats.headersWon })) };
 }
+/** What a winning bet pays: stake × odds in whole coins, worked in hundredths of the odds (2026-11-10: the float product paid 100 @ 1,15
+ * as 114, 200 @ 2,30 as 459). Odds are kept to two decimals, so this is exact. */
+export const payoutOf = (stake: number, odds: number) => Math.floor(stake * Math.round(odds * 100) / 100);
 /** A bet's payout and each user's loss bonus for a settled match. */
 export type SettleBet = { readonly id: string; readonly user: number; readonly stake: number; readonly odds: number } & (Position | CouponPosition);
 export function settle(bets: readonly SettleBet[], f: MatchFacts) {
   const results = bets.map(b => { const won = isCoupon(b) ? b.legs.every(l => wins(l.family, l.params, l.code, f)) : wins(b.family, b.params, b.code, f);
-    return { id: b.id, user: b.user, won, payout: won ? Math.floor(b.stake * b.odds) : 0, stake: b.stake }; });
+    return { id: b.id, user: b.user, won, payout: won ? payoutOf(b.stake, b.odds) : 0, stake: b.stake }; });
   const net = new Map<number, number>();for (const r of results) net.set(r.user, (net.get(r.user) ?? 0) + r.payout - r.stake);
   return { results, bonuses: [...net].filter(([, n]) => n < 0).map(([user, n]) => ({ user, amount: Math.floor(-n * COIN.lossBonus) })) };
 }

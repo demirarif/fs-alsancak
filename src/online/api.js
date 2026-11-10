@@ -35,7 +35,7 @@ export const api={
   /** A bet: one pick or a coupon of several ({market, code} each); `replaces` edits one of one's open bets until kick-off. */
   /** `seen` is the odds on the screen: if they have dropped since, the bet is refused with the new ones (e.data.changed). */
   bet:(id,legs,stake,replaces=null,seen=null)=>call('POST',`/api/matches/${id}/bets`,{json:{legs,stake,...(replaces?{replaces}:{}),...(seen?{seen}:{})}}),
-  quote:(id,legs)=>call('POST',`/api/matches/${id}/quote`,{json:{legs}}),
+  quote:(id,legs,replaces=null)=>call('POST',`/api/matches/${id}/quote`,{json:{legs,replaces}}),
   cancelBet:betId=>call('POST',`/api/bets/${betId}/cancel`),
   people:()=>call('GET','/api/people').then(d=>d.people),
   coupons:()=>call('GET','/api/coupons'),

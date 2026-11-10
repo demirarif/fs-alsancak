@@ -1,6 +1,6 @@
 import { api, serverNow } from './api.js';
 import { decodeRecording } from '../v1/online/recording.ts';
-import { COIN, COUPON, scoreOutcome, SCORE_MAX } from '../v1/online/markets.ts';
+import { COIN, COUPON, payoutOf, scoreOutcome, SCORE_MAX } from '../v1/online/markets.ts';
 import './online.css';
 
 /* The players' page (user decisions 2026-11-05): four tabs, kept in the address (#gunun-maci/kuponlar):
@@ -35,7 +35,7 @@ const POS_NAMES=[['KL','kaleci'],['STP','stoper'],['SLB','sol bek'],['SĞB','sa�
 export function mountToday(host,{user}){
   // slip: {match, legs:[{market, code, label, odds}], stake, replaces, back} — one pick is a bet, several a coupon; `replaces` is the bet being
   // edited and `back` its stake, which comes back when the edit goes in. quote: the server's coupon odds for those picks.
-  let data=null,poll=null,tick=null,shown='',tab='mac',group='Maç',slip=null,quote=null,quoteTimer=null,asking=false,people=null,notice='',coupons=null,couponFilter='all',lastFull=0,older=[],olderMore=false;
+  let data=null,poll=null,tick=null,shown='',tab='mac',group='Maç',slip=null,quote=null,placing=false,quoteTimer=null,asking=false,people=null,notice='',coupons=null,couponFilter='all',lastFull=0,older=[],olderMore=false;
   // reels: a match's 9:16 summary made on this visit ({making, progress} while it is made, then {url, filename}).
   const details=new Map(),reels=new Map();
   const signature=d=>JSON.stringify([d.balance,d.requests.incoming.map(r=>r.id),d.requests.outgoing.map(r=>[r.id,r.status]),d.upcoming.map(m=>[m.id,m.live,m.over,m.regenerated,m.mine.length,m.book?.markets.map(x=>x.outcomes.map(o=>o.odds).join()).join()]),d.recent.map(m=>[m.id,m.net]),d.leaderboard.map(x=>[x.username,x.balance])]);
@@ -85,43 +85,40 @@ export function mountToday(host,{user}){
       ${r.outgoing.filter(x=>x.status==='pending'||Date.now()-x.at<86_400_000).map(x=>`<p class="tm-hint">${esc(x.displayName)} kişisinden ${coin(x.amount)} Alsancak coin istedin · ${x.status==='pending'?'bekliyor':x.status==='sent'?'gönderdi':'reddetti'}</p>`).join('')}
       ${notice?`<p class="tm-status" role="status">${esc(notice)}</p>`:''}<p class="tm-hint">Alsancak coin yalnız oyun parası; satın alınmaz, hiçbir şeye çevrilmez.${user.isAdmin?'':' Bakiyen biterse bir arkadaşından isteyebilirsin.'}</p></section>`;
   }
-  /** What one already holds on a match, market by market (single bets and coupon picks; the bet being edited left out). */
-  function heldSides(m){
-    const sides=new Map();for(const b of m.mine)if(b.status!=='void'&&b.id!==slip?.replaces){if(b.legs)for(const l of b.legs)sides.set(l.market,l);else sides.set(b.market,{market:b.market,code:b.code,label:b.label});}
-    return sides;
-  }
-  function outcomeButton(m,market,o,locked,sides){
-    const picked=slip&&slip.match===m.id&&slip.legs.some(l=>l.market===market.id&&l.code===o.code),side=sides.get(market.id),held=side&&side.code===o.code,other=side&&side.code!==o.code;
-    const off=locked||user.isAdmin||!o.playable||!market.active||other,title=!o.playable?'Oynanamaz: kaybetme ihtimali neredeyse yok':other?'Bu bahiste diğer taraftasın':'';
+  // Every option is open again for each new coupon (user, 2026-11-10: "her kupondan sonra oynanabilir iddaa bacaklarını sıfırlayalım"):
+  // what one already holds no longer locks a market's other options; the server refuses only a set that wins whatever the result.
+  function outcomeButton(m,market,o,locked){
+    const picked=slip&&slip.match===m.id&&slip.legs.some(l=>l.market===market.id&&l.code===o.code);
+    const off=locked||user.isAdmin||!o.playable||!market.active,title=!o.playable?'Oynanamaz: kaybetme ihtimali neredeyse yok':'';
     const trend=o.base&&Math.abs(o.odds-o.base)>=.01?(o.odds<o.base?'down':'up'):'';
-    return `<button type="button" class="tm-pick${picked?' is-picked':''}${held?' is-held':''}${trend?` is-${trend}`:''}" data-pick="${m.id}|${market.id}|${esc(o.code)}" ${off?'disabled':''} ${title?`title="${title}"`:''}><span>${esc(o.label)}</span><b>${odd(o.odds)}</b></button>`;
+    return `<button type="button" class="tm-pick${picked?' is-picked':''}${trend?` is-${trend}`:''}" data-pick="${m.id}|${market.id}|${esc(o.code)}" ${off?'disabled':''} ${title?`title="${title}"`:''}><span>${esc(o.label)}</span><b>${odd(o.odds)}</b></button>`;
   }
   function bulletin(m){
-    const book=m.book;if(!book)return '';const locked=m.live||serverNow()>=m.kickoffAt,groups=GROUPS.filter(g=>book.markets.some(x=>x.group===g&&x.active)),sides=heldSides(m);
+    const book=m.book;if(!book)return '';const locked=m.live||serverNow()>=m.kickoffAt,groups=GROUPS.filter(g=>book.markets.some(x=>x.group===g&&x.active));
     if(!groups.includes(group))group=groups[0]??'Maç';
     const markets=book.markets.filter(x=>x.group===group&&x.active),inSlip=id=>slip?.match===m.id&&slip.legs.some(l=>l.market===id);
     const scoreBox=group==='Skor'&&!locked&&!user.isAdmin?`<form class="tm-other-score" data-other-score="${m.id}"><span>Başka skor</span><input name="a" type="number" min="0" max="${SCORE_MAX}" inputmode="numeric" aria-label="${esc(m.teams.names[0])} golleri"><span>–</span><input name="b" type="number" min="0" max="${SCORE_MAX}" inputmode="numeric" aria-label="${esc(m.teams.names[1])} golleri"><button class="tm-ghost" type="submit">Seç</button></form>`:'';
     return `<div class="tm-bulletin"><div class="tm-tabs" role="tablist">${groups.map(g=>`<button type="button" role="tab" aria-selected="${g===group}" data-group="${g}">${g}${book.markets.some(x=>x.group===g&&inSlip(x.id))?' •':''}</button>`).join('')}</div>
-      ${markets.map(market=>{const held=sides.get(market.id);return `<div class="tm-market"><h4>${esc(market.label)}${held?` <small>· ${esc(held.label.split(': ').pop())} tarafındasın</small>`:''}</h4><div class="tm-odds${market.outcomes.length>3?' many':''}">${market.outcomes.map(o=>outcomeButton(m,market,o,locked,sides)).join('')}</div></div>`;}).join('')}${scoreBox}
-      <p class="tm-hint">Seçeneklere bastıkça kupona eklenir; birden çok seçim kupon olur, oranlar çarpılır ve hepsi tutarsa kazanır. Bir bahiste yalnız bir tarafa oynanır; oran, oynadığın anki orana kilitlenir. Oranlar oynanan paraya göre ağır ağır değişir. Soluk seçenekler kesine yakın olduğu için oynanamaz. Her sonuçta en az birinin kazandığı bahisler (ör. 7,5 üst ile 9,5 alt) birlikte oynanmaz.</p></div>${slipBox(m)}`;
+      ${markets.map(market=>`<div class="tm-market"><h4>${esc(market.label)}</h4><div class="tm-odds${market.outcomes.length>3?' many':''}">${market.outcomes.map(o=>outcomeButton(m,market,o,locked)).join('')}</div></div>`).join('')}${scoreBox}
+      <p class="tm-hint">Seçeneklere bastıkça kupona eklenir; birden çok seçim kupon olur, oranlar çarpılır ve hepsi tutarsa kazanır. Her yeni kuponda bütün seçenekler yeniden oynanabilir; oran, oynadığın anki orana kilitlenir. Oranlar oynanan paraya göre ağır ağır değişir. Soluk seçenekler kesine yakın olduğu için oynanamaz. Her sonuçta en az birinin kazandığı bahisler (ör. 7,5 üst ile 9,5 alt) birlikte oynanmaz.</p></div>${slipBox(m)}`;
   }
   const slipKey=()=>JSON.stringify(slip?.legs.map(l=>[l.market,l.code])??[]);
   /** The slip's figures: total odds (a coupon's from the server), the note under it, what it pays, whether it can be placed. */
   function slipState(){
-    const many=slip.legs.length>1,q=many&&quote?.key===slipKey()?quote:null,odds=many?(q?.ok?q.odds:0):slip.legs[0]?.odds??0,stake=Number(slip.stake)||0;
-    const total=many?(q?.ok?odd(q.odds):q&&!q.loading?'—':'…'):odd(odds),error=(q&&!q.ok&&!q.loading?q.error:'')||slip.error||'';
+    const many=slip.legs.length>1,q=quote?.key===slipKey()?quote:null,refused=!!(q&&!q.ok&&!q.loading),odds=many?(q?.ok?q.odds:0):refused?0:slip.legs[0]?.odds??0,stake=Number(slip.stake)||0;
+    const total=many?(q?.ok?odd(q.odds):refused?'—':'…'):refused?'—':odd(odds),error=(q&&!q.ok&&!q.loading?q.error:'')||slip.error||'';
     const note=error||(q?.ok&&q.factor>1?`Seçimler birbirine bağlı (biri olunca öteki de daha olası): kupon oranı çarpım olan ${odd(q.product)} yerine ${odd(q.odds)}.`:'');
-    const room=data.balance+(slip.back??0),blocked=!odds||stake<COIN.minStake||stake>COIN.maxStake||stake>room;
-    return {many,odds,stake,total,note,error,blocked,win:Math.floor(stake*odds),room};
+    const room=data.balance+(slip.back??0),blocked=placing||!odds||stake<COIN.minStake||stake>COIN.maxStake||stake>room;
+    return {many,odds,stake,total,note,error,blocked,win:payoutOf(stake,odds),room};
   }
   function slipBox(m){
     if(!slip||slip.match!==m.id||!slip.legs.length)return '';const st=slipState();
-    return `<form class="tm-slip" data-slip><div class="tm-slip-head"><b>${st.many?`Kupon · ${slip.legs.length} seçim`:'Bahis'}</b>${slip.replaces?'<span class="tm-points wait">düzenleniyor</span>':''}<button type="button" class="tm-link" data-slip-cancel>${slip.replaces?'Düzenlemeden vazgeç':'Temizle'}</button></div>
+    return `<form class="tm-slip" data-slip novalidate><div class="tm-slip-head"><b>${st.many?`Kupon · ${slip.legs.length} seçim`:'Bahis'}</b>${slip.replaces?'<span class="tm-points wait">düzenleniyor</span>':''}<button type="button" class="tm-link" data-slip-cancel>${slip.replaces?'Düzenlemeden vazgeç':'Temizle'}</button></div>
       <ul class="tm-slip-legs">${slip.legs.map((l,i)=>`<li><span>${esc(l.label)}</span><b>${odd(l.odds)}</b><button type="button" data-leg-remove="${i}" aria-label="${esc(l.label)}: kupondan çıkar">×</button></li>`).join('')}</ul>
       <div class="tm-slip-total"><span>${st.many?'Kupon oranı':'Oran'}</span><b data-total>${st.total}</b></div><p class="tm-hint${st.error?' tm-error':''}" data-note ${st.note?'':'hidden'}>${esc(st.note)}</p>
       <div class="tm-slip-row"><label>Tutar<input name="stake" type="number" min="${COIN.minStake}" max="${Math.min(COIN.maxStake,st.room)}" step="50" value="${esc(slip.stake)}" inputmode="numeric"></label>
       <div class="tm-quick">${[100,500,1000,2500,5000].map(v=>`<button type="button" data-quick="${v}" ${v>st.room?'disabled':''}>${coin(v)}</button>`).join('')}</div></div>
-      <div class="tm-slip-row"><span class="tm-win">Kazanırsan <b>${coin(st.win)}</b> Alsancak coin</span><span class="tm-actions"><button class="tm-button" type="submit" ${st.blocked?'disabled':''}>${slip.replaces?(st.many?'Kuponu güncelle':'Bahsi güncelle'):st.many?'Kuponu yap':'Bahsi yap'}</button></span></div>
+      <div class="tm-slip-row"><span class="tm-win">Kazanırsan <b>${coin(st.win)}</b> Alsancak coin</span><span class="tm-actions"><button class="tm-button" type="submit" ${st.blocked?'disabled':''}>${placing?'Gönderiliyor…':slip.replaces?(st.many?'Kuponu güncelle':'Bahsi güncelle'):st.many?'Kuponu yap':'Bahsi yap'}</button></span></div>
       <p class="tm-hint">${st.many?'Kupondaki seçimlerin hepsi tutarsa kazanır.':'Başka seçeneklere de basarsan kupon olur, oranlar çarpılır.'} En az ${coin(COIN.minStake)}, en çok ${coin(COIN.maxStake)} Alsancak coin. Maç bitince net kaybının %${COIN.lossBonus*100}'u geri gelir.${slip.replaces?' Güncelleyince eski kupon iade edilir, yenisi o anki oranlarla yapılır.':''}</p></form>`;
   }
   /** The slip's figures again without drawing it anew (a stake being typed keeps its field). */
@@ -136,8 +133,8 @@ export function mountToday(host,{user}){
     clearTimeout(quoteTimer);if(slip)slip.error=null;if(!slip){quote=null;return;}
     const key=slipKey(),match=slip.match,legs=slip.legs.map(l=>({market:l.market,code:l.code})),many=legs.length>1;quote=many?{key,loading:true}:null;
     // A single pick asks too: the slip shows the odds of this moment, not those of the last refresh (pages refresh less often now).
-    quoteTimer=setTimeout(async()=>{const r=await api.quote(match,legs).catch(e=>({ok:false,error:e.message}));if(!slip||slipKey()!==key)return;
-      if(many)quote={key,...r};if(r.ok&&Array.isArray(r.legs))slip.legs.forEach((l,i)=>{l.odds=r.legs[i]??l.odds;});updateSlip();},250);
+    quoteTimer=setTimeout(async()=>{const r=await api.quote(match,legs,slip.replaces).catch(e=>({ok:false,error:e.message}));if(!slip||slipKey()!==key)return;
+      if(many||!r.ok)quote={key,...r};else if(quote?.key!==key)quote=null;if(r.ok&&Array.isArray(r.legs))slip.legs.forEach((l,i)=>{l.odds=r.legs[i]??l.odds;});updateSlip();},250);
   }
   function toggleLeg(m,market,o){
     if(!slip||slip.match!==m.id)slip={match:m.id,legs:[],stake:slip?.stake??'500',replaces:null,back:0};
@@ -153,7 +150,7 @@ export function mountToday(host,{user}){
       return market&&o?{market:l.market,code:l.code,label:l.label,odds:o.odds}:null;}).filter(Boolean);
     slip={match:m.id,legs:picks,stake:String(bet.stake),replaces:bet.id,back:bet.stake};requestQuote();
   }
-  const betRow=(b,editable=false)=>`<li class="${b.status}${b.legs?' is-coupon':''}"><span>${esc(b.label)}</span><span>${coin(b.stake)} @ ${odd(b.odds)}</span><b>${b.status==='open'?`olası ${coin(Math.floor(b.stake*b.odds))}`:b.status==='won'?`kazandı · ${coin(b.payout)}`:statusText[b.status]}</b>
+  const betRow=(b,editable=false)=>`<li class="${b.status}${b.legs?' is-coupon':''}"><span>${esc(b.label)}</span><span>${coin(b.stake)} @ ${odd(b.odds)}</span><b>${b.status==='open'?`olası ${coin(payoutOf(b.stake,b.odds))}`:b.status==='won'?`kazandı · ${coin(b.payout)}`:statusText[b.status]}</b>
     ${b.legs?`<ul class="tm-legs">${b.legs.map(legItem).join('')}</ul>`:''}
     ${editable&&b.status==='open'?`<div class="tm-bet-actions"><button type="button" data-bet-edit="${b.id}">Düzenle</button><button type="button" data-bet-cancel="${b.id}" data-stake="${b.stake}">İptal et</button></div>`:''}</li>`;
   function myBets(m){
@@ -261,9 +258,15 @@ export function mountToday(host,{user}){
   host.addEventListener('submit',async event=>{
     const f=event.target;event.preventDefault();
     if(f.matches('[data-slip]')){
+      if(placing||!slip?.legs.length)return;
       const button=f.querySelector('button[type=submit]');button.disabled=true;const many=slip.legs.length>1,edited=!!slip.replaces,what=many?`${slip.legs.length} seçimli kupon`:slip.legs[0].label;
-      try{const r=await api.bet(slip.match,slip.legs.map(l=>({market:l.market,code:l.code})),Number(f.stake.value),slip.replaces,slipState().odds||null);notice=`${edited?'Kupon güncellendi':many?'Kupon alındı':'Bahis alındı'}: ${what} @ ${odd(r.odds)}`;slip=null;quote=null;await refresh();}
-      catch(e){notice='';
+      placing=true;updateSlip();
+      try{const r=await api.bet(slip.match,slip.legs.map(l=>({market:l.market,code:l.code})),Number(f.stake.value),slip.replaces,slipState().odds||null);placing=false;
+        notice=`${edited?'Kupon güncellendi':many?'Kupon alındı':'Bahis alındı'}: ${what} @ ${odd(r.odds)}`;slip=null;quote=null;
+        // A clean slate for the next coupon: the old slip goes even if its stake field still has the focus.
+        if(document.activeElement instanceof HTMLElement&&host.contains(document.activeElement))document.activeElement.blur();
+        await refresh();render();}
+      catch(e){placing=false;notice='';
         // The odds dropped since they were shown (user, 2026-11-06): nothing is played; the slip takes the new odds and a press plays them.
         if(e.data?.changed&&slip){if(Array.isArray(e.data.legs))slip.legs.forEach((l,i)=>{l.odds=e.data.legs[i]??l.odds;});if(many)quote={key:slipKey(),ok:true,odds:e.data.odds,product:e.data.product??e.data.odds,factor:e.data.factor??1};
           slip.error=e.message;render();host.querySelector('.tm-slip')?.scrollIntoView({block:'nearest'});return;}

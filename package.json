@@ -19,6 +19,7 @@
     "test:appearance": "node --experimental-strip-types tests/appearance.test.mjs",
     "test:engine": "node --experimental-strip-types tests/engine.test.mjs",
     "test:highlights": "node --experimental-strip-types tests/highlight.test.mjs",
+    "test:worker": "node --experimental-transform-types tests/worker.test.mjs",
     "calibrate:engine": "node --experimental-strip-types scripts/calibrate-engine.mjs"
   },
   "dependencies": {
