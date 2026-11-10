@@ -1,0 +1,107 @@
+/* Score bug (2026-11-10, user: "tasarım yapalım ... kutulara animasyon ekleyelim çok basit duruyor; gol atınca mavi takım ve kırmızı
+   takıma ait animasyon olsun; sol üstte skor tabelası goool olsun, sonra 3-1'den 3-2 olsun"). Inspired by TV score bugs — team codes in
+   their colours with cut ends, the score either side of an emblem, the clock in a tab below — with no club's or league's marks. */
+.sbx{--sbx-h:44px;--sbx-code:94px;--sbx-digit:42px;--sbx-emblem:56px;--home:#2f6fe0;--home-2:#6ea3ff;--away:#d93a4c;--away-2:#ff8a96;
+  position:absolute;left:24px;top:22px;z-index:7;font-family:"Barlow Condensed","Arial Narrow",sans-serif;color:#fff;user-select:none;pointer-events:none;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+.sbx-row{position:relative;display:flex;align-items:stretch;height:var(--sbx-h)}
+/* Team blocks: the code in the team colour, its inner end cut on a slant, two lighter slashes beside the cut. */
+.sbx-code{position:relative;width:var(--sbx-code);display:grid;place-items:center;font-size:27px;font-weight:800;letter-spacing:.06em;overflow:hidden}
+.sbx-code.home{background:var(--home);clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%);padding-right:12px}
+.sbx-code.away{background:var(--away);clip-path:polygon(16px 0,100% 0,100% 100%,0 100%);padding-left:12px}
+.sbx-code::before,.sbx-code::after{content:"";position:absolute;top:-4px;bottom:-4px;width:7px;transform:skewX(-20deg)}
+.sbx-code.home::before{right:22px;background:var(--home-2);opacity:.75}.sbx-code.home::after{right:32px;background:var(--home-2);opacity:.4}
+.sbx-code.away::before{left:22px;background:var(--away-2);opacity:.75}.sbx-code.away::after{left:32px;background:var(--away-2);opacity:.4}
+/* Score boxes: white, slanted to meet the blocks; the number rolls when it changes. */
+.sbx-digit{position:relative;width:var(--sbx-digit);background:#fff;color:#12141a;overflow:hidden;display:grid;place-items:center;font-size:36px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+.sbx-digit.home{margin-left:-16px;padding-left:12px;width:calc(var(--sbx-digit) + 16px);clip-path:polygon(16px 0,100% 0,100% 100%,0 100%)}
+.sbx-digit.away{margin-right:-16px;padding-right:12px;width:calc(var(--sbx-digit) + 16px);clip-path:polygon(0 0,100% 0,calc(100% - 16px) 100%,0 100%)}
+.sbx-digit span{grid-area:1/1;display:block;transition:none}
+.sbx-digit .flash{position:absolute;inset:0;opacity:0}
+.sbx-digit.home .flash{background:var(--home)}.sbx-digit.away .flash{background:var(--away)}
+/* The emblem between the scores: a dark disc with the "A", reaching above and below the row. */
+.sbx-emblem{position:relative;z-index:2;width:var(--sbx-emblem);margin:-6px -4px;display:grid;place-items:center}
+.sbx-emblem i{width:var(--sbx-emblem);height:var(--sbx-emblem);border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a3f52,#14161d 70%);box-shadow:0 0 0 3px #fff,0 0 0 5px rgba(0,0,0,.25);display:grid;place-items:center;font-style:normal;font-size:30px;font-weight:800;color:#f2c94c}
+/* Clock tab under the middle. */
+.sbx-clock{position:absolute;left:50%;top:calc(var(--sbx-h) + 2px);transform:translateX(-50%);min-width:98px;height:25px;padding:0 12px;background:#15171d;display:flex;align-items:center;justify-content:center;gap:7px;font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;clip-path:polygon(0 0,100% 0,calc(100% - 8px) 100%,8px 100%)}
+.sbx-clock small{font-size:13px;opacity:.6;font-weight:700;letter-spacing:.06em}
+/* Who has the ball: a short bar under his side's block. */
+.sbx-poss{position:absolute;top:calc(var(--sbx-h) + 3px);width:44px;height:4px;background:#fff;border-radius:2px;opacity:0;transition:left .45s cubic-bezier(.4,0,.2,1),opacity .3s}
+.sbx.has-poss .sbx-poss{opacity:.9}
+
+/* Entrance: the blocks open out from the emblem. */
+.sbx.is-intro .sbx-code.home{animation:sbx-in-l .7s cubic-bezier(.2,.8,.2,1) both .15s}
+.sbx.is-intro .sbx-code.away{animation:sbx-in-r .7s cubic-bezier(.2,.8,.2,1) both .15s}
+.sbx.is-intro .sbx-digit{animation:sbx-fade .4s ease-out both .45s}
+.sbx.is-intro .sbx-emblem i{animation:sbx-pop .55s cubic-bezier(.3,1.6,.5,1) both}
+.sbx.is-intro .sbx-clock{animation:sbx-drop .45s ease-out both .7s}
+@keyframes sbx-in-l{from{transform:translateX(70px);clip-path:polygon(100% 0,100% 0,calc(100% - 16px) 100%,calc(100% - 16px) 100%)}}
+@keyframes sbx-in-r{from{transform:translateX(-70px);clip-path:polygon(16px 0,16px 0,0 100%,0 100%)}}
+@keyframes sbx-fade{from{opacity:0}}
+@keyframes sbx-pop{from{transform:scale(0) rotate(-90deg)}}
+@keyframes sbx-drop{from{transform:translate(-50%,-26px);opacity:0}}
+
+/* ── Goal: the scorer's colour sweeps over the bug, his mascot crosses it and GOOOOL appears behind it. ── */
+.sbx-goal{position:absolute;left:-6px;right:-6px;top:-8px;height:calc(var(--sbx-h) + 16px);z-index:4;overflow:hidden;display:none}
+.sbx.is-goal .sbx-goal{display:block}
+.sbx-goal .bar{position:absolute;inset:0;background:var(--c);
+  background-image:repeating-linear-gradient(115deg,rgba(255,255,255,.13) 0 7px,transparent 7px 26px);animation:sbx-lines .6s linear infinite}
+.sbx-goal.home{--c:var(--home);--ink:#ffd84d}.sbx-goal.away{--c:var(--away);--ink:#fff}
+/* The app has a global .home rule (style.css: a gold background); the bug's home/away parts set their own. */
+.sbx-goal.home,.sbx-goal.away,.sbx-scorer.home,.sbx-scorer.away{background:none}.sbx-digit.home,.sbx-digit.away{background:#fff}
+.sbx-goal.home .bar{clip-path:polygon(0 0,0 0,0 100%,0 100%);animation:sbx-lines .6s linear infinite,sbx-open-l .32s cubic-bezier(.3,0,.2,1) forwards}
+.sbx-goal.away .bar{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%);animation:sbx-lines .6s linear infinite,sbx-open-r .32s cubic-bezier(.3,0,.2,1) forwards}
+.sbx-goal.is-out.home .bar{animation:sbx-lines .6s linear infinite,sbx-close-l .3s cubic-bezier(.6,0,.8,.3) forwards}
+.sbx-goal.is-out.away .bar{animation:sbx-lines .6s linear infinite,sbx-close-r .3s cubic-bezier(.6,0,.8,.3) forwards}
+@keyframes sbx-lines{to{background-position:28px 0}}
+@keyframes sbx-open-l{to{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}
+@keyframes sbx-open-r{to{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}}
+@keyframes sbx-close-l{from{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}to{clip-path:polygon(0 0,0 0,0 100%,0 100%)}}
+@keyframes sbx-close-r{from{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}to{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%)}}
+.sbx-goal .word{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:800;letter-spacing:.04em;color:var(--ink);text-shadow:0 3px 0 rgba(0,0,0,.25)}
+.sbx-goal .word b{display:inline-block;opacity:0;transform:translateY(14px) scale(.6)}
+.sbx-goal .word b.on{animation:sbx-letter .28s cubic-bezier(.3,1.7,.5,1) forwards}
+.sbx-goal.is-cheer .word b{animation:sbx-bounce .5s ease-in-out 2 alternate;opacity:1;transform:none}
+/* Pulling back, the word and the mascot go with the colour (they used to stay over the score for a moment). */
+.sbx-goal.is-out .word,.sbx-goal.is-out .mascot{opacity:0;transition:opacity .14s}
+@keyframes sbx-letter{to{opacity:1;transform:none}}
+@keyframes sbx-bounce{to{transform:translateY(-4px) scale(1.06)}}
+/* The mascot runs the length of the bar. */
+.sbx-goal .mascot{position:absolute;top:50%;width:84px;height:60px;margin-top:-30px}
+.sbx-goal.home .mascot{left:-90px;animation:sbx-run-r 1.15s cubic-bezier(.45,.05,.55,.95) forwards .2s}
+.sbx-goal.away .mascot{right:-90px;animation:sbx-run-l 1.15s cubic-bezier(.45,.05,.55,.95) forwards .2s}
+@keyframes sbx-run-r{to{left:calc(100% + 10px)}}
+@keyframes sbx-run-l{to{right:calc(100% + 10px)}}
+/* Seagull: wings beating. */
+.sbx-gull .wing{transform-origin:42px 32px;animation:sbx-flap .22s ease-in-out infinite alternate}
+.sbx-gull .wing.back{animation-delay:-.11s;opacity:.85}
+@keyframes sbx-flap{from{transform:rotate(-28deg) scaleY(1)}to{transform:rotate(22deg) scaleY(.7)}}
+/* Fireball: the ball spinning, the flame flickering behind it. */
+.sbx-fire .ball{transform-origin:22px 30px;animation:sbx-spin .35s linear infinite reverse}
+.sbx-fire .flame{transform-origin:30px 30px;animation:sbx-flicker .12s ease-in-out infinite alternate}
+@keyframes sbx-spin{to{transform:rotate(360deg)}}
+@keyframes sbx-flicker{to{transform:scaleX(1.12) scaleY(.88)}}
+/* The scorer, in a strip under the bar. */
+.sbx-scorer{position:absolute;top:calc(var(--sbx-h) + 8px);display:flex;height:26px;z-index:5;opacity:0}
+.sbx-scorer.home{left:0}.sbx-scorer.away{right:0;flex-direction:row-reverse}
+.sbx-scorer b{background:#fff;color:#12141a;display:flex;align-items:center;padding:0 12px;font-size:19px;font-weight:800;letter-spacing:.02em}
+.sbx-scorer span{background:var(--c);display:flex;align-items:center;padding:0 10px;font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.sbx-scorer.home{--c:var(--home)}.sbx-scorer.away{--c:var(--away)}
+.sbx-scorer.is-in{animation:sbx-strip .3s ease-out forwards}
+.sbx-scorer.is-out{opacity:1;animation:sbx-strip .25s ease-in reverse forwards}
+@keyframes sbx-strip{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.sbx.is-goal .sbx-clock{opacity:0;transition:opacity .2s}
+/* The emblem's disc is taller than the goal bar: it fades as the colour reaches it, so its rim doesn't show above and below. */
+.sbx-emblem{transition:opacity .2s}.sbx.is-goal .sbx-emblem{opacity:0;transition:opacity .12s .1s}
+/* After the sweep: the new number rolls up, a flash of the team's colour behind it, his block thumps once. */
+.sbx-digit.roll .old{animation:sbx-roll-out .42s cubic-bezier(.5,0,.75,0) forwards}
+.sbx-digit.roll .new{animation:sbx-roll-in .48s cubic-bezier(.2,.9,.3,1.3) forwards .12s;transform:translateY(110%)}
+.sbx-digit.roll .flash{animation:sbx-flash .7s ease-out}
+@keyframes sbx-roll-out{to{transform:translateY(-110%)}}
+@keyframes sbx-roll-in{to{transform:none}}
+@keyframes sbx-flash{0%{opacity:0}20%{opacity:.9}100%{opacity:0}}
+.sbx-code.thump{animation:sbx-thump .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes sbx-thump{40%{transform:scale(1.08)}}
+
+@media (max-width:720px){.sbx{left:12px;top:12px;transform:scale(.78);transform-origin:0 0}}
+@media (prefers-reduced-motion:reduce){.sbx *,.sbx *::before,.sbx *::after{animation-duration:.01ms!important;animation-iteration-count:1!important}}

@@ -1,0 +1,1719 @@
+{
+ "voice": "s4R0kmUXB5AoaxLgQ9Ee",
+ "generic": {
+  "shot": [
+   "genel/shot-1.mp3",
+   "genel/shot-2.mp3"
+  ],
+  "goal": [
+   "genel/goal-1.mp3",
+   "genel/goal-2.mp3",
+   "genel/goal-3.mp3"
+  ],
+  "header-shot": [
+   "genel/header-shot-1.mp3",
+   "genel/header-shot-2.mp3"
+  ],
+  "save": [
+   "genel/save-1.mp3",
+   "genel/save-2.mp3"
+  ],
+  "parry": [
+   "genel/parry-1.mp3",
+   "genel/parry-2.mp3"
+  ],
+  "spill": [
+   "genel/spill-1.mp3"
+  ],
+  "wide": [
+   "genel/wide-1.mp3",
+   "genel/wide-2.mp3",
+   "genel/wide-3.mp3"
+  ],
+  "post": [
+   "genel/post-1.mp3",
+   "genel/post-2.mp3"
+  ],
+  "block": [
+   "genel/block-1.mp3",
+   "genel/block-2.mp3"
+  ],
+  "foul": [
+   "genel/foul-1.mp3",
+   "genel/foul-2.mp3"
+  ],
+  "corner": [
+   "genel/corner-1.mp3",
+   "genel/corner-2.mp3"
+  ],
+  "penalty-kick": [
+   "genel/penalty-kick-1.mp3"
+  ],
+  "cross": [
+   "genel/cross-1.mp3",
+   "genel/cross-2.mp3"
+  ],
+  "penalty": [
+   "genel/penalty-1.mp3",
+   "genel/penalty-2.mp3"
+  ],
+  "free-kick": [
+   "genel/free-kick-1.mp3",
+   "genel/free-kick-2.mp3"
+  ],
+  "keeper-claim": [
+   "genel/keeper-claim-1.mp3",
+   "genel/keeper-claim-2.mp3"
+  ],
+  "tackle": [
+   "genel/tackle-1.mp3",
+   "genel/tackle-2.mp3"
+  ],
+  "interception": [
+   "genel/interception-1.mp3",
+   "genel/interception-2.mp3"
+  ],
+  "nutmeg": [
+   "genel/nutmeg-1.mp3",
+   "genel/nutmeg-2.mp3"
+  ],
+  "loss": [
+   "genel/loss-1.mp3",
+   "genel/loss-2.mp3"
+  ],
+  "bad-touch": [
+   "genel/bad-touch-1.mp3"
+  ],
+  "pass-good": [
+   "genel/pass-good-1.mp3",
+   "genel/pass-good-2.mp3"
+  ],
+  "second-half": [
+   "genel/second-half-1.mp3"
+  ],
+  "kick-off-start": [
+   "genel/kick-off-start-1.mp3"
+  ],
+  "restart": [
+   "genel/restart-1.mp3"
+  ],
+  "half-time": [
+   "genel/half-time-1.mp3",
+   "genel/half-time-2.mp3"
+  ],
+  "full-time": [
+   "genel/full-time-1.mp3"
+  ]
+ },
+ "players": {
+  "taha": {
+   "ball": [
+    "oyuncu/taha/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/taha/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/taha/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/taha/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/taha/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/taha/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/taha/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/taha/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/taha/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/taha/goal-1.mp3",
+    "oyuncu/taha/goal-2.mp3"
+   ]
+  },
+  "servan": {
+   "ball": [
+    "oyuncu/servan/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/servan/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/servan/pass-good-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/servan/loss-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/servan/tackle-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/servan/beat-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/servan/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/servan/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/servan/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/servan/goal-1.mp3",
+    "oyuncu/servan/goal-2.mp3"
+   ]
+  },
+  "alper": {
+   "pass": [
+    "oyuncu/alper/pass-1.mp3"
+   ],
+   "ball": [
+    "oyuncu/alper/ball-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/alper/pass-good-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/alper/tackle-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/alper/beat-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/alper/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/alper/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/alper/shot-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/alper/foul-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/alper/goal-1.mp3",
+    "oyuncu/alper/goal-2.mp3"
+   ]
+  },
+  "mahmut": {
+   "ball": [
+    "oyuncu/mahmut/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/mahmut/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/mahmut/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/mahmut/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/mahmut/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/mahmut/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/mahmut/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/mahmut/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/mahmut/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/mahmut/goal-1.mp3",
+    "oyuncu/mahmut/goal-2.mp3"
+   ]
+  },
+  "goktug": {
+   "pass": [
+    "oyuncu/goktug/pass-1.mp3"
+   ],
+   "ball": [
+    "oyuncu/goktug/ball-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/goktug/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/goktug/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/goktug/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/goktug/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/goktug/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/goktug/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/goktug/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/goktug/goal-1.mp3",
+    "oyuncu/goktug/goal-2.mp3"
+   ]
+  },
+  "barkuz": {
+   "ball": [
+    "oyuncu/barkuz/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/barkuz/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/barkuz/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/barkuz/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/barkuz/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/barkuz/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/barkuz/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/barkuz/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/barkuz/shot-1.mp3"
+   ],
+   "save": [
+    "oyuncu/barkuz/save-1.mp3",
+    "oyuncu/barkuz/save-2.mp3"
+   ],
+   "goal": [
+    "oyuncu/barkuz/goal-1.mp3",
+    "oyuncu/barkuz/goal-2.mp3"
+   ]
+  },
+  "kiyan": {
+   "ball": [
+    "oyuncu/kiyan/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/kiyan/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/kiyan/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/kiyan/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/kiyan/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/kiyan/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/kiyan/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/kiyan/shot-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/kiyan/foul-1.mp3"
+   ],
+   "save": [
+    "oyuncu/kiyan/save-1.mp3",
+    "oyuncu/kiyan/save-2.mp3"
+   ],
+   "goal": [
+    "oyuncu/kiyan/goal-1.mp3",
+    "oyuncu/kiyan/goal-2.mp3"
+   ]
+  },
+  "m-emre": {
+   "ball": [
+    "oyuncu/m-emre/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/m-emre/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/m-emre/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/m-emre/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/m-emre/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/m-emre/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/m-emre/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/m-emre/shot-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/m-emre/foul-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/m-emre/goal-1.mp3",
+    "oyuncu/m-emre/goal-2.mp3"
+   ]
+  },
+  "erhan": {
+   "ball": [
+    "oyuncu/erhan/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/erhan/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/erhan/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/erhan/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/erhan/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/erhan/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/erhan/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/erhan/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/erhan/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/erhan/goal-1.mp3",
+    "oyuncu/erhan/goal-2.mp3"
+   ]
+  },
+  "ismail": {
+   "ball": [
+    "oyuncu/ismail/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/ismail/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/ismail/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/ismail/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/ismail/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/ismail/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/ismail/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/ismail/shot-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/ismail/foul-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/ismail/goal-1.mp3",
+    "oyuncu/ismail/goal-2.mp3"
+   ]
+  },
+  "baran": {
+   "ball": [
+    "oyuncu/baran/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/baran/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/baran/pass-good-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/baran/tackle-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/baran/beat-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/baran/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/baran/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/baran/shot-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/baran/foul-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/baran/goal-1.mp3",
+    "oyuncu/baran/goal-2.mp3"
+   ]
+  },
+  "eren": {
+   "ball": [
+    "oyuncu/eren/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/eren/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/eren/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/eren/beat-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/eren/loss-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/eren/tackle-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/eren/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/eren/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/eren/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/eren/goal-1.mp3",
+    "oyuncu/eren/goal-2.mp3"
+   ]
+  },
+  "arif": {
+   "ball": [
+    "oyuncu/arif/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/arif/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/arif/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/arif/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/arif/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/arif/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/arif/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/arif/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/arif/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/arif/goal-1.mp3",
+    "oyuncu/arif/goal-2.mp3"
+   ]
+  },
+  "emir": {
+   "ball": [
+    "oyuncu/emir/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/emir/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/emir/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/emir/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/emir/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/emir/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/emir/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/emir/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/emir/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/emir/goal-1.mp3",
+    "oyuncu/emir/goal-2.mp3"
+   ]
+  },
+  "hakan-goktug": {
+   "ball": [
+    "oyuncu/hakan-goktug/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/hakan-goktug/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/hakan-goktug/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/hakan-goktug/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/hakan-goktug/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/hakan-goktug/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/hakan-goktug/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/hakan-goktug/shot-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/hakan-goktug/foul-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/hakan-goktug/goal-1.mp3",
+    "oyuncu/hakan-goktug/goal-2.mp3"
+   ]
+  },
+  "melih": {
+   "ball": [
+    "oyuncu/melih/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/melih/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/melih/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/melih/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/melih/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/melih/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/melih/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/melih/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/melih/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/melih/goal-1.mp3",
+    "oyuncu/melih/goal-2.mp3"
+   ]
+  },
+  "sahin": {
+   "ball": [
+    "oyuncu/sahin/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/sahin/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/sahin/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/sahin/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/sahin/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/sahin/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/sahin/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/sahin/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/sahin/shot-1.mp3"
+   ],
+   "save": [
+    "oyuncu/sahin/save-1.mp3",
+    "oyuncu/sahin/save-2.mp3"
+   ],
+   "goal": [
+    "oyuncu/sahin/goal-1.mp3",
+    "oyuncu/sahin/goal-2.mp3"
+   ]
+  },
+  "mustafa": {
+   "ball": [
+    "oyuncu/mustafa/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/mustafa/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/mustafa/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/mustafa/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/mustafa/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/mustafa/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/mustafa/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/mustafa/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/mustafa/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/mustafa/goal-1.mp3",
+    "oyuncu/mustafa/goal-2.mp3"
+   ]
+  },
+  "mali": {
+   "ball": [
+    "oyuncu/mali/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/mali/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/mali/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/mali/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/mali/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/mali/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/mali/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/mali/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/mali/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/mali/goal-1.mp3",
+    "oyuncu/mali/goal-2.mp3"
+   ]
+  },
+  "mensur": {
+   "ball": [
+    "oyuncu/mensur/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/mensur/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/mensur/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/mensur/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/mensur/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/mensur/loss-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/mensur/foul-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/mensur/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/mensur/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/mensur/goal-1.mp3",
+    "oyuncu/mensur/goal-2.mp3"
+   ]
+  },
+  "suleyman": {
+   "ball": [
+    "oyuncu/suleyman/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/suleyman/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/suleyman/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/suleyman/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/suleyman/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/suleyman/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/suleyman/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/suleyman/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/suleyman/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/suleyman/goal-1.mp3",
+    "oyuncu/suleyman/goal-2.mp3"
+   ]
+  },
+  "onur": {
+   "ball": [
+    "oyuncu/onur/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/onur/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/onur/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/onur/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/onur/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/onur/loss-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/onur/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/onur/shot-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/onur/bad-touch-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/onur/goal-1.mp3",
+    "oyuncu/onur/goal-2.mp3"
+   ]
+  },
+  "omer": {
+   "ball": [
+    "oyuncu/omer/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/omer/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/omer/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/omer/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/omer/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/omer/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/omer/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/omer/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/omer/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/omer/goal-1.mp3",
+    "oyuncu/omer/goal-2.mp3"
+   ]
+  },
+  "mamadou": {
+   "ball": [
+    "oyuncu/mamadou/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/mamadou/pass-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/mamadou/beat-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/mamadou/pass-good-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/mamadou/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/mamadou/loss-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/mamadou/shot-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/mamadou/foul-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/mamadou/bad-touch-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/mamadou/goal-1.mp3",
+    "oyuncu/mamadou/goal-2.mp3"
+   ]
+  },
+  "caca": {
+   "pass": [
+    "oyuncu/caca/pass-1.mp3"
+   ],
+   "ball": [
+    "oyuncu/caca/ball-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/caca/beat-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/caca/pass-good-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/caca/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/caca/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/caca/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/caca/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/caca/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/caca/goal-1.mp3",
+    "oyuncu/caca/goal-2.mp3"
+   ]
+  },
+  "utku": {
+   "ball": [
+    "oyuncu/utku/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/utku/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/utku/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/utku/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/utku/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/utku/loss-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/utku/foul-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/utku/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/utku/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/utku/goal-1.mp3",
+    "oyuncu/utku/goal-2.mp3"
+   ]
+  },
+  "kamil-reis": {
+   "ball": [
+    "oyuncu/kamil-reis/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/kamil-reis/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/kamil-reis/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/kamil-reis/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/kamil-reis/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/kamil-reis/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/kamil-reis/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/kamil-reis/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/kamil-reis/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/kamil-reis/goal-1.mp3",
+    "oyuncu/kamil-reis/goal-2.mp3"
+   ]
+  },
+  "ali-efe": {
+   "ball": [
+    "oyuncu/ali-efe/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/ali-efe/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/ali-efe/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/ali-efe/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/ali-efe/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/ali-efe/loss-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/ali-efe/foul-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/ali-efe/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/ali-efe/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/ali-efe/goal-1.mp3",
+    "oyuncu/ali-efe/goal-2.mp3"
+   ]
+  },
+  "talha": {
+   "ball": [
+    "oyuncu/talha/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/talha/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/talha/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/talha/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/talha/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/talha/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/talha/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/talha/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/talha/shot-1.mp3"
+   ],
+   "save": [
+    "oyuncu/talha/save-1.mp3",
+    "oyuncu/talha/save-2.mp3"
+   ],
+   "goal": [
+    "oyuncu/talha/goal-1.mp3",
+    "oyuncu/talha/goal-2.mp3"
+   ]
+  },
+  "yusuf": {
+   "ball": [
+    "oyuncu/yusuf/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/yusuf/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/yusuf/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/yusuf/beat-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/yusuf/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/yusuf/bad-touch-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/yusuf/tackle-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/yusuf/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/yusuf/shot-1.mp3"
+   ],
+   "save": [
+    "oyuncu/yusuf/save-1.mp3",
+    "oyuncu/yusuf/save-2.mp3"
+   ],
+   "goal": [
+    "oyuncu/yusuf/goal-1.mp3",
+    "oyuncu/yusuf/goal-2.mp3"
+   ]
+  },
+  "yanki": {
+   "ball": [
+    "oyuncu/yanki/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/yanki/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/yanki/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/yanki/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/yanki/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/yanki/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/yanki/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/yanki/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/yanki/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/yanki/goal-1.mp3",
+    "oyuncu/yanki/goal-2.mp3"
+   ]
+  },
+  "tevfik": {
+   "ball": [
+    "oyuncu/tevfik/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/tevfik/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/tevfik/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/tevfik/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/tevfik/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/tevfik/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/tevfik/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/tevfik/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/tevfik/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/tevfik/goal-1.mp3",
+    "oyuncu/tevfik/goal-2.mp3"
+   ]
+  },
+  "berkin": {
+   "ball": [
+    "oyuncu/berkin/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/berkin/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/berkin/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/berkin/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/berkin/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/berkin/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/berkin/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/berkin/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/berkin/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/berkin/goal-1.mp3",
+    "oyuncu/berkin/goal-2.mp3"
+   ]
+  },
+  "direnc": {
+   "ball": [
+    "oyuncu/direnc/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/direnc/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/direnc/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/direnc/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/direnc/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/direnc/loss-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/direnc/foul-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/direnc/bad-touch-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/direnc/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/direnc/goal-1.mp3",
+    "oyuncu/direnc/goal-2.mp3"
+   ]
+  },
+  "eto": {
+   "ball": [
+    "oyuncu/eto/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/eto/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/eto/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/eto/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/eto/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/eto/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/eto/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/eto/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/eto/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/eto/goal-1.mp3",
+    "oyuncu/eto/goal-2.mp3"
+   ]
+  },
+  "ugur": {
+   "ball": [
+    "oyuncu/ugur/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/ugur/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/ugur/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/ugur/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/ugur/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/ugur/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/ugur/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/ugur/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/ugur/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/ugur/goal-1.mp3",
+    "oyuncu/ugur/goal-2.mp3"
+   ]
+  },
+  "arda-barin": {
+   "ball": [
+    "oyuncu/arda-barin/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/arda-barin/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/arda-barin/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/arda-barin/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/arda-barin/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/arda-barin/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/arda-barin/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/arda-barin/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/arda-barin/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/arda-barin/goal-1.mp3",
+    "oyuncu/arda-barin/goal-2.mp3"
+   ]
+  },
+  "yigit-cetinkaya": {
+   "ball": [
+    "oyuncu/yigit-cetinkaya/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/yigit-cetinkaya/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/yigit-cetinkaya/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/yigit-cetinkaya/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/yigit-cetinkaya/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/yigit-cetinkaya/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/yigit-cetinkaya/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/yigit-cetinkaya/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/yigit-cetinkaya/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/yigit-cetinkaya/goal-1.mp3",
+    "oyuncu/yigit-cetinkaya/goal-2.mp3"
+   ]
+  },
+  "batu": {
+   "ball": [
+    "oyuncu/batu/ball-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/batu/pass-good-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/batu/pass-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/batu/tackle-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/batu/beat-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/batu/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/batu/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/batu/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/batu/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/batu/goal-1.mp3",
+    "oyuncu/batu/goal-2.mp3"
+   ]
+  },
+  "seker": {
+   "ball": [
+    "oyuncu/seker/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/seker/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/seker/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/seker/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/seker/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/seker/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/seker/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/seker/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/seker/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/seker/goal-1.mp3",
+    "oyuncu/seker/goal-2.mp3"
+   ]
+  },
+  "halit": {
+   "ball": [
+    "oyuncu/halit/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/halit/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/halit/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/halit/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/halit/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/halit/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/halit/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/halit/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/halit/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/halit/goal-1.mp3",
+    "oyuncu/halit/goal-2.mp3"
+   ]
+  },
+  "metehan": {
+   "ball": [
+    "oyuncu/metehan/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/metehan/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/metehan/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/metehan/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/metehan/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/metehan/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/metehan/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/metehan/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/metehan/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/metehan/goal-1.mp3",
+    "oyuncu/metehan/goal-2.mp3"
+   ]
+  },
+  "sarp": {
+   "ball": [
+    "oyuncu/sarp/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/sarp/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/sarp/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/sarp/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/sarp/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/sarp/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/sarp/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/sarp/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/sarp/shot-1.mp3"
+   ],
+   "save": [
+    "oyuncu/sarp/save-1.mp3",
+    "oyuncu/sarp/save-2.mp3"
+   ],
+   "goal": [
+    "oyuncu/sarp/goal-1.mp3",
+    "oyuncu/sarp/goal-2.mp3"
+   ]
+  },
+  "altug": {
+   "ball": [
+    "oyuncu/altug/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/altug/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/altug/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/altug/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/altug/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/altug/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/altug/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/altug/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/altug/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/altug/goal-1.mp3",
+    "oyuncu/altug/goal-2.mp3"
+   ]
+  },
+  "oguz": {
+   "ball": [
+    "oyuncu/oguz/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/oguz/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/oguz/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/oguz/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/oguz/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/oguz/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/oguz/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/oguz/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/oguz/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/oguz/goal-1.mp3",
+    "oyuncu/oguz/goal-2.mp3"
+   ]
+  },
+  "eren-emeksiz": {
+   "ball": [
+    "oyuncu/eren-emeksiz/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/eren-emeksiz/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/eren-emeksiz/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/eren-emeksiz/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/eren-emeksiz/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/eren-emeksiz/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/eren-emeksiz/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/eren-emeksiz/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/eren-emeksiz/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/eren-emeksiz/goal-1.mp3",
+    "oyuncu/eren-emeksiz/goal-2.mp3"
+   ]
+  },
+  "fuat": {
+   "ball": [
+    "oyuncu/fuat/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/fuat/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/fuat/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/fuat/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/fuat/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/fuat/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/fuat/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/fuat/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/fuat/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/fuat/goal-1.mp3",
+    "oyuncu/fuat/goal-2.mp3"
+   ]
+  },
+  "akin": {
+   "ball": [
+    "oyuncu/akin/ball-1.mp3"
+   ],
+   "pass": [
+    "oyuncu/akin/pass-1.mp3"
+   ],
+   "pass-good": [
+    "oyuncu/akin/pass-good-1.mp3"
+   ],
+   "beat": [
+    "oyuncu/akin/beat-1.mp3"
+   ],
+   "tackle": [
+    "oyuncu/akin/tackle-1.mp3"
+   ],
+   "loss": [
+    "oyuncu/akin/loss-1.mp3"
+   ],
+   "bad-touch": [
+    "oyuncu/akin/bad-touch-1.mp3"
+   ],
+   "foul": [
+    "oyuncu/akin/foul-1.mp3"
+   ],
+   "shot": [
+    "oyuncu/akin/shot-1.mp3"
+   ],
+   "goal": [
+    "oyuncu/akin/goal-1.mp3",
+    "oyuncu/akin/goal-2.mp3"
+   ]
+  }
+ },
+ "effects": {}
+}

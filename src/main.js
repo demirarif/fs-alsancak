@@ -1,4 +1,8 @@
 import './style.css';
+import './theme-fc.css';
+document.documentElement.dataset.theme='fc';
+// Entrance animations play when a screen comes up, not on every re-render inside it.
+{let t;const settle=()=>{document.documentElement.classList.remove('fc-settled');clearTimeout(t);t=setTimeout(()=>document.documentElement.classList.add('fc-settled'),1400);};settle();addEventListener('hashchange',settle);}
 import {mountPlayerLibrary} from './v1/features/player-library.ts';
 import {mountTeamSelection} from './v1/features/team-selection/controller.ts';
 import {mountLineupReview} from './v1/features/lineup-review/controller.ts';

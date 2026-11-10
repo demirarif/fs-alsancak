@@ -17,7 +17,9 @@ export const TEAM_IDS: readonly [TeamId, TeamId] = ['team-1', 'team-2'];
 
 export interface PlayerStats { passes: number; completed: number; shots: number; onTarget: number; goals: number; assists: number; tackles: number; interceptions: number; saves: number; fouls: number; headersWon: number }
 /** Scripted body motion between two points (a keeper's dive, a sliding tackle): the body travels with the animation, not after it. */
-export interface Lunge { t0: number; t1: number; x0: number; z0: number; x1: number; z1: number }
+export interface Lunge { t0: number; t1: number; x0: number; z0: number; x1: number; z1: number;
+  /** A standing step (a tackle stepping in): he is still on his feet, so a ball played into him hits him. */
+  solid?: boolean }
 export interface RtPlayer {
   readonly idx: number; readonly id: string; readonly name: string; readonly team: Team; readonly keeper: boolean; readonly guest: boolean;
   slot: FormationSlot;
@@ -34,8 +36,13 @@ export interface RtPlayer {
   energy: number;
   action: number; actionStart: number; actionEnd: number; actionParam: number;
   lockUntil: number; touchUntil: number; tackleUntil: number; decideAt: number; supportAt: number;
+  /** Wrong-footed or getting up: runs at a quarter of his speed until then. Shorter than lockUntil (no tackle, no touch), so a beaten
+   * man turns and chases instead of standing (2026-11-09). */
+  stallUntil: number;
   /** On the ground after a dive, a slide or a foul: no running until he is up. */
   groundedUntil: number; lunge: Lunge | null;
+  /** After a goal: the scorer this team-mate runs to and celebrates with (-1 otherwise). */
+  celebrateWith: number;
   lastReceived: number; receivedSinceMood: number;
   mood: Mood | null; moodUntil: number;
   dayForm: string | null;
@@ -98,7 +105,7 @@ export function createRuntimePlayers(snapshot: MatchSnapshot, lineups: readonly 
         longWide: keeper && !!player.specialAbilities?.some(s => s.id === 'accurate-long-wide-distribution'),
         aerial: aerialScore(a, specialist), headerSpecialist: specialist,
         x: 0, z: 0, vx: 0, vz: 0, heading: 0, tx: 0, tz: 0, pace: 0, role: 'shape', roleUntil: 0, energy: 1,
-        action: 0, actionStart: 0, actionEnd: 0, actionParam: 0, lockUntil: 0, touchUntil: 0, tackleUntil: 0, decideAt: 0, supportAt: 0, groundedUntil: 0, lunge: null,
+        action: 0, actionStart: 0, actionEnd: 0, actionParam: 0, lockUntil: 0, stallUntil: 0, touchUntil: 0, tackleUntil: 0, decideAt: 0, supportAt: 0, groundedUntil: 0, lunge: null, celebrateWith: -1,
         lastReceived: 0, receivedSinceMood: 0, mood: null, moodUntil: 0, dayForm: null,
         stats: { passes: 0, completed: 0, shots: 0, onTarget: 0, goals: 0, assists: 0, tackles: 0, interceptions: 0, saves: 0, fouls: 0, headersWon: 0 } });
     }

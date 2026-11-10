@@ -269,3 +269,68 @@
 /* The narrowest phones: the camera angles by their short names. */
 @media(max-width:400px),(max-height:500px){#match-screen.is-broadcast .mc-segmented button{padding:4px 8px;font-size:0}#match-screen.is-broadcast .mc-segmented button::after{content:attr(data-short);font-size:10px}}
 
+
+/* Full-time report (2026-11-09): man of the match, 10-point ratings, shot map (match-report.js). Spans the wide card's two columns. */
+#match-screen .mr-report{grid-column:1/-1;display:flex;flex-direction:column;gap:12px;min-width:0}
+#match-screen .mr-motm{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid #e7c18155;border-left:3px solid var(--mc-blue);border-radius:7px;background:linear-gradient(100deg,#2b3446,#202c3c 70%)}
+#match-screen .mr-motm.red{border-left-color:var(--mc-red)}
+#match-screen .mr-motm .kit-shirt{width:30px;height:30px}
+#match-screen .mr-motm div{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1}
+#match-screen .mr-motm small{font-size:8px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--mc-gold-text)}
+#match-screen .mr-motm b{font-size:16px;font-weight:800;color:#fff}
+#match-screen .mr-motm span{font-size:10px;color:var(--mc-muted)}
+#match-screen .mr-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start}
+#match-screen .mr-shots{margin:0;padding:10px 10px 8px;border:1px solid #ffffff12;border-radius:6px;background:#202c3c}
+#match-screen .mr-shots svg{display:block;width:100%;height:auto}
+#match-screen .mr-shots .pitch rect,#match-screen .mr-shots .pitch line,#match-screen .mr-shots .pitch circle{fill:none;stroke:#ffffff2e;stroke-width:.35}
+#match-screen .mr-shots .pitch>rect:first-child{fill:#2f5a3a;stroke:#ffffff40}
+#match-screen .mr-shots .pitch .goalmouth{fill:#ffffff30}
+#match-screen .mr-shots circle.goal{stroke:#1b2330;stroke-width:.45}
+#match-screen .mr-shots circle.goal.blue{fill:var(--mc-blue)}#match-screen .mr-shots circle.goal.red{fill:var(--mc-red)}
+#match-screen .mr-shots circle.goal{filter:drop-shadow(0 0 1.2px #e7c181)}
+#match-screen .mr-shots circle.on{stroke-width:.5;fill-opacity:.55}
+#match-screen .mr-shots circle.on.blue{fill:var(--mc-blue);stroke:var(--mc-blue)}#match-screen .mr-shots circle.on.red{fill:var(--mc-red);stroke:var(--mc-red)}
+#match-screen .mr-shots circle.off{fill:none;stroke-width:.45;stroke-opacity:.75}
+#match-screen .mr-shots circle.off.blue{stroke:var(--mc-blue)}#match-screen .mr-shots circle.off.red{stroke:var(--mc-red)}
+#match-screen .mr-shots figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin-top:6px;font-size:9px;color:var(--mc-dim)}
+#match-screen .mr-shots .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:4px;vertical-align:-1px}
+#match-screen .mr-shots .dot.goal{background:var(--mc-gold);box-shadow:0 0 4px #e7c181}
+#match-screen .mr-shots .dot.on{background:#c5d2e4a0}
+#match-screen .mr-shots .dot.off{border:1.5px solid #c5d2e4}
+#match-screen .mr-title{margin:0 0 7px;font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#91a4bd}
+#match-screen .mr-title small{font-size:8px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--mc-dim);margin-left:4px}
+#match-screen .mr-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#match-screen .mr-ratings{list-style:none;margin:0;padding:6px 9px;border:1px solid var(--mc-border);border-top:2px solid var(--mc-blue);border-radius:6px;background:#1b2533}
+#match-screen .mr-ratings.red{border-top-color:var(--mc-red)}
+#match-screen .mr-ratings li{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:3px 0;font-size:10px;border-bottom:1px solid #ffffff08}
+#match-screen .mr-ratings li:last-child{border-bottom:0}
+#match-screen .mr-ratings li span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e3e8ef}
+#match-screen .mr-ratings li i{font-style:normal;font-size:8px;font-weight:800;color:var(--mc-dim)}
+#match-screen .mr-ratings li.is-motm span{color:var(--mc-gold-text);font-weight:800}
+#match-screen .mr-rating{flex:none;min-width:30px;padding:1px 5px;border-radius:4px;font-style:normal;font-size:10px;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;color:#0f1620}
+#match-screen .mr-motm .mr-rating{min-width:42px;padding:4px 7px;font-size:15px}
+#match-screen .mr-rating.top{background:#7fd38d}#match-screen .mr-rating.good{background:#b8dd8a}#match-screen .mr-rating.ok{background:#e6cf7e}#match-screen .mr-rating.low{background:#e49a8c}
+@media (max-width:720px){
+  #match-screen .mr-grid{grid-template-columns:1fr}
+  #match-screen .mr-motm b{font-size:14px}
+}
+
+/* Commentary feed with icons and the scoreboard taking a goal (2026-11-09). */
+#match-screen .match-ticker li{padding:3px 8px 3px 4px;font-size:10px;line-height:1.45;animation:ticker-in .35s ease-out}
+#match-screen .match-ticker li:nth-child(4){opacity:.3}
+#match-screen .match-ticker button{align-items:center;gap:7px}
+#match-screen .match-ticker .ev{flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--mc-blue);color:#132033}
+#match-screen .match-ticker li.red .ev{background:var(--mc-red);color:#2a1219}
+#match-screen .match-ticker li.neutral .ev{background:#8391a6;color:#151c27}
+#match-screen .match-ticker li.is-goal .ev{background:var(--mc-gold);color:#2a2112;box-shadow:0 0 8px #e7c18199}
+#match-screen .match-ticker .ev-icon{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#match-screen .match-ticker li.is-goal{font-size:11px}
+#match-screen .match-ticker li.is-goal span{color:#fff}
+#match-screen .match-scoreboard{--flash:#e7c181aa}
+#match-screen .match-scoreboard.scored-blue{--flash:#8cb4edcc}#match-screen .match-scoreboard.scored-red{--flash:#e598a8cc}
+#match-screen .match-scoreboard.is-scored{animation:score-flash 1.8s ease-out}
+#match-screen .match-scoreboard.is-scored .match-score{display:inline-block;animation:score-bump .9s cubic-bezier(.2,1.5,.4,1)}
+@keyframes score-bump{0%{transform:scale(1)}28%{transform:scale(1.4);color:#fff}100%{transform:scale(1)}}
+@keyframes score-flash{0%{box-shadow:0 0 0 0 transparent}18%{box-shadow:0 0 0 2px var(--flash),0 0 30px var(--flash)}100%{box-shadow:0 0 0 0 transparent}}
+@media (max-width:720px){#match-screen .match-ticker .ev{width:18px;height:18px}}
+@media (prefers-reduced-motion:reduce){#match-screen .match-scoreboard.is-scored,#match-screen .match-scoreboard.is-scored .match-score,#match-screen .match-ticker li{animation:none}}

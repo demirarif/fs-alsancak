@@ -1,0 +1,188 @@
+/* "Gece Maçı" (night match) theme, 2026-11-10 — chosen by the user from the "Alsancak arayüz önerileri" designs (direction B): deep navy
+ * surfaces, the two kits as solid slabs with cut edges, one electric-lime accent for what is live, Barlow Condensed for figures and
+ * labels. Loaded after match.css and match-ui.css and restyles them; rules that move things around apply from 721 px up, so the phone
+ * layout keeps its places. */
+#match-screen{--n-bg:#0b1020;--n-panel:#121a2e;--n-line:#26304f;--n-text:#f2f4f8;--n-muted:#a9b3c8;--n-lime:#c8f04a;--n-lime-rgb:200,240,74;--n-lime-ink:#10140a;
+  --n-blue:#2c4f8f;--n-red:#8e2747;--n-blue-hi:#4f7fd1;--n-red-hi:#d4587c;--n-blue-tx:#8fb3f0;--n-red-tx:#f0a7bb;--n-fig:'Barlow Condensed','Manrope',sans-serif;
+  --mc-blue:var(--n-blue-tx);--mc-red:var(--n-red-tx);--mc-gold:var(--n-lime);--mc-gold-text:var(--n-lime)}
+
+/* Scoreboard: kit slabs, the score between them, the clock in lime. */
+#match-screen .match-scoreboard{align-items:stretch;gap:0;height:48px;padding:0;border:0;border-radius:0;background:var(--n-bg);box-shadow:0 8px 24px #0007}
+#match-screen .match-scoreboard .match-team{padding:0 22px 0 14px;background:var(--n-blue);clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%);color:#fff;font-family:var(--n-fig);font-size:20px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+#match-screen .match-scoreboard .match-team.right{padding:0 14px 0 22px;background:var(--n-red);clip-path:polygon(12px 0,100% 0,100% 100%,0 100%);color:#fff}
+#match-screen .match-scoreboard .match-team b{max-width:150px;overflow:hidden;text-overflow:ellipsis;font-weight:700}
+#match-screen .match-score,#match-screen .match-scoreboard.is-scored .match-score{display:flex;align-items:center;padding:0 12px;font-family:var(--n-fig);font-size:34px;font-weight:800;letter-spacing:0;color:#fff}
+#match-screen .match-score em{margin:0 6px;font-size:28px;font-weight:600;color:#5f6b88}
+#match-screen .match-clock{justify-content:center;min-width:0;margin:0;padding:0 14px;border:0}
+#match-screen .match-clock span{font-family:var(--n-fig);font-size:22px;font-weight:700;color:var(--n-lime)}
+#match-screen .match-clock small{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--n-muted)}
+
+/* Possession so far, under the scoreboard. */
+#match-screen .match-possession{position:absolute;z-index:5;left:18px;top:68px;display:flex;align-items:center;gap:9px;height:26px;padding:0 12px;background:#0b1020e6;color:var(--n-muted);font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;pointer-events:none}
+#match-screen .match-possession[hidden]{display:none}
+#match-screen .match-possession b{font-family:var(--n-fig);font-size:15px;font-weight:700;letter-spacing:0;color:var(--n-text);font-variant-numeric:tabular-nums}
+#match-screen .mp-bar{display:flex;gap:2px;width:120px;height:4px}
+#match-screen .mp-bar i{display:block;flex:50 1 0;background:var(--n-blue-hi)}
+#match-screen .mp-bar i[data-possbar="1"]{background:var(--n-red-hi)}
+
+/* Camera angles: square, the one on in lime. */
+#match-screen .mc-segmented{gap:4px;padding:4px;border:0;border-radius:0;background:var(--n-bg);box-shadow:0 8px 24px #0007}
+#match-screen .mc-segmented button{height:34px;min-height:34px;padding:0 12px;border:0;border-radius:0;color:var(--n-text);font-family:var(--n-fig);font-size:15px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+#match-screen .mc-segmented button:hover{background:#ffffff12;color:#fff}
+#match-screen .mc-segmented button.active,#match-screen .mc-segmented button.active:hover{background:var(--n-lime);color:var(--n-lime-ink);box-shadow:none}
+
+/* Event feed: solid rows, the minute in lime, the icon on the team's colour. */
+#match-screen .match-ticker{gap:3px}
+#match-screen .match-ticker li{padding:6px 10px 6px 6px;border:0;border-radius:0;background:#0b1020e8;backdrop-filter:none;color:var(--n-text);font-size:12px;line-height:1.45;text-shadow:none}
+#match-screen .match-ticker li:nth-child(2){opacity:.85}#match-screen .match-ticker li:nth-child(3){opacity:.7}#match-screen .match-ticker li:nth-child(4){opacity:.5}
+#match-screen .match-ticker li b{min-width:28px;font-family:var(--n-fig);font-size:17px;font-weight:700;color:var(--n-lime)}
+#match-screen .match-ticker .ev{width:22px;height:22px;border-radius:0;background:var(--n-blue-hi);color:var(--n-bg)}
+#match-screen .match-ticker li.red .ev{background:var(--n-red-hi);color:var(--n-bg)}
+#match-screen .match-ticker li.neutral .ev{background:#5f6b88;color:var(--n-bg)}
+#match-screen .match-ticker li.is-goal{background:#0b1020f5;font-size:12px}
+#match-screen .match-ticker li.is-goal .ev{background:var(--n-lime);color:var(--n-lime-ink);box-shadow:none}
+#match-screen .match-why{border:1px solid var(--n-line);border-radius:0;background:var(--n-bg)}
+
+/* Goal: lime GOL, the scorer on his kit, the score — cut edges, as one band. */
+#match-screen .match-goal-banner{align-items:stretch;gap:0;height:104px;bottom:92px;padding:0;border:0;border-radius:0;background:none;box-shadow:none;filter:drop-shadow(0 12px 28px #000a)}
+#match-screen .match-goal-banner.blue,#match-screen .match-goal-banner.red{border:0}
+#match-screen .match-goal-banner strong{display:flex;align-items:center;padding:0 42px 0 26px;background:var(--n-lime);color:var(--n-lime-ink);clip-path:polygon(0 0,100% 0,calc(100% - 24px) 100%,0 100%);font-family:var(--n-fig);font-size:86px;font-weight:800;line-height:1;letter-spacing:2px}
+#match-screen .gb-who{display:flex;flex-direction:column;justify-content:center;gap:1px;margin-left:-12px;padding:0 42px 0 36px;background:var(--n-blue);clip-path:polygon(24px 0,100% 0,calc(100% - 24px) 100%,0 100%);text-align:left}
+#match-screen .match-goal-banner.red .gb-who{background:var(--n-red)}
+#match-screen .gb-who small{font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;color:#e1e8f6}
+#match-screen .gb-who b{font-family:var(--n-fig);font-size:52px;font-weight:800;line-height:.95;letter-spacing:.6px;text-transform:uppercase;color:#fff}
+#match-screen .match-goal-banner .gb-who span{display:block;font-size:12px;font-weight:600;line-height:1.4;color:#e6ecf7}
+#match-screen .gb-score{display:flex;flex-direction:column;align-items:center;justify-content:center;margin-left:-12px;padding:0 26px 0 38px;background:var(--n-bg);clip-path:polygon(24px 0,100% 0,100% 100%,0 100%)}
+#match-screen .gb-score b{font-family:var(--n-fig);font-size:48px;font-weight:800;line-height:1;color:#fff;white-space:nowrap}
+#match-screen .gb-score small{max-width:170px;overflow:hidden;font-size:9px;font-weight:800;letter-spacing:1.4px;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap;color:var(--n-muted)}
+#match-screen .match-chapter{padding:6px 14px;border:0;border-radius:0;background:var(--n-bg);color:var(--n-lime);font-family:var(--n-fig);font-size:15px;font-weight:700;letter-spacing:1.4px}
+
+/* Transport. */
+#match-screen .match-controls{border-top:1px solid var(--n-line);background:var(--n-bg)}
+#match-screen .match-timeline input{border-radius:0;background:linear-gradient(to right,#f2f4f8 var(--progress,0%),#26304f var(--progress,0%))}
+#match-screen .match-timeline input::-webkit-slider-thumb{border-color:var(--n-bg);box-shadow:0 0 0 1px var(--n-lime);background:var(--n-lime)}
+#match-screen .match-timeline input::-moz-range-thumb{border-color:var(--n-bg);background:var(--n-lime)}
+#match-screen .match-marks i{background:var(--n-lime);opacity:.5}
+#match-screen .mc-play,#match-screen .mc-play:hover{border:0;border-radius:0;background:var(--n-lime);color:var(--n-lime-ink);box-shadow:none;font-family:var(--n-fig);font-size:17px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+#match-screen .mc-play:hover{background:#d8f86f}
+#match-screen .mc-replay,#match-screen .match-skip{border:1px solid var(--n-line);border-radius:0;background:transparent;color:var(--n-text);font-family:var(--n-fig);font-size:15px;font-weight:600;letter-spacing:.6px}
+#match-screen .mc-replay:hover:not(:disabled),#match-screen .match-skip:hover{border-color:var(--n-lime);background:transparent;color:var(--n-lime)}
+#match-screen .mc-speeds{gap:4px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+#match-screen .mc-speeds button{border:1px solid var(--n-line);border-radius:0;color:var(--n-text);font-family:var(--n-fig);font-size:14px;font-weight:600;letter-spacing:.4px}
+#match-screen .mc-speeds button:hover{border-color:#ffffff45;background:transparent;color:#fff}
+#match-screen .mc-speeds button.active{border-color:var(--n-lime);background:transparent;color:var(--n-lime)}
+#match-screen .mc-speed-divider{background:var(--n-line)}
+
+/* Half-time and full-time card. */
+#match-screen .match-overlay{background:#05080fd1}
+#match-screen .match-card{border:0;border-radius:0;background:var(--n-bg);box-shadow:0 32px 100px #000b}
+#match-screen .mc-topline{border-bottom:1px solid var(--n-line);background:var(--n-bg)}
+#match-screen .mc-wordmark{color:var(--n-lime)}
+#match-screen .mc-label{font-family:var(--n-fig);font-size:14px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--n-muted)}
+#match-screen .mc-header{padding:0;border:0;background:none}
+#match-screen .mc-header>p{margin:0;padding:10px 22px;color:var(--n-muted)}
+#match-screen .mc-score-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;gap:0;min-height:148px}
+#match-screen .mc-side,#match-screen .mc-side.right{flex-direction:row;align-items:center;gap:14px;min-width:0;padding:16px 48px 16px 22px;background:var(--n-blue);clip-path:polygon(0 0,100% 0,calc(100% - 32px) 100%,0 100%);color:#fff;font-size:inherit;letter-spacing:0;text-align:left}
+#match-screen .mc-side.right{justify-content:flex-end;padding:16px 22px 16px 48px;background:var(--n-red);clip-path:polygon(32px 0,100% 0,100% 100%,0 100%);text-align:right}
+#match-screen .mc-side-text{display:flex;flex-direction:column;gap:6px;min-width:0}
+#match-screen .mc-side-text>b{font-family:var(--n-fig);font-size:36px;font-weight:800;line-height:1;letter-spacing:.6px;text-transform:uppercase;overflow-wrap:anywhere}
+#match-screen .mc-goals{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:12px;font-weight:500;line-height:1.5;color:#dbe5f8}
+#match-screen .mc-side.right .mc-goals{justify-content:flex-end;color:#f6dbe3}
+#match-screen .mc-goals b{font-weight:800;color:#fff}
+#match-screen .mc-score-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0 24px}
+#match-screen .mc-score{font-family:var(--n-fig);font-size:92px;font-weight:800;line-height:.9;letter-spacing:0;color:#fff;font-variant-numeric:tabular-nums}
+#match-screen .mc-score em{margin:0 8px;font-size:60px;font-weight:600;font-style:normal;color:#5f6b88}
+#match-screen .mc-score-box small{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--n-muted)}
+#match-screen .mc-body,#match-screen .wide .mc-body,#match-screen .wide .mc-body:has(.is-scoreless){display:flex;flex-direction:column;align-items:stretch;gap:14px;padding:18px 22px 20px}
+
+/* Goal flow: the match's minutes as a line, Mavi above, Kırmızı below. */
+#match-screen .mc-flow{display:flex;flex-direction:column;gap:6px}
+#match-screen .mc-flow-title{display:flex;justify-content:space-between;margin:0;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--n-muted)}
+#match-screen .mc-flow .none{margin:0;font-size:12px;color:var(--n-muted)}
+#match-screen .mc-flow-line{position:relative;height:74px;margin:0 14px}
+#match-screen .mc-flow-line::before{content:'';position:absolute;left:0;right:0;top:36px;height:2px;background:var(--n-line)}
+#match-screen .mc-flow-line .ht{position:absolute;left:50%;top:12px;width:2px;height:50px;background:#3b4670}
+#match-screen .mc-flow-line i{position:absolute;top:0;display:flex;flex-direction:column;align-items:center;gap:2px;transform:translateX(-50%);font-style:normal}
+#match-screen .mc-flow-line i::after{content:'';width:10px;height:18px;background:var(--n-blue-hi)}
+#match-screen .mc-flow-line i b{font-family:var(--n-fig);font-size:13px;font-weight:700;line-height:1;color:var(--n-text)}
+#match-screen .mc-flow-line i.red{top:39px;flex-direction:column-reverse}
+#match-screen .mc-flow-line i.red::after{background:var(--n-red-hi)}
+
+/* Figures as tiles. */
+#match-screen .mc-stats,#match-screen .mc-body:has(.is-scoreless) .mc-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:0;border:0;border-radius:0;background:none}
+#match-screen .mc-stat,#match-screen .mc-body:has(.is-scoreless) .mc-stat{display:flex;flex-direction:column;align-items:stretch;justify-content:space-between;gap:8px;padding:12px 14px;background:var(--n-panel);font-size:inherit}
+#match-screen .mc-stat>span.mc-stat-label{font-size:10px;font-weight:800;letter-spacing:1.2px;text-align:left;text-transform:uppercase;white-space:normal;color:var(--n-muted)}
+#match-screen .mc-stat-values{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-family:var(--n-fig);font-size:28px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+#match-screen .mc-stat-values b:first-child{color:var(--n-blue-tx)}#match-screen .mc-stat-values b:last-child{color:var(--n-red-tx)}
+#match-screen .mc-stat>i{height:4px;border-radius:0;opacity:1;background:linear-gradient(to right,var(--n-blue-hi) calc(var(--share) - 1px),var(--n-panel) calc(var(--share) - 1px) calc(var(--share) + 1px),var(--n-red-hi) calc(var(--share) + 1px))}
+
+/* Full-time report: man of the match in lime, ratings and shot map on the night panels. */
+#match-screen .mr-motm,#match-screen .mr-motm.red{border:0;border-radius:0;background:var(--n-lime);color:var(--n-lime-ink)}
+#match-screen .mr-motm small{color:var(--n-lime-ink)}
+#match-screen .mr-motm b{font-family:var(--n-fig);font-size:34px;line-height:1;text-transform:uppercase;color:var(--n-lime-ink)}
+#match-screen .mr-motm span{font-weight:700;color:#2b3510}
+#match-screen .mr-motm .mr-rating{background:var(--n-bg);color:var(--n-lime);font-family:var(--n-fig);font-size:28px}
+#match-screen .mr-shots{border:0;border-radius:0;background:var(--n-panel)}
+#match-screen .mr-shots .pitch rect,#match-screen .mr-shots .pitch line,#match-screen .mr-shots .pitch circle{stroke:var(--n-lime)40}
+#match-screen .mr-shots .pitch>rect:first-child{fill:#13261a;stroke:var(--n-lime)59}
+#match-screen .mr-shots circle.goal{stroke:var(--n-bg);filter:drop-shadow(0 0 1.4px var(--n-lime))}
+#match-screen .mr-shots .dot.goal{box-shadow:0 0 4px var(--n-lime)}
+#match-screen .mr-title{color:var(--n-muted)}
+#match-screen .mr-ratings{border:0;border-top:3px solid var(--n-blue-hi);border-radius:0;background:var(--n-panel)}
+#match-screen .mr-ratings.red{border-top-color:var(--n-red-hi)}
+#match-screen .mr-ratings li{border-bottom-color:#ffffff0d;font-size:11px}
+#match-screen .mr-ratings li.is-motm span{color:var(--n-lime)}
+#match-screen .mr-rating{border-radius:0;font-family:var(--n-fig);font-size:14px}
+#match-screen .match-archived{color:var(--n-muted)}
+
+/* Actions. */
+#match-screen .match-actions{border-top:1px solid var(--n-line);background:var(--n-bg)}
+#match-screen .match-button{border:0;border-radius:0;background:var(--n-lime);color:var(--n-lime-ink);box-shadow:none;font-family:var(--n-fig);font-size:16px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
+#match-screen .match-button:hover{background:#d8f86f;color:var(--n-lime-ink)}
+#match-screen .match-button.ghost{border:1px solid var(--n-line);background:transparent;color:var(--n-text)}
+#match-screen .match-button.ghost:hover{border-color:var(--n-lime);background:transparent;color:var(--n-lime)}
+
+/* Desktop and tablet: the feed and the "why" panel move to the right, under the camera angles; shirts give way to the kit slabs. */
+@media(min-width:721px){
+  #match-screen .match-scoreboard .match-kit{display:none}
+  #match-screen .match-ticker{left:auto;right:18px;top:68px;width:300px}
+  #match-screen .match-why{left:auto;right:18px;top:68px}
+}
+@media(min-width:721px) and (max-width:1050px){
+  #match-screen .match-possession{left:15px;top:66px}
+  #match-screen .match-ticker,#match-screen .match-why{right:15px;top:64px}
+  #match-screen .match-scoreboard .match-team{font-size:17px}
+}
+@media(max-width:720px){
+  #match-screen .match-scoreboard{height:42px}
+  #match-screen .match-scoreboard .match-team{padding:0 16px 0 8px}
+  #match-screen .match-scoreboard .match-team.right{padding:0 8px 0 16px}
+  #match-screen .match-score{font-size:26px;padding:0 8px}
+  #match-screen .match-score em{font-size:22px;margin:0 4px}
+  #match-screen .match-clock span{font-size:18px}
+  #match-screen .match-possession{left:10px;top:56px;height:24px;gap:7px}
+  #match-screen .match-possession small{display:none}
+  #match-screen .mp-bar{width:80px}
+  #match-screen .match-ticker{top:88px}
+  #match-screen .match-why{top:88px}
+  #match-screen .mc-segmented button{font-size:13px}
+  #match-screen .match-goal-banner{height:70px;bottom:104px;max-width:calc(100% - 20px)}
+  #match-screen .match-goal-banner strong{padding:0 26px 0 14px;font-size:44px;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+  #match-screen .gb-who{margin-left:-8px;padding:0 24px 0 22px;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);min-width:0}
+  #match-screen .gb-who b{font-size:28px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #match-screen .match-goal-banner .gb-who span{display:none}
+  #match-screen .gb-score{margin-left:-8px;padding:0 12px 0 22px;clip-path:polygon(14px 0,100% 0,100% 100%,0 100%)}
+  #match-screen .gb-score b{font-size:26px}
+  #match-screen .gb-score small{display:none}
+  #match-screen .mc-score-row{grid-template-columns:minmax(0,1fr);min-height:0}
+  #match-screen .mc-side,#match-screen .mc-side.right{padding:12px 14px;clip-path:none}
+  #match-screen .mc-side-text>b{font-size:26px}
+  #match-screen .mc-score-box{padding:10px 0}
+  #match-screen .mc-score{font-size:68px}
+  #match-screen .mc-score em{font-size:44px}
+  #match-screen .mc-body,#match-screen .wide .mc-body,#match-screen .wide .mc-body:has(.is-scoreless){padding:12px}
+  #match-screen .mc-stats,#match-screen .mc-body:has(.is-scoreless) .mc-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #match-screen .mc-stat-values{font-size:20px}
+  #match-screen .mc-stat-values b{white-space:nowrap}
+  #match-screen .mc-flow-line{margin:0 8px}
+}

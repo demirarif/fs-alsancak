@@ -1,0 +1,409 @@
+/* "Gece Maçı Premium" (2026-11-10): the night theme in motion, from row D of the "Alsancak arayüz önerileri" designs (the user: "Evet,
+ * uygula"). After studying beIN Sports, Sky Sports and DAZN graphics — ideas only, none of their marks, fonts or layouts: glass panels,
+ * striped kit slabs, italic figures, a scoreboard whose digits roll, a strip under it that flips between facts, a full-screen goal sting,
+ * the walk-out line-ups, the half-time L screen and an animated full-time card. Loaded last; prefers-reduced-motion keeps the looks and
+ * drops the motion (end of file). */
+#match-screen{--p-glass:rgba(9,14,28,.8);--p-glass-hi:inset 0 1px 0 rgba(255,255,255,.1);--p-shadow:0 18px 40px rgba(0,0,0,.45);--p-ease:cubic-bezier(.2,.8,.2,1);
+  --p-stripe:repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 2px,transparent 2px 8px);--p-blue:linear-gradient(90deg,#1d3766,#3563b0);--p-red:linear-gradient(90deg,#b03a5d,#76203a)}
+#match-screen .mc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ── Scoreboard: lime "A" tile, striped kit slabs, the score box, the clock with a live dot; a light sweep now and then. ── */
+#match-screen .match-scoreboard{--sb-h:54px;display:flex;align-items:stretch;gap:0;height:var(--sb-h);padding:0;overflow:hidden;background:var(--p-glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--p-glass-hi),var(--p-shadow)}
+#match-screen .sb-mark{display:grid;place-items:center;flex:none;width:var(--sb-h);background:var(--n-lime);color:var(--n-lime-ink);font-family:var(--n-fig);font-style:italic;font-weight:800;font-size:32px;line-height:1}
+#match-screen .match-scoreboard .match-team{display:flex;align-items:center;padding:0 26px 0 16px;background:var(--p-stripe),var(--p-blue);clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%);font-style:italic;font-weight:800;font-size:24px;letter-spacing:1px}
+#match-screen .match-scoreboard .match-team.right{margin-left:-6px;padding:0 16px 0 26px;background:var(--p-stripe),var(--p-red);clip-path:polygon(14px 0,100% 0,100% 100%,0 100%)}
+#match-screen .match-scoreboard .match-team b{font-weight:800}
+#match-screen .match-scoreboard .match-score,#match-screen .match-scoreboard.is-scored .match-score{display:flex;align-items:center;margin-left:-6px;padding:0 16px 0 18px;background:#0a0f1d;clip-path:polygon(14px 0,100% 0,calc(100% - 14px) 100%,0 100%);font-size:38px;line-height:var(--sb-h)}
+#match-screen .match-scoreboard .match-score em{margin:0 7px}
+#match-screen .sb-num{display:block;height:var(--sb-h);overflow:hidden;font-variant-numeric:tabular-nums}
+#match-screen .sb-roll{display:flex;flex-direction:column;animation:sb-roll .7s var(--p-ease) both}
+#match-screen .sb-roll i{display:block;height:var(--sb-h);font-style:normal}
+@keyframes sb-roll{from{transform:translateY(0)}to{transform:translateY(calc(-1 * var(--sb-h)))}}
+#match-screen .match-scoreboard.is-scored{animation:none}
+#match-screen .match-scoreboard.is-scored .match-score{animation:sb-goal 1.6s var(--p-ease)}
+@keyframes sb-goal{0%{background:#0a0f1d;color:#fff}12%,45%{background:var(--n-lime);color:var(--n-lime-ink)}100%{background:#0a0f1d;color:#fff}}
+#match-screen .match-scoreboard .match-clock{flex-direction:row;align-items:center;gap:10px;min-width:0;margin:0;padding:0 16px;border:0}
+#match-screen .match-scoreboard .match-clock span{font-size:26px;font-weight:700;color:var(--n-lime);font-variant-numeric:tabular-nums}
+#match-screen .match-scoreboard .match-clock small{padding:2px 6px;border:1px solid rgba(255,255,255,.18);font-size:10px;font-weight:800;letter-spacing:1.4px;white-space:nowrap}
+#match-screen .match-scoreboard.is-live .match-clock small::before{content:'CANLI · ';color:#ff7286}
+#match-screen .match-scoreboard .match-onair{display:none}
+#match-screen .sb-live{flex:none;width:8px;height:8px;border-radius:50%;background:var(--n-lime);animation:p-live 1.6s ease-out infinite}
+#match-screen .match-scoreboard.is-paused .sb-live{animation:none;background:#5f6b88}
+#match-screen .match-scoreboard.is-live .sb-live{background:#ff5d73;animation-name:p-live-red}
+@keyframes p-live{0%,100%{box-shadow:0 0 0 0 rgba(var(--n-lime-rgb),.65)}60%{box-shadow:0 0 0 7px rgba(var(--n-lime-rgb),0)}}
+@keyframes p-live-red{0%,100%{box-shadow:0 0 0 0 rgba(255,93,115,.65)}60%{box-shadow:0 0 0 7px rgba(255,93,115,0)}}
+#match-screen .sb-sheen{position:absolute;top:-10px;bottom:-10px;left:0;width:90px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);animation:p-sheen 9s cubic-bezier(.7,0,.3,1) infinite;pointer-events:none}
+@keyframes p-sheen{0%,72%{transform:translateX(-140%) skewX(-22deg)}88%,100%{transform:translateX(1000%) skewX(-22deg)}}
+
+/* ── The strip under the scoreboard: possession, and every 6 s a fact flipping in. ── */
+#match-screen .match-possession{left:72px;top:76px;height:30px;padding:0 14px;border-bottom:2px solid var(--n-lime);background:rgba(9,14,28,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:var(--p-shadow);transform-origin:50% 0}
+#match-screen .mp-poss{display:flex;align-items:center;gap:9px}
+#match-screen .mp-fact{display:none;align-items:center;gap:10px;white-space:nowrap}
+#match-screen .match-possession.is-fact .mp-poss{display:none}
+#match-screen .match-possession.is-fact .mp-fact{display:flex}
+#match-screen .mp-fact span{font-size:10px;font-weight:800;letter-spacing:1.2px;color:var(--n-muted)}
+#match-screen .mp-fact b{font-family:var(--n-fig);font-size:18px;font-weight:800;letter-spacing:.3px;color:var(--n-text)}
+#match-screen .mp-fact em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--n-muted)}
+#match-screen .match-possession.is-flip{animation:p-flap .55s var(--p-ease)}
+@keyframes p-flap{from{transform:perspective(500px) rotateX(-90deg);opacity:0}to{transform:none;opacity:1}}
+
+/* ── Feed, chapter chip, camera angles, name tags, transport: glass and lime. ── */
+#match-screen .match-ticker{gap:4px}
+#match-screen .match-ticker li{padding:7px 12px 7px 10px;background:rgba(9,14,28,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 3px 0 0 var(--n-blue-hi);animation:p-feed .45s var(--p-ease)}
+#match-screen .match-ticker li.red{box-shadow:inset 3px 0 0 var(--n-red-hi)}
+#match-screen .match-ticker li.neutral{box-shadow:inset 3px 0 0 #5f6b88}
+#match-screen .match-ticker li.is-goal{background:linear-gradient(90deg,rgba(var(--n-lime-rgb),.22),rgba(9,14,28,.9) 45%);box-shadow:inset 4px 0 0 var(--n-lime)}
+#match-screen .match-ticker li b{font-style:italic;font-weight:800;font-size:18px}
+@keyframes p-feed{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+#match-screen .match-chapter{padding:7px 14px 7px 13px;background:rgba(9,14,28,.86);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 3px 0 0 var(--n-lime),var(--p-shadow);font-style:italic;font-weight:800;font-size:16px}
+#match-screen .mc-segmented{background:var(--p-glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--p-glass-hi),var(--p-shadow)}
+#match-screen .match-label{border:0;border-radius:3px;background:rgba(9,14,28,.82);box-shadow:inset 2px 0 0 var(--kit,#8cb4ed)}
+#match-screen .match-label.is-owner{background:var(--n-lime);color:var(--n-lime-ink);box-shadow:0 0 14px rgba(var(--n-lime-rgb),.55)}
+#match-screen .match-label.is-owner i{background:var(--n-lime-ink)}
+#match-screen .match-controls{border-top-color:#1c2440;background:linear-gradient(180deg,#0b1020,#070b16)}
+#match-screen .match-timeline input{background:linear-gradient(to right,rgba(var(--n-lime-rgb),.35) 0,var(--n-lime) var(--progress,0%),rgba(255,255,255,.12) var(--progress,0%))}
+#match-screen .match-timeline input::-webkit-slider-thumb{border:0;background:#fff;box-shadow:0 0 0 3px rgba(var(--n-lime-rgb),.5),0 0 12px rgba(var(--n-lime-rgb),.6)}
+#match-screen .match-timeline input::-moz-range-thumb{border:0;background:#fff;box-shadow:0 0 0 3px rgba(var(--n-lime-rgb),.5)}
+
+/* ── Goal sting: flash, three bars sweeping across, GOL with its outlined echo, the name letter by letter, the score strip rolling;
+ * the scorer's cut-out on a slanted kit panel. One 3.6 s timeline; the banner is hidden again when it ends. ── */
+#match-screen .match-stage .match-goal-banner{inset:0;top:0;bottom:0;left:0;right:0;transform:none;display:block;width:auto;max-width:none;height:auto;padding:0;border:0;border-radius:0;background:none;box-shadow:none;filter:none;overflow:hidden;pointer-events:none;container-type:size;animation:none;
+  --gs-h:56px;--team-slab:linear-gradient(160deg,#3a68b8,#1d3766 55%,#0e1c3a)}
+#match-screen .match-stage .match-goal-banner.red{--team-slab:linear-gradient(160deg,#c04368,#6e1c36 55%,#3a0f1f)}
+#match-screen .match-stage .match-goal-banner[hidden]{display:none}
+/* The older banner styled every span in it; reset them here, and the sting's own span rules below say "span." to outrank this reset. */
+#match-screen .match-stage .match-goal-banner span{display:inline;gap:0;align-items:normal;font-size:inherit;font-weight:inherit;line-height:inherit;color:inherit;text-align:inherit}
+#match-screen .gs-dim{position:absolute;inset:0;background:linear-gradient(100deg,rgba(5,8,18,.88),rgba(5,8,18,.55) 42%,rgba(5,8,18,.08) 72%);animation:gs-dim 3.6s linear both}
+@keyframes gs-dim{0%{opacity:0}10%,82%{opacity:1}100%{opacity:0}}
+#match-screen .gs-flash{position:absolute;inset:0;background:#fff;opacity:0;animation:gs-flash .6s linear both}
+@keyframes gs-flash{0%{opacity:0}8%{opacity:.7}100%{opacity:0}}
+#match-screen .gs-bar{position:absolute;top:-20%;left:0;height:140%;animation:gs-bar .8s cubic-bezier(.7,0,.3,1) both}
+#match-screen .gs-bar.a{width:10cqw;background:var(--n-lime);box-shadow:0 0 40px rgba(var(--n-lime-rgb),.7)}
+#match-screen .gs-bar.b{width:16cqw;background:var(--p-stripe),var(--team-slab);animation-delay:.07s}
+#match-screen .gs-bar.c{width:3cqw;background:#fff;animation-delay:.14s}
+@keyframes gs-bar{from{transform:translateX(-40cqw) skewX(-22deg)}to{transform:translateX(140cqw) skewX(-22deg)}}
+#match-screen .gs-panel{position:absolute;top:0;right:0;bottom:0;width:46cqw;background:var(--p-stripe),var(--team-slab);clip-path:polygon(22% 0,100% 0,100% 100%,0 100%);animation:gs-panel 3.6s var(--p-ease) both}
+@keyframes gs-panel{0%,8%{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%)}20%,82%{clip-path:polygon(22% 0,100% 0,100% 100%,0 100%)}94%,100%{clip-path:polygon(100% 0,100% 0,100% 100%,100% 100%)}}
+#match-screen .gs-panel img{position:absolute;right:7%;bottom:0;height:94%;width:auto;aspect-ratio:448/560;object-fit:contain;object-position:bottom;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5));animation:gs-face 3.6s var(--p-ease) both}
+@keyframes gs-face{0%,14%{transform:translateY(12%);opacity:0}28%,82%{transform:none;opacity:1}92%,100%{transform:translateY(-3%);opacity:0}}
+#match-screen .gs-halo{position:absolute;right:6%;bottom:8%;width:72%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(var(--n-lime-rgb),.45),rgba(var(--n-lime-rgb),0) 65%);animation:gs-halo 1.8s ease-in-out infinite alternate}
+@keyframes gs-halo{from{transform:scale(1);opacity:.6}to{transform:scale(1.08);opacity:.9}}
+#match-screen .match-goal-banner span.gs-min{position:absolute;right:4%;top:3%;font-family:var(--n-fig);font-style:italic;font-weight:800;font-size:30cqh;line-height:1;color:rgba(255,255,255,.07)}
+#match-screen .gs-main{position:absolute;left:5cqw;bottom:8cqh;display:flex;flex-direction:column;align-items:flex-start;gap:1.4cqh;max-width:56cqw}
+#match-screen .match-goal-banner:not(.has-face) .gs-main{max-width:90cqw}
+#match-screen .gs-word{position:relative;font-family:var(--n-fig);font-style:italic;font-weight:800;font-size:min(30cqh,22cqw);line-height:.85;letter-spacing:.04em}
+#match-screen .match-stage .match-goal-banner .gs-word strong{display:block;padding:0;background:none;clip-path:none;color:var(--n-lime);font:inherit;letter-spacing:inherit;text-shadow:0 0 60px rgba(var(--n-lime-rgb),.55);transform-origin:0 50%;animation:gs-word 3.6s var(--p-ease) both}
+#match-screen .match-goal-banner span.gs-echo{position:absolute;inset:0;color:transparent;-webkit-text-stroke:2px var(--n-lime);animation:gs-echo 3.6s var(--p-ease) both}
+@keyframes gs-word{0%,6%{transform:scale(1.8);opacity:0;letter-spacing:.4em}16%{transform:scale(.96);opacity:1;letter-spacing:.04em}20%,82%{transform:scale(1);opacity:1;letter-spacing:.04em}92%,100%{transform:translateX(-12%);opacity:0;letter-spacing:.04em}}
+@keyframes gs-echo{0%,12%{transform:none;opacity:0}20%{transform:translate(1.2%,2%);opacity:.5}82%{transform:translate(2%,3%);opacity:.25}92%,100%{opacity:0}}
+#match-screen .gs-name{display:flex;flex-wrap:wrap;overflow:hidden;font-family:var(--n-fig);font-style:italic;font-weight:800;font-size:min(13cqh,9cqw);line-height:1.04;letter-spacing:.02em;color:#fff;text-shadow:0 8px 24px rgba(0,0,0,.5)}
+#match-screen .match-goal-banner .gs-name span{display:inline-block;animation:gs-letter 3.6s var(--p-ease) both;animation-delay:calc(var(--i) * 35ms)}
+@keyframes gs-letter{0%,20%{transform:translateY(105%)}30%,84%{transform:none}92%,100%{transform:translateY(-105%)}}
+#match-screen .gs-sub{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;animation:gs-sub 3.6s var(--p-ease) both}
+#match-screen .match-goal-banner span.gs-chip{padding:4px 10px;background:var(--n-lime);color:var(--n-lime-ink);font-size:12px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
+#match-screen .match-goal-banner .gs-sub>span:last-child{font-size:16px;font-weight:700;color:#eef2f8;text-shadow:0 2px 8px rgba(0,0,0,.6)}
+@keyframes gs-sub{0%,28%{opacity:0;transform:translateY(10px)}36%,84%{opacity:1;transform:none}92%,100%{opacity:0}}
+#match-screen .gs-strip{display:flex;align-items:stretch;height:var(--gs-h);margin-top:.6cqh;animation:gs-strip 3.6s var(--p-ease) both}
+#match-screen .gs-strip>b{display:flex;align-items:center;padding:0 20px;background:var(--p-stripe),var(--p-blue);font-family:var(--n-fig);font-style:italic;font-weight:800;font-size:22px;letter-spacing:.6px;text-transform:uppercase;color:#fff;white-space:nowrap}
+#match-screen .gs-strip>b:last-child{background:var(--p-stripe),var(--p-red)}
+#match-screen .match-goal-banner span.gs-score{display:flex;align-items:center;padding:0 18px;background:#0a0f1d;font-family:var(--n-fig);font-weight:800;font-size:40px;line-height:var(--gs-h);color:#fff}
+#match-screen .gs-score em{margin:0 10px;font-style:normal;color:#5f6b88}
+#match-screen .match-goal-banner span.gs-n{display:block;height:var(--gs-h);overflow:hidden}
+#match-screen .match-goal-banner span.gs-roll{display:flex;flex-direction:column;color:var(--n-lime);animation:gs-roll 3.6s var(--p-ease) both}
+#match-screen .gs-roll i{display:block;height:var(--gs-h);font-style:normal}
+@keyframes gs-strip{0%,26%{clip-path:inset(0 100% 0 0)}34%,84%{clip-path:inset(0)}92%,100%{clip-path:inset(0 0 0 100%)}}
+@keyframes gs-roll{0%,40%{transform:none}50%,100%{transform:translateY(calc(-1 * var(--gs-h)))}}
+
+/* ── Walk-out: both line-ups beside the tunnel, man by man. ── */
+#match-screen .match-lineup{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility 0s linear .5s}
+#match-screen .match-lineup.on{opacity:1;visibility:visible;transition:opacity .3s ease}
+#match-screen .ml-team{position:absolute;top:86px;width:250px;box-sizing:border-box;padding:14px 16px 12px;border-radius:14px;background:rgba(9,14,28,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--p-glass-hi),inset 3px 0 0 var(--n-blue-hi),var(--p-shadow)}
+#match-screen .ml-team.blue{left:18px}
+#match-screen .ml-team.red{right:18px;box-shadow:var(--p-glass-hi),inset -3px 0 0 var(--n-red-hi),var(--p-shadow)}
+#match-screen .match-lineup.on .ml-team.blue{animation:ml-left .7s var(--p-ease) .2s both}
+#match-screen .match-lineup.on .ml-team.red{animation:ml-right .7s var(--p-ease) .35s both}
+@keyframes ml-left{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+@keyframes ml-right{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+#match-screen .ml-team header{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:6px 10px;margin-bottom:10px}
+#match-screen .ml-team header b{grid-row:2;grid-column:1/-1}
+#match-screen .ml-team header span{grid-row:1;grid-column:2;justify-self:end}
+#match-screen .ml-team header small{grid-row:1;grid-column:1;justify-self:start;padding:3px 8px;background:var(--n-lime);color:var(--n-lime-ink);font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
+#match-screen .ml-team header b{overflow:hidden;font-family:var(--n-fig);font-style:italic;font-weight:800;font-size:34px;line-height:.95;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
+#match-screen .ml-team header span{padding:3px 8px;border-radius:5px;background:rgba(44,79,143,.6);font-family:var(--n-fig);font-weight:800;font-size:17px}
+#match-screen .ml-team.red header span{background:rgba(142,39,71,.6)}
+#match-screen .ml-team ol{display:flex;flex-direction:column;gap:3px;margin:0;padding:0;list-style:none}
+#match-screen .ml-team li{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:9px;height:24px;font-size:13px}
+#match-screen .match-lineup.on li{animation:ml-row .45s var(--p-ease) both;animation-delay:calc(.55s + var(--i) * .09s)}
+#match-screen .match-lineup.on .red li{animation-name:ml-row-r;animation-delay:calc(.7s + var(--i) * .09s)}
+@keyframes ml-row{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+@keyframes ml-row-r{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+#match-screen .ml-face{width:24px;height:24px;overflow:hidden;border-radius:50%;background:radial-gradient(circle at 50% 30%,#4f7fd1,#1d3766)}
+#match-screen .ml-team.red .ml-face{background:radial-gradient(circle at 50% 30%,#d4587c,#6e1c36)}
+#match-screen .ml-face img{display:block;width:100%;height:125%;object-fit:cover;object-position:top}
+#match-screen .ml-team li b{overflow:hidden;font-weight:700;text-overflow:ellipsis;white-space:nowrap}
+#match-screen .ml-team li span{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--n-muted);white-space:nowrap}
+@media(max-height:640px){#match-screen .ml-team{top:80px;padding:10px 14px}#match-screen .ml-team header b{font-size:28px}#match-screen .ml-team li{height:20px;font-size:12px}#match-screen .ml-face{width:20px;height:20px}#match-screen .ml-team li{grid-template-columns:20px minmax(0,1fr) auto}}
+
+/* ── Half time: the L screen. The picture shrinks to the top left (match-screen.js sets its scale and size), the panels slide in. ── */
+#match-screen .match-scene,#match-screen .match-labels{transform-origin:0 0;transition:transform .8s var(--p-ease)}
+#match-screen .match-stage:has(.ls-screen){background:radial-gradient(60% 60% at 10% 100%,rgba(44,79,143,.45),transparent 70%),radial-gradient(50% 50% at 100% 0,rgba(142,39,71,.35),transparent 70%),#070b16}
+#match-screen .match-stage:has(.ls-screen) :is(.match-scoreboard,.match-possession,.match-ticker,.match-camera,.match-chapter,.match-goal-banner,.mc-golive,.match-lineup,.match-why){visibility:hidden}
+#match-screen .match-overlay:has(.ls-screen){display:block;padding:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+#match-screen .ls-screen{position:absolute;inset:0;color:var(--n-text)}
+#match-screen :is(.ls-side,.ls-bottom){position:absolute;box-sizing:border-box;border-radius:16px;background:rgba(12,18,34,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--p-glass-hi),var(--p-shadow)}
+#match-screen .ls-side{left:calc(2 * var(--ls-g) + var(--ls-sw));top:var(--ls-g);right:var(--ls-g);height:var(--ls-sh);display:flex;flex-direction:column;gap:10px;padding:14px 16px;overflow:auto;scrollbar-width:thin;animation:ls-side .8s var(--p-ease) .15s both}
+#match-screen .ls-bottom{left:var(--ls-g);right:var(--ls-g);top:calc(2 * var(--ls-g) + var(--ls-sh));bottom:var(--ls-g);display:grid;grid-template-columns:minmax(0,1fr) auto;overflow:hidden;animation:ls-bottom .8s var(--p-ease) .25s both}
+@keyframes ls-side{from{opacity:0;transform:translateX(110%)}to{opacity:1;transform:none}}
+@keyframes ls-bottom{from{opacity:0;transform:translateY(110%)}to{opacity:1;transform:none}}
+#match-screen .ls-replay{position:absolute;left:calc(var(--ls-g) + 16px);top:calc(var(--ls-g) + var(--ls-sh) - 52px);display:flex;align-items:stretch;height:36px;margin:0;animation:ls-tag .6s var(--p-ease) .8s both}
+#match-screen .ls-replay span{display:flex;align-items:center;gap:7px;padding:0 12px;background:var(--n-lime);color:var(--n-lime-ink);font-size:12px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase}
+#match-screen .ls-replay span i{width:7px;height:7px;border-radius:50%;background:var(--n-lime-ink);animation:p-blink 1s ease-in-out infinite}
+#match-screen .ls-replay b{display:flex;align-items:center;padding:0 14px;background:rgba(9,14,28,.88);font-family:var(--n-fig);font-style:italic;font-weight:700;font-size:20px;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap}
+@keyframes ls-tag{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes p-blink{50%{opacity:.35}}
+#match-screen .ls-side header{display:flex;justify-content:space-between;align-items:center;flex:none;font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--n-muted)}
+#match-screen .ls-live{display:flex;align-items:center;gap:8px;color:var(--n-lime)}
+#match-screen .ls-live i{width:8px;height:8px;border-radius:50%;background:var(--n-lime);animation:p-live 1.6s ease-out infinite}
+#match-screen .ls-score{display:flex;align-items:stretch;flex:none;height:52px;overflow:hidden;border-radius:10px}
+#match-screen .ls-score>b{flex:1;min-width:0;overflow:hidden;padding:0 12px;font-family:var(--n-fig);font-style:italic;font-weight:800;font-size:18px;line-height:52px;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
+#match-screen .ls-score>b.blue{background:var(--p-stripe),linear-gradient(90deg,#2c4f8f,#3a68b8)}
+#match-screen .ls-score>b.red{text-align:right;background:var(--p-stripe),linear-gradient(90deg,#b03358,#8e2747)}
+#match-screen .ls-score>strong{display:flex;align-items:center;padding:0 12px;background:#0a0f1d;font-family:var(--n-fig);font-weight:800;font-size:40px;line-height:1}
+#match-screen .ls-score em{margin:0 6px;font-style:normal;font-size:36px;color:#5f6b88}
+#match-screen .ls-title{display:flex;justify-content:space-between;gap:10px;margin:0;font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--n-muted)}
+#match-screen .ls-none{margin:auto 0;font-size:13px;color:var(--n-muted)}
+#match-screen .ls-chart{display:flex;flex:1 1 auto;flex-direction:column;gap:4px;min-height:80px}
+#match-screen .ls-chart svg{flex:1 1 auto;width:100%;min-height:0;overflow:visible}
+#match-screen .ls-chart .zero{stroke:#3a4566;stroke-dasharray:3 4}
+#match-screen .ls-chart .up{fill:rgba(79,127,209,.32)}#match-screen .ls-chart .down{fill:rgba(212,88,124,.35)}
+#match-screen .ls-chart .up,#match-screen .ls-chart .down{opacity:0;animation:p-fade .6s ease-out 1.9s forwards}
+#match-screen .ls-chart .line{fill:none;stroke:var(--n-lime);stroke-width:3;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 6px rgba(var(--n-lime-rgb),.6));animation:ls-draw 1.4s cubic-bezier(.4,0,.2,1) .7s forwards}
+#match-screen .ls-chart circle{stroke:#0a0f1d;stroke-width:2;transform-box:fill-box;transform-origin:center;animation:ls-dot .5s var(--p-ease) both;animation-delay:calc(.8s + var(--i) * .12s)}
+#match-screen .ls-chart circle.blue{fill:var(--n-blue-hi)}#match-screen .ls-chart circle.red{fill:var(--n-red-hi)}
+@keyframes ls-draw{to{stroke-dashoffset:0}}
+@keyframes ls-dot{0%{transform:scale(0)}60%{transform:scale(1.5)}100%{transform:scale(1)}}
+@keyframes p-fade{to{opacity:1}}
+#match-screen .ls-stats{display:flex;flex:none;flex-direction:column;gap:6px}
+#match-screen .ls-stat{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:baseline;gap:4px 10px;animation:p-up .5s var(--p-ease) both;animation-delay:calc(.9s + var(--i) * .1s)}
+#match-screen .ls-stat b{font-family:var(--n-fig);font-weight:800;font-size:17px;color:var(--n-blue-tx);white-space:nowrap}
+#match-screen .ls-stat b:last-of-type{text-align:right;color:var(--n-red-tx)}
+#match-screen .ls-stat span{font-size:10px;font-weight:800;letter-spacing:1.2px;text-align:center;text-transform:uppercase;color:var(--n-muted)}
+#match-screen .ls-stat i{grid-column:1/-1;height:5px;border-radius:3px;background:linear-gradient(to right,var(--n-blue-hi) calc(var(--share) - 2px),transparent calc(var(--share) - 2px) calc(var(--share) + 2px),var(--n-red-hi) calc(var(--share) + 2px));transform-origin:var(--share) 50%;animation:p-grow .9s var(--p-ease) both;animation-delay:calc(1s + var(--i) * .1s)}
+@keyframes p-grow{from{transform:scaleX(0)}to{transform:none}}
+@keyframes p-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+#match-screen .ls-star{display:flex;flex:none;align-items:center;gap:12px;padding:6px 12px 6px 6px;border-radius:12px;background:linear-gradient(90deg,rgba(44,79,143,.6),rgba(44,79,143,.12));box-shadow:inset 0 0 0 1px rgba(143,179,240,.22);animation:p-up .6s var(--p-ease) 1.3s both}
+#match-screen .ls-star.red{background:linear-gradient(90deg,rgba(142,39,71,.6),rgba(142,39,71,.12));box-shadow:inset 0 0 0 1px rgba(240,167,187,.22)}
+#match-screen .ls-face{display:grid;flex:none;place-items:start center;width:46px;height:46px;overflow:hidden;border-radius:50%;background:radial-gradient(circle at 50% 30%,#4f7fd1,#1d3766);box-shadow:0 0 0 2px var(--n-lime)}
+#match-screen .ls-star.red .ls-face{background:radial-gradient(circle at 50% 30%,#d4587c,#6e1c36)}
+#match-screen .ls-face img{display:block;width:100%;height:125%;object-fit:cover;object-position:top}
+#match-screen .ls-face .match-kit{align-self:center}
+#match-screen .ls-star div{display:flex;flex:1;flex-direction:column;gap:2px;min-width:0}
+#match-screen .ls-star small{font-size:10px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--n-lime)}
+#match-screen .ls-star b{overflow:hidden;font-family:var(--n-fig);font-style:italic;font-weight:800;font-size:22px;line-height:1;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}
+#match-screen .ls-star span{font-size:12px;font-weight:700;color:#c9d5ee}
+#match-screen .ls-star em{font-family:var(--n-fig);font-style:normal;font-weight:800;font-size:26px;color:var(--n-lime)}
+#match-screen .ls-goals{display:flex;flex-direction:column;gap:8px;min-width:0;padding:14px 30px 12px}
+#match-screen .ls-track{--line:calc(12px + var(--up,1) * 17px);position:relative;flex:none;height:calc(24px + (var(--up,1) + var(--down,1)) * 17px);margin:auto 6px}
+#match-screen .ls-track::before,#match-screen .ls-fill{content:'';position:absolute;left:0;right:0;top:var(--line);height:4px;margin-top:-2px;border-radius:2px;background:#26304f}
+#match-screen .ls-fill{background:var(--n-lime);box-shadow:0 0 12px rgba(var(--n-lime-rgb),.6);transform-origin:0 50%;animation:p-grow 1.6s linear .6s both}
+#match-screen .ls-track>i{position:absolute;top:var(--line);width:0;height:0;font-style:normal;animation:ls-mark .5s var(--p-ease) both;animation-delay:calc(.7s + var(--i) * .14s)}
+#match-screen .ls-track>i::before{content:'';position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:var(--n-blue-hi);box-shadow:0 0 0 3px #0c1222}
+#match-screen .ls-track>i.red::before{background:var(--n-red-hi)}
+#match-screen .ls-track>i b{position:absolute;left:-4px;bottom:11px;font-family:var(--n-fig);font-weight:800;font-size:15px;line-height:1;white-space:nowrap;color:var(--n-blue-tx)}
+#match-screen .ls-track>i.lane-1 b{bottom:28px}
+#match-screen .ls-track>i.lane-2 b{bottom:45px}
+#match-screen .ls-track>i.red b{top:11px;bottom:auto;color:var(--n-red-tx)}
+#match-screen .ls-track>i.red.lane-1 b{top:28px}
+#match-screen .ls-track>i.red.lane-2 b{top:45px}
+#match-screen .ls-track>i.end b{left:auto;right:-4px}
+#match-screen .ls-track>i b span{color:var(--n-text);text-transform:uppercase}
+@keyframes ls-mark{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+#match-screen .ls-next{display:flex;flex-direction:column;justify-content:center;gap:10px;min-width:230px;padding:14px 22px;border-left:1px solid var(--n-line);background:linear-gradient(90deg,rgba(var(--n-lime-rgb),.08),rgba(var(--n-lime-rgb),0))}
+#match-screen .ls-next p{margin:0;font-size:13px;line-height:1.4;color:var(--n-muted)}
+#match-screen .ls-next p b{font-family:var(--n-fig);font-size:24px;color:var(--n-lime)}
+#match-screen .ls-actions{display:flex;flex-direction:column;gap:8px}
+#match-screen .ls-actions .match-button{justify-content:center}
+@media(min-width:721px){
+  #match-screen .match-stage:has(.ls-screen) :is(.match-scene,.match-labels){transform:translate(var(--ls-g),var(--ls-g)) scale(var(--ls-s))}
+  #match-screen .match-stage:has(.ls-screen) .match-scene{overflow:hidden;border-radius:calc(14px / var(--ls-s));box-shadow:0 0 0 calc(3px / var(--ls-s)) var(--n-lime),0 30px 80px rgba(0,0,0,.6)}
+}
+
+/* ── Odometer figures (L screen and full-time card): 0…n rolling up to n. ── */
+#match-screen .odo{display:inline-block;height:1em;overflow:hidden;line-height:1;vertical-align:top}
+#match-screen .odo>span{display:flex;flex-direction:column;animation:odo 1.3s cubic-bezier(.3,.9,.3,1) .5s both}
+#match-screen .odo i{display:block;height:1em;font-style:normal}
+@keyframes odo{from{transform:translateY(0)}to{transform:translateY(calc(var(--n) * -1em))}}
+
+/* ── Full time: the card rises, the slabs slide in, the figures roll, the tiles and bars follow; confetti for the winners; the man
+ * of the match on his kit with his photo, a light sweep and his rating filling a ring. ── */
+#match-screen .ft-confetti{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+#match-screen .ft-confetti i{position:absolute;top:-30px;left:var(--x);width:var(--w);height:var(--h);border-radius:1px;background:var(--c);opacity:.85;animation:ft-fall var(--d) linear var(--delay) infinite,ft-sway var(--sway) ease-in-out var(--delay) infinite alternate}
+@keyframes ft-fall{from{transform:translateY(-40px) rotate(0)}to{transform:translateY(110vh) rotate(600deg)}}
+@keyframes ft-sway{from{translate:-18px 0}to{translate:18px 0}}
+#match-screen .match-card.is-final{position:relative;animation:ft-card .7s var(--p-ease) both}
+@keyframes ft-card{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+#match-screen .is-final .mc-side{animation:ft-left .8s var(--p-ease) .15s both}
+#match-screen .is-final .mc-side.right{animation-name:ft-right}
+@keyframes ft-left{from{opacity:0;transform:translateX(-50%)}to{opacity:1;transform:none}}
+@keyframes ft-right{from{opacity:0;transform:translateX(50%)}to{opacity:1;transform:none}}
+#match-screen .is-final .mc-score-box{animation:ft-core .6s var(--p-ease) .3s both}
+@keyframes ft-core{from{transform:scaleY(0)}to{transform:none}}
+#match-screen .mc-score{display:flex;align-items:center}
+#match-screen .mc-score .odo>span{animation-delay:.6s}
+#match-screen .mc-win{align-self:flex-start;padding:3px 8px;background:var(--n-lime);color:var(--n-lime-ink);font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase;animation:p-up .5s var(--p-ease) 1.3s both}
+#match-screen .mc-side.right .mc-win{align-self:flex-end}
+#match-screen .mc-side-text>b{font-style:italic}
+#match-screen .is-final .mc-stat{animation:p-up .5s var(--p-ease) both;animation-delay:calc(.6s + var(--i) * .08s)}
+#match-screen .is-final .mc-stat>i{transform-origin:var(--share) 50%;animation:p-grow .9s var(--p-ease) both;animation-delay:calc(.8s + var(--i) * .08s)}
+#match-screen .is-final .mc-flow-line i{animation:ft-mark .45s var(--p-ease) both;animation-delay:calc(.6s + var(--i) * .07s)}
+@keyframes ft-mark{from{opacity:0;scale:.3}to{opacity:1;scale:1}}
+#match-screen .mr-motm,#match-screen .mr-motm.red{position:relative;overflow:hidden;min-height:104px;padding:14px 18px;gap:14px;border:0;background:var(--p-stripe),linear-gradient(120deg,#3a68b8,#1d3766 60%,#0e1c3a);color:#fff;box-shadow:inset 0 0 0 1px rgba(var(--n-lime-rgb),.35);animation:p-up .6s var(--p-ease) .9s both}
+#match-screen .mr-motm.red{background:var(--p-stripe),linear-gradient(120deg,#c04368,#6e1c36 60%,#3a0f1f)}
+#match-screen .mr-motm.has-face{padding-left:132px}
+#match-screen .mr-motm .mr-face{position:absolute;left:10px;bottom:0;width:auto;height:124px;aspect-ratio:448/560;object-fit:contain;object-position:bottom;filter:drop-shadow(0 12px 18px rgba(0,0,0,.45));animation:ft-face .8s var(--p-ease) 1.1s both}
+@keyframes ft-face{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+#match-screen .mr-motm small{color:var(--n-lime)}
+#match-screen .mr-motm b{font-style:italic;font-size:40px;color:#fff}
+#match-screen .mr-motm span{color:#dbe5f8}
+#match-screen .mr-sweep{position:absolute;top:-20px;bottom:-20px;left:0;width:80px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);transform:translateX(-200%) skewX(-18deg);animation:ft-sweep 1.2s ease-in-out 1.7s both;pointer-events:none}
+@keyframes ft-sweep{to{transform:translateX(1400%) skewX(-18deg)}}
+#match-screen .mr-ring{position:relative;display:grid;flex:none;place-items:center;width:64px;height:64px}
+#match-screen .mr-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+#match-screen .mr-ring .bg{fill:rgba(9,14,28,.7);stroke:#26304f;stroke-width:4}
+#match-screen .mr-ring .fg{fill:none;stroke:var(--n-lime);stroke-width:4;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 5px rgba(var(--n-lime-rgb),.7));animation:ft-ring 1.2s cubic-bezier(.4,0,.2,1) 1.3s forwards}
+@keyframes ft-ring{to{stroke-dashoffset:calc(1 - var(--r))}}
+#match-screen .mr-motm .mr-ring .mr-rating{position:relative;min-width:0;padding:0;border:0;background:none;color:var(--n-lime);font-size:22px}
+
+/* ── Phones: no L (the panels stack over the dimmed replay), a smaller sting without the photo panel, no walk-out line-ups. ── */
+@media(max-width:1050px){
+  #match-screen .match-scoreboard .match-team{padding:0 22px 0 12px;font-size:19px}
+  #match-screen .match-scoreboard .match-team.right{padding:0 12px 0 22px}
+  #match-screen .match-scoreboard .match-score{font-size:32px}
+  #match-screen .match-scoreboard .match-clock span{font-size:22px}
+  #match-screen .ml-team{width:220px}
+}
+@media(max-width:720px){
+  #match-screen .match-scoreboard{--sb-h:42px}
+  #match-screen .sb-mark{display:none}
+  #match-screen .match-scoreboard .match-team{padding:0 16px 0 8px;font-size:16px}
+  #match-screen .match-scoreboard .match-team.right{padding:0 8px 0 16px}
+  #match-screen .match-scoreboard .match-score,#match-screen .match-scoreboard.is-scored .match-score{padding:0 12px 0 14px;font-size:26px}
+  #match-screen .match-scoreboard .match-clock{gap:7px;padding:0 10px}
+  #match-screen .match-scoreboard .match-clock span{font-size:18px}
+  #match-screen .match-scoreboard .match-clock small{display:none}
+  #match-screen.is-broadcast .match-scoreboard{--sb-h:36px;padding:0;background:var(--p-glass)}
+  #match-screen.is-broadcast .match-scoreboard .match-score{font-size:22px;line-height:var(--sb-h)}
+  #match-screen .match-possession{left:10px;top:58px;height:26px;max-width:calc(100% - 20px);overflow:hidden}
+  #match-screen .mp-fact em{display:none}
+  #match-screen .match-lineup{display:none}
+  #match-screen .match-stage .match-goal-banner{--gs-h:44px}
+  #match-screen .gs-panel{display:none}
+  #match-screen .gs-main{left:16px;right:16px;bottom:72px;max-width:none}
+  #match-screen .gs-word{font-size:min(24cqh,24cqw)}
+  #match-screen .gs-name{font-size:min(11cqh,10cqw)}
+  #match-screen .match-goal-banner .gs-sub>span:last-child{font-size:13px}
+  #match-screen .gs-strip>b{padding:0 12px;font-size:16px}
+  #match-screen .match-goal-banner span.gs-score{padding:0 12px;font-size:30px}
+  #match-screen .match-overlay:has(.ls-screen){overflow:auto;background:#05080fd6;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  #match-screen .ls-screen{position:relative;inset:auto;display:flex;flex-direction:column;gap:10px;padding:12px}
+  #match-screen :is(.ls-side,.ls-bottom){position:relative;inset:auto;height:auto;overflow:visible}
+  #match-screen .ls-bottom{grid-template-columns:minmax(0,1fr)}
+  #match-screen .ls-chart{flex:none;min-height:0}
+  #match-screen .ls-chart svg{height:96px}
+  #match-screen .ls-goals{padding:14px 16px 12px}
+  #match-screen .ls-track>i b span{display:none}
+  #match-screen .ls-next{min-width:0;border-top:1px solid var(--n-line);border-left:0}
+  #match-screen .ls-replay{display:none}
+  #match-screen .mr-motm b{font-size:30px}
+  #match-screen .mr-motm.has-face{padding-left:104px}
+  #match-screen .mr-motm .mr-face{height:100px}
+}
+
+/* ── Reduced motion: every panel in its final place, no sweeps, no confetti. ── */
+@media(prefers-reduced-motion:reduce){
+  #match-screen :is(.sb-sheen,.gs-bar,.gs-flash,.ft-confetti,.mr-sweep){display:none}
+  #match-screen :is(.sb-roll,.sb-live,.match-possession.is-flip,.match-ticker li,.gs-dim,.gs-word strong,.gs-echo,.gs-name span,.gs-sub,.gs-strip,.gs-panel,.gs-panel img,.gs-halo,.ml-team,.ml-team li,.ls-side,.ls-bottom,.ls-replay,.ls-replay i,.ls-live i,.ls-chart circle,.ls-stat,.ls-stat i,.ls-star,.ls-fill,.ls-track>i,.match-card.is-final,.mc-side,.mc-score-box,.mc-win,.mc-stat,.mc-stat>i,.mc-flow-line i,.mr-motm,.mr-face){animation:none!important}
+  #match-screen .sb-roll{transform:translateY(calc(-1 * var(--sb-h)))}
+  #match-screen .match-goal-banner span.gs-roll{animation:none!important;transform:translateY(calc(-1 * var(--gs-h)))}
+  #match-screen .odo>span{animation:none!important;transform:translateY(calc(var(--n) * -1em))}
+  #match-screen .ls-chart .line{animation:none!important;stroke-dashoffset:0}
+  #match-screen .ls-chart :is(.up,.down){animation:none!important;opacity:1}
+  #match-screen .mr-ring .fg{animation:none!important;stroke-dashoffset:calc(1 - var(--r))}
+  #match-screen :is(.match-scene,.match-labels){transition:none}
+}
+
+/* ── Boxes and type (2026-11-10, the user: "kutuları ve yazıları geliştirelim"): every HUD box a size larger, its type bolder, one
+ * hierarchy throughout — a small-capitals label, the value in condensed figures. ── */
+/* Name tags over the players: condensed capitals on a glass tag with the kit stripe and a pointer down to the man; the man on the
+ * ball in lime, with a ball. */
+#match-screen .match-label{gap:6px;padding:3px 9px 3px 9px;border:0;border-radius:3px;background:rgba(9,14,28,.88);box-shadow:inset 3px 0 0 var(--kit,#8cb4ed),0 4px 10px rgba(0,0,0,.35);color:#f2f4f8;font:700 14px/16px var(--n-fig);letter-spacing:.5px;text-transform:uppercase}
+#match-screen .match-label i{display:none}
+#match-screen .match-label::after{content:'';position:absolute;left:50%;top:100%;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:rgba(9,14,28,.88)}
+#match-screen .match-label.is-owner{color:var(--n-lime-ink)}
+#match-screen .match-label.is-owner::after{border-top-color:var(--n-lime)}
+#match-screen .match-label.is-owner::before{content:'';flex:none;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff 0 35%,#cfd5dc 70%,#8e98a3);box-shadow:0 0 0 1.5px var(--n-lime-ink)}
+/* Feed: readable lines — the event in semibold 13 px, the minute in italic figures, a square icon tile. */
+#match-screen .match-ticker li{padding:0;font-size:13px;line-height:1.35}
+#match-screen .match-ticker button{gap:10px;box-sizing:border-box;padding:8px 12px}
+#match-screen .match-ticker li span{font-weight:600;color:#eef2f8}
+#match-screen .match-ticker li.is-goal{font-size:14px}
+#match-screen .match-ticker li.is-goal span{font-weight:800;color:#fff}
+#match-screen .match-ticker li b{min-width:30px;font-size:19px}
+#match-screen .match-ticker .ev{width:26px;height:26px;border-radius:4px}
+#match-screen .match-ticker .ev-icon{width:15px;height:15px}
+/* Transport: the speeds as one segmented control with the chosen one filled; bolder, larger labels. */
+#match-screen .mc-speeds{gap:2px;padding:3px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px #1f2945}
+#match-screen .mc-speeds button{height:34px;min-height:34px;border:0;font-size:15px;font-weight:700;color:#c9d2e3}
+#match-screen .mc-speeds button:hover:not(:disabled){border:0;background:rgba(255,255,255,.08);color:#fff}
+#match-screen .mc-speeds button.active,#match-screen .mc-speeds button.active:hover{background:var(--n-lime);color:var(--n-lime-ink)}
+#match-screen .mc-play,#match-screen .mc-play:hover{font-size:18px}
+#match-screen :is(.mc-replay,.match-skip){font-size:16px;font-weight:700}
+#match-screen .mc-segmented button{font-size:16px;font-weight:700}
+/* "Neden oldu?": a glass card with a lime top edge, the moment as a headline, the figures as chips, the rules on a lime rule. */
+#match-screen .match-why{padding:0 0 14px;border:0;border-radius:12px;background:rgba(9,14,28,.93);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:var(--p-glass-hi),inset 0 3px 0 var(--n-lime),var(--p-shadow)}
+#match-screen .match-why header{margin:0 0 10px;padding:12px 10px 10px 16px;border-bottom:1px solid var(--n-line);color:var(--n-lime);font-size:11px;font-weight:800;letter-spacing:1.6px}
+#match-screen .match-why>:not(header){margin-left:16px;margin-right:16px}
+#match-screen .match-why .why-line{font-family:var(--n-fig);font-style:italic;font-size:22px;font-weight:800;line-height:1.1}
+#match-screen .match-why .why-engine{font-size:13px;line-height:1.45}
+#match-screen .match-why .why-facts li{padding:4px 9px;border:0;border-radius:4px;background:rgba(255,255,255,.08);font-size:12px;font-weight:700}
+#match-screen .match-why .why-attrs{font-size:13px;line-height:1.45}
+#match-screen .match-why :is(.why-attrs,.why-rules) span{margin-bottom:4px;color:var(--n-muted);font-size:10px;font-weight:800;letter-spacing:1.4px}
+#match-screen .match-why .why-rules li{border-left-color:var(--n-lime);font-size:12.5px;line-height:1.45}
+#match-screen .match-why .why-none{font-size:13px}
+@media(min-width:721px){
+  #match-screen .match-ticker{width:340px;gap:5px}
+  #match-screen .match-why{width:360px}
+  #match-screen .match-possession{height:32px;gap:10px}
+  #match-screen .match-possession small{font-size:10px;letter-spacing:1.4px}
+  #match-screen .match-possession b{font-size:17px}
+  #match-screen .mp-fact span{font-size:11px}
+  #match-screen .mp-fact b{font-size:19px}
+  #match-screen .mp-fact em{font-size:13px}
+}
+@media(max-width:720px){
+  #match-screen .match-label{padding:2px 7px;font-size:12px;line-height:14px}
+  #match-screen .match-ticker li{font-size:12px}
+  #match-screen .match-ticker button{padding:6px 10px;gap:8px}
+  #match-screen .match-ticker li b{font-size:16px}
+  #match-screen .match-ticker .ev{width:22px;height:22px}
+  #match-screen .mc-speeds button{height:30px;min-height:30px;font-size:13px}
+  #match-screen .mc-segmented button{font-size:13px}
+}
+
+/* ── Sound on / off (2026-11-10): a round glass button, bottom left of the picture (top right on a phone). ── */
+#match-screen .mc-sound{position:absolute;left:18px;bottom:18px;z-index:6;display:grid;place-items:center;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:var(--p-glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:var(--p-glass-hi),0 8px 20px rgba(0,0,0,.4);color:var(--n-lime);cursor:pointer}
+#match-screen .mc-sound .ui-icon{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+#match-screen .mc-sound.is-off{color:var(--n-muted)}
+#match-screen .mc-sound:hover{background:rgba(9,14,28,.92);color:#fff}
+#match-screen .mc-sound:focus-visible{outline:2px solid var(--n-lime);outline-offset:2px}
+#match-screen .match-stage:has(.ls-screen) .mc-sound{visibility:hidden}
+@media(max-width:720px){#match-screen .mc-sound{left:auto;right:10px;top:10px;bottom:auto;width:36px;height:36px}}
+@media(max-width:720px){#match-screen.is-broadcast .mc-sound{top:48px}}
+
+/* Radar (2026-11-10, user: "aşağıda fifada olduğu gibi mini map"): bottom centre, above the transport bar. A plain dark pitch plate,
+   no glow. */
+#match-screen .match-radar{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:5;width:246px;aspect-ratio:105/68;
+  background:rgba(14,28,18,.72);border:1px solid rgba(255,255,255,.14);border-radius:3px;pointer-events:none}
+#match-screen .match-radar[hidden]{display:none}
+/* On phones the camera strip runs along the bottom of the picture; the map sits just above it. */
+@media (max-width:720px){#match-screen .match-radar{width:150px;bottom:64px}}

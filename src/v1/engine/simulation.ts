@@ -22,6 +22,12 @@ interface SetPlan { attackers: SetRole[]; defenders: SetRole[]; short: number; k
 interface Restart { kind: RestartKind; team: Team; x: number; z: number; taker: number; readyAt: number; direct: boolean; play: SetPlay | null; plan: SetPlan | null }
 /** Finishing, set-piece, duel and game-state knobs: ENGINE_TUNING.play (one source, recorded with every match). */
 const K = T.play;
+/** The receiving move: its length and where in it the ball is met (the view draws the same keyframes). */
+const RECEIVE_SECONDS = .55, RECEIVE_CONTACT = .45;
+/** Where team-mates gather round a scorer: [angle from his facing, metres] — behind-left, behind-right, right behind him. */
+const CELEBRATE_SLOTS = [[1.9, .7], [-1.9, .7], [Math.PI, .8]] as const;
+/** m: half the thickness of a player lying on the ground (legs, back) for a low ball. */
+const LYING_RADIUS = .22;
 export interface TeamStats { shots: number; onTarget: number; goals: number; passes: number; completed: number; possession: number; corners: number; fouls: number; penalties: number; headerGoals: number; saves: number; freeKicks: number }
 export interface HalfCarry {
   readonly rngState: readonly number[]; readonly score: readonly [number, number]; readonly firstKickoff: Team; readonly eventSeq: number;
@@ -139,8 +145,12 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
   }
   function intercept(p: RtPlayer) {
     const top = topSpeed(p) * .93, reach = p.keeper ? 1 : .6;
-    for (const q of path) { const need = Math.max(0, Math.hypot(q.x - p.x, q.z - p.z) - reach); if (need / top + .12 <= q.t && q.y < (p.keeper ? 2.4 : 1.9)) return { x: q.x, z: q.z, t: q.t }; }
-    const last = path.at(-1) ?? { x: ball.x, z: ball.z, t: 3 };return { x: last.x, z: last.z, t: 3 + Math.hypot(last.x - p.x, last.z - p.z) / top };
+    // A man on the ground or not yet allowed to touch the ball (beaten, fouled) is not there as soon as his top speed says, and a
+    // wrong-footed one starts late (2026-11-09: the chaser picked was often the beaten defender, so nobody else went for the ball).
+    // The man who has just touched it cannot play it again for a moment either (2026-11-10: picked as the chaser, he stood over it).
+    const ready = Math.max(0, p.groundedUntil - t, p.lockUntil - t, p.touchUntil - t), late = .75 * Math.max(0, p.stallUntil - t);
+    for (const q of path) { const need = Math.max(0, Math.hypot(q.x - p.x, q.z - p.z) - reach); if (q.t >= ready && need / top + .12 + late <= q.t && q.y < (p.keeper ? 2.4 : 1.9)) return { x: q.x, z: q.z, t: q.t }; }
+    const last = path.at(-1) ?? { x: ball.x, z: ball.z, t: 3 };return { x: last.x, z: last.z, t: Math.max(3, ready) + late + Math.hypot(last.x - p.x, last.z - p.z) / top };
   }
 
   // --- positioning ------------------------------------------------------------
@@ -186,6 +196,9 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
   // Nobody walks into the net or round the back of the goal: targets stay in front of the goal lines (the corner taker excepted).
   function setTarget(p: RtPlayer, x: number, z: number, pace: number, role: Role) { const lim = cornerTaker(p) ? GOAL_X + .6 : GOAL_X - .3; p.tx = clamp(x, -lim, lim); p.tz = clamp(z, -35.5, 35.5); p.pace = pace; p.role = role; }
 
+  /** Each side's man going for the free ball at the last decision: he keeps the job unless another gets there clearly sooner (2026-11-10:
+   * under a ball looping up the job changed hands every 0.2 s, and each man who lost it turned and ran 20 m back to his place). */
+  const lastChaser: [number, number] = [-1, -1];
   function assignRoles() {
     const carrier = ball.owner >= 0 ? players[ball.owner]! : null, free = !carrier && !ball.dead;
     const bx = carrier ? carrier.x : ball.x, bz = carrier ? carrier.z : ball.z;
@@ -214,12 +227,32 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
       if (free) {
         // The pass target and the best-placed opponent go for a moving ball; otherwise one chaser per team.
         const intended = ball.pass?.team === team ? players[ball.pass.to]! : null;
-        if (intended && !intended.keeper) { const i = intercept(intended); setTarget(intended, i.x, i.z, 1, 'receive'); }
+        let spot: { x: number; z: number } | null = null;
+        if (intended && !intended.keeper) {
+          const i = intercept(intended);setTarget(intended, i.x, i.z, 1, 'receive');spot = i;lastChaser[team] = intended.idx;
+          // A pass going astray: a team-mate who gets to it clearly first goes for it too, instead of watching the target run 15 m for a
+          // ball at his own feet (2026-11-10, user: "5 metre önündeki topa koşmuyor, 20 metre geriden rakip gelip topu alıyor").
+          let mate: RtPlayer | null = null, mt = i.t - K.astrayLead;
+          for (const p of own) { if (p === intended || p.keeper) continue; const q = intercept(p); if (q.t < mt) { mt = q.t; mate = p; } }
+          if (mate) { const q = intercept(mate); setTarget(mate, q.x, q.z, 1, 'chase'); spot = q; }
+        }
         else {
-          let best: RtPlayer | null = null, bt = Infinity;
+          let best: RtPlayer | null = null, bt = Infinity, keepT = Infinity;
           // Keepers sweep only what they reach clearly first: a keeper caught off his line leaves the goal empty.
-          for (const p of own) { const i = intercept(p); if (p.keeper && ((!inBox(-X(team, ball.x), Z(team, ball.z)) && !inBox(-X(team, i.x), Z(team, i.z))) || i.t + K.keeperFirst > rivalFirst[team])) continue; if (i.t < bt) { bt = i.t; best = p; } }
-          if (best) { const i = intercept(best); setTarget(best, i.x, i.z, 1, 'chase'); }
+          for (const p of own) {
+            const i = intercept(p); if (p.keeper && ((!inBox(-X(team, ball.x), Z(team, ball.z)) && !inBox(-X(team, i.x), Z(team, i.z))) || i.t + K.keeperFirst > rivalFirst[team])) continue;
+            if (p.idx === lastChaser[team]) keepT = i.t;
+            if (i.t < bt) { bt = i.t; best = p; }
+          }
+          if (keepT <= bt + K.chaseStick) best = players[lastChaser[team]]!;
+          if (best) { const i = intercept(best); setTarget(best, i.x, i.z, 1, 'chase'); spot = i; lastChaser[team] = best.idx; }
+        }
+        // The second ball: the nearest other man close to it stays for the knock-down or rebound, a few metres goal-side of where it will
+        // be played, instead of turning his back on it and jogging off to his place.
+        if (spot) {
+          let second: RtPlayer | null = null, sd: number = K.secondBallRadius;
+          for (const p of own) { if (p.keeper || p.role !== 'shape') continue; const d = Math.hypot(p.x - ball.x, p.z - ball.z); if (d < sd) { sd = d; second = p; } }
+          if (second) setTarget(second, W(team, X(team, spot.x) - K.secondBallBack), spot.z * .85 + second.z * .15, .75, 'cover');
         }
         // A loose ball running into the box toward the own goal is the keeper's, whoever played it (a stray throw or back pass used to roll in).
         const k = keeperOf(team), lofted = ball.pass && ball.pass.team !== team && ball.pass.lofted ? ball.pass : null;
@@ -234,7 +267,11 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
       if (carrier && carrier.team !== team) {
         // Defending: nearest presses, the next covers the lane to the most dangerous receiver, defenders mark nearest attackers.
         const sorted = own.filter(p => !p.keeper).sort((a, b) => dist(a, carrier) - dist(b, carrier));
-        const presser = sorted[0];if (presser) setTarget(presser, carrier.x + carrier.vx * .25 + dir[team] * -.6, carrier.z + carrier.vz * .25, .95 * (1 - .4 * relax(team)), 'press');
+        // He jockeys a step off, between the ball and his goal, and backs off as the carrier comes on; the tackle is a step in (duels()).
+        // 2026-11-09: his spot was 0.6 m from the carrier, inside the bodies' 0.9 m spacing, so the two stood pressed together ~20 s a match.
+        const presser = sorted[0];
+        if (presser) { const gx = W(team, -GOAL_X), gl = Math.hypot(gx - carrier.x, carrier.z) || 1, j = T.duel.jockey;
+          setTarget(presser, carrier.x + carrier.vx * .25 + (gx - carrier.x) / gl * j, carrier.z + carrier.vz * .25 - carrier.z / gl * j, .95 * (1 - .4 * relax(team)), 'press'); }
         const second = sorted[1];
         // The next man covers the path from the ball to goal, so beating one defender is not beating the line.
         // Near the own goal he steps in tight, so a dribbler in and around the box meets a second challenge (user: "biri müdahale etsin").
@@ -271,7 +308,7 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
   // --- movement ---------------------------------------------------------------
   function movePlayers() {
     for (const p of players) {
-      const owner = ball.owner === p.idx, locked = t < p.lockUntil;
+      const owner = ball.owner === p.idx, stalled = t < p.stallUntil;
       if (p.lunge && t > p.lunge.t1 + .02 && t >= p.groundedUntil) p.lunge = null;
       const g = p.lunge;
       if (g && t <= g.t1 + .02) {
@@ -281,7 +318,7 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
       } else if (t < p.groundedUntil) { p.vx = 0; p.vz = 0; }
       else {
         let top = topSpeed(p) * (owner && !ball.hands ? T.locomotion.carry * (.7 + .03 * p.a.dribbling) : 1);
-        if (locked) top *= .25;
+        if (stalled) top *= .25;
         const dx = p.tx - p.x, dz = p.tz - p.z, d = Math.hypot(dx, dz);
         // Arrive without overrunning: never faster than he can still stop from in the distance left.
         let speed = Math.min(top * p.pace, Math.sqrt(2 * T.locomotion.brake * Math.max(0, d - .1)));if (d < .25) speed = 0;
@@ -293,7 +330,8 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
       const line = cornerTaker(p) ? GOAL_X + .6 : GOAL_X - .2;if (Math.abs(p.x) > line) { p.x = Math.sign(p.x) * line; p.vx = 0; }
       p.z = clamp(p.z, -PI.halfWidth - 2.6, PI.halfWidth + 2.6);
       const v = Math.hypot(p.vx, p.vz), want = owner || v < .4 ? (owner && v > .4 ? Math.atan2(p.vx, p.vz) : Math.atan2(ball.x - p.x, ball.z - p.z)) : Math.atan2(p.vx, p.vz);
-      if ((t >= p.actionEnd || p.action === ACTION.none) && t >= p.groundedUntil) p.heading += Math.atan2(Math.sin(want - p.heading), Math.cos(want - p.heading)) * Math.min(1, DT * 9);
+      // After the first touch he turns with the ball instead of holding the receiving stance to the end of the move.
+      if ((t >= p.actionEnd || p.action === ACTION.none || (p.action === ACTION.receive && t > p.actionStart + .3)) && t >= p.groundedUntil) p.heading += Math.atan2(Math.sin(want - p.heading), Math.cos(want - p.heading)) * Math.min(1, DT * 9);
       const frac = v / Math.max(1, topSpeed(p)), drainMul = 1.3 - .09 * p.a.stamina;
       p.energy = clamp(p.energy - (frac > .75 ? T.energy.sprintDrain : T.energy.jogDrain * frac) * drainMul * DT + (frac < .3 ? T.energy.recover * (.6 + .06 * p.a.stamina) * DT : 0), 0, 1);
       if (t >= p.actionEnd && p.action !== ACTION.none && p.action !== ACTION.hold) p.action = ACTION.none;
@@ -301,7 +339,9 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     // Bodies keep apart; a man on the ground or mid-dive is not shoved, the one standing steps round him.
     for (let i = 0; i < players.length; i++) for (let j = i + 1; j < players.length; j++) {
       const a = players[i]!, b = players[j]!, dx = b.x - a.x, dz = b.z - a.z, d = Math.hypot(dx, dz);
-      if (!(d > 0 && d < T.locomotion.separation)) continue;
+      // Celebrating team-mates may close in to hug.
+      const hug = t < celebrateUntil && a.role === 'celebrate' && b.role === 'celebrate' && a.team === b.team;
+      if (!(d > 0 && d < (hug ? T.setPiece.celebrateHug : T.locomotion.separation))) continue;
       const wa = a.lunge || t < a.groundedUntil ? 0 : 1, wb = b.lunge || t < b.groundedUntil ? 0 : 1;if (!wa && !wb) continue;
       const push = (T.locomotion.separation - d) / d / (wa + wb);a.x -= dx * push * wa; a.z -= dz * push * wa; b.x += dx * push * wb; b.z += dz * push * wb;
     }
@@ -484,7 +524,12 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
   /** Strike delay: the kicker plants and swings (animation contact at 45%), staying tackle-able meanwhile. */
   function windup(p: RtPlayer, code: number, run: () => void, duration: number = T.pass.windup, faceX?: number, faceZ?: number) {
     if (faceX !== undefined && faceZ !== undefined) p.heading = Math.atan2(faceX - p.x, faceZ - p.z);
-    act(p, code, duration / .45, .0);p.actionStart = t;p.actionEnd = t + duration / .45;setTarget(p, p.x, p.z, 0, 'carry');
+    act(p, code, duration / .45, .0);p.actionStart = t;p.actionEnd = t + duration / .45;
+    // Struck on the move when the ball goes roughly the way he runs; across or back over his body he plants and stops as before
+    // (2026-11-09: every kick braked to a standstill, so runners stopped dead to pass).
+    const v = Math.hypot(p.vx, p.vz), along = v > .5 ? (p.vx * Math.sin(p.heading) + p.vz * Math.cos(p.heading)) / v : 0;
+    const keep = T.pass.strideKeep * clamp((along - .3) / .55, 0, 1), lead = duration / .45;
+    setTarget(p, p.x + p.vx * lead, p.z + p.vz * lead, keep * v / Math.max(1, topSpeed(p)), 'carry');
     // Kicking foot: strong foot most of the time (left-footers per the user), the weak foot is less accurate.
     if (code === ACTION.pass || code === ACTION.shot) p.actionParam = rng.chance(LUCK.strongFootChance) ? strongFoot(p) : 1 - strongFoot(p);
     pending = { player: p.idx, at: t + duration, run };
@@ -509,7 +554,7 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     if (ball.owner !== p.idx || dist(p, d) > 2.8 || t < d.lockUntil) return;
     const r = rng.next(), team = p.team, pX = X(team, p.x);
     if (r < k.pBeat) {
-      d.lockUntil = t + 1; d.tackleUntil = t + 1.3; act(p, ACTION.touch, .35, .5); p.decideAt = t + .3; p.vx *= .6; p.vz *= .6;
+      d.lockUntil = t + 1; d.stallUntil = t + T.duel.beatenStall; d.tackleUntil = t + 1.3; act(p, ACTION.touch, .35, .5); p.decideAt = t + .3; p.vx *= .6; p.vz *= .6;
       const prev = beatChain.get(p.idx);beatChain.set(p.idx, { t, count: prev && t - prev.t < 6 ? prev.count + 1 : 1 });
       log('beat', team, p, d, k.nutmeg ? .45 : pX > 20 ? .32 : .18, k.nutmeg ? `${p.name}, ${d.name} oyuncusuna bacak arası attı!` : `${p.name} çalımla ${d.name} oyuncusunu geçti (çalım ${p.a.dribbling}, hız ${p.a.speed})`, { p: k.pBeat, sampled: r, attrs: attrs(p, ['dribbling', 'speed', 'control']) });
       return;
@@ -664,13 +709,21 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
   }
   /** The tackle is launched now and decided at contact: a slide carries the defender along the ground to where the ball will be. */
   function startChallenge(d: RtPlayer, carrier: RtPlayer, slide: boolean, pWin: number, pFoul: number) {
-    const lead = slide ? .3 : .15, bx = carrier.x + carrier.vx * lead, bz = carrier.z + carrier.vz * lead, dx = bx - d.x, dz = bz - d.z, l = Math.hypot(dx, dz) || 1;
+    // A standing tackle from the jockeying distance takes a step: a little longer to arrive than one already at the ball.
+    const reachNow = Math.hypot(carrier.x + Math.sin(carrier.heading) * T.ball.carryOffset - d.x, carrier.z + Math.cos(carrier.heading) * T.ball.carryOffset - d.z);
+    const lead = slide ? .3 : reachNow > .8 ? .24 : .15, bx = carrier.x + carrier.vx * lead, bz = carrier.z + carrier.vz * lead, dx = bx - d.x, dz = bz - d.z, l = Math.hypot(dx, dz) || 1;
     d.heading = Math.atan2(dx, dz);
     if (slide) {
       const go = clamp(l - .45, 0, 2.6), duration = 1.35;
       d.lunge = { t0: t + .04, t1: t + lead, x0: d.x, z0: d.z, x1: d.x + dx / l * go, z1: d.z + dz / l * go };
-      act(d, ACTION.slide, duration, 0); d.actionStart = t + lead - .22 * duration; d.actionEnd = d.actionStart + duration; d.groundedUntil = t + lead + .6; d.lockUntil = t + lead + .95;
-    } else { act(d, ACTION.tackle, .6, 0); d.actionStart = t + lead - .3 * .6; d.actionEnd = d.actionStart + .6; }
+      act(d, ACTION.slide, duration, 0); d.actionStart = t + lead - .22 * duration; d.actionEnd = d.actionStart + duration; d.groundedUntil = t + lead + .6; d.lockUntil = t + lead + .95; d.stallUntil = d.lockUntil;
+    } else {
+      // Standing tackle: from his jockeying distance he steps in to the ball (not through the man), so a won ball is at his foot.
+      const fx = bx + Math.sin(carrier.heading) * T.ball.carryOffset, fz = bz + Math.cos(carrier.heading) * T.ball.carryOffset, fl = Math.hypot(fx - d.x, fz - d.z) || 1, go = clamp(fl - .45, 0, .95);
+      d.heading = Math.atan2(fx - d.x, fz - d.z);
+      if (go > .05) d.lunge = { t0: t, t1: t + lead, x0: d.x, z0: d.z, x1: d.x + (fx - d.x) / fl * go, z1: d.z + (fz - d.z) / fl * go, solid: true };
+      act(d, ACTION.tackle, .6, 0); d.actionStart = t + lead - .3 * .6; d.actionEnd = d.actionStart + .6;
+    }
     challenge = { d: d.idx, carrier: carrier.idx, at: t + lead, slide, pWin, pFoul };
   }
   function resolveChallenge() {
@@ -680,7 +733,7 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     if (ball.owner !== carrier.idx || restart || ball.hands) return;
     const team = d.team, reach = Math.hypot(ball.x - d.x, ball.z - d.z);
     if (reach > (c.slide ? 1.05 : 1.3)) {
-      d.lockUntil = Math.max(d.lockUntil, t + (c.slide ? .5 : T.duel.beatenLock));
+      d.lockUntil = Math.max(d.lockUntil, t + (c.slide ? .5 : T.duel.beatenLock)); d.stallUntil = Math.max(d.stallUntil, t + (c.slide ? .5 : T.duel.beatenStall));
       if (c.slide) log('beat', carrier.team, carrier, d, .14, `${carrier.name}, ${d.name} oyuncusunun kayarak müdahalesinden sıyrıldı`, { attrs: attrs(carrier, ['dribbling', 'speed']) });
       return;
     }
@@ -688,19 +741,20 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     if (r < c.pWin) {
       d.stats.tackles++;
       log('tackle', team, d, carrier, .12, `${d.name} ${c.slide ? 'kayarak ' : ''}topu kaptı (savunma ${d.a.defending}, top sürme ${carrier.a.dribbling})`, { p: c.pWin, sampled: r, attrs: attrs(d, ['defending', 'strength', 'positioning']) });
-      if (!c.slide && rng.chance(.45)) giveBall(d);
+      // He keeps it only when it is at his foot; from further it is knocked loose (a won ball used to jump 1.3 m onto his foot).
+      if (!c.slide && rng.chance(.45) && reach < 1) giveBall(d);
       else { const a = Math.atan2(ball.z - d.z, ball.x - d.x) + rng.range(-.9, .9), sp = c.slide ? rng.range(3, 7) : rng.range(2, 5); looseBall(Math.cos(a) * sp, Math.sin(a) * sp); ball.lastTouch = d.idx; ball.lastTeam = team; possession = -1; }
-      carrier.lockUntil = t + .45;return;
+      carrier.lockUntil = t + .45; carrier.stallUntil = t + T.duel.lostBallStall;return;
     }
     // A foul is body contact: at full stretch he only gets to (or misses) the ball.
     const body = Math.hypot(carrier.x - d.x, carrier.z - d.z);
     if (r < c.pWin + c.pFoul * (1 - c.pWin) && body <= (c.slide ? K.foulBodySlide : K.foulBodyStand)) { foul(d, carrier, c.pFoul);return; }
-    d.lockUntil = Math.max(d.lockUntil, t + T.duel.beatenLock);
+    d.lockUntil = Math.max(d.lockUntil, t + T.duel.beatenLock); d.stallUntil = Math.max(d.stallUntil, t + T.duel.beatenStall);
     log('beat', carrier.team, carrier, d, .14, `${carrier.name}, ${d.name} karşısında sıyrıldı`, { p: 1 - c.pWin, sampled: r, attrs: attrs(carrier, ['dribbling', 'control']) });
   }
   function foul(d: RtPlayer, victim: RtPlayer, p: number) {
     const team = victim.team, vX = X(team, victim.x), vZ = Z(team, victim.z), penalty = inBox(vX, vZ);
-    d.stats.fouls++; stats[d.team].fouls++; act(victim, ACTION.fall, 1.7, .08); victim.groundedUntil = t + 1.25; victim.lockUntil = t + 1.45; victim.lunge = null;
+    d.stats.fouls++; stats[d.team].fouls++; act(victim, ACTION.fall, 1.7, .08); victim.groundedUntil = t + 1.25; victim.lockUntil = t + 1.45; victim.stallUntil = victim.lockUntil; victim.lunge = null;
     log('foul', d.team, d, victim, penalty ? .7 : vX > 25 ? .35 : .15, `${d.name}, ${victim.name} oyuncusuna faul yaptı${penalty ? ' · PENALTI' : ''}`, { p, attrs: attrs(d, ['defending', 'pressing']) });
     if (penalty) { stats[team].penalties++; setRestart('penalty', team, W(team, GOAL_X - 11), 0); }
     else {
@@ -771,11 +825,24 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     const sp = Math.hypot(ball.vx, ball.vz);if (sp < 1.5 || ball.y > .9) return;
     const ux = ball.vx / sp, uz = ball.vz / sp, rx = p.x - ball.x, rz = p.z - ball.z, along = rx * ux + rz * uz, lat = rx * uz - rz * ux;
     if (along < -.2 || Math.abs(lat) > .46) return;
-    act(p, ACTION.tackle, .45, .35);p.lockUntil = Math.max(p.lockUntil, t + .35);
+    act(p, ACTION.tackle, .45, .35);p.lockUntil = Math.max(p.lockUntil, t + .35); p.stallUntil = Math.max(p.stallUntil, t + .35);
     // Already at his feet: no time to get out of the way, it clips his foot as it passes (bodyBlock); otherwise he is clear of its line.
     const arrive = Math.max(0, along) / sp, side = lat >= 0 ? 1 : -1;if (arrive < .1) return;
     const need = .5 - Math.abs(lat);
     p.lunge = { t0: t, t1: t + clamp(arrive * .8, .1, .16), x0: p.x, z0: p.z, x1: p.x + uz * side * need, z1: p.z - ux * side * need };
+  }
+  /** The man a ground pass is meant for starts his receiving move just before it reaches him, body open to the ball (2026-11-09: the
+   * move began at the touch and was dated back, so its first half was never drawn and he met the ball standing square to nothing). */
+  function prepareReceiver() {
+    const pass = ball.pass;if (!pass || pass.lofted || pass.to < 0 || ball.y > .5) return;
+    const q = players[pass.to]!;if (q.team !== pass.team || q.keeper || q.action !== ACTION.none || t < q.groundedUntil || q.lunge) return;
+    const sp = Math.hypot(ball.vx, ball.vz);if (sp < 1) return;
+    const lead = RECEIVE_CONTACT * RECEIVE_SECONDS, eta = Math.max(0, Math.hypot(ball.x - q.x, ball.z - q.z) - T.intercept.reach) / sp;
+    if (eta > lead + DT) return;
+    act(q, ACTION.receive, RECEIVE_SECONDS, 0); q.actionStart = t + eta - lead; q.actionEnd = q.actionStart + RECEIVE_SECONDS;
+    // Square to the ball, unless he is running on to it from behind (over his shoulder): then he keeps his line.
+    const toBall = Math.atan2(ball.x - q.x, ball.z - q.z), v = Math.hypot(q.vx, q.vz), run = Math.atan2(q.vx, q.vz);
+    if (v < 3 || Math.abs(Math.atan2(Math.sin(toBall - run), Math.cos(toBall - run))) < 1.75) q.heading = toBall;
   }
   function controlChecks() {
     if (ball.owner >= 0 || ball.dead || ball.y > 1.15) return;
@@ -829,17 +896,61 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
       log('bad-touch', team, p, null, .06, `${p.name} topu kontrol edemedi (kontrol ${p.a.control}, baskı ${pct(press)})`, { p: pc, pressure: press, attrs: attrs(p, ['control']) });
       return;
     }
-    const changed = giveBall(p);act(p, ACTION.receive, .55, .45);
+    // A move he already started for this ball (prepareReceiver) runs on; otherwise it starts now, dated back to its touch.
+    const prepared = p.action === ACTION.receive && Math.abs(t - p.actionStart - RECEIVE_CONTACT * RECEIVE_SECONDS) < .15;
+    const changed = giveBall(p);if (!prepared) act(p, ACTION.receive, RECEIVE_SECONDS, RECEIVE_CONTACT);
+    // First touch: on a step the way he was going and toward the goal he attacks, as fast as the pressure allows, not to a dead stop
+    // (2026-11-09: receivers fell from ~4 m/s to ~1.4 m/s and a quarter of the passes after a touch were struck from a standstill).
+    if (!p.keeper) {
+      const v = Math.hypot(p.vx, p.vz), w = clamp(v / 4, 0, 1) * .65, ux = v > .3 ? p.vx / v : 0, uz = v > .3 ? p.vz / v : 0;
+      let fx = ux * w + dir[team] * (1 - w), fz = uz * w;const fl = Math.hypot(fx, fz) || 1;fx /= fl; fz /= fl;
+      setTarget(p, p.x + fx * T.decision.firstTouch, p.z + fz * T.decision.firstTouch, (.35 + .3 * clamp(v / 5, 0, 1)) * (1 - .5 * press), 'carry');
+    }
     if (pass && pass.team === team && pass.from !== p.idx && pass.kind !== 'clear') { const from = players[pass.from]!; if (from.team === team) { from.stats.completed++; stats[team].completed++; } }
     if (changed && fromTeam !== team) log('interception', team, p, null, .06, `${p.name} topu kazandı`);
   }
-  /** A low ball does not pass through a body: reaching a player who is not playing it, it cannons off him (shin, knee, back). */
+  /** A player lying on the ground as a line along the pitch: a slide from his hips (he leans back) to his boots, a man fouled face down
+   * from his feet to his head. */
+  function lyingBody(p: RtPlayer) {
+    const hx = Math.sin(p.heading), hz = Math.cos(p.heading), [back, front] = p.action === ACTION.slide ? [.4, .9] : [0, 1.5];
+    return { x0: p.x - hx * back, z0: p.z - hz * back, x1: p.x + hx * front, z1: p.z + hz * front };
+  }
+  /** Down after a slide or a foul he is still a body: a low ball into his legs or back stops on him and runs off slowly (2026-11-09: a pass
+   * played just past a sliding defender ran straight through him). A keeper's dive belongs to the save logic. */
+  function lyingBlock(p: RtPlayer, ax: number, az: number, sx: number, sz: number, sp: number) {
+    if (p.keeper || ball.y > .35 || (p.action !== ACTION.slide && p.action !== ACTION.fall) || (p.idx === ball.lastTouch && t < p.touchUntil + .15)) return false;
+    const L = lyingBody(p), lx = L.x1 - L.x0, lz = L.z1 - L.z0, ll = Math.hypot(lx, lz) || 1;
+    // Closest approach of this tick's path to the body line (sampled finer than the body's thickness).
+    let best = Infinity, cx = 0, cz = 0, first = 0, last = 0;
+    for (let k = 0; k <= 4; k++) {
+      const qx = ax + sx * k / 4, qz = az + sz * k / 4, w = clamp(((qx - L.x0) * lx + (qz - L.z0) * lz) / (ll * ll), 0, 1), ex = L.x0 + lx * w, ez = L.z0 + lz * w, dd = Math.hypot(qx - ex, qz - ez);
+      if (k === 0) first = dd;if (k === 4) last = dd;
+      if (dd < best) { best = dd; cx = ex; cz = ez; }
+    }
+    // Only a ball coming at him: one knocked off his own boots by the slide is leaving his body, not running into it.
+    if (best > LYING_RADIUS + R || (last >= first && first <= LYING_RADIUS + R)) return false;
+    // Off the side of the body it came from, slower.
+    let nx = -lz / ll, nz = lx / ll;if (nx * ball.vx + nz * ball.vz > 0) { nx = -nx; nz = -nz; }
+    const dot = ball.vx * nx + ball.vz * nz, keep = rng.range(.25, .45), a = rng.range(-.4, .4);
+    let rx = ball.vx - 2 * dot * nx, rz = ball.vz - 2 * dot * nz;[rx, rz] = [(rx * Math.cos(a) - rz * Math.sin(a)) * keep, (rx * Math.sin(a) + rz * Math.cos(a)) * keep];
+    ball.x = cx + nx * (LYING_RADIUS + R + .02); ball.z = cz + nz * (LYING_RADIUS + R + .02); keyBall(); ball.vx = rx; ball.vz = rz;
+    ball.pass = null; ball.lastTouch = p.idx; ball.lastTeam = p.team; p.touchUntil = Math.max(p.touchUntil, t + .3); possession = -1;
+    log('clearance', p.team, p, null, .04, `Top yerdeki ${p.name} oyuncusuna çarptı (${sp.toFixed(0)} m/sn)`, { outcome: 'ricochet' });
+    return true;
+  }
+  /** A low ball does not pass through a body: reaching a player who is not playing it, it cannons off him (shin, knee, back).
+   * A body block only ever lengthens a man's no-touch window (2026-11-10: a parry tipped round the post that clipped the keeper's own
+   * body cut his 1.6 s down to 0.3 s, and he caught the corner-bound ball). */
   function bodyBlock() {
     if (ball.owner >= 0 || ball.dead || netted || ball.shot || ball.y > 1.2) return;
     const sp = Math.hypot(ball.vx, ball.vz);if (sp < 3) return;
     const ax = ball.x - ball.vx * DT, az = ball.z - ball.vz * DT, sx = ball.vx * DT, sz = ball.vz * DT, len2 = sx * sx + sz * sz;
     for (const p of players) {
-      if (t < p.groundedUntil || p.lunge || (p.idx === ball.lastTouch && t < p.touchUntil + .15)) continue;
+      if (t < p.groundedUntil) { if (lyingBlock(p, ax, az, sx, sz, sp)) return; continue; }
+      if (p.lunge && !p.lunge.solid) continue;
+      // Just after his own touch the ball is his to leave behind; running on into it (a pass he clipped) it hits him again rather than
+      // passing through his legs (2026-11-09).
+      if (p.idx === ball.lastTouch && t < p.touchUntil + .15 && (ball.x - p.x) * (ball.vx - p.vx) + (ball.z - p.z) * (ball.vz - p.vz) >= 0) continue;
       // Closest approach of this tick's path to his centre.
       const u = clamp(((p.x - ax) * sx + (p.z - az) * sz) / Math.max(1e-9, len2), 0, 1), cx = ax + sx * u, cz = az + sz * u, dx = cx - p.x, dz = cz - p.z, d = Math.hypot(dx, dz);
       if (d > .33) continue;
@@ -851,7 +962,9 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
         if (ml < .2) { const s = rng.chance(.5) ? 1 : -1; mx = uz * s; mz = -ux * s; ml = 1; }
         mx /= ml; mz /= ml;const a = rng.range(.35, .8), s2 = sp * rng.range(.55, .8), vx = (ux * Math.cos(a) + mx * Math.sin(a)) * s2, vz = (uz * Math.cos(a) + mz * Math.sin(a)) * s2;
         ball.x = p.x + mx * .36; ball.z = p.z + mz * .36; keyBall(); ball.vx = vx; ball.vz = vz;
-        ball.lastTouch = p.idx; ball.lastTeam = p.team; p.touchUntil = t + .3; possession = -1;
+        // It stays the passer's pass (it runs on roughly his way); if it now sits closer to a team-mate than to its target, the astray rule
+        // in assignRoles sends him (2026-11-10: making it nobody's pass handed the defence every clipped ball — a goal a match fewer).
+        ball.lastTouch = p.idx; ball.lastTeam = p.team; p.touchUntil = Math.max(p.touchUntil, t + .3); possession = -1;
         log('clearance', p.team, p, null, .04, `Top ${p.name} oyuncusunun ayağına değdi`, { outcome: 'touch' });
         return;
       }
@@ -863,14 +976,14 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
           ball.vx = (ox - ball.x) / od * osp; ball.vz = (oz - ball.z) / od * osp; ball.vy = rng.range(.8, 3);
         } else { const a = rng.range(-Math.PI, Math.PI), osp = rng.range(1.5, 4); ball.vx = Math.cos(a) * osp; ball.vz = Math.sin(a) * osp; ball.vy = rng.range(3.5, 6); }
         if (ball.y < R + .02) ball.y = R + .02;
-        ball.pass = null; ball.lastTouch = p.idx; ball.lastTeam = p.team; p.touchUntil = t + .35; possession = -1;
+        ball.pass = null; ball.lastTouch = p.idx; ball.lastTeam = p.team; p.touchUntil = Math.max(p.touchUntil, t + .35); possession = -1;
         log('clearance', p.team, p, null, .15, `Orta ${p.name} oyuncusuna çarptı`, { outcome: 'block' });
         return;
       }
       const a = rng.range(-.5, .5), keep = rng.range(.3, .5);let rx = ball.vx - 2 * Math.min(0, dot) * nx, rz = ball.vz - 2 * Math.min(0, dot) * nz;
       [rx, rz] = [(rx * Math.cos(a) - rz * Math.sin(a)) * keep, (rx * Math.sin(a) + rz * Math.cos(a)) * keep];
       ball.x = p.x + nx * .36; ball.z = p.z + nz * .36; keyBall(); ball.vx = rx; ball.vz = rz; ball.vy = Math.max(ball.vy, rng.range(0, 1.4));if (ball.vy > 0 && ball.y < R + .02) ball.y = R + .02;
-      ball.pass = null; ball.lastTouch = p.idx; ball.lastTeam = p.team; p.touchUntil = t + .3; possession = -1;
+      ball.pass = null; ball.lastTouch = p.idx; ball.lastTeam = p.team; p.touchUntil = Math.max(p.touchUntil, t + .3); possession = -1;
       log('clearance', p.team, p, null, .04, `Top ${p.name} oyuncusuna çarpıp sekti`, { outcome: 'ricochet' });
       return;
     }
@@ -908,9 +1021,11 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     if (s.outcome === 'save') { k.stats.saves++; stats[k.team].saves++; ball.x = s.ex; ball.z = s.ez; giveBall(k, true); log('save', k.team, k, shooter, .74, `${k.name} kurtardı (kalecilik ${k.gk})`, { outcome: 'catch' }); return; }
     if (s.outcome === 'parry') {
       k.stats.saves++; stats[k.team].saves++; ball.lastTouch = k.idx; ball.lastTeam = k.team;
-      // He cannot claim his own parry straight back (it used to land back in his gloves while the commentary said corner).
-      k.touchUntil = t + .9;
+      // He cannot claim his own parry straight back (it used to land back in his gloves while the commentary said corner). One tipped
+      // round the post stays his to leave until it is out: now that chasers wait for their touch, he would otherwise run to meet it
+      // on the line the moment he may touch again (2026-11-10).
       const out = rng.chance(K.parryWide), side = Math.sign(Z(team, s.ez) || (rng.chance(.5) ? 1 : -1));
+      k.touchUntil = t + (out ? 1.6 : .9);
       if (out) {
         // Tipped round the post: aimed through a point on the goal line outside the post, so it always crosses wide of the frame.
         const ox = W(team, GOAL_X + .05), oz = W(team, side * (PI.goalHalfWidth + rng.range(.55, 1.6))), od = Math.max(.5, Math.hypot(ox - ball.x, oz - ball.z)), osp = rng.range(6, 9);
@@ -950,7 +1065,16 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     // The ball keeps travelling into the net during the celebration; play is stopped by the restart.
     ball.owner = -1; ball.pass = null; ball.shot = null; netted = true; netSign = dir[team];
     celebrateUntil = t + T.setPiece.celebration;
-    if (scorer && !own) { act(scorer, ACTION.celebrate, T.setPiece.celebration, 0); setTarget(scorer, W(team, GOAL_X - 10), W(team, Z(team, scorer.z) > 0 ? 28 : -28), .7, 'celebrate'); }
+    for (const q of players) q.celebrateWith = -1;
+    if (scorer && !own) {
+      // He runs off toward the corner flag — a short run now, so the team-mates catch him while the celebration is still on screen.
+      const cx = W(team, GOAL_X - 10) - scorer.x, cz = W(team, Z(team, scorer.z) > 0 ? 28 : -28) - scorer.z, run = Math.min(1, T.setPiece.celebrateRun / Math.max(1, Math.hypot(cx, cz)));
+      act(scorer, ACTION.celebrate, T.setPiece.celebration, 0); setTarget(scorer, scorer.x + cx * run, scorer.z + cz * run, .7, 'celebrate');
+      // 2026-11-10 (user: "ortak sevinç"): the nearest outfield team-mates run to him and celebrate together; param 1–3 is each one's
+      // place round him. Chosen by distance only, no random draw.
+      const mates = byTeam[team].filter(q => q !== scorer && !q.keeper && dist(q, scorer) < T.setPiece.celebrateReach).sort((a, b) => dist(a, scorer) - dist(b, scorer)).slice(0, T.setPiece.celebrateMates);
+      mates.forEach((q, i) => { act(q, ACTION.celebrate, T.setPiece.celebration, 0, i + 1); q.celebrateWith = scorer.idx; setTarget(q, scorer.x, scorer.z, 1, 'celebrate'); });
+    }
     // Tevfik without M.Emre gets irritated when his team concedes.
     const conceding = 1 - team as Team;
     for (const p of byTeam[conceding]) if (p.id === 'tevfik' && !byTeam[conceding].some(q => q.id === 'm-emre') && rng.chance(T.personality.tevfikTrigger)) mood(p, 'irritated', 'gol sonrası sinirlendi');
@@ -1015,13 +1139,19 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     for (const p of players) {
       // Taker stands just behind the ball (inside the line for throws and corners).
       if (p === taker) { const behind = r.kind === 'corner' || r.kind === 'throw-in' ? 0 : .35; setTarget(p, r.x - dir[team] * behind, r.z - Math.sign(r.z) * (r.kind === 'corner' || r.kind === 'throw-in' ? .4 : 0), r.kind === 'throw-in' ? .8 : 1, 'restart'); continue; }
-      if (t < celebrateUntil && p.role === 'celebrate') continue;
+      if (t < celebrateUntil && p.role === 'celebrate') {
+        // A team-mate keeps closing on the scorer, to his own place round him (front-left, front-right, behind).
+        const s = p.celebrateWith >= 0 ? players[p.celebrateWith]! : null;
+        if (s) { const slot = CELEBRATE_SLOTS[(p.actionParam - 1) % CELEBRATE_SLOTS.length]!, h = s.heading; setTarget(p, s.x + Math.sin(h + slot[0]) * slot[1], s.z + Math.cos(h + slot[0]) * slot[1], 1, 'celebrate'); }
+        continue;
+      }
       const attacking = p.team === team, k = p.keeper;
       let s = shapeTarget(p, attacking, r.x, r.z);
       if (k) s = keeperTarget(p, r.x, r.z);
       if (r.kind === 'kick-off') { const pX = Math.min(-1.2, X(p.team, s.x)); s = { x: W(p.team, pX), z: s.z }; if (!attacking && Math.hypot(s.x, s.z) < 9.2) s = { x: W(p.team, -9.5), z: s.z }; }
       if (r.kind === 'penalty') { if (k && !attacking) s = { x: W(p.team, -GOAL_X + .3), z: 0 }; else if (!k) { const lim = GOAL_X - 19; const pX = X(team, s.x); s = { x: W(team, Math.min(pX, lim)), z: s.z }; } }
-      setTarget(p, s.x, s.z, .7, 'restart');
+      // Back for a kick-off from far away at a run, not a walk.
+      setTarget(p, s.x, s.z, r.kind === 'kick-off' && Math.hypot(s.x - p.x, s.z - p.z) > 20 ? .85 : .7, 'restart');
     }
     // Box set pieces: corners, free kicks crossed in or shot over the wall.
     if (r.kind === 'corner' || (r.kind === 'free-kick' && r.play !== 'pass')) {
@@ -1045,6 +1175,10 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
     const r = restart!, taker = players[r.taker]!;
     if (t < r.readyAt) return;
     if (Math.hypot(taker.x - r.x, taker.z - r.z) > 1.6) { taker.tx = r.x; taker.tz = r.z; taker.pace = 1; return; }
+    // A kick-off waits for both teams in their own halves, the other side outside the centre circle (2026-11-10, user: after a goal
+    // the scorer and the team-mates celebrating with him were still deep in the other half and the kick-off caught them out).
+    if (r.kind === 'kick-off' && t < r.readyAt + T.setPiece.kickoffWaitMax
+      && players.some(p => X(p.team, p.x) > T.setPiece.kickoffHalfSlack || (p.team !== r.team && Math.hypot(p.x, p.z) < 8.8))) return;
     restart = null; ball.dead = false; netted = false; ball.y = R; ball.vx = ball.vy = ball.vz = 0;
     // Throw-ins and corners start just inside the lines so the first touch never re-crosses them.
     const edge = r.kind === 'throw-in' || r.kind === 'corner';
@@ -1113,8 +1247,9 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
   // --- replay -------------------------------------------------------------------
   function writeFrame() {
     if (frameCount >= maxFrames) return;
-    // Stopped from the whistle to the restart; after a goal the first seconds of the celebration still count as play to watch.
-    const stopped = ball.dead || (restart !== null && !(netted && t < celebrateUntil - 2.5));
+    // Stopped from the whistle to the restart; after a goal the celebration still counts as play to watch but for its last
+    // celebrationTail seconds (2026-11-10: 2.5 → 1, so the team-mates reaching the scorer are seen).
+    const stopped = ball.dead || (restart !== null && !(netted && t < celebrateUntil - T.setPiece.celebrationTail));
     const o = frameCount * stride, state = stopped ? BALL_STATE.dead : ball.owner >= 0 ? (ball.hands ? BALL_STATE.hands : BALL_STATE.feet) : ball.y > R + .05 ? BALL_STATE.air : BALL_STATE.ground;
     samples[o] = t; samples[o + 1] = ball.x; samples[o + 2] = ball.y; samples[o + 3] = ball.z; samples[o + 4] = state; samples[o + 5] = possession; samples[o + 6] = score[0]; samples[o + 7] = score[1];
     for (let i = 0; i < players.length; i++) {
@@ -1175,7 +1310,7 @@ export function simulateHalf(snapshot: MatchSnapshot, half: 1 | 2, lineups: read
       resolveShot();
       if (netted || (!ball.shot && outOfPlay())) break;
     }
-    if (!ball.dead && !netted && ball.owner < 0 && !ball.shot) { aerialContest(); controlChecks(); bodyBlock(); }
+    if (!ball.dead && !netted && ball.owner < 0 && !ball.shot) { prepareReceiver(); aerialContest(); controlChecks(); bodyBlock(); }
     if (possession !== -1) stats[possession].possession += DT;
     if (tick % T.tickHz === 0) temporal();
     if (tick % T.snapshotEvery === 0) writeFrame();

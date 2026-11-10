@@ -1,7 +1,7 @@
 /** Match engine coefficients. Initial tuning decisions, calibrated with seeded batches (scripts/calibrate-engine.mjs).
  * Every random draw uses the match's seeded stream; nothing here prescribes a score. */
 export const ENGINE_TUNING = {
-  version: 'engine-v1-tuning-6',
+  version: 'engine-v1-tuning-9',
   /** User decision 2026-11-03: 60 minutes (2×30). */
   halfSeconds: 30 * 60,
   tickHz: 30,
@@ -18,8 +18,11 @@ export const ENGINE_TUNING = {
     angleSigmaBase: .016, angleSigmaSkill: .052, speedSigma: .06, loftLandingSigma: .035, loftLandingSkill: .06,
     pressureSigma: .7, fatigueSigma: .35, arriveSpeed: [5.5, 9], loftFlightPerMeter: 1 / 19, loftFlightBase: .35,
     seeBase: .25, seePerVision: .075, judgementNoise: .22, windup: .17,
+    /** Share of his running speed a kicker keeps through the windup when the ball goes the way he runs (none across his body). */
+    strideKeep: .7,
   },
-  decision: { temperatureBase: .045, temperatureVision: .055, shotSelfishness: 1, carryCommit: [.32, .55], receiveDelayBase: .34, receiveDelayControl: .022 },
+  /** firstTouch: m ahead the receiver's first touch takes the ball (toward goal, along his run) until he decides (2026-11-09). */
+  decision: { temperatureBase: .045, temperatureVision: .055, shotSelfishness: 1, carryCommit: [.32, .55], receiveDelayBase: .34, receiveDelayControl: .022, firstTouch: 2.5 },
   shot: {
     /** Headers spray more than struck shots (2026-11-04: with corners back, headers had become the most efficient finish). */
     speedBase: 15.5, speedPerShooting: 1.45, angleSigmaBase: .05, angleSigmaSkill: .055, pressureSigma: .8, headerSigma: 2.6, specialistHeaderSigma: 1.85,
@@ -34,15 +37,30 @@ export const ENGINE_TUNING = {
     windup: .24, range: 32, postWidth: .16,
   },
   aerial: { strength: .4, positioning: .2, finishing: .15, control: .15, speed: .1, specialistBonus: 1.1, duelNoise: 1, distancePenalty: .85, keeperClaim: .55 },
-  duel: { attemptBase: .16, attemptPerPressing: .025, range: 1.45, sharpness: .42, bias: .05, beatenLock: .7, cooldown: 1.1 },
+  /** beatenLock: s a beaten defender may not tackle or touch the ball; beatenStall / lostBallStall: s he (or the man who lost the ball)
+   * is wrong-footed and slow, after which he turns and chases at full speed (2026-11-09: the whole lock at quarter speed read as giving up). */
+  duel: { attemptBase: .16, attemptPerPressing: .025, range: 1.45, sharpness: .42, bias: .05, beatenLock: .7, beatenStall: .3, lostBallStall: .25, cooldown: 1.1,
+    /** m the pressing defender holds off the carrier, toward his own goal (inside standing tackle range, outside body spacing). */
+    jockey: 1.3 },
   foul: { base: .085, aggression: .035, fatigue: .05, frustrated: .06, max: .32 },
   setPiece: { kickoffDelay: 2.4, throwDelay: [1.4, 2.6], cornerDelay: 3.6, goalKickDelay: 3, freeKickDelay: 3.2, penaltyDelay: 3.4, celebration: 6,
+    /** 2026-11-10: the scorer's run off (m); up to three outfield team-mates within celebrateReach m run to him; celebrating together
+     * they may stand celebrateHug m apart. */
+    celebrateRun: 8, celebrateMates: 3, celebrateReach: 22, celebrateHug: .55, celebrationTail: 1,
+    /** A kick-off waits (at most kickoffWaitMax s past its time) until everyone is back in his own half, kickoffHalfSlack m allowed. */
+    kickoffWaitMax: 15, kickoffHalfSlack: .3,
     directFreeKickRange: 28, penaltyBase: .74, penaltyPerFinishing: .03, penaltyPerKeeper: -.004 },
   /** chemistryShare: a team chemistry point is worth this much on each team-mate's passing/vision/positioning (engine/runtime.ts). */
   personality: { chemistryShare: .25, dayFormGood: .15, dayFormBad: .15, frustrationSeconds: 360, disengageSeconds: 300, frustrationRecovery: 2, servanTrigger: .12, tevfikTrigger: .35, moodSeconds: 300, argumentChance: .35 },
   /** Out of position (rating points below his best position): see engine/position-fit.ts. */
   positionFit: { tolerance: 4, perPoint: .05, max: 1, key: .5 },
-  /** Batch calibration knobs (median ~11 total goals in 60 min, user examples 4–2, 7–5, 9–7; 2–1 is nearly impossible). */
+  /** Batch calibration knobs (median ~11 total goals in 60 min, user examples 4–2, 7–5, 9–7; 2–1 is nearly impossible).
+   * tuning-7 (2026-11-09: duels, first touch, bodies on the ground) keeps these: 36 seeded matches give median 10, mean 10.2 goals,
+   * 21 shots on target and 13.7 fouls a match (tuning-6: 10, 9.9, 21, 13.3). tuning-8 (2026-11-10: team-mates join the goal
+   * celebration; kick-offs wait for both teams in their own halves) — 36 matches: median 10, mean 10.1, 20.9 on target, 12.9 fouls.
+   * tuning-9 (2026-11-10: loose balls — the nearest men go for them, the chaser sticks, a second man waits for the knock-down) — 72
+   * matches: median 9, mean 9.4, 39.0 shots, 20.0 on target, 14.3 fouls (tuning-8 on the same 72: 11, 10.7, 42.7, 21.1, 12.5). The
+   * goal lost is the scrambles nobody went for; finishing/keeper/defence/intent nudges did not bring it back (72-match checks). */
   calibration: { finishing: .86, keeper: .6, defenseSharpness: .85, attackingIntent: 1.35 },
   /** Finishing, set-piece, duel and game-state knobs from the 3–4 Nov 2026 sessions (user feedback: strike when the angle opens, poor
    * shooters miss wide, real free kicks and corners, halı saha keepers, visible slides, blowouts rare). */
@@ -52,6 +70,11 @@ export const ENGINE_TUNING = {
     shortCorner: .08, fkShotDelay: 4, fkCrossDelay: 3.6, fkPassDelay: [1.4, 2.4], distance: 9.15, wallJump: [1.75, 2.05],
     /** Sliding tackles: from beyond standing range up to slideReach more; rarer, a little less clean, more fouls. keeperFirst: s a keeper must reach a loose ball before any rival to come for it. */
     slideReach: 1.05, slideAttempt: .55, slideWin: .92, slideFoul: 1.6, keeperFirst: .3,
+    /** A pass going astray: a team-mate who reaches it this many seconds before its target goes for it too (2026-11-10). */
+    astrayLead: .8,
+    /** The man going for a free ball keeps the job unless another reaches it chaseStick s sooner; the nearest other within
+     * secondBallRadius m waits secondBallBack m goal-side of where it will be played (2026-11-10). */
+    chaseStick: .35, secondBallRadius: 6, secondBallBack: 3.5,
     /** A foul needs body contact: the challenger's centre within these metres of the man on the ball (slides reach further). */
     foulBodyStand: 1.5, foulBodySlide: 1.8,
     /** User 2026-11-04: strike before the six-yard box; alone the finish is calmer, hemmed in by 2–3 it is cramped, weak, often blocked or wide. */

@@ -93,7 +93,9 @@ export const CAMERA_POLICY = {
   presets: {
     // Main-stand gantry at the halfway line; slides on a rail and tightens toward the attacked goal.
     // pitchBiasZ: the aim stays this far in from the touchlines, so a throw-in keeps the ball in the picture with mostly pitch around it.
-    broadcast: { cameraHeight: 24, cameraZ: 72, railFollow: { midfield: .42, finalThird: .62 }, railLimit: 34, horizontalFovDegrees: { midfield: 40, finalThird: 31 }, pitchBiasZ: 28,
+    // 2026-11-10 (user: "sahayı ve açıları daha iyi istiyorum"): a tighter, TV-like lens — ~31 m of pitch across the picture instead of
+    // ~55 m, so a player is about twice the size — from a gantry a little nearer and lower, following the play further along the rail.
+    broadcast: { cameraHeight: 20, cameraZ: 62, railFollow: { midfield: .7, finalThird: .85 }, railLimit: 40, horizontalFovDegrees: { midfield: 26, finalThird: 22 }, pitchBiasZ: 28,
       // Portrait screens (2026-11-04): a higher, closer gantry looking more steeply down, so the pitch rather than sky and stands fills a
       // tall picture; blended in as the screen narrows from aspect `blend[0]` to `blend[1]`.
       portrait: { cameraHeight: 36, cameraZ: 52, railFollow: .85, blend: [1.15, .75] } },
@@ -101,7 +103,8 @@ export const CAMERA_POLICY = {
     wide: { camera: { x: -84, y: 60, z: 78 }, targetFollow: { x: .4, z: .25 }, horizontalFovDegrees: 64 },
     // Crane behind the goal being attacked; ends switch with hysteresis and swing over the main stand.
     // 24 m back and 10.5 m up keeps the near goal frame in the lower part of the picture and clears the end stand.
-    goal: { behindGoalMeters: 24, cameraHeight: 10.5, lateralFollow: .3, minimumLookAheadMeters: 9, switchHysteresisMeters: 8, horizontalFovDegrees: 62 },
+    // 2026-11-10: nearer and lower (was 24 m back, 10.5 m up, 62°), so the goalmouth and the players fill more of it.
+    goal: { behindGoalMeters: 16, cameraHeight: 8.5, lateralFollow: .3, minimumLookAheadMeters: 9, switchHysteresisMeters: 8, horizontalFovDegrees: 52 },
   },
   /** Camera clearance over turf and the low stands built in stadium.js. */
   clearance: { turf: 1.6, sideStandStartZ: 39, sideStandSlope: .45, sideWallZ: 51.2, sideWallTop: 10.5, endStandStartX: 58, endStandTop: 6.5, aboveStand: 2.5 },
